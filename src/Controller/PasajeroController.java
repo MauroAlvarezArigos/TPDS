@@ -1,5 +1,7 @@
 package Controller;
 
+import javax.swing.JComboBox;
+
 import Dominio.Pasajero;
 import GUI.GestionPasajeroGUI;
 import Servicios.PasajeroServicio;
@@ -13,6 +15,12 @@ public class PasajeroController {
 	public PasajeroController(GestionPasajeroGUI g) {
 		this.pasajeroServicio = new PasajeroServicio();
 		this.gestionGUI = g;
+	}
+	
+	public void cargarTDNI() {
+		JComboBox<String> tdni = new JComboBox<String>();
+		tdni.addItem("DNI");
+		
 	}
 
 }

@@ -26,6 +26,8 @@ public class GestionPasajeroGUI extends JFrame{
 		this.setResizable(false);
 		this.controller = new PasajeroController(this);
 		
+		this.controller.cargarTDNI();
+		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5,5,5,5));
 		contentPane.setLayout(new BorderLayout());
@@ -85,7 +87,7 @@ public class GestionPasajeroGUI extends JFrame{
 		gbc_lblDocTipo.gridy = 2;
 		panelDatos.add(lblDocTipo, gbc_lblDocTipo);
 		
-		cbxTipoDNI 
+		
 		
 		
 		JButton btnCancel = new JButton("Cancel");
