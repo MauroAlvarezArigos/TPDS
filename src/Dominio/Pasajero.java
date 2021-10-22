@@ -4,14 +4,18 @@ public class Pasajero extends Persona{
 	private String nombre;
 	private String apellido;
 	private String ndoc;
-	private String tipodoc;
+	private String tipodoc; //Cambiarlo a IDType
 	private String ocupacion;
 	private String fechanacimiento;
-	private String nacionalidad;
+	private Pais nacionalidad;
 	
 	//Constructor
+	public Pasajero() {
+		super();
+	}
+	
 	public Pasajero(String nombre, String apellido, String ndoc, String tipodoc, String ocupacion,
-			String fechanacimiento, String nacionalidad) {
+			String fechanacimiento, Pais nacionalidad) {
 		super();
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -72,11 +76,11 @@ public class Pasajero extends Persona{
 		this.fechanacimiento = fechanacimiento;
 	}
 
-	public String getNacionalidad() {
+	public Pais getNacionalidad() {
 		return nacionalidad;
 	}
 
-	public void setNacionalidad(String nacionalidad) {
+	public void setNacionalidad(Pais nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
 	

@@ -10,113 +10,114 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import Controller.PasajeroController;
+import Exceptions.NoConcordanciaException;
+
 import java.awt.Color;
+import java.awt.FlowLayout;
 
 public class GestionPasajeroGUI extends JFrame{
 	private PasajeroController controller;
-	
-	private JTextField tbxNombre;
+	private JComboBox<String> cbxTipoDNI;	
 	private JTextField tbxApellido;
-	private JComboBox<String> cbxTipoDNI;
+	private JTextField tbxNombre;
 	private JTextField tbxNDoc;
-	private JTextField textField;
 	
 	public GestionPasajeroGUI() {
-		this.setUndecorated(true);
 		this.setResizable(false);
-		this.controller = new PasajeroController(this);
 		
+		this.controller = new PasajeroController(this);
 		this.controller.cargarTDNI();
 		
-		JPanel contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5,5,5,5));
-		contentPane.setLayout(new BorderLayout());
-		this.setContentPane(contentPane);
-		
-		JPanel panelDatos = new JPanel();
-		contentPane.add(panelDatos, BorderLayout.CENTER);
-		panelDatos.setLayout(new GridBagLayout());
+		this.setLayout(new BorderLayout(0, 0));
 		
 		JLabel lblGestionar = new JLabel("Gestionar Pasajero");
+		lblGestionar.setVerticalAlignment(SwingConstants.BOTTOM);
 		lblGestionar.setHorizontalAlignment(SwingConstants.CENTER);
 		lblGestionar.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		contentPane.add(lblGestionar, BorderLayout.NORTH);
+		this.add(lblGestionar, BorderLayout.NORTH);
+		
+		JPanel panelDatos = new JPanel();
+		this.add(panelDatos, BorderLayout.CENTER);
+		panelDatos.setLayout(null);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
-		lblApellido.setHorizontalAlignment(SwingConstants.RIGHT);
-		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
-		gbc_lblApellido.anchor = GridBagConstraints.EAST;
-		gbc_lblApellido.insets = new Insets(0, 0, 5, 5);
-		gbc_lblApellido.gridx = 0;
-		gbc_lblApellido.gridy = 1;
-		panelDatos.add(lblApellido, gbc_lblApellido);
+		lblApellido.setBounds(88, 64, 50, 15);
+		panelDatos.add(lblApellido);
 		
 		tbxApellido = new JTextField();
-		tbxApellido.setColumns(20);
-		GridBagConstraints gbc_tbxApellido = new GridBagConstraints();
-		gbc_tbxApellido.anchor = GridBagConstraints.WEST;
-		gbc_tbxApellido.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tbxApellido.insets = new Insets(0, 0, 5, 5);
-		gbc_tbxApellido.gridx = 1;
-		gbc_tbxApellido.gridy = 1;
-		panelDatos.add(tbxApellido, gbc_tbxApellido);
+		tbxApellido.setBounds(145, 61, 270, 20);
+		panelDatos.add(tbxApellido);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
-		gbc_lblNombre.anchor = GridBagConstraints.EAST;
-		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_lblNombre.gridx = 0;
-		gbc_lblNombre.gridy = 2;
-		panelDatos.add(lblNombre, gbc_lblNombre);
-		
-		tbxNombre = new JTextField();
-		tbxNombre.setColumns(20);
-		GridBagConstraints gbc_tbxNombre = new GridBagConstraints();
-		gbc_tbxNombre.anchor = GridBagConstraints.WEST;
-		gbc_tbxNombre.fill = GridBagConstraints.HORIZONTAL;
-		gbc_tbxNombre.insets = new Insets(0, 0, 5, 5);
-		gbc_tbxNombre.gridx = 1;
-		gbc_tbxNombre.gridy = 2;
-		panelDatos.add(tbxNombre, gbc_tbxNombre);
-		
-		JLabel lblDocTipo = new JLabel("Documento Tipo");
-		GridBagConstraints gbc_lblDocTipo = new GridBagConstraints();
-		gbc_lblDocTipo.anchor = GridBagConstraints.EAST;
-		gbc_lblDocTipo.insets = new Insets(0, 0, 5, 5);
-		gbc_lblDocTipo.gridx = 0;
-		gbc_lblDocTipo.gridy = 2;
-		panelDatos.add(lblDocTipo, gbc_lblDocTipo);
-		
-		
-		
-		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBackground(Color.RED);
-		GridBagConstraints gbc_btnCancel = new GridBagConstraints();
-		gbc_btnCancel.anchor = GridBagConstraints.EAST;
-		gbc_btnCancel.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCancel.gridx = 1;
-		gbc_btnCancel.gridy = 3;
-		panelDatos.add(btnCancel, gbc_btnCancel);
-		
-		JButton btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.setBackground(Color.GREEN);
-		GridBagConstraints gbc_btnSiguiente = new GridBagConstraints();
-		gbc_btnSiguiente.anchor = GridBagConstraints.WEST;
-		gbc_btnSiguiente.insets = new Insets(0, 0, 5, 5);
-		gbc_btnSiguiente.gridx = 2;
-		gbc_btnSiguiente.gridy = 3;
-		panelDatos.add(btnSiguiente, gbc_btnSiguiente);
-		
+		lblNombre.setBounds(88, 91, 50, 15);
+		panelDatos.add(lblNombre);
 				
+		tbxNombre = new JTextField();
+		tbxNombre.setBounds(145, 89, 270, 20);
+		panelDatos.add(tbxNombre);
+		
+		JLabel lblDocumentoTipo = new JLabel("Documento Tipo:");
+		lblDocumentoTipo.setBounds(88, 120, 100, 15);
+		panelDatos.add(lblDocumentoTipo);
+		
+		cbxTipoDNI.setBounds(190, 115, 87, 25);
+		panelDatos.add(cbxTipoDNI);
+			
+		
+		JLabel lblNumero = new JLabel("Número");
+		lblNumero.setBounds(280, 120, 50, 15);
+		panelDatos.add(lblNumero);
+		
+		tbxNDoc = new JTextField();
+		tbxNDoc.setBounds(330, 117, 85, 20);
+		panelDatos.add(tbxNDoc);
+		tbxNDoc.setColumns(10);
 		
 		
-		this.pack();
+		//Buttons
+		JButton Cancelar = new JButton("Cancelar");
+		Cancelar.setBounds(210,150,90,25);
+		Cancelar.setBackground(Color.RED);
+		Cancelar.setForeground(Color.WHITE);
+		panelDatos.add(Cancelar);
+		
+		JButton Siguiente = new JButton("Siguiente");
+		Siguiente.setBounds(315,150,100,25);
+		Siguiente.setBackground(new Color(0, 128, 0));
+		Siguiente.setForeground(Color.WHITE);
+		panelDatos.add(Siguiente);
+
+		//Actions
+		Cancelar.addActionListener(e -> dispose());
+		
+		Siguiente.addActionListener(e -> {
+			try {
+				controller.buscarPasajero();
+			} catch (NoConcordanciaException e1) {
+				e1.printStackTrace();
+				mostrarError("No Concordancia", "No existe ninguna concordancia según los criterios de búsqueda");
+			}
+		});
+		
 		this.setLocationRelativeTo(null);
-		this.setSize(300,200);
+		this.setSize(500,300);		
 		
 	}
 	
-	
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
+	}
 
+	//Getters and Setters
+	public JTextField getTbxNombre() {return tbxNombre;}
+	public void setTbxNombre(JTextField tbxNombre) {this.tbxNombre = tbxNombre;}
+	public JTextField getTbxApellido() {return tbxApellido;}
+	public void setTbxApellido(JTextField tbxApellido) {this.tbxApellido = tbxApellido;}
+	public JComboBox<String> getCbxTipoDNI() {return cbxTipoDNI;}
+	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTipoDNI = cbxTipoDNI;}
+	public JTextField getTbxNDoc() {return tbxNDoc;}
+	public void setTbxNDoc(JTextField tbxNDoc) {this.tbxNDoc = tbxNDoc;}
 }
