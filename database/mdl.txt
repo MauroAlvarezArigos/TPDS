@@ -1,0 +1,24 @@
+insert into posiva
+values
+(1,'consumidor final'),
+(2,'test');
+
+insert into persona
+values
+('34254321223','asdf@yahoo.it','12345678','calle','1289',1),
+('34565437644','qwerty@gmail.aw','986756452','fghjk','4576',1);
+
+insert into idtype
+values
+('DNI'),
+('LE');
+
+insert into pais
+values
+('Argentina',1,'Argentino'),
+('España',2,'Español');
+
+insert into pasajero
+values
+('12345678','carlos','rodriguez','23867165','DNI' ,'plomero','01-04-2000',2),
+('986756452','jose','martin','41765729','LE' ,'pintor','05-09-1999',1);
