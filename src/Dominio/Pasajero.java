@@ -1,13 +1,16 @@
 package Dominio;
 
+import java.sql.Date;
+
 public class Pasajero extends Persona{
 	private String nombre;
 	private String apellido;
 	private String ndoc;
-	private String tipodoc; //Cambiarlo a IDType
+	private IDType tipodoc;
 	private String ocupacion;
-	private String fechanacimiento;
+	private Date fechanacimiento;
 	private Pais nacionalidad;
+
 	
 	//Constructor
 	public Pasajero() {
