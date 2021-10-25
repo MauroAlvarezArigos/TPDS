@@ -63,7 +63,7 @@ public class PaisDAOSQL implements PaisDAO{
             pstmt = conn.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
             pais.setNombre(rs.getString("NOMBRE"));
-            pais.setCodigo(rs.getString("CODIGOPAIS"));
+            pais.setCodigo(rs.getInt("CODIGOPAIS"));
             pais.setNacionalidad(rs.getString("NACIONALIDAD"));
 
         }catch(SQLException e) {

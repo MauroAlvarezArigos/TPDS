@@ -34,7 +34,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			pstmt.setString(2, unPasajero.getNombre());
 			pstmt.setString(3, unPasajero.getApellido());
 			pstmt.setString(4, unPasajero.getNdoc());
-			pstmt.setString(5, unPasajero.getTipodoc());
+			pstmt.setString(5, unPasajero.getTipodoc().getTipoDeID());
 			pstmt.setString(6, unPasajero.getOcupacion());
 			//pstmt.setString(7, unPasajero.getFechanacimiento());
 			pstmt.setInt(7, unPasajero.getNacionalidad().getCodigo());
@@ -73,7 +73,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
 				p.setNdoc(rs.getString("NDOC"));
-				p.setTipodoc(rs.getString("TIPODOC"));
+				//p.setTipodoc(rs.getString("TIPODOC"));
 				p.setOcupacion(rs.getString("OCUPACION"));
 				//p.setNacionalidad(rs.getInt("NACIONALIDAD")); Crear dao de pais
 				lista.add(p);

@@ -10,13 +10,10 @@ public class Pais {
 	private List<Provincia> provincias;
 	
 	//Constructor
-	public Pais(String nombre, Integer codigo, String nacionalidad) {
+	public Pais() {
 		super();
-		this.nombre = nombre;
-		this.codigoPais = codigo;
-		this.nacionalidad = nacionalidad;
-		this.provincias = new ArrayList<Provincia>();
 	}
+
 
 	//Getters and Setters
 	public String getNombre() {
