@@ -69,6 +69,10 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Pasajero p = new Pasajero();
+				p.setTelefono(rs.getString("TELEFONO"));
+				p.setEmail(rs.getString("EMAIL"));
+				p.setCalle(rs.getString("CALLE"));
+				p.setAltura(rs.getInt("ALTURA"));
 				p.setCuit_cif(rs.getString("CUIT"));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
@@ -100,7 +104,8 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	}
 	
 	private String prepararSentencia(String nombre, String apellido, String tipoDoc, String ndoc) {
-		String p1 = "SELECT * FROM PASAJERO ";
+		String p1 = "SELECT * FROM PASAJERO p " +
+				"JOIN PERSONA per ON (p.cuit = per.cuit) ";
 		String tmp = "";
 		int cont = 0;
 		

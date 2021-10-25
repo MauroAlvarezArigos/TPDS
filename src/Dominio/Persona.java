@@ -6,12 +6,14 @@ public class Persona {
 	private String cuit_cif;
 	private String calle;
 	private Integer altura;
-	
+	private PosIVA IVA;
+
+
 	//Constructor
 	public Persona() {
 		super();
 	}
-	
+
 	//Getters and Setters
 	public String getTelefono() {
 		return telefono;
@@ -52,11 +54,9 @@ public class Persona {
 	public void setAltura(Integer altura) {
 		this.altura = altura;
 	}
-	
-	
-	
-	
-	
 
+	public PosIVA getIVA() {return IVA;	}
+
+	public void setIVA(PosIVA IVA) {this.IVA = IVA;	}
 
 }
