@@ -1,8 +1,13 @@
 package GUI;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -12,6 +17,9 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
@@ -19,50 +27,82 @@ import javax.swing.table.DefaultTableModel;
 import Controller.PasajeroController;
 import Dominio.Pasajero;
 
-public class GestionPasajeroBusquedaGUI extends JFrame{
+public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener{
 	private JTable table;
 	private PasajeroController controller;
-
-	public GestionPasajeroBusquedaGUI(List<Pasajero> lista) {
-		
+	private ButtonGroup bg;
+	private List<Pasajero> lista;
+	
+	public GestionPasajeroBusquedaGUI(List<Pasajero> lista, String t) {
+		this.lista = lista;
+		System.out.println("Guarde la lista");
 		this.setResizable(false);
-		this.setLayout(new BorderLayout(0, 0));
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setVisible(true);
+		this.setLayout(new BorderLayout());
+		System.out.println("Setee Layout");
+		
+		JPanel titulo = new JPanel();
+		ImageIcon image = new ImageIcon(".\\res\\search1x.png");
+		JLabel img = new JLabel(image, JLabel.CENTER);
+		JLabel lblTitulo = new JLabel(t);
+		lblTitulo.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblTitulo.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 
+		titulo.add(img);
+		titulo.add(lblTitulo);
+
+		this.add(titulo, BorderLayout.NORTH);
 		
-		//ADD LUPA
-		JLabel lblGestionar = new JLabel("Apellido: Nombres: ");
-		lblGestionar.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblGestionar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGestionar.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		this.add(lblGestionar, BorderLayout.NORTH);
+		System.out.println("Setee TITULO");
 		
+		//Filling search results
+		JPanel results = new JPanel();
+		results.setLayout(new GridLayout(0,1));
+		System.out.println("Cree results");
 		
-		//Creo la tabla
+		bg = new ButtonGroup();
+		System.out.println("Cree bg");
+		
 		int tam = lista.size();
-		Object[][] tabla = new Object[tam][4];
+		String s = "";
 		for(int i=0; i<tam; i++) {
-			tabla[i][0] = lista.get(i).getApellido();
-			tabla[i][1] = lista.get(i).getNombre();
-			tabla[i][2] = lista.get(i).getTipodoc();
-			tabla[i][3] = lista.get(i).getNdoc();
+			s += lista.get(i).getApellido() + " ";
+			s += lista.get(i).getNombre() + " ";
+			s += lista.get(i).getTipodoc()+ " ";
+			s += lista.get(i).getNdoc() + " ";
+			
+			final JRadioButton rb = new JRadioButton(s);
+			rb.setActionCommand(Integer.toString(i));
+			bg.add(rb);
+			results.add(rb);
+			s = "";
 		}
-
 		
-		String[] columnNames = {"Apellido", "Nombre", "Tipo Documento", "Número"};
-		DefaultTableModel dtm = new DefaultTableModel((Object[][]) tabla, columnNames);
-		final JTable table = new JTable(dtm);
-		scrollPane.setPreferredSize(new Dimension(100,500));
-		table.setPreferredScrollableViewportSize(new Dimension(250, 100));
+		JScrollPane sp = new JScrollPane(results);
+		sp.setPreferredSize(new Dimension(600,600));
+		System.out.println("Cree el JScrollPane");
 		
-		scrollPane.setViewportView(table);
-		this.add(scrollPane, BorderLayout.CENTER);
+		this.add(sp, BorderLayout.CENTER);
+		System.out.println("Añadi JScrollPane al JFrame");
 		
-		SwingUtilities.updateComponentTreeUI(this);	 
+		//Buttons
+		JPanel buttons = new JPanel();
+		buttons.setLayout(new BorderLayout());
+		JButton siguiente = new JButton("Siguiente");
+		siguiente.addActionListener(this);
+		buttons.add(siguiente, BorderLayout.LINE_END);
+		this.add(buttons, BorderLayout.SOUTH);
+		
+		System.out.println("Cree y añadi botones");
+		
+		
+		
+		SwingUtilities.updateComponentTreeUI(this);
+		
+		System.out.println("update");
 		
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);	
+		this.setSize(700,300);	
 	}
 	
 	public void update() {
@@ -76,6 +116,13 @@ public class GestionPasajeroBusquedaGUI extends JFrame{
 	public void setController(PasajeroController unController) {
 		this.controller = unController;
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		 if (e.getActionCommand().equals("Siguiente")) {
+	            System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
+	     }
 	}
 
 }

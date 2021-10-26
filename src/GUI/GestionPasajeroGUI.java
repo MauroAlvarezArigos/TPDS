@@ -81,21 +81,25 @@ public class GestionPasajeroGUI extends JFrame{
 		Cancelar.setForeground(Color.WHITE);
 		panelDatos.add(Cancelar);
 		
-		JButton Siguiente = new JButton("Siguiente");
-		Siguiente.setBounds(315,150,100,25);
-		Siguiente.setBackground(new Color(0, 128, 0));
-		Siguiente.setForeground(Color.WHITE);
-		panelDatos.add(Siguiente);
+		JButton next = new JButton("Siguiente");
+		next.setBounds(315,150,100,25);
+		next.setBackground(new Color(0, 128, 0));
+		next.setForeground(Color.WHITE);
+		panelDatos.add(next);
 
 		//Actions
 		Cancelar.addActionListener(e -> dispose());
 		
-		Siguiente.addActionListener(e -> {
+		next.addActionListener(e -> {
 			try {
 				controller.buscarPasajero();
 			} catch (NoConcordanciaException e1) {
 				e1.printStackTrace();
 				mostrarError("No Concordancia", "No existe ninguna concordancia según los criterios de búsqueda");
+			} catch (Exception e1) {
+				System.out.println("Es en el try de gestion pasajero");
+				e1.printStackTrace();
+				
 			}
 		});
 		

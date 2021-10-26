@@ -35,18 +35,31 @@ public class PasajeroController {
 		String n = gestionGUI.getTbxNombre().getText();
 		String d = gestionGUI.getTbxNDoc().getText();
 		String td = gestionGUI.getCbxTipoDNI().getSelectedItem().toString();
+		String s;
 		
 		try {
+			System.out.println("Entre al Try block");
 			lista = pasajeroServicio.buscarPasajero(n, a, td, d);
+			System.out.println("busque los pasajeros");
+			s = prepararTitulo(n,a,td,d);
+			System.out.println("Prepare el titulo");
 			
-			gbusquedaGUI = new GestionPasajeroBusquedaGUI(lista);
+			gbusquedaGUI = new GestionPasajeroBusquedaGUI(lista, s);
+			System.out.println("Cree gbusquedaGUI");
 			gbusquedaGUI.setController(this);
+			System.out.println("Setee el controller");
+
 	
 		    gestionGUI.setVisible(false);
+		    System.out.println("Escondi gestionGUI");
 		    gbusquedaGUI.setVisible(true);
+		    System.out.println("Mostre gBusquedaGUI");
 		    
 		} catch (NoConcordanciaException e) {
 			throw e;
+		} catch (Exception e2) {
+			System.out.println("Capture e2");
+			e2.printStackTrace();
 		}
 	}
 	
@@ -63,6 +76,38 @@ public class PasajeroController {
 		tdni.addItem("Pasaporte");
 		tdni.addItem("Otro");
 		gestionGUI.setCbxTipoDNI(tdni);
+	}
+	
+	private String prepararTitulo(String nombre, String apellido, String tipoDoc, String ndoc) {
+		String tmp = "";
+		
+		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
+			return "Busqueda Sin Parámetros";
+		} else {
+			
+			if(!apellido.equals("")) {
+				tmp = tmp + "Apellido: '" + apellido+"'";
+				System.out.println("apellido concatenado");
+			}
+		
+			if(!nombre.equals("")) {
+				System.out.println("Nombre concatenado");
+					
+				tmp = tmp + " Nombre: '"+nombre+"'";
+			}
+		
+			if(!tipoDoc.equals("")) {
+				System.out.println("tdoc concatenado");
+		
+				tmp = tmp + " Tipo Documento: '"+ tipoDoc+"'";				
+			}
+			if(!ndoc.equals("")) {
+				System.out.println("doc concatenado");
+				tmp = tmp + " Número: '"+ ndoc+"'";				
+			}
+		
+		}
+		return tmp;
 	}
 		
 

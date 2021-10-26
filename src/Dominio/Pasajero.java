@@ -87,5 +87,11 @@ public class Pasajero extends Persona{
 		this.nacionalidad = nacionalidad;
 	}
 	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return this.apellido + " " + this.nombre + " " + this.ndoc;
+	}
+	
 
 }
