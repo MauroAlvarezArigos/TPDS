@@ -3,15 +3,14 @@ package DAO;
 
 import DAO.utils.DB;
 import Dominio.Pais;
-import Dominio.Pasajero;
+import Dominio.Provincia;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-public class PaisDAOSQL implements PaisDAO{
+public class UbicacionDAOSQL implements UbicacionDAO {
 
     private static final String INSERT_PAIS =
             "INSERT INTO PAIS(NOMBRE, CODIGOPAIS, NACIONALIDAD)"
@@ -19,10 +18,13 @@ public class PaisDAOSQL implements PaisDAO{
     private static final String SEARCH_CODE_PAIS =
             "SELECT FROM PAIS"
                     + "WHERE CODIGOPAIS = ";
+    private static final String INSERT_PROVINCIA=
+            "INSERT INTO PROVINCIA(NOMBRE, CODIGOPROVINCIA, PAIS)"
+                    +" VALUES( ?, ?, ?)";
 
 //Insert Pais
     @Override
-    public Pais insert(Pais unPais){
+    public Pais insertPais(Pais unPais){
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         try{
@@ -52,7 +54,7 @@ public class PaisDAOSQL implements PaisDAO{
 //BuscarPaisCodigo
 
     @Override
-    public Pais buscarCode(int Codigo){
+    public Pais buscarCodePais(int Codigo){
         String sentencia = SEARCH_CODE_PAIS+Codigo;
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
@@ -81,4 +83,33 @@ public class PaisDAOSQL implements PaisDAO{
         return pais;
     }
 
+}
+
+//Insert Provincia
+
+@Override
+public Provincia insertProvincia(Provincia unProvincia){
+    Connection conn = DB.getConexion();
+    PreparedStatement pstmt = null;
+    try{
+        pstmt = conn.prepareStatement(INSERT_PROVINCIA);
+        pstmt.setString(1, unProvincia.getNombre());
+        pstmt.setInt(2, unProvincia.getCodigoProvincia());
+        //pstmt.setString(3, unProvincia.get());
+
+        pstmt.executeUpdate();
+    } catch(SQLException e) {
+        e.printStackTrace();
+    }
+    finally {
+        try {
+            if(pstmt!=null) pstmt.close();
+            if(conn!=null) conn.close();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    return null;
+}
 }

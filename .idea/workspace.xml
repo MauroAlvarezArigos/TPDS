@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/TPDS.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/TPDS.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PaisDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PaisDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PaisDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PaisDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/utils/DB.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/utils/DB.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/IDType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/IDType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Localidad.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Localidad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Pais.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Pais.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Pasajero.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Pasajero.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Persona.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/PersonaJuridica.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/PersonaJuridica.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/PosIVA.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/PosIVA.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Provincia.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Provincia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Exceptions/NoConcordanciaException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Exceptions/NoConcordanciaException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/modelosTabla/PasajeroBusquedaTableModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/modelosTabla/PasajeroBusquedaTableModel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/module-info.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PaisDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PaisDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/utils/DB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DB.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/PosIVA.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/PosIVA.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="2" />
+  </component>
+  <component name="ProjectId" id="206X3fCHsxfUyZp9pd3e2XMJJry" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/postgresql-42.2.23.jar" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RunManager">
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GUI.App" />
+      <module name="TPDS" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="GUI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.App" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="" />
+      <created>1635365815336</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1635365815336</updated>
+    </task>
+    <servers />
+  </component>
+</project>

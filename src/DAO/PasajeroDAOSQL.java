@@ -19,9 +19,14 @@ import Exceptions.NoConcordanciaException;
 public class PasajeroDAOSQL implements PasajeroDAO{
 	
 	private static final String INSERT_PASAJERO =
+			"\n"+
 			"INSERT INTO PASAJERO(CUIT, NOMBRE, APELLIDO,"
-			+"NDOC, TIPODOC, OCUPACION, NACIONALIDAD)"
-			+ " VALUES(?, ?, ?, ?, ?, ?, ?)";
+			+"NDOC, TIPODOC, OCUPACION, FECHANAC, NACIONALIDAD)"
+			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
+	private static final String INSERT_PERSONA =
+			"\n"+
+			"INSERT INTO PERSONA(TELEFONO, EMAIL, CUIT, CALLE, ALTURA, POSIVA)"
+			+"VALUES( ?, ?, ?, ?, ?, ?)";
 	
 
 	@Override
@@ -29,15 +34,22 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try{
-			pstmt = conn.prepareStatement(INSERT_PASAJERO);
+			pstmt = conn.prepareStatement(INSERT_PASAJERO+INSERT_PERSONA);
 			pstmt.setString(1, unPasajero.getCuit_cif());
 			pstmt.setString(2, unPasajero.getNombre());
 			pstmt.setString(3, unPasajero.getApellido());
 			pstmt.setString(4, unPasajero.getNdoc());
 			pstmt.setString(5, unPasajero.getTipodoc().getTipoDeID());
 			pstmt.setString(6, unPasajero.getOcupacion());
-			//pstmt.setString(7, unPasajero.getFechanacimiento());
-			pstmt.setInt(7, unPasajero.getNacionalidad().getCodigo());
+			pstmt.setDate(7, unPasajero.getFechanacimiento());
+			pstmt.setInt(8, unPasajero.getNacionalidad().getCodigo());
+			//parte de Persona
+			pstmt.setString(9, unPasajero.getTelefono());
+			pstmt.setString(10, unPasajero.getEmail());
+			pstmt.setString(11, unPasajero.getCuit_cif());
+			pstmt.setString(12, unPasajero.getCalle());
+			pstmt.setInt(13, unPasajero.getAltura());
+			pstmt.setInt(14, unPasajero.getIVA().getID());
 				
 			pstmt.executeUpdate();
 		} catch(SQLException e) {
