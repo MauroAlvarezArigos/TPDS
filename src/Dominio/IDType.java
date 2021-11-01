@@ -1,6 +1,10 @@
 package Dominio;
 
 public class IDType {
+
+    private String TipoDeID;
+
+    //Get Set
     public String getTipoDeID() {
         return TipoDeID;
     }
@@ -9,11 +13,9 @@ public class IDType {
         TipoDeID = tipoDeID;
     }
 
-    private String TipoDeID;
-
 
     //Constructor
-    public IDType(String Type) {
-    this.TipoDeID = Type;
+    public IDType() {
+    super();
     }
 }
