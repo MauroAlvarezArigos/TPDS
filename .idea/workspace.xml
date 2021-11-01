@@ -3,9 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PosIVADAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PosIVADAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/IDType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/IDType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

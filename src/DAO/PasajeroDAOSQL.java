@@ -13,8 +13,13 @@ import java.util.List;
 
 //import Excepciones.ExcepcionNoExisteElemento;
 import DAO.utils.DB;
+import Dominio.IDType;
 import Dominio.Pasajero;
+import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
 	
@@ -27,6 +32,12 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			"\n"+
 			"INSERT INTO PERSONA(TELEFONO, EMAIL, CUIT, CALLE, ALTURA, POSIVA)"
 			+"VALUES( ?, ?, ?, ?, ?, ?)";
+	private static final String BUSCAR_DOC_REPETIDO =
+			"\n"+
+			"SELECT FROM PASAJERO p" +
+			" JOIN PERSONA per ON (p.cuit = per.cuit)" +
+			" JOIN IDTYPE id ON (p.tipodoc = id.tipodeid)" +
+			" WHERE (? = id.tipodeid AND ? = p.ndoc)";
 	
 
 	@Override
@@ -114,7 +125,53 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		
 		
 	}
-	
+
+	@Override
+	public void DocRepetido(IDType IDtipo, String Ndoc) throws DuplicateDocNumberException {
+		List<Pasajero> lista = new ArrayList<Pasajero>();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(BUSCAR_DOC_REPETIDO);
+			pstmt.setString(1, IDtipo.getTipoDeID());
+			pstmt.setString(2, Ndoc);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Pasajero p = new Pasajero();
+				p.setTelefono(rs.getString("TELEFONO"));
+				p.setEmail(rs.getString("EMAIL"));
+				p.setCalle(rs.getString("CALLE"));
+				p.setAltura(rs.getInt("ALTURA"));
+				p.setCuit_cif(rs.getString("CUIT"));
+				p.setNombre(rs.getString("NOMBRE"));
+				p.setApellido(rs.getString("APELLIDO"));
+				p.setNdoc(rs.getString("NDOC"));
+				//p.setTipodoc(rs.getString("TIPODOC"));
+				p.setOcupacion(rs.getString("OCUPACION"));
+				//p.setNacionalidad(rs.getInt("NACIONALIDAD")); Crear dao de pais
+				lista.add(p);
+			}
+			if(lista.size() > 0) {
+				throw new DuplicateDocNumberException();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+
+	}
+
 	private String prepararSentencia(String nombre, String apellido, String tipoDoc, String ndoc) {
 		String p1 = "SELECT * FROM PASAJERO p " +
 				"JOIN PERSONA per ON (p.cuit = per.cuit) ";
