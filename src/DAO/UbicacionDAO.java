@@ -9,9 +9,10 @@ import java.util.List;
 public interface UbicacionDAO {
     public Pais insertPais(Pais unPais);
     public Pais buscarCodePais(int Codigo);
-    public Provincia insertProvincia(Provincia unProvincia);
+    public Provincia insertProvincia(Provincia unProvincia, int CodPais);
     public Provincia buscarCodeProvincia(int Codigo);
-    public Localidad insertLocalidad(Localidad unLocalidad);
+    public Localidad insertLocalidad(Localidad unLocalidad, int CodProv);
     public Localidad buscarLocalidad(int Codigo);
     public List<Provincia> buscarProvinciasPais(Pais unPais);
+    public List<Localidad> buscarLocalidaProvincias(Provincia unProvincia);
 }

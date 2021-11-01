@@ -6,12 +6,7 @@ public class Localidad{
 	private Integer codigoLocalidad;
 	
 	//Constructor
-	public Localidad(String nombre, String codPostal, Integer codigoLocalidad) {
-		super();
-		this.nombre = nombre;
-		this.codPostal = codPostal;
-		this.codigoLocalidad = codigoLocalidad;
-	}
+	public Localidad() {super();}
 
 	//Getters and Setters
 	public String getNombre() {

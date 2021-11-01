@@ -9,11 +9,8 @@ public class Provincia{
 	private List<Localidad> localidades;
 	
 	
-	public Provincia(String nombre, Integer codigoProvincia) {
+	public Provincia() {
 		super();
-		this.nombre = nombre;
-		this.codigoProvincia = codigoProvincia;
-		this.localidades = new ArrayList<Localidad>();
 	}
 	
 	public String getNombre() {
@@ -34,7 +31,9 @@ public class Provincia{
 	public void setLocalidades(Localidad unaLocalidad) {
 		this.localidades.add(unaLocalidad);
 	}
-	
+	public void setListLocalidades(List<Localidad> ListLocalidades){
+		this.localidades = ListLocalidades;
+	}
 	
 
 }

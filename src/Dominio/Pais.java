@@ -48,4 +48,8 @@ public class Pais {
 		this.provincias.add(unaProvincia);
 	}
 
+	public void setListProvincias (List<Provincia> Provincias){
+		this.provincias = Provincias;
+	}
+
 }
