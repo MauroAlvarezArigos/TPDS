@@ -38,8 +38,18 @@ public class App extends JFrame {
 		panelMenu.setLayout(null);
 		
 		JButton botonGestionarPasajero = new JButton("Gestionar Pasajero");
-		botonGestionarPasajero.setBounds(145, 10, 150, 20);
+		botonGestionarPasajero.setBounds(62, 10, 150, 20);
 		panelMenu.add(botonGestionarPasajero);
+		
+		JButton btnAltaPasajero = new JButton("Alta Pasajero");
+		btnAltaPasajero.setBounds(222, 9, 129, 23);
+		panelMenu.add(btnAltaPasajero);
+		
+		btnAltaPasajero.addActionListener(e -> {
+			AltaPasajeroGUI ap = new AltaPasajeroGUI();
+			ap.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
 		
 
 		botonGestionarPasajero.addActionListener(e -> {
