@@ -3,9 +3,18 @@
   <component name="ChangeListManager">
     <list default="true" id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PosIVADAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PosIVADAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PosIVADAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PosIVADAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/UbicacionDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/UbicacionDAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/UbicacionDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/UbicacionDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/IDType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/IDType.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Localidad.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Localidad.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Pais.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Pais.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Provincia.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Provincia.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PasajeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PasajeroController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

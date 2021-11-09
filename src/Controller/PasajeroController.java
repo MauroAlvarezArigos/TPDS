@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
+import GUI.DarAltaPsjeroGUI;
 import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
 import Servicios.PasajeroServicio;
@@ -21,6 +22,7 @@ public class PasajeroController {
 	private List<Pasajero> lista;
 	private GestionPasajeroGUI gestionGUI;
 	private GestionPasajeroBusquedaGUI gbusquedaGUI;
+	private DarAltaPsjeroGUI AltaPsjeroGUI;
 	private final JTable table;
 	
 	//Constructor
@@ -40,20 +42,20 @@ public class PasajeroController {
 		try {
 			System.out.println("Entre al Try block");
 			lista = pasajeroServicio.buscarPasajero(n, a, td, d);
-			System.out.println("busque los pasajeros");
+					//System.out.println("busque los pasajeros");
 			s = prepararTitulo(n,a,td,d);
-			System.out.println("Prepare el titulo");
+					//System.out.println("Prepare el titulo");
 			
 			gbusquedaGUI = new GestionPasajeroBusquedaGUI(lista, s);
-			System.out.println("Cree gbusquedaGUI");
+					//System.out.println("Cree gbusquedaGUI");
 			gbusquedaGUI.setController(this);
-			System.out.println("Setee el controller");
+					//System.out.println("Setee el controller");
 
 	
 		    gestionGUI.setVisible(false);
-		    System.out.println("Escondi gestionGUI");
+		    		//System.out.println("Escondi gestionGUI");
 		    gbusquedaGUI.setVisible(true);
-		    System.out.println("Mostre gBusquedaGUI");
+		    		//System.out.println("Mostre gBusquedaGUI");
 		    
 		} catch (NoConcordanciaException e) {
 			throw e;
@@ -109,6 +111,8 @@ public class PasajeroController {
 		}
 		return tmp;
 	}
-		
+
+
+	public void
 
 }
