@@ -33,9 +33,15 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		this.setLocationRelativeTo(null);
 		this.setSize(700,300);
 		
+		this.setLayout(new BorderLayout());
+		
+		JLabel title = new JLabel(t);
+		
+		this.add(title, BorderLayout.NORTH);
+		
 		//Filling search results
 		JPanel results = new JPanel();
-		results.setLayout(null);
+		results.setLayout(new GridLayout(0,1));
 		
 		bg = new ButtonGroup();
 		System.out.println("Cree bg");
@@ -60,7 +66,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		sp.setPreferredSize(new Dimension(600,600));
 		System.out.println("Cree el JScrollPane");
 		
-		getContentPane().add(sp);
+		this.add(sp, BorderLayout.CENTER);
 		System.out.println("Añadi JScrollPane al JFrame");
 		
 		//Buttons
@@ -70,7 +76,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		JButton siguiente = new JButton("Siguiente");
 		siguiente.addActionListener(this);
 		buttons.add(siguiente, BorderLayout.LINE_END);
-		getContentPane().add(buttons);
+		this.add(buttons, BorderLayout.SOUTH);
 		
 		System.out.println("Cree y añadi botones");
 		

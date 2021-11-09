@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
-import GUI.DarAltaPsjeroGUI;
+//import GUI.DarAltaPsjeroGUI;
 import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
 import Servicios.PasajeroServicio;
@@ -22,7 +22,7 @@ public class PasajeroController {
 	private List<Pasajero> lista;
 	private GestionPasajeroGUI gestionGUI;
 	private GestionPasajeroBusquedaGUI gbusquedaGUI;
-	private DarAltaPsjeroGUI AltaPsjeroGUI;
+	//private DarAltaPsjeroGUI AltaPsjeroGUI;
 	private final JTable table;
 	
 	//Constructor
@@ -111,8 +111,5 @@ public class PasajeroController {
 		}
 		return tmp;
 	}
-
-
-	public void
 
 }
