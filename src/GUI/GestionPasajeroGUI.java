@@ -2,9 +2,6 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -13,9 +10,9 @@ import Controller.PasajeroController;
 import Exceptions.NoConcordanciaException;
 
 import java.awt.Color;
-import java.awt.FlowLayout;
 
 public class GestionPasajeroGUI extends JFrame{
+	
 	private PasajeroController controller;
 	private JComboBox<String> cbxTipoDNI;	
 	private JTextField tbxApellido;
@@ -23,21 +20,16 @@ public class GestionPasajeroGUI extends JFrame{
 	private JTextField tbxNDoc;
 	
 	public GestionPasajeroGUI() {
-		this.setResizable(false);
-		
+	
 		this.controller = new PasajeroController(this);
 		this.controller.cargarTDNI();
-		
-		this.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblGestionar = new JLabel("Gestionar Pasajero");
-		lblGestionar.setVerticalAlignment(SwingConstants.BOTTOM);
-		lblGestionar.setHorizontalAlignment(SwingConstants.CENTER);
-		lblGestionar.setFont(new Font("Tahoma", Font.PLAIN, 22));
-		this.add(lblGestionar, BorderLayout.NORTH);
+		this.setLayout(null);
+		this.setLocationRelativeTo(null);
+		this.setSize(500,300);		
 		
 		JPanel panelDatos = new JPanel();
-		this.add(panelDatos, BorderLayout.CENTER);
+		panelDatos.setBounds(0, 33, 476, 230);
+		getContentPane().add(panelDatos);
 		panelDatos.setLayout(null);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
@@ -62,7 +54,6 @@ public class GestionPasajeroGUI extends JFrame{
 		
 		cbxTipoDNI.setBounds(190, 115, 87, 25);
 		panelDatos.add(cbxTipoDNI);
-			
 		
 		JLabel lblNumero = new JLabel("Número");
 		lblNumero.setBounds(280, 120, 50, 15);
@@ -86,6 +77,13 @@ public class GestionPasajeroGUI extends JFrame{
 		next.setBackground(new Color(0, 128, 0));
 		next.setForeground(Color.WHITE);
 		panelDatos.add(next);
+		
+		JLabel lblGestionar = new JLabel("Gestionar Pasajero");
+		lblGestionar.setBounds(0, 0, 496, 27);
+		getContentPane().add(lblGestionar);
+		lblGestionar.setVerticalAlignment(SwingConstants.BOTTOM);
+		lblGestionar.setHorizontalAlignment(SwingConstants.CENTER);
+		lblGestionar.setFont(new Font("Tahoma", Font.PLAIN, 22));
 
 		//Actions
 		Cancelar.addActionListener(e -> dispose());
@@ -102,10 +100,6 @@ public class GestionPasajeroGUI extends JFrame{
 				
 			}
 		});
-		
-		this.setLocationRelativeTo(null);
-		this.setSize(500,300);		
-		
 	}
 	
 	public void mostrarError(String titulo,String detalle) {

@@ -2,43 +2,51 @@ package GUI;
 
 
 import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
+import javax.swing.border.EmptyBorder;
 
 
 public class App extends JFrame {
 	
+	private JPanel contentPane;
+	
 	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					App frame = new App();
+					frame.setTitle("Sistema de Gestion de Viajes");
+					frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
+					frame.setLocationRelativeTo(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+	
+	public App() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JPanel panelMenu = new JPanel();
+		setContentPane(panelMenu);
+		panelMenu.setLayout(null);
+		
+		JButton botonGestionarPasajero = new JButton("Gestionar Pasajero");
+		botonGestionarPasajero.setBounds(145, 10, 150, 20);
+		panelMenu.add(botonGestionarPasajero);
+		
 
-		JFrame frame = new JFrame("Naurede");
-		frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		frame.setTitle("Sistema de Gestion de Viajes");
-		frame.setLayout(new BorderLayout());
-		
-		JPanel menu = new JPanel();
-		
-		JButton boton = new JButton("Gestionar Pasajero");
-		menu.add(boton);
-		
-		boton.addActionListener(e -> {
+		botonGestionarPasajero.addActionListener(e -> {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();
 			gp.setVisible(true);
-			SwingUtilities.updateComponentTreeUI(frame);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
-		
-		
-		frame.add(menu, BorderLayout.NORTH);
-		
-		frame.pack();
-		frame.setLocationRelativeTo(null);
-		frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-		frame.setVisible(true);
-		
 	}
 	
 }
