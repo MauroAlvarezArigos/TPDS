@@ -75,14 +75,17 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		buttons.setBounds(0, 0, 0, 0);
 		buttons.setLayout(new BorderLayout());
 		JButton siguiente = new JButton("Siguiente");
+		
 		siguiente.addActionListener(e -> {
-			try {
-				controller.DarAltaPasajero();
-			}catch (Exception e1) {
-				//System.out.println("Es en el try de gestion pasajero");
-				e1.printStackTrace();
-			}
+			actionPerformed(e);
+//			try {
+//				controller.DarAltaPasajero();
+//			}catch (Exception e1) {
+//				//System.out.println("Es en el try de gestion pasajero");
+//				e1.printStackTrace();
+//			}
 		});
+		
 		buttons.add(siguiente, BorderLayout.LINE_END);
 		this.add(buttons, BorderLayout.SOUTH);
 		

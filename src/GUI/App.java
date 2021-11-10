@@ -53,7 +53,6 @@ public class App extends JFrame {
 			ap.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
-		
 
 		botonGestionarPasajero.addActionListener(e -> {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();

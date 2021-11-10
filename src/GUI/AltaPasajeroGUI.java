@@ -1,9 +1,11 @@
 package GUI;
 
 import Controller.PasajeroController;
+import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.util.Properties;
 
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -14,6 +16,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.JButton;
 
 public class AltaPasajeroGUI extends JFrame{
@@ -121,6 +128,18 @@ public class AltaPasajeroGUI extends JFrame{
 		JLabel lblFecNac = new JLabel("Fecha de Nacimiento");
 		lblFecNac.setBounds(25, 125, 122, 14);
 		datosPersonales.add(lblFecNac);
+		
+		//Agregar DatePicker
+		UtilDateModel model = new UtilDateModel();
+		Properties p = new Properties();
+		p.put("text.today", "Hoy");
+		p.put("text.month", "Mes");
+		p.put("text.year", "Año");
+		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
+		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		datePicker.setBounds(150, 120, 110, 30);
+		datosPersonales.add(datePicker);
+		
 		
 		JPanel panelDocimento = new JPanel();
 		panelDocimento.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Documento       ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
