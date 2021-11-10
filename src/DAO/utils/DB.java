@@ -14,7 +14,7 @@ public class DB {
 
         String url =  "jdbc:postgresql://localhost:5432/postgres";
         String user = "postgres";
-        String pass = "admin123";
+        String pass = "123";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
