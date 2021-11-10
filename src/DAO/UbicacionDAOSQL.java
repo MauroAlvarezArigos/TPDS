@@ -39,6 +39,12 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     private static final String SEARCH_PROVINCIA_LOCALIDAD =
             "SELECT FROM LOCALIDAD" +
                     " WHERE CODIGOPROVINCIA = ";
+    private static final String SEARCH_NACIONALIDAD =
+            "SELECT FROM PAIS" +
+                    "WHERE NACIONALIDAD = ";
+    private static final String SEARCH_NOMBRE_LOCALIDAD =
+            "SELECT FROM LOCALIDAD" +
+                    " WHERE NOMBRE = ";
 
     //Insert Pais
     @Override
@@ -291,5 +297,58 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         return Localidades;
     }
 
+    @Override
+    public Pais getNacionalidad(String nacionalidad){
+        String sentencia = SEARCH_NACIONALIDAD + nacionalidad;
+        Connection conn = DB.getConexion();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        Pais unPais = new Pais();
+
+        try {
+            pstmt = conn.prepareStatement(sentencia);
+            rs = pstmt.executeQuery();
+            int codigo = rs.getInt("CODIGOPAIS");
+            unPais = buscarCodePais(codigo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return unPais;
+    }
+
+    public Localidad getLocalidadNombre(String nombre){
+        String sentencia = SEARCH_NOMBRE_LOCALIDAD + nombre;
+        Connection conn = DB.getConexion();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Localidad loc = new Localidad();
+
+        try {
+            pstmt = conn.prepareStatement(sentencia);
+            rs = pstmt.executeQuery();
+            int codigo = Integer.parseInt(rs.getString("CODIGOLOCALIDAD"));
+            loc = buscarLocalidad(codigo);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return loc;
+    }
 }
 

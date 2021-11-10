@@ -12,9 +12,9 @@ public class DB {
 
     private static Connection crearConexion() {
 
-        String url =  "jdbc:postgresql://localhost:5432/postgres";
+        String url =  "jdbc:postgresql://localhost:5432/TP6DisenioSistemas";
         String user = "postgres";
-        String pass = "admin123";
+        String pass = "0000";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
