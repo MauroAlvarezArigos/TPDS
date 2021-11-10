@@ -7,6 +7,7 @@ public class Persona {
 	private String calle;
 	private Integer altura;
 	private PosIVA IVA;
+	private Localidad localidad;
 
 
 	//Constructor
@@ -58,5 +59,12 @@ public class Persona {
 	public PosIVA getIVA() {return IVA;	}
 
 	public void setIVA(PosIVA IVA) {this.IVA = IVA;	}
+
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
 
 }

@@ -26,6 +26,7 @@ import Dominio.Pasajero;
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener{
 	private ButtonGroup bg;
 	private List<Pasajero> lista;
+	private PasajeroController controller;
 	
 	public GestionPasajeroBusquedaGUI(List<Pasajero> lista, String t) {
 		
@@ -74,7 +75,14 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		buttons.setBounds(0, 0, 0, 0);
 		buttons.setLayout(new BorderLayout());
 		JButton siguiente = new JButton("Siguiente");
-		siguiente.addActionListener(this);
+		siguiente.addActionListener(e -> {
+			try {
+				controller.DarAltaPasajero();
+			}catch (Exception e1) {
+				//System.out.println("Es en el try de gestion pasajero");
+				e1.printStackTrace();
+			}
+		});
 		buttons.add(siguiente, BorderLayout.LINE_END);
 		this.add(buttons, BorderLayout.SOUTH);
 		
@@ -96,7 +104,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 	}
 	
 	public void setController(PasajeroController unController) {
-		
+		controller = unController;
 	}
 
 	@Override

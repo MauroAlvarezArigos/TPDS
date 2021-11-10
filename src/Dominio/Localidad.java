@@ -32,7 +32,8 @@ public class Localidad{
 	public void setCodigoLocalidad(Integer codigoLocalidad) {
 		this.codigoLocalidad = codigoLocalidad;
 	}
-	
+
+
 	
 	
 	

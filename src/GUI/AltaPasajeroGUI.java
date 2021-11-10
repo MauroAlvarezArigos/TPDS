@@ -1,5 +1,7 @@
 package GUI;
 
+import Controller.PasajeroController;
+
 import java.awt.Color;
 import java.awt.GridLayout;
 
@@ -32,6 +34,8 @@ public class AltaPasajeroGUI extends JFrame{
 	private JTextField tbxPiso;
 	private JLabel lblDpto;
 	private JLabel lblPiso;
+
+	private PasajeroController controller;
 	
 	public AltaPasajeroGUI() {
 		this.setLayout(null);
@@ -337,5 +341,9 @@ public class AltaPasajeroGUI extends JFrame{
 		tbxPiso.setColumns(10);
 		
 		return direccion;
+	}
+
+	public void setController(PasajeroController unController) {
+		controller = unController;
 	}
 }
