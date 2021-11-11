@@ -3,10 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/UbicacionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/UbicacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/UbicacionServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PasajeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PasajeroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

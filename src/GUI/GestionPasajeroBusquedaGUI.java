@@ -21,14 +21,15 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 import Controller.PasajeroController;
+import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener{
 	private ButtonGroup bg;
-	private List<Pasajero> lista;
+	private List<PasajeroDTO> lista;
 	private PasajeroController controller;
 	
-	public GestionPasajeroBusquedaGUI(List<Pasajero> lista, String t) {
+	public GestionPasajeroBusquedaGUI(List<PasajeroDTO> lista, String t) {
 		
 		this.lista = lista;
 		this.setLocationRelativeTo(null);
