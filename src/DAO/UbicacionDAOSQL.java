@@ -157,10 +157,11 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         try {
             pstmt = conn.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
-            prov.setNombre(rs.getString("NOMBRE"));
-            prov.setCodigoProvincia(rs.getInt("CODIGOPROVINCIA"));
-            //prov.setLocalidades(rs.getString("NACIONALIDAD"));
-
+            if(rs.next()) {
+                prov.setNombre(rs.getString("NOMBRE"));
+                prov.setCodigoProvincia(rs.getInt("CODIGOPROVINCIA"));
+                //prov.setLocalidades(rs.getString("NACIONALIDAD"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -214,10 +215,11 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         try {
             pstmt = conn.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
-            loc.setNombre(rs.getString("NOMBRE"));
-            loc.setCodigoLocalidad(rs.getInt("CODIGOLOCALIDAD"));
-            loc.setCodPostal(rs.getString("CODPOSTAL"));
-
+            if(rs.next()) {
+                loc.setNombre(rs.getString("NOMBRE"));
+                loc.setCodigoLocalidad(rs.getInt("CODIGOLOCALIDAD"));
+                loc.setCodPostal(rs.getString("CODPOSTAL"));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -281,10 +283,12 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                 Localidad loc = new Localidad();
                 pstmt = conn.prepareStatement(sentencia);
                 rs = pstmt.executeQuery();
-                loc.setNombre(rs.getString("NOMBRE"));
-                loc.setCodigoLocalidad(rs.getInt("CODIGOPROVINCIA"));
-                loc.setCodPostal(rs.getString("CODPOSTAL"));
-                Localidades.add(loc);
+                if(rs.next()) {
+                    loc.setNombre(rs.getString("NOMBRE"));
+                    loc.setCodigoLocalidad(rs.getInt("CODIGOPROVINCIA"));
+                    loc.setCodPostal(rs.getString("CODPOSTAL"));
+                    Localidades.add(loc);
+                }
             }
         }
         catch (SQLException e) {
@@ -312,8 +316,10 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         try {
             pstmt = conn.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
-            int codigo = rs.getInt("CODIGOPAIS");
-            unPais = buscarCodePais(codigo);
+            if(rs.next()) {
+                int codigo = rs.getInt("CODIGOPAIS");
+                unPais = buscarCodePais(codigo);
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -343,8 +349,10 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
             rs = pstmt.executeQuery();
             //Lo siguiente puede ser ineficiente revisar
-            int codigo = Integer.parseInt(rs.getString("CODIGOLOCALIDAD"));
-            loc = buscarLocalidad(codigo);
+            if(rs.next()) {
+                int codigo = Integer.parseInt(rs.getString("CODIGOLOCALIDAD"));
+                loc = buscarLocalidad(codigo);
+            }
             //
         } catch (SQLException e) {
             e.printStackTrace();

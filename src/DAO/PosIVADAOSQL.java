@@ -93,9 +93,10 @@ public class PosIVADAOSQL implements PosIVADAO {
         try {
             pstmt = conn.prepareStatement(Sentencia);
             rs = pstmt.executeQuery();
-
+            if(rs.next()) {
                 iva.setID(rs.getInt("IDENT"));
                 iva.setTipo(rs.getString("TIPO"));
+            }
         }catch(SQLException e) {
             e.printStackTrace();
         }
