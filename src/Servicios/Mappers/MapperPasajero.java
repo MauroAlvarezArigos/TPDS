@@ -53,7 +53,7 @@ public class MapperPasajero {
         unPasajero.setCalle(unPasajeroDTO.getCalle());
         unPasajero.setAltura(unPasajeroDTO.getAltura());
         unPasajero.setIVA(IVAServicio.getIVA(unPasajeroDTO.getIVA()));
-        unPasajero.setLocalidad(ubicacionServicio.getLocalidadNombre(unPasajeroDTO.getLocalidad()));
+        unPasajero.setLocalidad(ubicacionServicio.getLocalidadNombre(unPasajeroDTO.getLocalidad(),unPasajeroDTO.getProvincia(),unPasajeroDTO.getPais()));
 
         return unPasajero;
     }

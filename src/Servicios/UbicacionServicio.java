@@ -15,7 +15,7 @@ public class UbicacionServicio {
     public Pais getNacionalidad (String nacionalidad){
         return ubicacionDAO.getNacionalidad(nacionalidad);
     }
-    public Localidad getLocalidadNombre (String localidad){
-        return ubicacionDAO.getLocalidadNombre(localidad);
+    public Localidad getLocalidadNombre (String localidad, String prov, String pais){
+        return ubicacionDAO.getLocalidadNombre(localidad, prov, pais);
     }
 }

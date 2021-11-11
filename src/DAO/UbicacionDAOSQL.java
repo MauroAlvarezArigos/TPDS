@@ -43,8 +43,10 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             "SELECT FROM PAIS" +
                     "WHERE NACIONALIDAD = ";
     private static final String SEARCH_NOMBRE_LOCALIDAD =
-            "SELECT FROM LOCALIDAD" +
-                    " WHERE NOMBRE = ";
+            "SELECT l.NOMBRE, l.CODPOSTAL, l.CODIGOLOCALIDAD, l.PROV FROM LOCALIDAD l " +
+                    "JOIN PROVINCIA p ON (p.CODIGOPROVINCIA = l.PROV) " +
+                    "JOIN PAIS c ON (c.CODIGOPAIS = p.PAIS)" +
+                    " WHERE ((l.NOMBRE = ?) AND (p.NOMBRE = ?) AND (c.NOMBRE = ?))";
 
     //Insert Pais
     @Override
@@ -325,8 +327,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         return unPais;
     }
 
-    public Localidad getLocalidadNombre(String nombre){
-        String sentencia = SEARCH_NOMBRE_LOCALIDAD + nombre;
+    public Localidad getLocalidadNombre(String nombre, String prov, String pais){
+        String sentencia = SEARCH_NOMBRE_LOCALIDAD;
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -334,10 +336,15 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
         try {
             pstmt = conn.prepareStatement(sentencia);
+            pstmt.setString(1,nombre);
+            pstmt.setString(2,prov);
+            pstmt.setString(3,pais);
+
             rs = pstmt.executeQuery();
+            //Lo siguiente puede ser ineficiente revisar
             int codigo = Integer.parseInt(rs.getString("CODIGOLOCALIDAD"));
             loc = buscarLocalidad(codigo);
-
+            //
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
