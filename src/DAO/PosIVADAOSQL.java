@@ -21,8 +21,12 @@ public class PosIVADAOSQL implements PosIVADAO {
                     "SELECT FROM POSIVA";
     private static final String GET_IVA =
             "\n" +
-                    "SELECT FROM POSIVA" +
-                    "WHERE TIPO = ";
+                    "SELECT * FROM POSIVA" +
+                    " WHERE TIPO =";
+    private static final String SEARCH_IVA =
+            "\n" +
+                    "SELECT * FROM POSIVA" +
+                    " WHERE IDENT=";
 
     @Override
     public PosIVA Insert(PosIVA unPosIVA) {
@@ -92,6 +96,37 @@ public class PosIVADAOSQL implements PosIVADAO {
 
                 iva.setID(rs.getInt("IDENT"));
                 iva.setTipo(rs.getString("TIPO"));
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(pstmt != null) pstmt.close();
+                if(conn != null) conn.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return iva;
+
+
+    }
+
+    public PosIVA BuscarIVA(int ident){
+        String Sentencia = SEARCH_IVA + ident;
+        Connection conn = DB.getConexion();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        PosIVA iva = new PosIVA();
+        try {
+            pstmt = conn.prepareStatement(Sentencia);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                iva.setID(rs.getInt("IDENT"));
+                iva.setTipo(rs.getString("TIPO"));
+            }
         }catch(SQLException e) {
             e.printStackTrace();
         }

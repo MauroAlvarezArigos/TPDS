@@ -19,8 +19,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             "INSERT INTO PAIS(NOMBRE, CODIGOPAIS, NACIONALIDAD)"
                     + " VALUES(?, ?, ?)";
     private static final String SEARCH_CODE_PAIS =
-            "SELECT FROM PAIS"
-                    + "WHERE CODIGOPAIS = ";
+            "SELECT * FROM PAIS"
+                    + " WHERE CODIGOPAIS=";
     private static final String INSERT_PROVINCIA =
             "INSERT INTO PROVINCIA(NOMBRE, CODIGOPROVINCIA, PAIS)"
                     + " VALUES( ?, ?, ?)";
@@ -29,19 +29,19 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                     + " VALUES( ?, ?, ?, ?)";
     private static final String SEARCH_CODE_PROVINCIA =
             "SELECT FROM PROVINCIA"
-                    + "WHERE CODIGOPROVINCIA = ";
+                    + " WHERE CODIGOPROVINCIA =";
     private static final String SEARCH_CODE_LOCALIDAD =
             "SELECT FROM LOCALIDAD"
-                    + "WHERE CODIGOLOCALIDAD = ";
+                    + " WHERE CODIGOLOCALIDAD =";
     private static final String SEARCH_PAIS_PROVINCIA =
             "SELECT FROM PROVINCIA" +
-                    " WHERE CODIGOPAIS = ";
+                    " WHERE PAIS =";
     private static final String SEARCH_PROVINCIA_LOCALIDAD =
             "SELECT FROM LOCALIDAD" +
-                    " WHERE CODIGOPROVINCIA = ";
+                    " WHERE PROV =";
     private static final String SEARCH_NACIONALIDAD =
             "SELECT FROM PAIS" +
-                    "WHERE NACIONALIDAD = ";
+                    " WHERE NACIONALIDAD =";
     private static final String SEARCH_NOMBRE_LOCALIDAD =
             "SELECT l.NOMBRE, l.CODPOSTAL, l.CODIGOLOCALIDAD, l.PROV FROM LOCALIDAD l " +
                     "JOIN PROVINCIA p ON (p.CODIGOPROVINCIA = l.PROV) " +
@@ -83,20 +83,21 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     @Override
     public Pais buscarCodePais(int Codigo) {
-        String sentencia = SEARCH_CODE_PAIS + Codigo;
+        String sentencia = SEARCH_CODE_PAIS + "\'"+Codigo+"\'";
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Pais pais = new Pais();
 
         try {
-            pstmt = conn.prepareStatement(sentencia);
-            rs = pstmt.executeQuery();
-            pais.setNombre(rs.getString("NOMBRE"));
-            pais.setCodigo(rs.getInt("CODIGOPAIS"));
-            pais.setNacionalidad(rs.getString("NACIONALIDAD"));
-            pais.setListProvincias(buscarProvinciasPais(pais));
-
+                pstmt = conn.prepareStatement(sentencia);
+                rs = pstmt.executeQuery();
+            if(rs.next()) {
+                pais.setNombre(rs.getString("NOMBRE"));
+                pais.setCodigo(rs.getInt("CODIGOPAIS"));
+                pais.setNacionalidad(rs.getString("NACIONALIDAD"));
+                pais.setListProvincias(buscarProvinciasPais(pais));
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -241,10 +242,10 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         List<Provincia> Provincias = new ArrayList<>();
 
         try {
-            while(rs.next()) {
                 Provincia prov = new Provincia();
                 pstmt = conn.prepareStatement(sentencia);
                 rs = pstmt.executeQuery();
+                while(rs.next()) {
                 prov.setNombre(rs.getString("NOMBRE"));
                 prov.setCodigoProvincia(rs.getInt("CODIGOPROVINCIA"));
                 prov.setListLocalidades(buscarLocalidaProvincias(prov));

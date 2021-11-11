@@ -17,19 +17,6 @@ public class Pasajero extends Persona{
 		super();
 	}
 	
-	public Pasajero(String nombre, String apellido, String ndoc, IDType tipodoc, String ocupacion,
-			Date fechanacimiento, Pais nacionalidad) {
-		super();
-		this.nombre = nombre;
-		this.apellido = apellido;
-		this.ndoc = ndoc;
-		this.tipodoc = tipodoc;
-		this.ocupacion = ocupacion;
-		this.fechanacimiento = fechanacimiento;
-		this.nacionalidad = nacionalidad;
-	}
-
-
 	//Getters and Setters
 	public String getNombre() {
 		return nombre;

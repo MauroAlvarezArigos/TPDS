@@ -10,16 +10,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class IDTypeDAOSQL implements IDTypeDAO {
 
     private static final String GET_ALL =
             "\n" +
-                    "SELECT FROM IDTYPE";
+                    "SELECT * FROM IDTYPE";
     private static final String GET_ID =
             "\n" +
-                    "SELECT FROM IDTYPE " +
-                    "WHERE TIPODEID = ";
+                    "SELECT * FROM IDTYPE " +
+                    "WHERE (TIPODEID = ";
 
 
     @Override
@@ -53,7 +54,8 @@ public class IDTypeDAOSQL implements IDTypeDAO {
 
     @Override
     public IDType getIDType(String ID) {
-        String Sentencia = GET_ID + ID;
+        ID = ID.toUpperCase();
+        String Sentencia = GET_ID + "\'"+ID+"\'" + ")";
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -62,7 +64,9 @@ public class IDTypeDAOSQL implements IDTypeDAO {
         try {
             pstmt = conn.prepareStatement(Sentencia);
             rs = pstmt.executeQuery();
-            unID.setTipoDeID(rs.getString("TIPODEID"));
+            if(rs.next()) {
+                unID.setTipoDeID(rs.getString("TIPODEID"));
+            }
 
         } catch (SQLException e) {
             e.printStackTrace();

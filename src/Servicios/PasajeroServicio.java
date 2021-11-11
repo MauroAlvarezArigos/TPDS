@@ -16,7 +16,7 @@ import static java.lang.Boolean.TRUE;
 public class PasajeroServicio {
 	
 	PasajeroDAO pasajerodao;
-	MapperPasajero mapper;
+	MapperPasajero mapper = new MapperPasajero();
 	
 	public PasajeroServicio() {
 		pasajerodao = new PasajeroDAOSQL();

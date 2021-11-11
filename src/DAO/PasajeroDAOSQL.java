@@ -22,6 +22,10 @@ import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
+
+	IDTypeDAOSQL IDDAO = new IDTypeDAOSQL();
+	UbicacionDAOSQL UBICACIONDAO = new UbicacionDAOSQL();
+	PosIVADAOSQL IVADAO = new PosIVADAOSQL();
 	
 	private static final String INSERT_PASAJERO =
 			"\n"+
@@ -94,15 +98,21 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				Pasajero p = new Pasajero();
 				p.setTelefono(rs.getString("TELEFONO"));
 				p.setEmail(rs.getString("EMAIL"));
+				p.setCuit_cif(rs.getString("CUIT"));
 				p.setCalle(rs.getString("CALLE"));
 				p.setAltura(rs.getInt("ALTURA"));
-				p.setCuit_cif(rs.getString("CUIT"));
+				p.setIVA(IVADAO.BuscarIVA(rs.getInt("POSIVA")));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
 				p.setNdoc(rs.getString("NDOC"));
-				//p.setTipodoc(rs.getString("TIPODOC"));
+				p.setFechanacimiento(rs.getDate("FECHANAC"));
+				//Puede estar mal este set
+				p.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
 				p.setOcupacion(rs.getString("OCUPACION"));
-				//p.setNacionalidad(rs.getInt("NACIONALIDAD")); Crear dao de pais
+				//Puede estar mal este set
+				//System.out.println(rs.getInt("NACIONALIDAD"));
+				p.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
+
 				lista.add(p);
 			}
 			if(lista.size() == 0) {
