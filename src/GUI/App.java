@@ -3,6 +3,7 @@ package GUI;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Frame;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -21,6 +22,8 @@ public class App extends JFrame {
 				try {
 					App frame = new App();
 					frame.setTitle("Sistema de Gestion de Viajes");
+					frame.pack();
+					frame.setSize(600,400);
 					frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
@@ -50,7 +53,6 @@ public class App extends JFrame {
 			ap.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
-		
 
 		botonGestionarPasajero.addActionListener(e -> {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();
