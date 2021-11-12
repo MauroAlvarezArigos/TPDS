@@ -30,9 +30,9 @@ public class MapperPasajero {
         unPasajeroDTO.setCalle(unPasajero.getCalle());
         unPasajeroDTO.setAltura(unPasajero.getAltura());
         unPasajeroDTO.setIVA(unPasajero.getIVA().getTipo());
-        //unPasajeroDTO.setPais(unPasajero.getLocalidad().getProvincia().getPais().getNombre());
-        //unPasajeroDTO.setProvincia(unPasajero.getLocalidad().getProvincia().getNombre());
-        //unPasajeroDTO.setLocalidad(unPasajero.getLocalidad().getNombre());
+        unPasajeroDTO.setPais(unPasajero.getLocalidad().getProvincia().getPais().getNombre());
+        unPasajeroDTO.setProvincia(unPasajero.getLocalidad().getProvincia().getNombre());
+        unPasajeroDTO.setLocalidad(unPasajero.getLocalidad().getNombre());
 
         return unPasajeroDTO;
     }
@@ -53,7 +53,7 @@ public class MapperPasajero {
         unPasajero.setCalle(unPasajeroDTO.getCalle());
         unPasajero.setAltura(unPasajeroDTO.getAltura());
         unPasajero.setIVA(IVAServicio.getIVA(unPasajeroDTO.getIVA()));
-        //unPasajero.setLocalidad(ubicacionServicio.getLocalidadNombre(unPasajeroDTO.getLocalidad(),unPasajeroDTO.getProvincia(),unPasajeroDTO.getPais()));
+        unPasajero.setLocalidad(ubicacionServicio.getLocalidadNombre(unPasajeroDTO.getLocalidad(),unPasajeroDTO.getProvincia(),unPasajeroDTO.getPais()));
 
         return unPasajero;
     }

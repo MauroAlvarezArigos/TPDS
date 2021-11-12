@@ -110,8 +110,8 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
 				p.setOcupacion(rs.getString("OCUPACION"));
 				//Puede estar mal este set
-				//System.out.println(rs.getInt("NACIONALIDAD"));
 				p.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
+				p.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getString("LOCALIDAD")));
 
 				lista.add(p);
 			}

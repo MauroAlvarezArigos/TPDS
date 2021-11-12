@@ -28,19 +28,19 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             "INSERT INTO LOCALIDAD(NOMBRE, CODPOSTAL, CODIGOLOCALIDAD, PROV)"
                     + " VALUES( ?, ?, ?, ?)";
     private static final String SEARCH_CODE_PROVINCIA =
-            "SELECT FROM PROVINCIA"
+            "SELECT * FROM PROVINCIA"
                     + " WHERE CODIGOPROVINCIA =";
     private static final String SEARCH_CODE_LOCALIDAD =
-            "SELECT FROM LOCALIDAD"
+            "SELECT * FROM LOCALIDAD"
                     + " WHERE CODIGOLOCALIDAD =";
     private static final String SEARCH_PAIS_PROVINCIA =
-            "SELECT FROM PROVINCIA" +
+            "SELECT * FROM PROVINCIA" +
                     " WHERE PAIS =";
     private static final String SEARCH_PROVINCIA_LOCALIDAD =
-            "SELECT FROM LOCALIDAD" +
+            "SELECT * FROM LOCALIDAD" +
                     " WHERE PROV =";
     private static final String SEARCH_NACIONALIDAD =
-            "SELECT FROM PAIS" +
+            "SELECT * FROM PAIS" +
                     " WHERE NACIONALIDAD =";
     private static final String SEARCH_NOMBRE_LOCALIDAD =
             "SELECT l.NOMBRE, l.CODPOSTAL, l.CODIGOLOCALIDAD, l.PROV FROM LOCALIDAD l " +
@@ -83,7 +83,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     @Override
     public Pais buscarCodePais(int Codigo) {
-        String sentencia = SEARCH_CODE_PAIS + "\'"+Codigo+"\'";
+        String sentencia = SEARCH_CODE_PAIS + Codigo;
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -96,7 +96,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                 pais.setNombre(rs.getString("NOMBRE"));
                 pais.setCodigo(rs.getInt("CODIGOPAIS"));
                 pais.setNacionalidad(rs.getString("NACIONALIDAD"));
-                pais.setListProvincias(buscarProvinciasPais(pais));
+                pais.setListProvincias(buscarProvinciasPais(Codigo));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -160,6 +160,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             if(rs.next()) {
                 prov.setNombre(rs.getString("NOMBRE"));
                 prov.setCodigoProvincia(rs.getInt("CODIGOPROVINCIA"));
+                prov.setPais(buscarCodePais(rs.getInt("PAIS")));
                 //prov.setLocalidades(rs.getString("NACIONALIDAD"));
             }
         } catch (SQLException e) {
@@ -205,8 +206,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 //BuscarLocalidad
 
     @Override
-    public Localidad buscarLocalidad(int Codigo) {
-        String sentencia = SEARCH_CODE_LOCALIDAD + Codigo;
+    public Localidad buscarLocalidad(String Codigo) {
+        String sentencia = SEARCH_CODE_LOCALIDAD + "\'" + Codigo + "\'";
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -219,6 +220,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                 loc.setNombre(rs.getString("NOMBRE"));
                 loc.setCodigoLocalidad(rs.getInt("CODIGOLOCALIDAD"));
                 loc.setCodPostal(rs.getString("CODPOSTAL"));
+                loc.setProvincia(buscarCodeProvincia(rs.getInt("PROV")));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -236,21 +238,22 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 //BuscarProvPais
 
     @Override
-    public List<Provincia> buscarProvinciasPais(Pais unPais) {
-        String sentencia = SEARCH_PAIS_PROVINCIA + unPais.getCodigo();
+    public List<Provincia> buscarProvinciasPais(int codigo) {
+        String sentencia = SEARCH_PAIS_PROVINCIA + codigo;
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Provincia> Provincias = new ArrayList<>();
 
         try {
-                Provincia prov = new Provincia();
                 pstmt = conn.prepareStatement(sentencia);
                 rs = pstmt.executeQuery();
                 while(rs.next()) {
+                    Provincia prov = new Provincia();
                 prov.setNombre(rs.getString("NOMBRE"));
-                prov.setCodigoProvincia(rs.getInt("CODIGOPROVINCIA"));
-                prov.setListLocalidades(buscarLocalidaProvincias(prov));
+                int codigoprov = rs.getInt("CODIGOPROVINCIA");
+                prov.setCodigoProvincia(codigoprov);
+                prov.setListLocalidades(buscarLocalidaProvincias(codigoprov));
                 Provincias.add(prov);
             }
         }
@@ -271,26 +274,25 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 //BuscarLocalidadProvincia
 
     @Override
-    public List<Localidad> buscarLocalidaProvincias(Provincia unProvincia) {
-        String sentencia = SEARCH_PROVINCIA_LOCALIDAD + unProvincia.getCodigoProvincia();
+    public List<Localidad> buscarLocalidaProvincias(int codigo) {
+        String sentencia = SEARCH_PROVINCIA_LOCALIDAD + codigo;
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Localidad> Localidades = new ArrayList<>();
 
         try {
-            while(rs.next()) {
+
                 Localidad loc = new Localidad();
                 pstmt = conn.prepareStatement(sentencia);
                 rs = pstmt.executeQuery();
-                if(rs.next()) {
+            while(rs.next()) {
                     loc.setNombre(rs.getString("NOMBRE"));
-                    loc.setCodigoLocalidad(rs.getInt("CODIGOPROVINCIA"));
+                    loc.setCodigoLocalidad(rs.getInt("CODIGOLOCALIDAD"));
                     loc.setCodPostal(rs.getString("CODPOSTAL"));
                     Localidades.add(loc);
                 }
             }
-        }
         catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -301,8 +303,10 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                 e.printStackTrace();
             }
         }
+
         return Localidades;
     }
+
 
     @Override
     public Pais getNacionalidad(String nacionalidad){
@@ -350,7 +354,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             rs = pstmt.executeQuery();
             //Lo siguiente puede ser ineficiente revisar
             if(rs.next()) {
-                int codigo = Integer.parseInt(rs.getString("CODIGOLOCALIDAD"));
+                String codigo = rs.getString("CODIGOLOCALIDAD");
                 loc = buscarLocalidad(codigo);
             }
             //

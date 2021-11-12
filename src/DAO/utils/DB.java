@@ -12,13 +12,13 @@ public class DB {
 
     private static Connection crearConexion() {
 
-        String url =  "jdbc:postgresql://localhost:5432/TP6DisenioSistemas";
+        String url =  "jdbc:postgresql://localhost:5432/TPDisenio";
         String user = "postgres";
         String pass = "0000";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
-            System.out.println("Conexion exitosa");
+            System.out.println("Conexion exitosa" + " a " + url);
         } catch (SQLException e) {
             System.out.println("Error al conectarse al servidor");
             e.printStackTrace();
