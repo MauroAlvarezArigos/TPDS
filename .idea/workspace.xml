@@ -2,8 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="845495c7-68fa-4224-8cb4-04203191d0a0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/mdl.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/mdl.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -74,5 +75,8 @@
       <updated>1635365815336</updated>
     </task>
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.sql" />
   </component>
 </project>
