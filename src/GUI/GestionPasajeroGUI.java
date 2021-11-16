@@ -1,11 +1,8 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-
 import Controller.PasajeroController;
 import Exceptions.NoConcordanciaException;
 
@@ -55,7 +52,7 @@ public class GestionPasajeroGUI extends JFrame{
 		cbxTipoDNI.setBounds(190, 115, 87, 25);
 		panelDatos.add(cbxTipoDNI);
 		
-		JLabel lblNumero = new JLabel("Número");
+		JLabel lblNumero = new JLabel("Nï¿½mero");
 		lblNumero.setBounds(280, 120, 50, 15);
 		panelDatos.add(lblNumero);
 		
@@ -93,7 +90,7 @@ public class GestionPasajeroGUI extends JFrame{
 				controller.buscarPasajero();
 			} catch (NoConcordanciaException e1) {
 				e1.printStackTrace();
-				mostrarError("No Concordancia", "No existe ninguna concordancia según los criterios de búsqueda");
+				mostrarError("No Concordancia", "No existe ninguna concordancia segï¿½n los criterios de bï¿½squeda");
 			} catch (Exception e1) {
 				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();

@@ -1,7 +1,6 @@
 package GUI;
 
 import javax.swing.ButtonGroup;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -11,10 +10,9 @@ import javax.swing.JRadioButton;
 import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 import java.awt.Dimension;
-import java.awt.Font;
+
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +20,7 @@ import java.util.List;
 
 import Controller.PasajeroController;
 import DTO.PasajeroDTO;
-import Dominio.Pasajero;
+
 
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener{
 	private ButtonGroup bg;
@@ -69,7 +67,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		System.out.println("Cree el JScrollPane");
 		
 		this.add(sp, BorderLayout.CENTER);
-		System.out.println("Añadi JScrollPane al JFrame");
+		System.out.println("Aï¿½adi JScrollPane al JFrame");
 		
 		//Buttons
 		JPanel buttons = new JPanel();
@@ -90,7 +88,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		buttons.add(siguiente, BorderLayout.LINE_END);
 		this.add(buttons, BorderLayout.SOUTH);
 		
-		System.out.println("Cree y añadi botones");
+		System.out.println("Cree y aï¿½adi botones");
 		
 		
 		
