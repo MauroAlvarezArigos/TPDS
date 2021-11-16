@@ -115,9 +115,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 
 				lista.add(p);
 			}
-			if(lista.size() == 0) {
-				throw new NoConcordanciaException();
-			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}

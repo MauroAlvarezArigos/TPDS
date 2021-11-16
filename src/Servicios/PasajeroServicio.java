@@ -24,21 +24,31 @@ public class PasajeroServicio {
 	
 	public List<PasajeroDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
 
-				List<Pasajero> LPsjero = pasajerodao.buscar(nombre, apellido, tipoDoc, ndoc);
-				List<PasajeroDTO> LPsjeroDTO = new ArrayList<PasajeroDTO>();
+		List<Pasajero> LPsjero = pasajerodao.buscar(nombre, apellido, tipoDoc, ndoc);
+		List<PasajeroDTO> LPsjeroDTO = new ArrayList<PasajeroDTO>();
 
-				int size = LPsjero.size();
-				for(int c = 0; c < size; c++){
-					LPsjeroDTO.add(mapper.toDTO(LPsjero.get(c)));
-				}
+		if(LPsjero.size() == 0) {
+			throw new NoConcordanciaException();
+		}
+		else {
+			LPsjeroDTO = pasajerosToDTO(LPsjero);
+		}
 
 		return LPsjeroDTO;
 	}
-
+	
+	private List<PasajeroDTO> pasajerosToDTO(List<Pasajero> LPsjero) {
+		List<PasajeroDTO> LPsjeroDTO = new ArrayList<PasajeroDTO>();
+		for(Pasajero p : LPsjero) {
+			LPsjeroDTO.add(mapper.toDTO(p));
+		}
+		return LPsjeroDTO;
+	}
+	
 	public void DarAltaPasajero(boolean skip, PasajeroDTO unPasajeroDTO) throws DuplicateDocNumberException {
 		Pasajero unPasajero;
 		unPasajero = mapper.toDomain(unPasajeroDTO);
-		if(skip == TRUE){
+		if(skip){
 			pasajerodao.DocRepetido((unPasajero.getTipodoc()), unPasajero.getNdoc());
 		}
 		pasajerodao.insert(unPasajero);
