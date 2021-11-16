@@ -1,10 +1,8 @@
 package DAO;
 
-import java.sql.Array;
 
 import java.sql.Connection;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,9 +15,6 @@ import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
-
-import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
 
