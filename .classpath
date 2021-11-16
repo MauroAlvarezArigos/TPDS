@@ -6,8 +6,8 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="E:/Programacion/Java/TPDS/postgresql-42.2.23.jar"/>
-	<classpathentry kind="lib" path="jdatepicker-1.3.4.jar">
+	<classpathentry kind="lib" path="C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TP - Codigo/TPDS/postgresql-42.2.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TP - Codigo/TPDS/jdatepicker-1.3.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
