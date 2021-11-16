@@ -7,6 +7,7 @@ public class Provincia{
 	private String nombre;
 	private Integer codigoProvincia;
 	private List<Localidad> localidades;
+	private Pais pais;
 	
 	
 	public Provincia() {
@@ -34,6 +35,10 @@ public class Provincia{
 	public void setListLocalidades(List<Localidad> ListLocalidades){
 		this.localidades = ListLocalidades;
 	}
-	
-
+	public Pais getPais() {
+		return pais;
+	}
+	public void setPais(Pais pais) {
+		this.pais = pais;
+	}
 }

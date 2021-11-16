@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
 //import GUI.DarAltaPsjeroGUI;
@@ -20,7 +21,7 @@ import Servicios.PasajeroServicio;
 public class PasajeroController {
 	private PasajeroServicio pasajeroServicio;
 	private Pasajero pasajero;
-	private List<Pasajero> lista;
+	private List<PasajeroDTO> lista;
 	private GestionPasajeroGUI gestionGUI;
 	private GestionPasajeroBusquedaGUI gbusquedaGUI;
 	private AltaPasajeroGUI AltaPsjeroGUI;

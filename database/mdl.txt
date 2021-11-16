@@ -3,20 +3,30 @@ values
 (1,'consumidor final'),
 (2,'test');
 
+insert into pais
+values
+('Argentina',1,'Argentino'),
+('España',2,'Español');
+
+insert into provincia
+values
+('Santa Fe', 1, 1),
+('Catalunia', 2, 2);
+
+insert into localidad
+values
+('Santa Fe Ciudad', '3000', '1', 1),
+('Barcelona', '080xx', '2', 2);
+
 insert into persona
 values
-('34254321223','asdf@yahoo.it','12345678','calle','1289',1),
-('34565437644','qwerty@gmail.aw','986756452','fghjk','4576',1);
+('34254321223','asdf@yahoo.it','12345678','calle','1289',1,1),
+('34565437644','qwerty@gmail.aw','986756452','fghjk','4576',1,2);
 
 insert into idtype
 values
 ('DNI'),
 ('LE');
-
-insert into pais
-values
-('Argentina',1,'Argentino'),
-('España',2,'Español');
 
 insert into pasajero
 values
