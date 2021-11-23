@@ -9,6 +9,7 @@ import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
+import DTO.IDTypeDTO;
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
@@ -16,10 +17,12 @@ import Exceptions.NoConcordanciaException;
 import GUI.AltaPasajeroGUI;
 import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
+import Servicios.IDTypeServicio;
 import Servicios.PasajeroServicio;
 
 public class PasajeroController {
 	private PasajeroServicio pasajeroServicio;
+	private IDTypeServicio IDServicio;
 	private Pasajero pasajero;
 	private List<PasajeroDTO> lista;
 	private GestionPasajeroGUI gestionGUI;
@@ -31,6 +34,7 @@ public class PasajeroController {
 	public PasajeroController(GestionPasajeroGUI g) {
 		this.table = new JTable();
 		this.pasajeroServicio = new PasajeroServicio();
+		this.IDServicio = new IDTypeServicio();
 		this.gestionGUI = g;
 	}
 	
@@ -70,15 +74,21 @@ public class PasajeroController {
 	public JTable getTabla() {
 		return this.table;
 	}
-	
+
 	public void cargarTDNI() {
 		JComboBox<String> tdni = new JComboBox<String>();
+		List<IDTypeDTO> ListaIDT = IDServicio.getAllIDType();
+		int size = ListaIDT.size();
 		tdni.addItem("");
-		tdni.addItem("DNI");
-		tdni.addItem("LE");
-		tdni.addItem("LC");
-		tdni.addItem("Pasaporte");
-		tdni.addItem("Otro");
+		for(int c = 0; c < size; c++) {
+			tdni.addItem((ListaIDT.get(c)).getTipo());
+		}
+		//tdni.addItem("");
+		//tdni.addItem("DNI");
+		//tdni.addItem("LE");
+		//tdni.addItem("LC");
+		//tdni.addItem("Pasaporte");
+		//tdni.addItem("Otro");
 		gestionGUI.setCbxTipoDNI(tdni);
 	}
 	

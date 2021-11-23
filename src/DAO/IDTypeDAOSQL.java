@@ -23,7 +23,7 @@ public class IDTypeDAOSQL implements IDTypeDAO {
 
 
     @Override
-    public List<IDType> GetAllIDType() {
+    public List<IDType> getAllIDType() {
         List<IDType> lista = new ArrayList<>();
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;

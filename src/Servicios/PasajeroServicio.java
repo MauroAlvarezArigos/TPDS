@@ -11,8 +11,6 @@ import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
 import Servicios.Mappers.MapperPasajero;
 
-import static java.lang.Boolean.TRUE;
-
 public class PasajeroServicio {
 	
 	PasajeroDAO pasajerodao;
@@ -49,7 +47,7 @@ public class PasajeroServicio {
 		Pasajero unPasajero;
 		unPasajero = mapper.toDomain(unPasajeroDTO);
 		if(skip){
-			pasajerodao.DocRepetido((unPasajero.getTipodoc()), unPasajero.getNdoc());
+			pasajerodao.docRepetido((unPasajero.getTipodoc()), unPasajero.getNdoc());
 		}
 		pasajerodao.insert(unPasajero);
 	}

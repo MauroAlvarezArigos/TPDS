@@ -129,7 +129,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	}
 
 	@Override
-	public void DocRepetido(IDType IDtipo, String Ndoc) throws DuplicateDocNumberException {
+	public void docRepetido(IDType IDtipo, String Ndoc) throws DuplicateDocNumberException {
 		List<Pasajero> lista = new ArrayList<Pasajero>();
 		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;

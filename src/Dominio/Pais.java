@@ -7,7 +7,7 @@ public class Pais {
 	private Integer codigoPais;
 	private String nacionalidad;
 	private List<Provincia> provincias;
-	
+
 	//Constructor
 	public Pais() {
 		super();
@@ -38,11 +38,11 @@ public class Pais {
 	public void setNacionalidad(String nacionalidad) {
 		this.nacionalidad = nacionalidad;
 	}
-	
+
 	public List<Provincia> getProvincias(){
 		return provincias;
 	}
-	
+
 	public void setProvincia(Provincia unaProvincia) {
 		this.provincias.add(unaProvincia);
 	}
