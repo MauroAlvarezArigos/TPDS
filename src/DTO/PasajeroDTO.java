@@ -2,6 +2,7 @@ package DTO;
 
 public class PasajeroDTO {
 //Pasajero
+    //Agregar ID Pasajero
     private String nombre;
     private String apellido;
     private String ndoc;
