@@ -27,10 +27,8 @@ public class IDTypeServicio {
         for(int c = 0; c < size; c++){
             ListaDTO.add(Mapper.toDTO(ListaDominio.get(c)));
         }
-<<<<<<< HEAD
+
         return ListaDTO;
-=======
-return ListaDTO;
->>>>>>> f2c99adc8e89050c56b647b343cc6cb94b38ed6a
+
     }
 }

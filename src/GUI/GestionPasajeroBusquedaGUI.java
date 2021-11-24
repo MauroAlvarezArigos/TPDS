@@ -22,59 +22,59 @@ import Controller.PasajeroController;
 import DTO.PasajeroDTO;
 
 
-public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener{
+public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener {
 	private ButtonGroup bg;
 	private List<PasajeroDTO> lista;
 	private PasajeroController controller;
-	
+
 	public GestionPasajeroBusquedaGUI(List<PasajeroDTO> lista, String t) {
-		
+
 		this.lista = lista;
 		this.setLocationRelativeTo(null);
-		this.setSize(700,300);
-		
+		this.setSize(700, 300);
+
 		this.setLayout(new BorderLayout());
-		
+
 		JLabel title = new JLabel(t);
-		
+
 		this.add(title, BorderLayout.NORTH);
-		
+
 		//Filling search results
 		JPanel results = new JPanel();
-		results.setLayout(new GridLayout(0,1));
-		
+		results.setLayout(new GridLayout(0, 1));
+
 		bg = new ButtonGroup();
 		System.out.println("Cree bg");
-		
+
 		int tam = lista.size();
 		String s = "";
-		for(int i=0; i<tam; i++) {
+		for (int i = 0; i < tam; i++) {
 			s += lista.get(i).getApellido() + " ";
 			s += lista.get(i).getNombre() + " ";
-			s += lista.get(i).getTipodoc()+ " ";
+			s += lista.get(i).getTipodoc() + " ";
 			s += lista.get(i).getNdoc() + " ";
-			
+
 			final JRadioButton rb = new JRadioButton(s);
 			rb.setActionCommand(Integer.toString(i));
 			bg.add(rb);
 			results.add(rb);
 			s = "";
 		}
-		
+
 		JScrollPane sp = new JScrollPane(results);
 		sp.setBounds(0, 0, 0, 0);
-		sp.setPreferredSize(new Dimension(600,600));
+		sp.setPreferredSize(new Dimension(600, 600));
 		System.out.println("Cree el JScrollPane");
-		
+
 		this.add(sp, BorderLayout.CENTER);
 		System.out.println("A�adi JScrollPane al JFrame");
-		
+
 		//Buttons
 		JPanel buttons = new JPanel();
 		buttons.setBounds(0, 0, 0, 0);
 		buttons.setLayout(new BorderLayout());
 		JButton siguiente = new JButton("Siguiente");
-		
+
 		siguiente.addActionListener(e -> {
 			actionPerformed(e);
 //			try {
@@ -84,36 +84,52 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 //				e1.printStackTrace();
 //			}
 		});
-		
+
 		buttons.add(siguiente, BorderLayout.LINE_END);
 		this.add(buttons, BorderLayout.SOUTH);
-		
+
 		System.out.println("Cree y a�adi botones");
-		
-		
-		
+
+
 		SwingUtilities.updateComponentTreeUI(this);
-		
+
 		System.out.println("update");
-			
+
 	}
-	
+
 	public void update() {
-	    SwingUtilities.updateComponentTreeUI(this);
+		SwingUtilities.updateComponentTreeUI(this);
 	}
-	
+
 	public void setTable(JTable tabla) {
 	}
-	
+
 	public void setController(PasajeroController unController) {
 		controller = unController;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (e.getActionCommand().equals("Siguiente")) {
-	            System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
-	     }
+		if (e.getActionCommand().equals("Siguiente")) {
+			//			try {
+//				controller.DarAltaPasajero();
+//			}catch (Exception e1) {
+//				//System.out.println("Es en el try de gestion pasajero");
+//				e1.printStackTrace();
+//			}
+			if ((bg.getSelection()) == null) {
+				try {
+					controller.DarAltaPasajero();
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+			} else {
+				System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
+				PasajeroDTO unPasajerDTO = lista.get((Integer.parseInt(bg.getSelection().getActionCommand())));
+				//todo
+				//modificarPasajeroGUI();
+			}
+		}
 	}
 
 }

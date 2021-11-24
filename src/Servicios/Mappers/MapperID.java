@@ -1,11 +1,12 @@
 package Servicios.Mappers;
 
 import DAO.IDTypeDAO;
+import DAO.IDTypeDAOSQL;
 import DTO.IDTypeDTO;
 import Dominio.IDType;
 
 public class MapperID {
-    private IDTypeDAO IDDAO;
+    private IDTypeDAO IDDAO = new IDTypeDAOSQL();
 
     public IDTypeDTO toDTO(IDType unIDType){
         IDTypeDTO unIDTypeDTO = new IDTypeDTO();
@@ -16,7 +17,4 @@ public class MapperID {
         return IDDAO.getIDType(unDTO.getTipo());
     }
 }
-<<<<<<< HEAD
 
-=======
->>>>>>> f2c99adc8e89050c56b647b343cc6cb94b38ed6a
