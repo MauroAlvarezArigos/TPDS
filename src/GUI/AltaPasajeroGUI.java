@@ -40,8 +40,10 @@ public class AltaPasajeroGUI extends JFrame{
 	private DarAltaController controller;
 
 	public AltaPasajeroGUI() {
+		controller = new DarAltaController(this);
 		this.setLayout(null);
 		this.setSize(1000, 500);
+		this.controller.cargarTDNI();
 		
 		JPanel datosPersonales = datosPersonales();
 		this.add(datosPersonales);
@@ -155,8 +157,8 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.setLayout(null);
 		
 		cbxTDoc = new JComboBox<String>();
+
 		cbxTDoc.setBounds(83, 21, 86, 24);
-		cbxTDoc.addItem("Pasaporte");
 		panelDocimento.add(cbxTDoc);
 		
 		JLabel lblTipo = new JLabel("Tipo");
@@ -380,4 +382,5 @@ public class AltaPasajeroGUI extends JFrame{
 				detalle,titulo,
 				JOptionPane.ERROR_MESSAGE);
 	}
+	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
 }

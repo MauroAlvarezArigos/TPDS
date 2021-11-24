@@ -50,7 +50,7 @@ public class App extends JFrame {
 		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
-			ap.setController(new DarAltaController());
+			ap.setController(new DarAltaController(ap));
 			ap.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});

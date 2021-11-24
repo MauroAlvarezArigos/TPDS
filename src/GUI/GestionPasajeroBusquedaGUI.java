@@ -120,7 +120,8 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 //			}
 			if ((bg.getSelection()) == null) {
 				try {
-					DarAltaController controllerAlta = new DarAltaController();
+					AltaPasajeroGUI a = new AltaPasajeroGUI();
+					DarAltaController controllerAlta = new DarAltaController(a);
 					controllerAlta.DarAltaPasajero();
 				} catch (Exception e1) {
 					e1.printStackTrace();

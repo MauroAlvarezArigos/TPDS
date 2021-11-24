@@ -5,15 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/App$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Servicios/PasajeroServicio.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
