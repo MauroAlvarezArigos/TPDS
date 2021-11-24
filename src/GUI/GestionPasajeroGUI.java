@@ -52,7 +52,7 @@ public class GestionPasajeroGUI extends JFrame{
 		cbxTipoDNI.setBounds(190, 115, 87, 25);
 		panelDatos.add(cbxTipoDNI);
 		
-		JLabel lblNumero = new JLabel("N�mero");
+		JLabel lblNumero = new JLabel("Numero");
 		lblNumero.setBounds(280, 120, 50, 15);
 		panelDatos.add(lblNumero);
 		

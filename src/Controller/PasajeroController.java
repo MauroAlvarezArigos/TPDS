@@ -36,6 +36,7 @@ public class PasajeroController {
 		this.pasajeroServicio = new PasajeroServicio();
 		this.IDServicio = new IDTypeServicio();
 		this.gestionGUI = g;
+		this.IDServicio = new IDTypeServicio();
 	}
 	
 	public void buscarPasajero() throws NoConcordanciaException{

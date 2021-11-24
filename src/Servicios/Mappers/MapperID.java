@@ -16,4 +16,7 @@ public class MapperID {
         return IDDAO.getIDType(unDTO.getTipo());
     }
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> f2c99adc8e89050c56b647b343cc6cb94b38ed6a
