@@ -125,10 +125,4 @@ public class PasajeroController {
 		return tmp;
 	}
 
-	public void DarAltaPasajero(){
-		AltaPsjeroGUI = new AltaPasajeroGUI();
-		AltaPsjeroGUI.setController(this);
-		gbusquedaGUI.setVisible(false);
-		AltaPsjeroGUI.setVisible(true);
-	}
 }

@@ -3,9 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Servicios/Mappers/MapperID.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Servicios/Mappers/MapperID.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/PasajeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PasajeroController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/IDTypeServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/IDTypeServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperID.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperID.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

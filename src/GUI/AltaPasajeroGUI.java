@@ -1,5 +1,6 @@
 package GUI;
 
+import Controller.DarAltaController;
 import Controller.PasajeroController;
 import modelosTabla.DateLabelFormatter;
 
@@ -359,6 +360,6 @@ public class AltaPasajeroGUI extends JFrame{
 		return direccion;
 	}
 
-	public void setController(PasajeroController unController) {
+	public void setController(DarAltaController unController) {
 	}
 }

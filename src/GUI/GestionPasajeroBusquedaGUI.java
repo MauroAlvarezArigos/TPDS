@@ -18,6 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import Controller.DarAltaController;
 import Controller.PasajeroController;
 import DTO.PasajeroDTO;
 
@@ -119,7 +120,8 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 //			}
 			if ((bg.getSelection()) == null) {
 				try {
-					controller.DarAltaPasajero();
+					DarAltaController controllerAlta = new DarAltaController();
+					controllerAlta.DarAltaPasajero();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
