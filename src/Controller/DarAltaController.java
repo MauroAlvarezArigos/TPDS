@@ -2,6 +2,7 @@ package Controller;
 
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
+import Exceptions.DuplicateDocNumberException;
 import GUI.AltaPasajeroGUI;
 import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
@@ -19,11 +20,9 @@ public class DarAltaController {
     private GestionPasajeroGUI gestionGUI;
     private GestionPasajeroBusquedaGUI gbusquedaGUI;
     private AltaPasajeroGUI AltaPsjeroGUI;
-    private final JTable table;
 
 
     public DarAltaController() {
-        this.table = new JTable();
         this.pasajeroServicio = new PasajeroServicio();
         this.IDServicio = new IDTypeServicio();
     }
@@ -31,7 +30,35 @@ public class DarAltaController {
     public void DarAltaPasajero(){
         AltaPsjeroGUI = new AltaPasajeroGUI();
         AltaPsjeroGUI.setController(this);
-        gbusquedaGUI.setVisible(false);
         AltaPsjeroGUI.setVisible(true);
     }
+
+    public void InformarOmisionnesDatosGUI(List<String> Datos){
+
+
+
+    }
+
+    public void revisarDocExistente(String NDoc, String TipoDoc) throws DuplicateDocNumberException {
+        pasajeroServicio.revisarDocExistente(NDoc, TipoDoc);
+    }
+
+    public void informarDocExistenteGUI(){
+
+    }
+
+    public void cargarOtroMensajeGUI(){
+
+    }
+
+    public void cargarPasajeroGUI(){
+
+    }
+
+    public void mensajeAceptarCancelarGUI(){
+
+    }
+
+
+
 }

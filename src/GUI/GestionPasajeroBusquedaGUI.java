@@ -68,7 +68,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		System.out.println("Cree el JScrollPane");
 
 		this.add(sp, BorderLayout.CENTER);
-		System.out.println("A�adi JScrollPane al JFrame");
+		System.out.println("Anadi JScrollPane al JFrame");
 
 		//Buttons
 		JPanel buttons = new JPanel();
@@ -89,7 +89,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		buttons.add(siguiente, BorderLayout.LINE_END);
 		this.add(buttons, BorderLayout.SOUTH);
 
-		System.out.println("Cree y a�adi botones");
+		System.out.println("Cree y anadi botones");
 
 
 		SwingUtilities.updateComponentTreeUI(this);

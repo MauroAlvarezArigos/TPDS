@@ -1,6 +1,8 @@
 package GUI;
 
 
+import Controller.DarAltaController;
+
 import java.awt.EventQueue;
 
 import javax.swing.JButton;
@@ -48,6 +50,7 @@ public class App extends JFrame {
 		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
+			ap.setController(new DarAltaController());
 			ap.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});

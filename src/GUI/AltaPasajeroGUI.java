@@ -2,26 +2,20 @@ package GUI;
 
 import Controller.DarAltaController;
 import Controller.PasajeroController;
+import Exceptions.DuplicateDocNumberException;
+import Exceptions.NoConcordanciaException;
 import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
 import java.util.Properties;
 
-import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
-
-import javax.swing.JButton;
 
 public class AltaPasajeroGUI extends JFrame{
 	//Personal data
@@ -41,6 +35,9 @@ public class AltaPasajeroGUI extends JFrame{
 	private JTextField tbxPiso;
 	private JLabel lblDpto;
 	private JLabel lblPiso;
+	private JComboBox<String> cbxTDoc;
+
+	private DarAltaController controller;
 
 	public AltaPasajeroGUI() {
 		this.setLayout(null);
@@ -69,8 +66,20 @@ public class AltaPasajeroGUI extends JFrame{
 		btnSiguiente.setBackground(new Color(0, 128, 0));
 		btnSiguiente.setBounds(848, 375, 117, 36);
 		this.add(btnSiguiente);
-		
-		
+
+		btnSiguiente.addActionListener(e -> {
+			try {
+				controller.revisarDocExistente(tbxNroDoc.getText(), cbxTDoc.getSelectedItem().toString());
+			} catch (DuplicateDocNumberException e1) {
+				e1.printStackTrace();
+				mostrarError("No Concordancia", "No existe ninguna concordancia seg�n los criterios de b�squeda");
+			} catch (Exception e1) {
+				System.out.println("Es en el try de gestion pasajero");
+				e1.printStackTrace();
+
+			}
+		});
+
 		this.setVisible(true);
 			
 	}
@@ -132,7 +141,7 @@ public class AltaPasajeroGUI extends JFrame{
 		Properties p = new Properties();
 		p.put("text.today", "Hoy");
 		p.put("text.month", "Mes");
-		p.put("text.year", "A�o");
+		p.put("text.year", "Ano");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
 		datePicker.setBounds(150, 120, 110, 30);
@@ -145,7 +154,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(panelDocimento);
 		panelDocimento.setLayout(null);
 		
-		JComboBox<String> cbxTDoc = new JComboBox<String>();
+		cbxTDoc = new JComboBox<String>();
 		cbxTDoc.setBounds(83, 21, 86, 24);
 		cbxTDoc.addItem("Pasaporte");
 		panelDocimento.add(cbxTDoc);
@@ -154,7 +163,7 @@ public class AltaPasajeroGUI extends JFrame{
 		lblTipo.setBounds(10, 26, 30, 14);
 		panelDocimento.add(lblTipo);
 		
-		JLabel lblNroDni = new JLabel("N�mero");
+		JLabel lblNroDni = new JLabel("Numero");
 		lblNroDni.setBounds(10, 62, 46, 14);
 		panelDocimento.add(lblNroDni);
 		
@@ -182,7 +191,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(tbxEmail);
 		tbxEmail.setColumns(10);
 		
-		JLabel lblTelefono = new JLabel("Tel�fono");
+		JLabel lblTelefono = new JLabel("Telefono");
 		lblTelefono.setBounds(25, 198, 60, 14);
 		datosPersonales.add(lblTelefono);
 		
@@ -196,7 +205,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(tbxTelefono);
 		tbxTelefono.setColumns(10);
 		
-		JLabel lblOcupacion = new JLabel("Ocupaci�n");
+		JLabel lblOcupacion = new JLabel("Ocupacion");
 		lblOcupacion.setBounds(242, 198, 70, 14);
 		datosPersonales.add(lblOcupacion);
 		
@@ -227,7 +236,8 @@ public class AltaPasajeroGUI extends JFrame{
 		cbxIVA.setBounds(294, 244, 176, 24);
 		cbxIVA.addItem("Responsable No Inscripto");
 		datosPersonales.add(cbxIVA);
-		
+
+
 		datosPersonales.setSize(500, 300);
 		return datosPersonales;
 	}
@@ -237,7 +247,7 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.setLayout(null);
 		direccion.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Direccion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
-		JLabel lblPais = new JLabel("Pa�s");
+		JLabel lblPais = new JLabel("Pais");
 		lblPais.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblPais.setBounds(25, 40, 46, 14);
 		direccion.add(lblPais);
@@ -299,7 +309,7 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.add(tbxCodPostal);
 		tbxCodPostal.setColumns(10);
 		
-		JLabel lblNumero = new JLabel("N�mero");
+		JLabel lblNumero = new JLabel("Numero");
 		lblNumero.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblNumero.setBounds(231, 144, 46, 14);
 		direccion.add(lblNumero);
@@ -360,6 +370,14 @@ public class AltaPasajeroGUI extends JFrame{
 		return direccion;
 	}
 
-	public void setController(DarAltaController unController) {
+
+	public void setController(DarAltaController unController) { controller = unController;
+	}
+
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+				detalle,titulo,
+				JOptionPane.ERROR_MESSAGE);
 	}
 }
