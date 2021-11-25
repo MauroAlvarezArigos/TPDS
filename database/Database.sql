@@ -4,7 +4,6 @@ create table posIVA (
 	constraint pk_ident primary key (ident)
 );
 
-
 create table pais(
 	nombre character varying(50),
 	codigoPais int,
@@ -30,6 +29,7 @@ create table localidad(
 );
 
 create table persona(
+	idPersona int, 
 	telefono character varying(25),
 	email character varying(50),
 	CUIT character varying(50) NOT NULL,
