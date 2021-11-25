@@ -6,6 +6,7 @@ import java.util.List;
 import DAO.PasajeroDAO;
 import DAO.PasajeroDAOSQL;
 import DTO.PasajeroDTO;
+import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
@@ -14,6 +15,7 @@ import Servicios.Mappers.MapperPasajero;
 public class PasajeroServicio {
 	
 	PasajeroDAO pasajerodao;
+	IDTypeServicio IDServicio = new IDTypeServicio();
 	MapperPasajero mapper = new MapperPasajero();
 	
 	public PasajeroServicio() {
@@ -41,6 +43,11 @@ public class PasajeroServicio {
 			LPsjeroDTO.add(mapper.toDTO(p));
 		}
 		return LPsjeroDTO;
+	}
+
+	public void revisarDocExistente(String Ndoc, String TipoDoc) throws DuplicateDocNumberException{
+		IDType ID = IDServicio.getIDType(TipoDoc);
+		pasajerodao.docRepetido(ID,Ndoc);
 	}
 	
 	public void DarAltaPasajero(boolean skip, PasajeroDTO unPasajeroDTO) throws DuplicateDocNumberException {
