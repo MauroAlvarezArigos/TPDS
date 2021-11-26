@@ -85,7 +85,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -118,7 +117,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -151,7 +149,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -183,7 +180,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -210,7 +206,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -242,7 +237,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -277,7 +271,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     } finally {
         try {
             if (pstmt != null) pstmt.close();
-            if (conn != null) conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -313,7 +306,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -345,7 +337,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -378,7 +369,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }

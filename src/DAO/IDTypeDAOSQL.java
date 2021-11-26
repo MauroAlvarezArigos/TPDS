@@ -59,7 +59,6 @@ public class IDTypeDAOSQL implements IDTypeDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
@@ -91,8 +90,7 @@ public class IDTypeDAOSQL implements IDTypeDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
+                } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
