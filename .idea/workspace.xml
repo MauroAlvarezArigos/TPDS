@@ -1,28 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PosIVADAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PosIVADAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PosIVADAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PosIVADAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/UbicacionDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/UbicacionDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/utils/DB.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/utils/DB.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/datosTablas.txt" beforeDir="false" afterPath="$PROJECT_DIR$/database/datosTablas.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/PasajeroController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/PasajeroController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/IDTypeDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/IDTypeDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PosIVADAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PosIVADAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PosIVADAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/UbicacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/utils/DB.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DB.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Pasajero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Pasajero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/GestionPasajeroBusquedaGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
-    </list>
+    <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
