@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 import DTO.IDTypeDTO;
+import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
@@ -24,7 +25,7 @@ public class PasajeroController {
 	private PasajeroServicio pasajeroServicio;
 	private IDTypeServicio IDServicio;
 	private Pasajero pasajero;
-	private List<PasajeroDTO> lista;
+	private List<PasajeroBusquedaDTO> lista;
 	private GestionPasajeroGUI gestionGUI;
 	private GestionPasajeroBusquedaGUI gbusquedaGUI;
 	private AltaPasajeroGUI AltaPsjeroGUI;

@@ -5,27 +5,30 @@ import java.util.List;
 
 import DAO.PasajeroDAO;
 import DAO.PasajeroDAOSQL;
+import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
 import Servicios.Mappers.MapperPasajero;
+import Servicios.Mappers.MapperPasajeroBusqueda;
 
 public class PasajeroServicio {
 	
 	PasajeroDAO pasajerodao;
 	IDTypeServicio IDServicio = new IDTypeServicio();
-	MapperPasajero mapper = new MapperPasajero();
+	MapperPasajeroBusqueda mapperB = new MapperPasajeroBusqueda();
+	MapperPasajero mapperP = new MapperPasajero();
 	
 	public PasajeroServicio() {
 		pasajerodao = new PasajeroDAOSQL();
 	}
 	
-	public List<PasajeroDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
+	public List<PasajeroBusquedaDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
 
-		List<Pasajero> LPsjero = pasajerodao.buscar(nombre, apellido, tipoDoc, ndoc);
-		List<PasajeroDTO> LPsjeroDTO = new ArrayList<PasajeroDTO>();
+		List<Pasajero> LPsjero = pasajerodao.buscarGestion(nombre, apellido, tipoDoc, ndoc);
+		List<PasajeroBusquedaDTO> LPsjeroDTO;
 
 		if(LPsjero.size() == 0) {
 			throw new NoConcordanciaException();
@@ -37,10 +40,10 @@ public class PasajeroServicio {
 		return LPsjeroDTO;
 	}
 	
-	private List<PasajeroDTO> pasajerosToDTO(List<Pasajero> LPsjero) {
-		List<PasajeroDTO> LPsjeroDTO = new ArrayList<PasajeroDTO>();
+	private List<PasajeroBusquedaDTO> pasajerosToDTO(List<Pasajero> LPsjero) {
+		List<PasajeroBusquedaDTO> LPsjeroDTO = new ArrayList<PasajeroBusquedaDTO>();
 		for(Pasajero p : LPsjero) {
-			LPsjeroDTO.add(mapper.toDTO(p));
+			LPsjeroDTO.add(mapperB.toDTO(p));
 		}
 		return LPsjeroDTO;
 	}
@@ -52,7 +55,7 @@ public class PasajeroServicio {
 	
 	public void DarAltaPasajero(boolean skip, PasajeroDTO unPasajeroDTO) throws DuplicateDocNumberException {
 		Pasajero unPasajero;
-		unPasajero = mapper.toDomain(unPasajeroDTO);
+		unPasajero = mapperP.toDomain(unPasajeroDTO);
 		if(skip){
 			pasajerodao.docRepetido((unPasajero.getTipodoc()), unPasajero.getNdoc());
 		}

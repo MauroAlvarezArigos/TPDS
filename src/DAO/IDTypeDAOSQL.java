@@ -1,5 +1,6 @@
 package DAO;
 
+import DAO.utils.ConnectionWrapper;
 import DAO.utils.DB;
 import Dominio.IDType;
 
@@ -13,6 +14,21 @@ import java.util.List;
 
 public class IDTypeDAOSQL implements IDTypeDAO {
 
+
+    //Get DB Connection
+    //---
+    private ConnectionWrapper wrapper;
+    private Connection connection;
+
+    //Constructor
+    //---
+    public IDTypeDAOSQL(){
+        wrapper = new ConnectionWrapper();
+        connection = wrapper.getConnection();
+    }
+
+    //Query Sentences
+    //---
     private static final String GET_ALL =
             "\n" +
                     "SELECT * FROM IDTYPE";
@@ -22,6 +38,8 @@ public class IDTypeDAOSQL implements IDTypeDAO {
                     "WHERE (TIPODEID = ";
 
 
+    //Obtener todos los tipos de ID
+    //---
     @Override
     public List<IDType> getAllIDType() {
         List<IDType> lista = new ArrayList<>();
@@ -50,7 +68,8 @@ public class IDTypeDAOSQL implements IDTypeDAO {
         return lista;
     }
 
-
+    //Obtener que tipo de ID representa una String
+    //---
     @Override
     public IDType getIDType(String ID) {
         ID = ID.toUpperCase();

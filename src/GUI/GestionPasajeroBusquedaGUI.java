@@ -20,15 +20,16 @@ import java.util.List;
 
 import Controller.DarAltaController;
 import Controller.PasajeroController;
+import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 
 
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener {
 	private ButtonGroup bg;
-	private List<PasajeroDTO> lista;
+	private List<PasajeroBusquedaDTO> lista;
 	private PasajeroController controller;
 
-	public GestionPasajeroBusquedaGUI(List<PasajeroDTO> lista, String t) {
+	public GestionPasajeroBusquedaGUI(List<PasajeroBusquedaDTO> lista, String t) {
 
 		this.lista = lista;
 		this.setLocationRelativeTo(null);
@@ -128,7 +129,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 				}
 			} else {
 				System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
-				PasajeroDTO unPasajerDTO = lista.get((Integer.parseInt(bg.getSelection().getActionCommand())));
+				PasajeroBusquedaDTO unPasajeroBusquedaDTO = lista.get((Integer.parseInt(bg.getSelection().getActionCommand())));
 				//todo
 				//modificarPasajeroGUI();
 			}

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import Excepciones.ExcepcionNoExisteElemento;
+import DAO.utils.ConnectionWrapper;
 import DAO.utils.DB;
 import Dominio.IDType;
 import Dominio.Pasajero;
@@ -18,10 +19,24 @@ import Exceptions.NoConcordanciaException;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
 
-	IDTypeDAOSQL IDDAO = new IDTypeDAOSQL();
-	UbicacionDAOSQL UBICACIONDAO = new UbicacionDAOSQL();
-	PosIVADAOSQL IVADAO = new PosIVADAOSQL();
-	
+	//External DAO Dependencies
+	private IDTypeDAOSQL IDDAO = new IDTypeDAOSQL();
+	private UbicacionDAOSQL UBICACIONDAO = new UbicacionDAOSQL();
+	private PosIVADAOSQL IVADAO = new PosIVADAOSQL();
+
+
+	//Get DB Connection
+	private ConnectionWrapper wrapper;
+	private Connection connection;
+
+	//Constructor
+	public PasajeroDAOSQL(){
+		wrapper = new ConnectionWrapper();
+		connection = wrapper.getConnection();
+	}
+
+	//Query Sentences
+	//---
 	private static final String INSERT_PASAJERO =
 			"\n"+
 			"INSERT INTO PASAJERO(CUIT, NOMBRE, APELLIDO,"
@@ -34,11 +49,17 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	private static final String BUSCAR_DOC_REPETIDO =
 			"\n"+
 			"SELECT FROM PASAJERO p" +
-			" JOIN PERSONA per ON (p.cuit = per.cuit)" +
+			" JOIN PERSONA per ON (p.idpersona = per.idpersona)" +
 			" JOIN IDTYPE id ON (p.tipodoc = id.tipodeid)" +
 			" WHERE (? = id.tipodeid AND ? = p.ndoc)";
-	
+	private static final String BUSCAR_DBID =
+			"\n"+
+			"SELECT * FROM PASAJERO p " +
+			"JOIN PERSONA per ON (p.idpersona = per.idpersona) "+
+			"WHERE p.ID = ";
 
+	//Insert Pasajero
+	//---
 	@Override
 	public Pasajero insert(Pasajero unPasajero) {
 		Connection conn = DB.getConexion();
@@ -77,6 +98,8 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		return null;
 	}
 
+	//Buscar Pasajero por Nombre, Apellido, Tipo y Numero de Documento
+	//---
 	@Override
 	public List<Pasajero> buscar(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException{
 		String sentencia = prepararSentencia(nombre, apellido, tipoDoc, ndoc);
@@ -128,6 +151,44 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		
 	}
 
+	public List<Pasajero> buscarGestion(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException{
+		String sentencia = prepararSentencia(nombre, apellido, tipoDoc, ndoc);
+
+		List<Pasajero> lista = new ArrayList<Pasajero>();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sentencia);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Pasajero p = new Pasajero();
+				p.setID(rs.getInt("idpersona"));
+				p.setNombre(rs.getString("NOMBRE"));
+				p.setApellido(rs.getString("APELLIDO"));
+				p.setNdoc(rs.getString("NDOC"));
+				p.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
+
+				lista.add(p);
+			}
+		}catch(SQLException e) {
+		e.printStackTrace();
+		}
+		finally {
+		try {
+			if(pstmt != null) pstmt.close();
+			if(conn != null) conn.close();
+		}
+		catch(SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	return lista;
+}
+
+	//Revisar si existe un documento repetido
+	//---
 	@Override
 	public void docRepetido(IDType IDtipo, String Ndoc) throws DuplicateDocNumberException {
 		List<Pasajero> lista = new ArrayList<Pasajero>();
@@ -174,65 +235,112 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 
 	}
 
+	//Busca el pasajero que posee la ID = BDID
+	//---
+	public Pasajero getPasajeroDbid(int DBID) {
+		String sentencia = BUSCAR_DBID + DBID;
+		Pasajero unPasajero = new Pasajero();
+		Connection conn = DB.getConexion();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+
+		try {
+			pstmt = conn.prepareStatement(sentencia);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				unPasajero.setID(rs.getInt("idpersona"));
+				unPasajero.setTelefono(rs.getString("TELEFONO"));
+				unPasajero.setEmail(rs.getString("EMAIL"));
+				unPasajero.setCuit_cif(rs.getString("CUIT"));
+				unPasajero.setCalle(rs.getString("CALLE"));
+				unPasajero.setAltura(rs.getInt("ALTURA"));
+				unPasajero.setIVA(IVADAO.BuscarIVA(rs.getInt("POSIVA")));
+				unPasajero.setNombre(rs.getString("NOMBRE"));
+				unPasajero.setApellido(rs.getString("APELLIDO"));
+				unPasajero.setNdoc(rs.getString("NDOC"));
+				unPasajero.setFechanacimiento(rs.getDate("FECHANAC"));
+				//Puede estar mal este set
+				unPasajero.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
+				unPasajero.setOcupacion(rs.getString("OCUPACION"));
+				//Puede estar mal este set
+				unPasajero.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
+				unPasajero.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getString("LOCALIDAD")));
+			}}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return unPasajero;
+	}
+
+
+	//Utility: Prepara sentencia para busqueda de pasajero
+	//---
 	private String prepararSentencia(String nombre, String apellido, String tipoDoc, String ndoc) {
 		String p1 = "SELECT * FROM PASAJERO p " +
-				"JOIN PERSONA per ON (p.cuit = per.cuit) ";
+				"JOIN PERSONA per ON (p.idpersona = per.idpersona) ";
 		String tmp = "";
 		int cont = 0;
-		
+
 		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
 			return p1;
 		} else {
 			tmp = tmp + "WHERE ";
 			System.out.println("Where concatenado");
-					
+
 			if(!nombre.equals("")) {
 				System.out.println("Nombre concatenado");
-					
+
 				tmp = tmp + " NOMBRE LIKE '%"+ nombre +"%'";
 				cont++;
 			}
-			
+
 			if(!apellido.equals("")) {
 				if(cont == 0) {
-					tmp = tmp + " APELLIDO LIKE '%"+ apellido +"%'";				
+					tmp = tmp + " APELLIDO LIKE '%"+ apellido +"%'";
 				}
 				else {
 					tmp = tmp + " AND APELLIDO LIKE '%"+ apellido +"%'";
-					
+
 				}
 				System.out.println("apellido concatenado");
-				
+
 				cont++;
 			}
 			if(!tipoDoc.equals("")) {
 				System.out.println("tdoc concatenado");
-				
+
 				if(cont == 0) {
-					tmp = tmp + " TIPODOC = '"+ tipoDoc +"'";				
+					tmp = tmp + " TIPODOC = '"+ tipoDoc +"'";
 				}
-				else { 
+				else {
 					tmp = tmp + " AND TIPODOC = '"+ tipoDoc +"'";
-					
+
 				}
 				cont++;
 			}
 			if(!ndoc.equals("")) {
 				System.out.println("doc concatenado");
-				
+
 				if(cont == 0) {
-					tmp = tmp + "NDOC = '"+ ndoc + "'";				
+					tmp = tmp + "NDOC = '"+ ndoc + "'";
 				}
 				else {
 					tmp = tmp + " AND NDOC = '"+ ndoc +"'";
-					
+
 				}
 				cont++;
 			}
-		
+
 		}
 		System.out.println(tmp);
 		return p1.concat(tmp);
 	}
-
 }

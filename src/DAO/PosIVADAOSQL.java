@@ -1,5 +1,6 @@
 package DAO;
 
+import DAO.utils.ConnectionWrapper;
 import DAO.utils.DB;
 import Dominio.PosIVA;
 
@@ -12,6 +13,21 @@ import java.util.List;
 
 public class PosIVADAOSQL implements PosIVADAO {
 
+
+    //Get DB Connection
+    //---
+    private ConnectionWrapper wrapper;
+    private Connection connection;
+
+    //Constructor
+    //---
+    public PosIVADAOSQL(){
+        wrapper = new ConnectionWrapper();
+        connection = wrapper.getConnection();
+    }
+
+    //Query Sentences
+    //---
     private static final String INSERT_POSIVA =
             "\n" +
                     "INSERT INTO POSIVA(IDENT, TIPO)"
@@ -28,8 +44,11 @@ public class PosIVADAOSQL implements PosIVADAO {
                     "SELECT * FROM POSIVA" +
                     " WHERE IDENT=";
 
+
+    //Guardar una nueva posicion IVA --(Revisar: puede no ser necesario)--
+    //---
     @Override
-    public PosIVA Insert(PosIVA unPosIVA) {
+    public void Insert(PosIVA unPosIVA) {
         Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         try {
@@ -49,9 +68,11 @@ public class PosIVADAOSQL implements PosIVADAO {
                 e.printStackTrace();
             }
         }
-        return null;
     }
 
+
+    //Obtiene la lista de todos las posibles posiciones de IVA
+    //---
     @Override
     public List<PosIVA> GetListIVA() {
         List<PosIVA> lista = new ArrayList<>();
@@ -83,6 +104,9 @@ public class PosIVADAOSQL implements PosIVADAO {
 		return lista;
 }
 
+
+    //Obtiene la Posicion de IVA que representa una String
+    //---
     public PosIVA getIVA(String PosIVA){
         String Sentencia = GET_IVA + PosIVA;
         Connection conn = DB.getConexion();
@@ -114,6 +138,7 @@ public class PosIVADAOSQL implements PosIVADAO {
 
 
     }
+
 
     public PosIVA BuscarIVA(int ident){
         String Sentencia = SEARCH_IVA + ident;

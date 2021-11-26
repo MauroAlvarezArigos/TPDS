@@ -29,7 +29,7 @@ create table localidad(
 );
 
 create table persona(
-	idPersona int, 
+	idPersona int,
 	telefono character varying(25),
 	email character varying(50),
 	CUIT character varying(50) NOT NULL,
@@ -39,7 +39,7 @@ create table persona(
 	Localidad character varying(10),
 	constraint fk_PosIVA foreign key (PosIVA) REFERENCES posIVA (ident),
 	constraint fk_Localidad foreign key (Localidad) REFERENCES localidad (codigoLocalidad),
-	constraint pk_CUIT primary key(CUIT)
+	constraint pk_ID primary key(idPersona)
 );
 
 
@@ -49,7 +49,7 @@ create table IDType(
 );
 
 create table pasajero(
-	cuit character varying(50), 
+    idPersona int,
 	nombre character varying(50),
 	apellido character varying(50),
 	Ndoc character varying(25),
@@ -57,7 +57,7 @@ create table pasajero(
 	Ocupacion character varying(50),
 	FechaNac date,
 	Nacionalidad int,
-	constraint fk_cuitpersona foreign key (cuit) REFERENCES persona (cuit),
+	constraint fk_idpersona foreign key (idPersona) REFERENCES persona (idPersona),
 	constraint pk_Ndoc primary key (Ndoc),
 	constraint fk_nacionalidad foreign key (Nacionalidad) REFERENCES pais (codigoPais),
 	constraint fk_TipoDoc foreign key (TipoDoc) REFERENCES IDtype (tipoDeID)

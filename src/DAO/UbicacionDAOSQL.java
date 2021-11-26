@@ -1,6 +1,7 @@
 package DAO;
 
 
+import DAO.utils.ConnectionWrapper;
 import DAO.utils.DB;
 import Dominio.Localidad;
 import Dominio.Pais;
@@ -15,6 +16,20 @@ import java.util.List;
 
 public class UbicacionDAOSQL implements UbicacionDAO {
 
+    //Get DB Connection
+    //---
+    private ConnectionWrapper wrapper;
+    private Connection connection;
+
+    //Constructor
+    //---
+    public UbicacionDAOSQL(){
+        wrapper = new ConnectionWrapper();
+        connection = wrapper.getConnection();
+    }
+
+    //Query Sentences
+    //---
     private static final String INSERT_PAIS =
             "INSERT INTO PAIS(NOMBRE, CODIGOPAIS, NACIONALIDAD)"
                     + " VALUES(?, ?, ?)";

@@ -3,6 +3,8 @@ package Dominio;
 import java.sql.Date;
 
 public class Pasajero extends Persona{
+
+	private int ID;
 	private String nombre;
 	private String apellido;
 	private String ndoc;
@@ -18,6 +20,15 @@ public class Pasajero extends Persona{
 	}
 	
 	//Getters and Setters
+
+	public int getID() {
+		return ID;
+	}
+
+	public void setID(int ID) {
+		this.ID = ID;
+	}
+
 	public String getNombre() {
 		return nombre;
 	}
