@@ -1,5 +1,7 @@
 package Servicios;
 
+import java.util.List;
+
 import DAO.UbicacionDAO;
 import DAO.UbicacionDAOSQL;
 import Dominio.Localidad;
@@ -17,5 +19,9 @@ public class UbicacionServicio {
     }
     public Localidad getLocalidadNombre (String localidad, String prov, String pais){
         return ubicacionDAO.getLocalidadNombre(localidad, prov, pais);
+    }
+    
+    public List<String> getAllNacionalidad() {
+		return ubicacionDAO.getNacionalidad();
     }
 }

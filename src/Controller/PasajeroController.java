@@ -1,17 +1,12 @@
 package Controller;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.table.DefaultTableModel;
 
 import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
-import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
 //import GUI.DarAltaPsjeroGUI;
