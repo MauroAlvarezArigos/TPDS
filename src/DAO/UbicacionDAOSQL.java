@@ -16,16 +16,10 @@ import java.util.List;
 
 public class UbicacionDAOSQL implements UbicacionDAO {
 
-    //Get DB Connection
-    //---
-    private ConnectionWrapper wrapper;
-    private Connection connection;
+    Connection conn;
 
-    //Constructor
-    //---
-    public UbicacionDAOSQL(){
-        wrapper = new ConnectionWrapper();
-        connection = wrapper.getConnection();
+    public UbicacionDAOSQL(Connection unConn){
+        conn = unConn;
     }
 
     //Query Sentences
@@ -66,7 +60,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     //Insert Pais
     @Override
     public Pais insertPais(Pais unPais) {
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         List<Provincia> LProv = unPais.getProvincias();
         int Lsize = LProv.size();
@@ -98,7 +91,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public Pais buscarCodePais(int Codigo) {
         String sentencia = SEARCH_CODE_PAIS + Codigo;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Pais pais = new Pais();
@@ -129,7 +121,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     @Override
     public Provincia insertProvincia(Provincia unProvincia, int CodPais) {
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         List<Localidad> LLoc = unProvincia.getLocalidades();
         int Lsize = LLoc.size();
@@ -161,7 +152,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public Provincia buscarCodeProvincia(int Codigo) {
         String sentencia = SEARCH_CODE_PROVINCIA + Codigo;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Provincia prov = new Provincia();
@@ -191,7 +181,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     @Override
     public Localidad insertLocalidad(Localidad unLocalidad, int CodProv) {
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement(INSERT_LOCALIDAD);
@@ -218,7 +207,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public Localidad buscarLocalidad(String Codigo) {
         String sentencia = SEARCH_CODE_LOCALIDAD + "\'" + Codigo + "\'";
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Localidad loc = new Localidad();
@@ -249,7 +237,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public List<Provincia> buscarProvinciasPais(int codigo) {
         String sentencia = SEARCH_PAIS_PROVINCIA + codigo;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Provincia> Provincias = new ArrayList<>();
@@ -284,7 +271,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public List<Localidad> buscarLocalidaProvincias(int codigo) {
         String sentencia = SEARCH_PROVINCIA_LOCALIDAD + codigo;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         List<Localidad> Localidades = new ArrayList<>();
@@ -318,7 +304,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     @Override
     public Pais getNacionalidad(String nacionalidad){
         String sentencia = SEARCH_NACIONALIDAD + nacionalidad;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
@@ -346,7 +331,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     public Localidad getLocalidadNombre(String nombre, String prov, String pais){
         String sentencia = SEARCH_NOMBRE_LOCALIDAD;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Localidad loc = new Localidad();

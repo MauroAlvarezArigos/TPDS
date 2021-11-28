@@ -17,26 +17,51 @@ public class ConnectionWrapper {
 
 
     public ConnectionWrapper() {
-        this.connection = dataSource.getConexion();
+        this.dataSource = new DB();
+        this.connection = dataSource.getConnection();
     }
 
 
-    public void destroy() throws SQLException {
-        this.connection.close();
+    public void destroy() /*throws SQLException*/ {
+        try{
+            this.connection.close();
+        }catch (SQLException e){
+            e.printStackTrace();
+        };
     }
 
-    public void begin() throws SQLException {
-        this.connection.setAutoCommit(false);
+    public void begin() /*throws SQLException*/ {
+        try{
+            this.connection.setAutoCommit(false);
+        }catch (SQLException e){
+            e.printStackTrace();
+    };
     }
 
-    public void commit() throws SQLException {
-        this.connection.commit();
-        this.connection.setAutoCommit(true);
+    public void commit() /*throws SQLException*/ {
+        try {
+            this.connection.commit();
+            this.connection.setAutoCommit(true);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
-    public void rollback() throws SQLException {
-        this.connection.rollback();
-        this.connection.setAutoCommit(true);
+    public void rollback() /*throws SQLException*/ {
+        try {
+            this.connection.rollback();
+            this.connection.setAutoCommit(true);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+    public void setAutoCommit() /*throws SQLException*/{
+        try {
+            this.connection.setAutoCommit(true);
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
     }
 
     public Connection getConnection() {

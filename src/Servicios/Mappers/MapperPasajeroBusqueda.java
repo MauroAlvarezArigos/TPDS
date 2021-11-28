@@ -1,13 +1,15 @@
 package Servicios.Mappers;
 
 import DAO.PasajeroDAOSQL;
+import DAO.utils.DAOManager;
 import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 
 public class MapperPasajeroBusqueda {
 
-    PasajeroDAOSQL PasajeroDAO = new PasajeroDAOSQL();
+    private PasajeroDAOSQL pasajeroDAO;
+    private DAOManager daoManager;
 
     public PasajeroBusquedaDTO toDTO(Pasajero unPasajero){
         //todo: Agregar id Pasajero
@@ -22,7 +24,14 @@ public class MapperPasajeroBusqueda {
     }
 
     public Pasajero toDomain(PasajeroBusquedaDTO unPasajeroBusquedaDTO){
+        daoManager = new DAOManager();
+        pasajeroDAO = daoManager.getPasajeroDAO();
 
-        return PasajeroDAO.getPasajeroDbid(unPasajeroBusquedaDTO.getDbid());
+        daoManager.begin();
+        Pasajero unPasajero = pasajeroDAO.getPasajeroDbid(unPasajeroBusquedaDTO.getDbid());
+        daoManager.commit();
+        daoManager.disconnect();
+
+        return unPasajero;
     }
 }

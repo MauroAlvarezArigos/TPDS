@@ -26,7 +26,7 @@ public class DB {
         conexion = true;
         return conn;
     }
-    public static  Connection getConexion() {
+    public static  Connection getConnection() {
 
         if(conexion) return crearConexion();
         return null;

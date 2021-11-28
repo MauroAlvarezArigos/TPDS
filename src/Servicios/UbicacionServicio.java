@@ -2,20 +2,38 @@ package Servicios;
 
 import DAO.UbicacionDAO;
 import DAO.UbicacionDAOSQL;
+import DAO.utils.DAOManager;
 import Dominio.Localidad;
 import Dominio.Pais;
 
 public class UbicacionServicio {
+    DAOManager daoManager;
     UbicacionDAO ubicacionDAO;
 
     public UbicacionServicio(){
-        ubicacionDAO = new UbicacionDAOSQL();
+        super();
     }
 
     public Pais getNacionalidad (String nacionalidad){
-        return ubicacionDAO.getNacionalidad(nacionalidad);
+        daoManager = new DAOManager();
+        ubicacionDAO = daoManager.getUbicacionDAO();
+
+        daoManager.begin();
+        Pais pais = ubicacionDAO.getNacionalidad(nacionalidad);
+        daoManager.commit();
+        daoManager.disconnect();
+
+        return pais;
     }
     public Localidad getLocalidadNombre (String localidad, String prov, String pais){
-        return ubicacionDAO.getLocalidadNombre(localidad, prov, pais);
+        daoManager = new DAOManager();
+        ubicacionDAO = daoManager.getUbicacionDAO();
+
+        daoManager.begin();
+        Localidad unlocalidad = ubicacionDAO.getLocalidadNombre(localidad, prov, pais);
+        daoManager.commit();
+        daoManager.disconnect();
+
+        return unlocalidad;
     }
 }

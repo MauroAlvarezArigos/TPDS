@@ -12,19 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class IDTypeDAOSQL implements IDTypeDAO {
 
+    Connection conn;
 
-    //Get DB Connection
-    //---
-    private ConnectionWrapper wrapper;
-    private Connection connection;
-
-    //Constructor
-    //---
-    public IDTypeDAOSQL(){
-        wrapper = new ConnectionWrapper();
-        connection = wrapper.getConnection();
+    public IDTypeDAOSQL(Connection unConn){
+        conn = unConn;
     }
 
     //Query Sentences
@@ -43,7 +37,6 @@ public class IDTypeDAOSQL implements IDTypeDAO {
     @Override
     public List<IDType> getAllIDType() {
         List<IDType> lista = new ArrayList<>();
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
@@ -73,7 +66,6 @@ public class IDTypeDAOSQL implements IDTypeDAO {
     public IDType getIDType(String ID) {
         ID = ID.toUpperCase();
         String Sentencia = GET_ID + "\'"+ID+"\'" + ")";
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         IDType unID = new IDType();
