@@ -58,6 +58,7 @@ public class PasajeroServicio {
 	}
 
 	public void revisarDocExistente(String Ndoc, String TipoDoc) throws DuplicateDocNumberException{
+
 		IDType ID = IDServicio.getIDType(TipoDoc);
 		pasajerodao.docRepetido(ID,Ndoc);
 	}

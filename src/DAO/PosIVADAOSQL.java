@@ -1,7 +1,5 @@
 package DAO;
 
-import DAO.utils.ConnectionWrapper;
-import DAO.utils.DB;
 import Dominio.PosIVA;
 
 import java.sql.Connection;

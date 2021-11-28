@@ -1,8 +1,6 @@
 package DAO;
 
 
-import DAO.utils.ConnectionWrapper;
-import DAO.utils.DB;
 import Dominio.Localidad;
 import Dominio.Pais;
 import Dominio.Provincia;

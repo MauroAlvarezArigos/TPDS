@@ -10,8 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import Excepciones.ExcepcionNoExisteElemento;
-import DAO.utils.ConnectionWrapper;
-import DAO.utils.DB;
 import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
