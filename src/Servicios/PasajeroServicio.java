@@ -24,7 +24,7 @@ public class PasajeroServicio {
 	public PasajeroServicio() {
 		pasajerodao = new PasajeroDAOSQL();
 	}
-	
+
 	public List<PasajeroBusquedaDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
 
 		List<Pasajero> LPsjero = pasajerodao.buscarGestion(nombre, apellido, tipoDoc, ndoc);
