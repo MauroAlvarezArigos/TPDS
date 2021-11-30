@@ -160,11 +160,12 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.setBounds(261, 71, 209, 104);
 		datosPersonales.add(panelDocimento);
 		panelDocimento.setLayout(null);
-		
-		cbxTDoc = new JComboBox<String>();
 
+
+		controller.cargarTDNI();
 		cbxTDoc.setBounds(83, 21, 86, 24);
 		panelDocimento.add(cbxTDoc);
+
 		
 		JLabel lblTipo = new JLabel("Tipo");
 		lblTipo.setBounds(10, 26, 30, 14);

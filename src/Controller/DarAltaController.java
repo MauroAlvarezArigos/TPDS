@@ -33,7 +33,7 @@ public class DarAltaController {
     }
 
     public void DarAltaPasajero(){
-        AltaPsjeroGUI.setController(this);
+        //AltaPsjeroGUI.setController(this);
         AltaPsjeroGUI.setVisible(true);
     }
 
