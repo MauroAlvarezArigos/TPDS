@@ -56,6 +56,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                     "JOIN PROVINCIA p ON (p.CODIGOPROVINCIA = l.PROV) " +
                     "JOIN PAIS c ON (c.CODIGOPAIS = p.PAIS)" +
                     " WHERE ((l.NOMBRE = ?) AND (p.NOMBRE = ?) AND (c.NOMBRE = ?))";
+    private static final String ALL_PAIS =
+            " SELECT * FROM PAIS ";
 
     //Insert Pais
     @Override
@@ -381,6 +383,28 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 		}
 		return Nacionalidad;
 	}
+
+    public List<Pais> getAllPais(){
+        String sentencia = ALL_PAIS;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<Pais> LPais = new ArrayList<Pais>();
+
+        try {
+            pstmt = conn.prepareStatement(sentencia);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Pais p = new Pais();
+                p.setNacionalidad(rs.getString("NACIONALIDAD"));
+                p.setCodigo(rs.getInt("CODIGOPAIS"));
+                p.setNombre(rs.getString("NOMBRE"));
+                LPais.add(p);
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return LPais;
+    }
 
 }
 
