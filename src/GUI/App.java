@@ -4,6 +4,7 @@ package GUI;
 import Controller.DarAltaController;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,15 +40,16 @@ public class App extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JPanel panelMenu = new JPanel();
 		setContentPane(panelMenu);
-		panelMenu.setLayout(null);
+		panelMenu.setLayout(new FlowLayout());
 		
 		JButton botonGestionarPasajero = new JButton("Gestionar Pasajero");
-		botonGestionarPasajero.setBounds(62, 10, 150, 20);
 		panelMenu.add(botonGestionarPasajero);
 		
 		JButton btnAltaPasajero = new JButton("Alta Pasajero");
-		btnAltaPasajero.setBounds(222, 9, 129, 23);
 		panelMenu.add(btnAltaPasajero);
+		
+		JButton btnMostrarEstadoHabitacion = new JButton("Mostrar Estado Habitacion");
+		panelMenu.add(btnMostrarEstadoHabitacion);
 		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
@@ -60,6 +62,12 @@ public class App extends JFrame {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();
 			gp.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		btnMostrarEstadoHabitacion.addActionListener(e -> {
+			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
+			me.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);			
 		});
 	}
 }

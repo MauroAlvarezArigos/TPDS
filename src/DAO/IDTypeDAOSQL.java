@@ -58,8 +58,15 @@ public class IDTypeDAOSQL implements IDTypeDAO {
             e.printStackTrace();
         } finally {
             try {
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
+                if (pstmt != null) {
+                	System.out.println("Cerre pstmt");
+                	pstmt.close();
+                }
+                if (conn != null) {
+                	System.out.println("Cerre conn");
+                	
+                	conn.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }
