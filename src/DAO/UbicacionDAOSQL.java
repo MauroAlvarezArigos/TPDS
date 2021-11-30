@@ -410,5 +410,6 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 		}
 		return Nacionalidad;
 	}
+
 }
 

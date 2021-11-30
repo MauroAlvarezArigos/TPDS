@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.JTextPane;
 
 
 
@@ -61,5 +62,4 @@ public class App extends JFrame {
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 	}
-	
 }
