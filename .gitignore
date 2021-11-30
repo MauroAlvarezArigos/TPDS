@@ -10,3 +10,4 @@ bin/
 ./.idea
 .idea
 ./src/DAO/utils/DB.java
+src/DAO/utils/DB.java

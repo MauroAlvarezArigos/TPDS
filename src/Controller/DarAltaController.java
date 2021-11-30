@@ -9,12 +9,14 @@ import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
 import Servicios.IDTypeServicio;
 import Servicios.PasajeroServicio;
+import Servicios.UbicacionServicio;
 
 import javax.swing.*;
 import java.util.List;
 
 public class DarAltaController {
     private PasajeroServicio pasajeroServicio;
+    private UbicacionServicio ubicacionServicio;
     private IDTypeServicio IDServicio;
     private Pasajero pasajero;
     private List<PasajeroDTO> lista;
@@ -25,12 +27,12 @@ public class DarAltaController {
 
     public DarAltaController(AltaPasajeroGUI a) {
         this.pasajeroServicio = new PasajeroServicio();
+        this.ubicacionServicio = new UbicacionServicio();
         this.IDServicio = new IDTypeServicio();
         this.AltaPsjeroGUI = a;
     }
 
     public void DarAltaPasajero(){
-        AltaPsjeroGUI = new AltaPasajeroGUI();
         AltaPsjeroGUI.setController(this);
         AltaPsjeroGUI.setVisible(true);
     }
@@ -75,6 +77,10 @@ public class DarAltaController {
 
     public void mensajeAceptarCancelarGUI(){
 
+    }
+    
+    public List<String> cargarNacionalidadGUI(){
+    	return ubicacionServicio.getAllNacionalidad();
     }
 
 

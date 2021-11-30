@@ -11,12 +11,15 @@ public class MapperID {
 
     private DAOManager daoManager;
 
+
+
     public IDTypeDTO toDTO(IDType unIDType){
         IDTypeDTO unIDTypeDTO = new IDTypeDTO();
         unIDTypeDTO.setTipo(unIDType.getTipoDeID());
         return unIDTypeDTO;
     }
     public IDType toDomain(IDTypeDTO unDTO){
+        daoManager = new DAOManager();
         IDDAO = daoManager.getIDTypeDAO();
 
         daoManager.begin();

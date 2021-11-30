@@ -14,7 +14,7 @@ import java.util.List;
 
 public class UbicacionDAOSQL implements UbicacionDAO {
 
-    Connection conn;
+    private Connection conn;
 
     public UbicacionDAOSQL(Connection unConn){
         conn = unConn;
@@ -49,6 +49,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     private static final String SEARCH_NACIONALIDAD =
             "SELECT * FROM PAIS" +
                     " WHERE NACIONALIDAD =";
+    private static final String ALL_NACIONALIDAD = 
+    		"SELECT NACIONALIDAD FROM PAIS";
     private static final String SEARCH_NOMBRE_LOCALIDAD =
             "SELECT l.NOMBRE, l.CODPOSTAL, l.CODIGOLOCALIDAD, l.PROV FROM LOCALIDAD l " +
                     "JOIN PROVINCIA p ON (p.CODIGOPROVINCIA = l.PROV) " +
@@ -357,5 +359,28 @@ public class UbicacionDAOSQL implements UbicacionDAO {
         }
         return loc;
     }
+
+
+	@Override
+	public List<String> getNacionalidad() {
+		String sentencia = ALL_NACIONALIDAD;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<String> Nacionalidad = new ArrayList<>();
+        
+        try {
+        	pstmt = conn.prepareStatement(sentencia);
+        	rs = pstmt.executeQuery();
+        	
+        	while(rs.next()) {
+                String getNacionalidad = rs.getString("nacionalidad");
+                Nacionalidad.add(getNacionalidad);
+            }
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return Nacionalidad;
+	}
+
 }
 

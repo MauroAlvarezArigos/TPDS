@@ -1,5 +1,7 @@
 package Servicios;
 
+import java.util.List;
+
 import DAO.UbicacionDAO;
 import DAO.UbicacionDAOSQL;
 import DAO.utils.DAOManager;
@@ -35,5 +37,17 @@ public class UbicacionServicio {
         daoManager.disconnect();
 
         return unlocalidad;
+    }
+    
+    public List<String> getAllNacionalidad() {
+        daoManager = new DAOManager();
+        ubicacionDAO = daoManager.getUbicacionDAO();
+
+        daoManager.begin();
+        List<String> returnvalue = ubicacionDAO.getNacionalidad();
+        daoManager.commit();
+        daoManager.disconnect();
+
+		return returnvalue;
     }
 }

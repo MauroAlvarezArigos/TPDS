@@ -1,12 +1,12 @@
 package GUI;
 
 import Controller.DarAltaController;
-import Controller.PasajeroController;
 import Exceptions.DuplicateDocNumberException;
-import Exceptions.NoConcordanciaException;
 import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import javax.swing.*;
@@ -17,6 +17,8 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+
+@SuppressWarnings("serial")
 public class AltaPasajeroGUI extends JFrame{
 	//Personal data
 	private JTextField tbxApellido;
@@ -36,45 +38,48 @@ public class AltaPasajeroGUI extends JFrame{
 	private JLabel lblDpto;
 	private JLabel lblPiso;
 	private JComboBox<String> cbxTDoc;
+	private JComboBox<String> cbxNacionalidad; 
 
 	private DarAltaController controller;
 
 	public AltaPasajeroGUI() {
+		this.setVisible(false);
+
 		controller = new DarAltaController(this);
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 		this.setSize(1000, 500);
 		this.controller.cargarTDNI();
 		
 		JPanel datosPersonales = datosPersonales();
-		this.add(datosPersonales);
+		getContentPane().add(datosPersonales);
 
 		JPanel direccion = direccion();
 		direccion.setBounds(539, 28, 426, 277);
-		this.add(direccion);
+		getContentPane().add(direccion);
 		
 		JLabel lblcampoObl = new JLabel("(*) Campos Obligatorios");
 		lblcampoObl.setForeground(Color.RED);
 		lblcampoObl.setBounds(29, 363, 136, 14);
-		this.add(lblcampoObl);
+		getContentPane().add(lblcampoObl);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBackground(new Color(255, 0, 0));
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setBounds(721, 375, 117, 36);
-		this.add(btnCancelar);
+		getContentPane().add(btnCancelar);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
 		btnSiguiente.setForeground(new Color(255, 255, 255));
 		btnSiguiente.setBackground(new Color(0, 128, 0));
 		btnSiguiente.setBounds(848, 375, 117, 36);
-		this.add(btnSiguiente);
+		getContentPane().add(btnSiguiente);
 
 		btnSiguiente.addActionListener(e -> {
 			try {
 				controller.revisarDocExistente(tbxNroDoc.getText(), cbxTDoc.getSelectedItem().toString());
 			} catch (DuplicateDocNumberException e1) {
 				e1.printStackTrace();
-				mostrarError("No Concordancia", "No existe ninguna concordancia seg�n los criterios de b�squeda");
+				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
 			} catch (Exception e1) {
 				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();
@@ -93,16 +98,16 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Datos Personales", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		
 		JLabel lblApellido = new JLabel("Apellido(s)");
-		lblApellido.setBounds(25, 33, 60, 14);
+		lblApellido.setBounds(10, 33, 60, 14);
 		datosPersonales.add(lblApellido);
 		
 		JLabel lblAsteriscoA = new JLabel("(*)");
 		lblAsteriscoA.setForeground(new Color(255, 0, 0));
-		lblAsteriscoA.setBounds(87, 33, 15, 14);
+		lblAsteriscoA.setBounds(77, 33, 15, 14);
 		datosPersonales.add(lblAsteriscoA);
 		
 		JLabel lblNacionalidad = new JLabel("Nacionalidad");
-		lblNacionalidad.setBounds(25, 76, 77, 14);
+		lblNacionalidad.setBounds(10, 76, 82, 14);
 		datosPersonales.add(lblNacionalidad);
 		
 		tbxApellido = new JTextField();
@@ -110,32 +115,32 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(tbxApellido);
 		tbxApellido.setColumns(10);
 		
-		JComboBox<String> cbxNacionalidad = new JComboBox<String>();
+		cbxNacionalidad = new JComboBox<String>();
 		cbxNacionalidad.setBounds(135, 71, 107, 24);
-		cbxNacionalidad.addItem("Argentino");
+		llenarListaNacionalidad();
 		datosPersonales.add(cbxNacionalidad);
 		
 		JLabel lblAsteriscoNac = new JLabel("(*)");
 		lblAsteriscoNac.setForeground(new Color(255, 0, 0));
-		lblAsteriscoNac.setBounds(102, 76, 15, 14);
+		lblAsteriscoNac.setBounds(94, 76, 15, 14);
 		datosPersonales.add(lblAsteriscoNac);
 		
 		JLabel lblNombre = new JLabel("Nombre(s)");
-		lblNombre.setBounds(252, 33, 60, 14);
+		lblNombre.setBounds(261, 33, 59, 14);
 		datosPersonales.add(lblNombre);
 		
 		JLabel lblAsteriscoN = new JLabel("(*)");
 		lblAsteriscoN.setForeground(new Color(255, 0, 0));
-		lblAsteriscoN.setBounds(315, 33, 15, 14);
+		lblAsteriscoN.setBounds(323, 33, 15, 14);
 		datosPersonales.add(lblAsteriscoN);
 		
 		tbxNombre = new JTextField();
 		tbxNombre.setColumns(10);
-		tbxNombre.setBounds(330, 30, 140, 20);
+		tbxNombre.setBounds(348, 30, 122, 20);
 		datosPersonales.add(tbxNombre);
 		
 		JLabel lblFecNac = new JLabel("Fecha de Nacimiento");
-		lblFecNac.setBounds(25, 125, 122, 14);
+		lblFecNac.setBounds(10, 120, 122, 14);
 		datosPersonales.add(lblFecNac);
 		
 		//Agregar DatePicker
@@ -146,7 +151,7 @@ public class AltaPasajeroGUI extends JFrame{
 		p.put("text.year", "Ano");
 		JDatePanelImpl datePanel = new JDatePanelImpl(model, p);
 		JDatePickerImpl datePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
-		datePicker.setBounds(150, 120, 110, 30);
+		datePicker.setBounds(132, 115, 110, 30);
 		datosPersonales.add(datePicker);
 		
 		
@@ -185,57 +190,57 @@ public class AltaPasajeroGUI extends JFrame{
 		lblAsteriscoDoc.setForeground(Color.RED);
 		
 		JLabel lblEmail = new JLabel("E-Mail");
-		lblEmail.setBounds(25, 161, 46, 14);
+		lblEmail.setBounds(10, 157, 46, 14);
 		datosPersonales.add(lblEmail);
 		
 		tbxEmail = new JTextField();
-		tbxEmail.setBounds(72, 155, 140, 20);
+		tbxEmail.setBounds(62, 155, 180, 20);
 		datosPersonales.add(tbxEmail);
 		tbxEmail.setColumns(10);
 		
 		JLabel lblTelefono = new JLabel("Telefono");
-		lblTelefono.setBounds(25, 198, 60, 14);
+		lblTelefono.setBounds(10, 198, 60, 14);
 		datosPersonales.add(lblTelefono);
 		
 		JLabel lblAsteriscoT = new JLabel("(*)");
 		lblAsteriscoT.setForeground(Color.RED);
-		lblAsteriscoT.setBounds(80, 198, 15, 14);
+		lblAsteriscoT.setBounds(77, 198, 15, 14);
 		datosPersonales.add(lblAsteriscoT);
 		
 		tbxTelefono = new JTextField();
-		tbxTelefono.setBounds(102, 195, 122, 20);
+		tbxTelefono.setBounds(92, 196, 150, 20);
 		datosPersonales.add(tbxTelefono);
 		tbxTelefono.setColumns(10);
 		
 		JLabel lblOcupacion = new JLabel("Ocupacion");
-		lblOcupacion.setBounds(242, 198, 70, 14);
+		lblOcupacion.setBounds(260, 198, 78, 14);
 		datosPersonales.add(lblOcupacion);
 		
 		JLabel lblAsteriscoO = new JLabel("(*)");
 		lblAsteriscoO.setForeground(Color.RED);
-		lblAsteriscoO.setBounds(310, 198, 15, 14);
+		lblAsteriscoO.setBounds(330, 198, 15, 14);
 		datosPersonales.add(lblAsteriscoO);
 		
 		tbxOcupacion = new JTextField();
-		tbxOcupacion.setBounds(330, 195, 130, 20);
+		tbxOcupacion.setBounds(348, 196, 122, 20);
 		datosPersonales.add(tbxOcupacion);
 		tbxOcupacion.setColumns(10);
 		
 		JLabel lblCuit = new JLabel("CUIT");
-		lblCuit.setBounds(25, 249, 28, 14);
+		lblCuit.setBounds(10, 248, 60, 14);
 		datosPersonales.add(lblCuit);
 		
 		tbxCuit = new JTextField();
-		tbxCuit.setBounds(63, 246, 157, 20);
+		tbxCuit.setBounds(92, 246, 150, 20);
 		datosPersonales.add(tbxCuit);
 		tbxCuit.setColumns(10);
 		
 		JLabel lblTIVA = new JLabel("Tipo IVA");
-		lblTIVA.setBounds(242, 249, 60, 14);
+		lblTIVA.setBounds(261, 248, 46, 14);
 		datosPersonales.add(lblTIVA);
 		
 		JComboBox<String> cbxIVA = new JComboBox<String>();
-		cbxIVA.setBounds(294, 244, 176, 24);
+		cbxIVA.setBounds(320, 243, 150, 24);
 		cbxIVA.addItem("Responsable No Inscripto");
 		datosPersonales.add(cbxIVA);
 
@@ -383,4 +388,12 @@ public class AltaPasajeroGUI extends JFrame{
 				JOptionPane.ERROR_MESSAGE);
 	}
 	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
+	
+	public void llenarListaNacionalidad() {
+		List<String> ListNacionalidades = new ArrayList<>();
+		ListNacionalidades = controller.cargarNacionalidadGUI();
+		for(int i=0; i<ListNacionalidades.size(); i++) {
+			this.cbxNacionalidad.addItem(ListNacionalidades.get(i));
+		}
+	}
 }

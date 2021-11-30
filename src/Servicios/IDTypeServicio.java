@@ -39,6 +39,7 @@ public class IDTypeServicio {
         daoManager.begin();
         List<IDType> ListaDominio = IDDAO.getAllIDType();
         List<IDTypeDTO> ListaDTO = new ArrayList<IDTypeDTO>();
+
         daoManager.commit();
         daoManager.disconnect();
 

@@ -12,7 +12,7 @@ import java.util.List;
 public class PosIVADAOSQL implements PosIVADAO {
 
 
-    Connection conn;
+    private Connection conn;
 
     public PosIVADAOSQL(Connection unConn){
         conn = unConn;

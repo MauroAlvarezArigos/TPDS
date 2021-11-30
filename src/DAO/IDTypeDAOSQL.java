@@ -13,7 +13,7 @@ import java.util.List;
 
 public class IDTypeDAOSQL implements IDTypeDAO {
 
-    Connection conn;
+    private Connection conn;
 
     public IDTypeDAOSQL(Connection unConn){
         conn = unConn;
@@ -50,6 +50,10 @@ public class IDTypeDAOSQL implements IDTypeDAO {
         } finally {
             try {
                 if (pstmt != null) pstmt.close();
+                if (pstmt != null) {
+                	System.out.println("Cerre pstmt");
+                	pstmt.close();
+                }
             } catch (SQLException e) {
                 e.printStackTrace();
             }

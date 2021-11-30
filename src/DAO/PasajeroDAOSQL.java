@@ -16,7 +16,7 @@ import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
-	Connection conn;
+	private Connection conn;
 
 	//External DAO Dependencies
 	private IDTypeDAOSQL IDDAO;

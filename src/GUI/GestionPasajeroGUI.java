@@ -8,6 +8,7 @@ import Exceptions.NoConcordanciaException;
 
 import java.awt.Color;
 
+@SuppressWarnings("serial")
 public class GestionPasajeroGUI extends JFrame{
 	
 	private PasajeroController controller;
@@ -90,7 +91,7 @@ public class GestionPasajeroGUI extends JFrame{
 				controller.buscarPasajero();
 			} catch (NoConcordanciaException e1) {
 				e1.printStackTrace();
-				mostrarError("No Concordancia", "No existe ninguna concordancia seg�n los criterios de b�squeda");
+				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
 			} catch (Exception e1) {
 				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();

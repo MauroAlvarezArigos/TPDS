@@ -24,9 +24,9 @@ public class PasajeroServicio {
 	MapperPasajeroBusqueda mapperB = new MapperPasajeroBusqueda();
 	MapperPasajero mapperP = new MapperPasajero();
 	IDTypeServicio IDServicio = new IDTypeServicio();
-	
+
 	public PasajeroServicio() {super(); }
-	
+
 	public List<PasajeroBusquedaDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
 
 		daoManager = new DAOManager();
