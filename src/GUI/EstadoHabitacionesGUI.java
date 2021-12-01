@@ -14,6 +14,7 @@ import javax.swing.JTable;
 import javax.swing.JMenuBar;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
 
 	private JPanel contentPane;

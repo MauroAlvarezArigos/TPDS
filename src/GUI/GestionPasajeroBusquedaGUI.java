@@ -24,6 +24,7 @@ import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 
 
+@SuppressWarnings({ "serial", "unused" })
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener {
 	private ButtonGroup bg;
 	private List<PasajeroBusquedaDTO> lista;

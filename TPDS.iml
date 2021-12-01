@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
   <component name="EclipseModuleManager">
-    <libelement value="file://E:/Programacion/Java/TPDS/postgresql-42.2.23.jar" />
+    <libelement value="file://C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TPDS/lib/postgresql-42.2.23.jar" />
     <src_description expected_position="0">
       <src_folder value="file://$MODULE_DIR$/src" expected_position="0" />
     </src_description>
@@ -17,7 +17,7 @@
     <orderEntry type="module-library">
       <library name="postgresql-42.2.23.jar">
         <CLASSES>
-          <root url="file://E:/Programacion/Java/TPDS/postgresql-42.2.23.jar" />
+          <root url="file://C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TPDS/lib/postgresql-42.2.23.jar" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

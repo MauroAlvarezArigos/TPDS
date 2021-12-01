@@ -1,9 +1,4 @@
-./bin
-TPDS/bin
-/bin
 bin/
-.bin/
-.bin
 .vscode/tasks.json
 .project
 ./src/DAO/utils/DB.java

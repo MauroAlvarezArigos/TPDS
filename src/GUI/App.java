@@ -10,14 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
-import javax.swing.JTextPane;
 
-
-
+@SuppressWarnings("serial")
 public class App extends JFrame {
-	
-	private JPanel contentPane;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {

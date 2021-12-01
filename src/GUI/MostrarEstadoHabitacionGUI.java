@@ -23,6 +23,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class MostrarEstadoHabitacionGUI extends JFrame{
 	private HabitacionController controller;
 	private JDatePickerImpl datePickerDesde;
