@@ -5,6 +5,7 @@ import Controller.DarAltaController;
 
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -66,7 +67,7 @@ public class App extends JFrame {
 		btnMostrarEstadoHabitacion.addActionListener(e -> {
 			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
 			me.setVisible(true);
-			SwingUtilities.updateComponentTreeUI(panelMenu);			
+			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 	}
 	

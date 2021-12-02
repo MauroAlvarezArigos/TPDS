@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.text.ParseException;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -118,6 +119,9 @@ public class MostrarEstadoHabitacionGUI extends JFrame{
 					datePickerHasta.setBackground(new Color(255, 0, 0));
 				}
 				mostrarError("","Debe indicar una fecha correcta");
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}			
 		});
 		
