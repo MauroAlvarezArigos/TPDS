@@ -12,12 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-
-
+@SuppressWarnings("serial")
 public class App extends JFrame {
-	
-	private JPanel contentPane;
-	
+
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -70,5 +67,4 @@ public class App extends JFrame {
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 	}
-	
 }

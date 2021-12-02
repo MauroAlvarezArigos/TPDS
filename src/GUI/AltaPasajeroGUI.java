@@ -38,11 +38,14 @@ public class AltaPasajeroGUI extends JFrame{
 	private JLabel lblDpto;
 	private JLabel lblPiso;
 	private JComboBox<String> cbxTDoc;
-	private JComboBox<String> cbxNacionalidad; 
+	private JComboBox<String> cbxNacionalidad;
+	private JComboBox<String> cbxPais;
 
 	private DarAltaController controller;
 
 	public AltaPasajeroGUI() {
+		this.setVisible(false);
+
 		controller = new DarAltaController(this);
 		getContentPane().setLayout(null);
 		this.setSize(1000, 500);
@@ -158,11 +161,12 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.setBounds(261, 71, 209, 104);
 		datosPersonales.add(panelDocimento);
 		panelDocimento.setLayout(null);
-		
-		cbxTDoc = new JComboBox<String>();
 
+
+		controller.cargarTDNI();
 		cbxTDoc.setBounds(83, 21, 86, 24);
 		panelDocimento.add(cbxTDoc);
+
 		
 		JLabel lblTipo = new JLabel("Tipo");
 		lblTipo.setBounds(10, 26, 30, 14);
@@ -257,7 +261,7 @@ public class AltaPasajeroGUI extends JFrame{
 		lblPais.setBounds(25, 40, 46, 14);
 		direccion.add(lblPais);
 		
-		JComboBox<String> cbxPais = new JComboBox<String>();
+		controller.cargarPais();
 		cbxPais.setBounds(81, 35, 130, 24);
 		cbxPais.addItem("Argentina");
 		direccion.add(cbxPais);
@@ -386,6 +390,8 @@ public class AltaPasajeroGUI extends JFrame{
 				JOptionPane.ERROR_MESSAGE);
 	}
 	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
+
+	public void setCbxPais(JComboBox<String> cbxPais) {this.cbxPais = cbxPais;}
 	
 	public void llenarListaNacionalidad() {
 		List<String> ListNacionalidades = new ArrayList<>();

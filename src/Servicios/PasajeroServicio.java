@@ -5,6 +5,7 @@ import java.util.List;
 
 import DAO.PasajeroDAO;
 import DAO.PasajeroDAOSQL;
+import DAO.utils.DAOManager;
 import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 import Dominio.IDType;
@@ -16,16 +17,23 @@ import Servicios.Mappers.MapperPasajeroBusqueda;
 
 public class PasajeroServicio {
 	
+	DAOManager daoManager;
+
 	PasajeroDAO pasajerodao;
-	IDTypeServicio IDServicio = new IDTypeServicio();
+
 	MapperPasajeroBusqueda mapperB = new MapperPasajeroBusqueda();
 	MapperPasajero mapperP = new MapperPasajero();
-	
-	public PasajeroServicio() {
-		pasajerodao = new PasajeroDAOSQL();
-	}
+	IDTypeServicio IDServicio = new IDTypeServicio();
+
+	public PasajeroServicio() {super(); }
 
 	public List<PasajeroBusquedaDTO> buscarPasajero(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException {
+
+		daoManager = new DAOManager();
+
+		pasajerodao = daoManager.getPasajeroDAO();
+
+		daoManager.begin();
 
 		List<Pasajero> LPsjero = pasajerodao.buscarGestion(nombre, apellido, tipoDoc, ndoc);
 		List<PasajeroBusquedaDTO> LPsjeroDTO;
@@ -36,7 +44,8 @@ public class PasajeroServicio {
 		else {
 			LPsjeroDTO = pasajerosToDTO(LPsjero);
 		}
-
+		daoManager.commit();
+		daoManager.disconnect();
 		return LPsjeroDTO;
 	}
 	
@@ -49,6 +58,7 @@ public class PasajeroServicio {
 	}
 
 	public void revisarDocExistente(String Ndoc, String TipoDoc) throws DuplicateDocNumberException{
+
 		IDType ID = IDServicio.getIDType(TipoDoc);
 		pasajerodao.docRepetido(ID,Ndoc);
 	}

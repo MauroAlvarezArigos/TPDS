@@ -1,7 +1,5 @@
 package DAO;
 
-import DAO.utils.ConnectionWrapper;
-import DAO.utils.DB;
 import Dominio.PosIVA;
 
 import java.sql.Connection;
@@ -14,18 +12,11 @@ import java.util.List;
 public class PosIVADAOSQL implements PosIVADAO {
 
 
-    //Get DB Connection
-    //---
-    private ConnectionWrapper wrapper;
-    private Connection connection;
+    private Connection conn;
 
-    //Constructor
-    //---
-    public PosIVADAOSQL(){
-        wrapper = new ConnectionWrapper();
-        connection = wrapper.getConnection();
+    public PosIVADAOSQL(Connection unConn){
+        conn = unConn;
     }
-
     //Query Sentences
     //---
     private static final String INSERT_POSIVA =
@@ -49,7 +40,6 @@ public class PosIVADAOSQL implements PosIVADAO {
     //---
     @Override
     public void Insert(PosIVA unPosIVA) {
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement(INSERT_POSIVA);
@@ -62,7 +52,6 @@ public class PosIVADAOSQL implements PosIVADAO {
         finally {
             try {
                 if(pstmt!=null) pstmt.close();
-                if(conn!=null) conn.close();
             }
             catch(SQLException e) {
                 e.printStackTrace();
@@ -76,7 +65,6 @@ public class PosIVADAOSQL implements PosIVADAO {
     @Override
     public List<PosIVA> GetListIVA() {
         List<PosIVA> lista = new ArrayList<>();
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
@@ -94,7 +82,6 @@ public class PosIVADAOSQL implements PosIVADAO {
 		finally {
         try {
             if(pstmt != null) pstmt.close();
-            if(conn != null) conn.close();
         }
         catch(SQLException e) {
             e.printStackTrace();
@@ -109,7 +96,6 @@ public class PosIVADAOSQL implements PosIVADAO {
     //---
     public PosIVA getIVA(String PosIVA){
         String Sentencia = GET_IVA + PosIVA;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PosIVA iva = new PosIVA();
@@ -127,7 +113,6 @@ public class PosIVADAOSQL implements PosIVADAO {
         finally {
             try {
                 if(pstmt != null) pstmt.close();
-                if(conn != null) conn.close();
             }
             catch(SQLException e) {
                 e.printStackTrace();
@@ -142,7 +127,6 @@ public class PosIVADAOSQL implements PosIVADAO {
 
     public PosIVA BuscarIVA(int ident){
         String Sentencia = SEARCH_IVA + ident;
-        Connection conn = DB.getConexion();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PosIVA iva = new PosIVA();
@@ -159,7 +143,6 @@ public class PosIVADAOSQL implements PosIVADAO {
         finally {
             try {
                 if(pstmt != null) pstmt.close();
-                if(conn != null) conn.close();
             }
             catch(SQLException e) {
                 e.printStackTrace();

@@ -16,6 +16,7 @@ import modelosTabla.HabitacionesDisponiblesTableModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+@SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
 
 	private JTable table;

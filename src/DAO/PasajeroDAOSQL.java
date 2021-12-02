@@ -10,30 +10,28 @@ import java.util.ArrayList;
 import java.util.List;
 
 //import Excepciones.ExcepcionNoExisteElemento;
-import DAO.utils.ConnectionWrapper;
-import DAO.utils.DB;
 import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
+	private Connection conn;
 
 	//External DAO Dependencies
-	private IDTypeDAOSQL IDDAO = new IDTypeDAOSQL();
-	private UbicacionDAOSQL UBICACIONDAO = new UbicacionDAOSQL();
-	private PosIVADAOSQL IVADAO = new PosIVADAOSQL();
+	private IDTypeDAOSQL IDDAO;
+	private UbicacionDAOSQL UBICACIONDAO;
+	private PosIVADAOSQL IVADAO;
 
 
-	//Get DB Connection
-	private ConnectionWrapper wrapper;
-	private Connection connection;
+	public PasajeroDAOSQL(Connection unConn){
+		conn = unConn;
+		IDDAO = new IDTypeDAOSQL(conn);
+		UBICACIONDAO = new UbicacionDAOSQL(conn);
+		IVADAO = new PosIVADAOSQL(conn);
 
-	//Constructor
-	public PasajeroDAOSQL(){
-		wrapper = new ConnectionWrapper();
-		connection = wrapper.getConnection();
 	}
+
 
 	//Query Sentences
 	//---
@@ -62,7 +60,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	//---
 	@Override
 	public Pasajero insert(Pasajero unPasajero) {
-		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		try{
 			pstmt = conn.prepareStatement(INSERT_PASAJERO+INSERT_PERSONA);
@@ -89,7 +86,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		finally {
 			try {
 				if(pstmt!=null) pstmt.close();
-				if(conn!=null) conn.close();
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -105,7 +101,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		String sentencia = prepararSentencia(nombre, apellido, tipoDoc, ndoc);
 		
 		List<Pasajero> lista = new ArrayList<Pasajero>();
-		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null; 
 		ResultSet rs = null;
 		
@@ -139,7 +134,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		finally {
 			try {
 				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -155,7 +149,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		String sentencia = prepararSentencia(nombre, apellido, tipoDoc, ndoc);
 
 		List<Pasajero> lista = new ArrayList<Pasajero>();
-		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -178,7 +171,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		finally {
 		try {
 			if(pstmt != null) pstmt.close();
-			if(conn != null) conn.close();
 		}
 		catch(SQLException e) {
 			e.printStackTrace();
@@ -192,7 +184,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	@Override
 	public void docRepetido(IDType IDtipo, String Ndoc) throws DuplicateDocNumberException {
 		List<Pasajero> lista = new ArrayList<Pasajero>();
-		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -225,7 +216,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		finally {
 			try {
 				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
 			}
 			catch(SQLException e) {
 				e.printStackTrace();
@@ -240,7 +230,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	public Pasajero getPasajeroDbid(int DBID) {
 		String sentencia = BUSCAR_DBID + DBID;
 		Pasajero unPasajero = new Pasajero();
-		Connection conn = DB.getConexion();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
@@ -271,7 +260,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		}finally {
 			try {
 				if(pstmt != null) pstmt.close();
-				if(conn != null) conn.close();
 			}
 			catch(SQLException e) {
 				e.printStackTrace();

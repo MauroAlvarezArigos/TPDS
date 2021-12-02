@@ -24,6 +24,7 @@ import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 
 
+@SuppressWarnings({ "serial", "unused" })
 public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener {
 	private ButtonGroup bg;
 	private List<PasajeroBusquedaDTO> lista;
@@ -130,8 +131,7 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 			} else {
 				System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
 				PasajeroBusquedaDTO unPasajeroBusquedaDTO = lista.get((Integer.parseInt(bg.getSelection().getActionCommand())));
-				//todo
-				//modificarPasajeroGUI();
+				//todo modificarPasajeroGUI();
 			}
 		}
 	}

@@ -1,6 +1,7 @@
 package Controller;
 
 import DTO.IDTypeDTO;
+import DTO.PaisDTO;
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
@@ -33,8 +34,7 @@ public class DarAltaController {
     }
 
     public void DarAltaPasajero(){
-        AltaPsjeroGUI = new AltaPasajeroGUI();
-        AltaPsjeroGUI.setController(this);
+        //AltaPsjeroGUI.setController(this);
         AltaPsjeroGUI.setVisible(true);
     }
 
@@ -58,6 +58,18 @@ public class DarAltaController {
         //tdni.addItem("Pasaporte");
         //tdni.addItem("Otro");
         AltaPsjeroGUI.setCbxTipoDNI(tdni);
+    }
+
+    public void cargarPais() {
+        JComboBox<String> lpais = new JComboBox<String>();
+        List<PaisDTO> ListaPaisesDTO = ubicacionServicio.getAllPais();
+
+        int size = ListaPaisesDTO.size();
+        lpais.addItem("");
+        for(int c = 0; c < size; c++) {
+            lpais.addItem((ListaPaisesDTO.get(c)).getPais());
+        }
+        AltaPsjeroGUI.setCbxPais(lpais);
     }
 
     public void revisarDocExistente(String NDoc, String TipoDoc) throws DuplicateDocNumberException {
