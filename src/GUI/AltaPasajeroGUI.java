@@ -5,6 +5,8 @@ import Exceptions.DuplicateDocNumberException;
 import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -37,9 +39,11 @@ public class AltaPasajeroGUI extends JFrame{
 	private JTextField tbxPiso;
 	private JLabel lblDpto;
 	private JLabel lblPiso;
-	private JComboBox<String> cbxTDoc;
-	private JComboBox<String> cbxNacionalidad;
-	private JComboBox<String> cbxPais;
+	private JComboBox<String> cbxTDoc = new JComboBox<>();
+	private JComboBox<String> cbxNacionalidad = new JComboBox<>();
+	private JComboBox<String> cbxPais = new JComboBox<>();
+	private JComboBox<String> cbxProvincia = new JComboBox<>();
+	private JComboBox<String> cbxLocalidad = new JComboBox<>();
 
 	private DarAltaController controller;
 
@@ -261,24 +265,47 @@ public class AltaPasajeroGUI extends JFrame{
 		lblPais.setBounds(25, 40, 46, 14);
 		direccion.add(lblPais);
 		
-		controller.cargarPais();
+
+
 		cbxPais.setBounds(81, 35, 130, 24);
-		cbxPais.addItem("Argentina");
 		direccion.add(cbxPais);
-		
+		controller.cargarPais();
+		ActionListener cbxPaisActionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cbxPais.getSelectedItem() != null && cbxPais.getSelectedItem().toString() != "") {
+					cbxProvincia.setEnabled(true);
+					controller.cargarProvincia();
+			}else cbxProvincia.setEnabled(false);}
+		};
+		cbxPais.addActionListener(cbxPaisActionListener);
+
+
 		JLabel lblProvincia = new JLabel("Provincia");
 		lblProvincia.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblProvincia.setBounds(14, 76, 57, 14);
 		direccion.add(lblProvincia);
-		
-		JComboBox<String> cbxProvincia = new JComboBox<String>();
+
+		//controller.cargarProvincia();
+		//JComboBox<String> cbxProvincia = new JComboBox<String>();
 		cbxProvincia.setBounds(81, 71, 130, 24);
-		cbxProvincia.addItem("Entre Rios");
+		cbxProvincia.setEnabled(false);
 		direccion.add(cbxProvincia);
-		
-		JComboBox<String> cbxLocalidad = new JComboBox<String>();
+		ActionListener CbxProvinciaActionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cbxProvincia.getSelectedItem() != null && cbxProvincia.getSelectedItem().toString() != "") {
+					cbxLocalidad.setEnabled(true);
+					controller.cargarLocalidad();
+				}else cbxLocalidad.setEnabled(false);
+			}
+		};
+		cbxProvincia.addActionListener(CbxProvinciaActionListener);
+
+		//controller.cargarLocalidad();
+		//JComboBox<String> cbxLocalidad = new JComboBox<String>();
 		cbxLocalidad.setBounds(81, 106, 130, 24);
-		cbxLocalidad.addItem("Parana");
+		cbxLocalidad.setEnabled(false);
 		direccion.add(cbxLocalidad);
 		
 		JLabel lblLocalidad = new JLabel("Localidad");
@@ -392,6 +419,19 @@ public class AltaPasajeroGUI extends JFrame{
 	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
 
 	public void setCbxPais(JComboBox<String> cbxPais) {this.cbxPais = cbxPais;}
+
+	public void setCbxProvincia(JComboBox<String> cbxProvincia) {this.cbxProvincia = cbxProvincia;}
+
+	public void setCbxLocalidad(JComboBox<String> cbxLocalidad) {this.cbxLocalidad = cbxLocalidad;}
+
+	public JComboBox<String> getCbxTipoDNI(){return this.cbxTDoc;}
+	public JComboBox<String> getCbxPais(){return this.cbxPais;}
+	public JComboBox<String> getCbxProvincia(){return this.cbxProvincia;}
+	public JComboBox<String> getCbxLocalidad(){return this.cbxLocalidad;}
+
+	public String getSelectedCbxPais(){return this.cbxPais.getSelectedItem().toString();}
+	public String getSelectedCbxProvincia(){return this.cbxProvincia.getSelectedItem().toString();}
+	public String getSelectedCbxLocalidad(){return this.cbxLocalidad.getSelectedItem().toString();}
 	
 	public void llenarListaNacionalidad() {
 		List<String> ListNacionalidades = new ArrayList<>();

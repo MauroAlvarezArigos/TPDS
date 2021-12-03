@@ -1,8 +1,6 @@
 package Controller;
 
-import DTO.IDTypeDTO;
-import DTO.PaisDTO;
-import DTO.PasajeroDTO;
+import DTO.*;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import GUI.AltaPasajeroGUI;
@@ -44,7 +42,8 @@ public class DarAltaController {
     }
 
     public void cargarTDNI() {
-        JComboBox<String> tdni = new JComboBox<String>();
+        JComboBox<String> tdni = AltaPsjeroGUI.getCbxTipoDNI();
+        tdni.removeAllItems();
         List<IDTypeDTO> ListaIDT = IDServicio.getAllIDType();
         int size = ListaIDT.size();
         tdni.addItem("");
@@ -61,15 +60,40 @@ public class DarAltaController {
     }
 
     public void cargarPais() {
-        JComboBox<String> lpais = new JComboBox<String>();
+        JComboBox<String> lpais = AltaPsjeroGUI.getCbxPais();
+        lpais.removeAllItems();
         List<PaisDTO> ListaPaisesDTO = ubicacionServicio.getAllPais();
 
-        int size = ListaPaisesDTO.size();
         lpais.addItem("");
-        for(int c = 0; c < size; c++) {
-            lpais.addItem((ListaPaisesDTO.get(c)).getPais());
+        for (PaisDTO paisDTO : ListaPaisesDTO) {
+            lpais.addItem(paisDTO.getPais());
         }
-        AltaPsjeroGUI.setCbxPais(lpais);
+        //AltaPsjeroGUI.setCbxPais(lpais);
+    }
+
+    public void cargarProvincia(){
+        JComboBox<String> lprov = AltaPsjeroGUI.getCbxProvincia();
+        lprov.removeAllItems();
+        String n_pais = AltaPsjeroGUI.getSelectedCbxPais();
+        List<ProvDTO> ListaProvDTO = ubicacionServicio.getAllProvinciasPais(n_pais);
+
+        lprov.addItem("");
+        for (ProvDTO provDTO : ListaProvDTO){
+            lprov.addItem(provDTO.getProv());
+        }
+        //AltaPsjeroGUI.setCbxProv(lprov);
+    }
+
+    public void cargarLocalidad(){
+        JComboBox<String> lloc = AltaPsjeroGUI.getCbxLocalidad();
+        lloc.removeAllItems();
+        String n_prov = AltaPsjeroGUI.getSelectedCbxProvincia();
+        List<LocalidadDTO> ListaLocalidadDTO = ubicacionServicio.getAllLocalidadesProv(n_prov);
+
+        lloc.addItem("");
+        for (LocalidadDTO LocDTO : ListaLocalidadDTO){
+            lloc.addItem(LocDTO.getLoc());
+        }
     }
 
     public void revisarDocExistente(String NDoc, String TipoDoc) throws DuplicateDocNumberException {

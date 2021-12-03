@@ -19,4 +19,6 @@ public interface UbicacionDAO {
     public Localidad getLocalidadNombre(String nombre, String prov, String pais);
     public List<String> getNacionalidad();
     public List<Pais> getAllPais();
+    public List<Provincia> getAllProvinciasPais(String n_pais);
+    public List<Localidad> getAllLocalidadesProv(String n_prov);
 }
