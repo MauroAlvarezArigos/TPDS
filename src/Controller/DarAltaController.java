@@ -16,6 +16,12 @@ import java.awt.*;
 import java.util.List;
 
 public class DarAltaController {
+
+    //Colors
+    Color Warning = new Color(255,0,0);
+    Color CancelButton = new Color(255,0,0);
+    Color NextButton = new Color(0,128,0);
+
     private PasajeroServicio pasajeroServicio;
     private UbicacionServicio ubicacionServicio;
     private IDTypeServicio IDServicio;
@@ -24,6 +30,7 @@ public class DarAltaController {
     private GestionPasajeroGUI gestionGUI;
     private GestionPasajeroBusquedaGUI gbusquedaGUI;
     private AltaPasajeroGUI AltaPsjeroGUI;
+    private PasajeroDTO pasajeroDTO;
 
 
     public DarAltaController(AltaPasajeroGUI a) {
@@ -31,6 +38,9 @@ public class DarAltaController {
         this.ubicacionServicio = new UbicacionServicio();
         this.IDServicio = new IDTypeServicio();
         this.AltaPsjeroGUI = a;
+        this.AltaPsjeroGUI.setWarningColor(Warning);
+        this.AltaPsjeroGUI.setCancelButtonColor(CancelButton);
+        this.AltaPsjeroGUI.setNextButtonColor(NextButton);
     }
 
     public void DarAltaPasajero(){
@@ -39,78 +49,78 @@ public class DarAltaController {
     }
 
     public boolean InformarOmisionnesDatosGUI(){
-        boolean bool = false;
+        boolean bool = true;
 
         if(AltaPsjeroGUI.getTbxApellidoStr().equals("") || AltaPsjeroGUI.getTbxApellidoStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblApellido(), AltaPsjeroGUI.getTbxApellido());
         }
         if(AltaPsjeroGUI.getTbxNombreStr().equals("") || AltaPsjeroGUI.getTbxNombreStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblNombre(), AltaPsjeroGUI.getTbxNombre());
         }
         if(AltaPsjeroGUI.getSelectedCbxNacionalidad().equals("") || AltaPsjeroGUI.getSelectedCbxNacionalidad() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblNacionalidad(), AltaPsjeroGUI.getCbxNacionalidad());
         }
         if(AltaPsjeroGUI.getDatePanelFechNac() == null){
-            bool = true;
+            bool = false;
+            highlightInput(AltaPsjeroGUI.getLblFecNac(), AltaPsjeroGUI.getDatePicker());
             //todo highlightInput(AltaPsjeroGUI);
         }
         //AltaPsjeroGUI.getTbxEmail();
         if(AltaPsjeroGUI.getTbxNroDocStr().equals("") || AltaPsjeroGUI.getTbxNroDocStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblNroDni(),AltaPsjeroGUI.getTbxNroDoc());
         }
         if(AltaPsjeroGUI.getTbxTelefonoStr().equals("") || AltaPsjeroGUI.getTbxTelefonoStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblTelefono(), AltaPsjeroGUI.getTbxTelefono());
         }
         if(AltaPsjeroGUI.getTbxOcupacionStr().equals("") || AltaPsjeroGUI.getTbxOcupacionStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblOcupacion(), AltaPsjeroGUI.getTbxOcupacion());
         }
         //AltaPsjeroGUI.getTbxCuitStr();
 
         if(AltaPsjeroGUI.getTbxCalleStr().equals("") || AltaPsjeroGUI.getTbxCalleStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblCalle(),AltaPsjeroGUI.getTbxCalle());
         }
         if(AltaPsjeroGUI.getTbxCodPostalStr().equals("") || AltaPsjeroGUI.getTbxCodPostalStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblCP(), AltaPsjeroGUI.getTbxCodPostal());
         }
         if(AltaPsjeroGUI.getTbxDireccionNroStr().equals("") || AltaPsjeroGUI.getTbxDireccionNroStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblDirNumero(), AltaPsjeroGUI.getTbxDireccionNro());
         }
         if(AltaPsjeroGUI.getCheckDpto().isSelected()){
         if(AltaPsjeroGUI.getTbxDptoStr().equals("") || AltaPsjeroGUI.getTbxDptoStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblDpto(), AltaPsjeroGUI.getTbxDpto());
         }
         if(AltaPsjeroGUI.getTbxPisoStr().equals("") || AltaPsjeroGUI.getTbxPisoStr() == null){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblPiso(), AltaPsjeroGUI.getTbxPiso());
         }
         }
 
 
         if(AltaPsjeroGUI.getSelectedCbxPais() == null || AltaPsjeroGUI.getSelectedCbxPais().equals("")){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblPais(), AltaPsjeroGUI.getCbxPais());
         }
         if(AltaPsjeroGUI.getSelectedCbxProvincia() == null || AltaPsjeroGUI.getSelectedCbxProvincia().equals("")){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblProvincia(), AltaPsjeroGUI.getCbxProvincia());
         }
         if(AltaPsjeroGUI.getSelectedCbxLocalidad() == null || AltaPsjeroGUI.getSelectedCbxLocalidad().equals("")){
-            bool = true;
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblLocalidad(), AltaPsjeroGUI.getCbxLocalidad());
         }
         if(AltaPsjeroGUI.getSelectedCbxTipoDNI().equals("") || AltaPsjeroGUI.getSelectedCbxTipoDNI() == null){
-            bool = true;
-            System.out.println("Tipo Dni revisado");
+            bool = false;
             highlightInput(AltaPsjeroGUI.getLblTipo(), AltaPsjeroGUI.getCbxTDoc());
         }
         return bool;
@@ -176,11 +186,54 @@ public class DarAltaController {
     }
 
     public void informarDocExistenteGUI(){
+          if(AltaPsjeroGUI.optionMessageGUI(
+                  "Numero de Documento Existente",
+                  "¡CUIDADO! el tipo y numero de documento ya existen en el sistema",
+                  new String[]{"ACEPTAR IGUALMENTE",
+                          "CORREGIR"})
+                  == JOptionPane.YES_OPTION){
 
+              System.out.println("Guardar Pasajero");
+              this.guardarPasajero();
+
+          }else{
+              AltaPsjeroGUI.getCbxTDoc().requestFocus();
+              AltaPsjeroGUI.getCbxTDoc().setBorder(BorderFactory.createLineBorder(Warning));
+              AltaPsjeroGUI.getTbxNroDoc().setBorder(BorderFactory.createLineBorder(Warning));
+              AltaPsjeroGUI.getLblNroDni().setForeground(Warning);
+              AltaPsjeroGUI.getLblTipo().setForeground(Warning);
+          }
+    }
+
+    private void guardarPasajero() {
+        pasajeroDTO = new PasajeroDTO();
+        pasajeroDTO.setApellido(AltaPsjeroGUI.getTbxApellidoStr());
+        pasajeroDTO.setNombre(AltaPsjeroGUI.getTbxNombreStr());
+        pasajeroDTO.setNdoc(AltaPsjeroGUI.getTbxNroDocStr());
+        pasajeroDTO.setTipodoc(AltaPsjeroGUI.getSelectedCbxTipoDNI());
+        pasajeroDTO.setOcupacion(AltaPsjeroGUI.getTbxOcupacionStr());
+        pasajeroDTO.setFechanacimiento(AltaPsjeroGUI.getDatePanelFechNac());
+        pasajeroDTO.setNacionalidad(AltaPsjeroGUI.getSelectedCbxNacionalidad());
+        pasajeroDTO.setPais(AltaPsjeroGUI.getSelectedCbxPais());
+        pasajeroDTO.setProvincia(AltaPsjeroGUI.getSelectedCbxProvincia());
+        pasajeroDTO.setLocalidad(AltaPsjeroGUI.getSelectedCbxLocalidad());
+
+        pasajeroDTO.setTelefono(AltaPsjeroGUI.getTbxTelefonoStr());
+        pasajeroDTO.setEmail(AltaPsjeroGUI.getTbxTelefonoStr());
+        pasajeroDTO.setCuit_cif(AltaPsjeroGUI.getTbxCuitStr());
+        pasajeroDTO.setCalle(AltaPsjeroGUI.getTbxCalleStr());
+        pasajeroDTO.setAltura(AltaPsjeroGUI.getTbxDireccionNroStr());
+        pasajeroDTO.setIVA(AltaPsjeroGUI.getSelectedCbxIVA());
+        cargarOtroMensajeGUI();
     }
 
     public void cargarOtroMensajeGUI(){
-
+        AltaPsjeroGUI.optionMessageGUI(
+                "Pasajero Guardado",
+                "El pasajero "+/*pasajeroDTO.getNombre()+*/" "
+                        +/*pasajeroDTO.getApellido()+*/" ha sido satisfactoriamente cargado al sistema." +
+                        " ¿desea cargar otro?",
+                new String[]{"SI","NO"});
     }
 
     public void cargarPasajeroGUI(){

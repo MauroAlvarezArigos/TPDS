@@ -76,7 +76,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			pstmt.setString(10, unPasajero.getEmail());
 			pstmt.setString(11, unPasajero.getCuit_cif());
 			pstmt.setString(12, unPasajero.getCalle());
-			pstmt.setInt(13, unPasajero.getAltura());
+			pstmt.setString(13, unPasajero.getAltura());
 			pstmt.setInt(14, unPasajero.getIVA().getID());
 				
 			pstmt.executeUpdate();
@@ -113,7 +113,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setEmail(rs.getString("EMAIL"));
 				p.setCuit_cif(rs.getString("CUIT"));
 				p.setCalle(rs.getString("CALLE"));
-				p.setAltura(rs.getInt("ALTURA"));
+				p.setAltura(rs.getString("ALTURA"));
 				p.setIVA(IVADAO.BuscarIVA(rs.getInt("POSIVA")));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
@@ -197,7 +197,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setTelefono(rs.getString("TELEFONO"));
 				p.setEmail(rs.getString("EMAIL"));
 				p.setCalle(rs.getString("CALLE"));
-				p.setAltura(rs.getInt("ALTURA"));
+				p.setAltura(rs.getString("ALTURA"));
 				p.setCuit_cif(rs.getString("CUIT"));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
@@ -243,7 +243,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				unPasajero.setEmail(rs.getString("EMAIL"));
 				unPasajero.setCuit_cif(rs.getString("CUIT"));
 				unPasajero.setCalle(rs.getString("CALLE"));
-				unPasajero.setAltura(rs.getInt("ALTURA"));
+				unPasajero.setAltura(rs.getString("ALTURA"));
 				unPasajero.setIVA(IVADAO.BuscarIVA(rs.getInt("POSIVA")));
 				unPasajero.setNombre(rs.getString("NOMBRE"));
 				unPasajero.setApellido(rs.getString("APELLIDO"));

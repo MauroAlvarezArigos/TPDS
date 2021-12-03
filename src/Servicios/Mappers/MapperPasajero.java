@@ -22,7 +22,7 @@ public class MapperPasajero {
         unPasajeroDTO.setNdoc(unPasajero.getNdoc());
         unPasajeroDTO.setTipodoc(unPasajero.getTipodoc().getTipoDeID());
         unPasajeroDTO.setOcupacion(unPasajero.getOcupacion());
-        unPasajeroDTO.setFechanacimiento(unPasajero.getFechanacimiento().toString());
+        unPasajeroDTO.setFechanacimiento(unPasajero.getFechanacimiento());
         unPasajeroDTO.setNacionalidad(unPasajero.getNacionalidad().getNacionalidad());
         unPasajeroDTO.setTelefono(unPasajero.getTelefono());
         unPasajeroDTO.setEmail(unPasajero.getEmail());
@@ -45,13 +45,13 @@ public class MapperPasajero {
         unPasajero.setNdoc(unPasajeroDTO.getNdoc());
         unPasajero.setTipodoc(IDServicio.getIDType(unPasajeroDTO.getTipodoc()));
         unPasajero.setOcupacion(unPasajeroDTO.getOcupacion());
-        unPasajero.setFechanacimiento(Date.valueOf(unPasajeroDTO.getFechanacimiento()));
+        unPasajero.setFechanacimiento(unPasajeroDTO.getFechanacimiento());
         unPasajero.setNacionalidad(ubicacionServicio.getNacionalidad(unPasajeroDTO.getNacionalidad()));
         unPasajero.setTelefono(unPasajeroDTO.getTelefono());
         unPasajero.setEmail(unPasajeroDTO.getEmail());
         unPasajero.setCuit_cif(unPasajeroDTO.getCuit_cif());
         unPasajero.setCalle(unPasajeroDTO.getCalle());
-        unPasajero.setAltura(unPasajeroDTO.getAltura());
+        unPasajero.setAltura(unPasajeroDTO.getAltura().toString());
         unPasajero.setIVA(IVAServicio.getIVA(unPasajeroDTO.getIVA()));
         unPasajero.setLocalidad(ubicacionServicio.getLocalidadNombre(unPasajeroDTO.getLocalidad(),unPasajeroDTO.getProvincia(),unPasajeroDTO.getPais()));
 

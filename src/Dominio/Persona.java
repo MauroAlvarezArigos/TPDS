@@ -5,7 +5,7 @@ public class Persona {
 	private String email;
 	private String cuit_cif;
 	private String calle;
-	private Integer altura;
+	private String altura;
 	private PosIVA IVA;
 	private Localidad localidad;
 
@@ -48,11 +48,11 @@ public class Persona {
 		this.calle = calle;
 	}
 
-	public Integer getAltura() {
+	public String getAltura() {
 		return altura;
 	}
 
-	public void setAltura(Integer altura) {
+	public void setAltura(String altura) {
 		this.altura = altura;
 	}
 

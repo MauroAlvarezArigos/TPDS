@@ -5,10 +5,13 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/PasajeroDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PasajeroDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Persona.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/IDTypeServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/IDTypeServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PasajeroServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

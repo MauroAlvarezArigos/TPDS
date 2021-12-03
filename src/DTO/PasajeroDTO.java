@@ -1,5 +1,7 @@
 package DTO;
 
+import java.sql.Date;
+
 public class PasajeroDTO {
 //Pasajero
     //Agregar ID Pasajero
@@ -8,7 +10,7 @@ public class PasajeroDTO {
     private String ndoc;
     private String tipodoc;
     private String ocupacion;
-    private String fechanacimiento;
+    private Date fechanacimiento;
     private String nacionalidad;
     private String pais;
     private String provincia;
@@ -19,7 +21,7 @@ public class PasajeroDTO {
     private String email;
     private String cuit_cif;
     private String calle;
-    private Integer altura;
+    private String altura;
     private String IVA;
 
 //Getters and Setters
@@ -53,10 +55,10 @@ public class PasajeroDTO {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
-    public String getFechanacimiento() {
+    public Date getFechanacimiento() {
         return fechanacimiento;
     }
-    public void setFechanacimiento(String fechanacimiento) {
+    public void setFechanacimiento(Date fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
     public String getNacionalidad() {
@@ -89,10 +91,10 @@ public class PasajeroDTO {
     public void setCalle(String calle) {
         this.calle = calle;
     }
-    public Integer getAltura() {
+    public String getAltura() {
         return altura;
     }
-    public void setAltura(Integer altura) {
+    public void setAltura(String altura) {
         this.altura = altura;
     }
     public String getIVA() {

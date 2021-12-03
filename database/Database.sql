@@ -34,7 +34,7 @@ create table persona(
 	email character varying(50),
 	CUIT character varying(50) NOT NULL,
 	calle character varying(25),
-	altura integer,
+	altura character varying(20),
 	PosIVA int,
 	Localidad character varying(10),
 	constraint fk_PosIVA foreign key (PosIVA) REFERENCES posIVA (ident),

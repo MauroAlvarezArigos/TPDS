@@ -24,6 +24,37 @@ import org.jdatepicker.impl.UtilDateModel;
 
 @SuppressWarnings("serial")
 public class AltaPasajeroGUI extends JFrame{
+	//Colors
+	Color Warning;
+	Color CancelButton;
+	Color NextButton;
+
+	//Getters and Setters
+
+	public Color getWarningColor() {
+		return Warning;
+	}
+
+	public void setWarningColor(Color warning) {
+		Warning = warning;
+	}
+
+	public Color getCancelButtonColor() {
+		return CancelButton;
+	}
+
+	public void setCancelButtonColor(Color cancelButton) {
+		CancelButton = cancelButton;
+	}
+
+	public Color getNextButtonColor() {
+		return NextButton;
+	}
+
+	public void setNextButtonColor(Color nextButton) {
+		NextButton = nextButton;
+	}
+
 	//Personal data
 	private JTextField tbxApellido;
 	private JTextField tbxNombre;
@@ -35,7 +66,13 @@ public class AltaPasajeroGUI extends JFrame{
 	JDatePanelImpl datePanel;
 	JDatePickerImpl datePicker;
 
+	public JDatePickerImpl getDatePicker() {
+		return datePicker;
+	}
 
+	public void setDatePicker(JDatePickerImpl datePicker) {
+		this.datePicker = datePicker;
+	}
 
 	//String Getters And Setters
 	public String getTbxApellidoStr() {
@@ -229,12 +266,14 @@ public class AltaPasajeroGUI extends JFrame{
 	private JComboBox<String> cbxPais = new JComboBox<>();
 	private JComboBox<String> cbxProvincia = new JComboBox<>();
 	private JComboBox<String> cbxLocalidad = new JComboBox<>();
+	private JComboBox<String> cbxIVA = new JComboBox<>();
 
 	//getters and setters
 	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
 	public void setCbxPais(JComboBox<String> cbxPais) {this.cbxPais = cbxPais;}
 	public void setCbxProvincia(JComboBox<String> cbxProvincia) {this.cbxProvincia = cbxProvincia;}
 	public void setCbxLocalidad(JComboBox<String> cbxLocalidad) {this.cbxLocalidad = cbxLocalidad;}
+	public void setCbxIVA(JComboBox<String> cbxIVA) {this.cbxIVA = cbxIVA;}
 
 	public JComboBox<String> getCbxTipoDNI(){return this.cbxTDoc;}
 	public JComboBox<String> getCbxPais(){return this.cbxPais;}
@@ -246,7 +285,14 @@ public class AltaPasajeroGUI extends JFrame{
 	public JComboBox<String> getCbxNacionalidad() {
 		return cbxNacionalidad;
 	}
+	public JComboBox<String> getCbxIVA(){ return cbxIVA;}
 
+	public String getSelectedCbxIVA(){
+		if(this.cbxIVA.getSelectedItem() != null)
+		{
+			return this.cbxPais.getSelectedItem().toString();
+		}else return null;
+	}
 	public String getSelectedCbxPais(){
 		if(this.cbxPais.getSelectedItem() != null)
 	{
@@ -383,30 +429,31 @@ public class AltaPasajeroGUI extends JFrame{
 		getContentPane().add(direccion);
 		
 		JLabel lblcampoObl = new JLabel("(*) Campos Obligatorios");
-		lblcampoObl.setForeground(Color.RED);
+		lblcampoObl.setForeground(Warning);
 		lblcampoObl.setBounds(29, 363, 136, 14);
 		getContentPane().add(lblcampoObl);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBackground(new Color(255, 0, 0));
+		btnCancelar.setBackground(CancelButton);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setBounds(721, 375, 117, 36);
 		getContentPane().add(btnCancelar);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
-		btnSiguiente.setForeground(new Color(255, 255, 255));
-		btnSiguiente.setBackground(new Color(0, 128, 0));
+		btnSiguiente.setForeground(Color.WHITE);
+		btnSiguiente.setBackground(NextButton);
 		btnSiguiente.setBounds(848, 375, 117, 36);
 		getContentPane().add(btnSiguiente);
 
 		btnSiguiente.addActionListener(e -> {
 			try {
 				if(controller.InformarOmisionnesDatosGUI()) {
-					controller.revisarDocExistente(tbxNroDoc.getText(), cbxTDoc.getSelectedItem().toString());
+					System.out.println("Revisado DOC");
+					try{controller.revisarDocExistente(this.getTbxNroDocStr(), this.getSelectedCbxTipoDNI());
+					}catch (DuplicateDocNumberException e1){
+						controller.informarDocExistenteGUI();
+					}
 				}
-			} catch (DuplicateDocNumberException e1) {
-				e1.printStackTrace();
-				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
 			} catch (Exception e1) {
 				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();
@@ -429,7 +476,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblApellido);
 		
 		JLabel lblAsteriscoA = new JLabel("(*)");
-		lblAsteriscoA.setForeground(new Color(255, 0, 0));
+		lblAsteriscoA.setForeground(Warning);
 		lblAsteriscoA.setBounds(77, 33, 15, 14);
 		datosPersonales.add(lblAsteriscoA);
 		
@@ -448,7 +495,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(cbxNacionalidad);
 		
 		JLabel lblAsteriscoNac = new JLabel("(*)");
-		lblAsteriscoNac.setForeground(new Color(255, 0, 0));
+		lblAsteriscoNac.setForeground(Warning);
 		lblAsteriscoNac.setBounds(94, 76, 15, 14);
 		datosPersonales.add(lblAsteriscoNac);
 		
@@ -457,7 +504,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblNombre);
 		
 		JLabel lblAsteriscoN = new JLabel("(*)");
-		lblAsteriscoN.setForeground(new Color(255, 0, 0));
+		lblAsteriscoN.setForeground(Warning);
 		lblAsteriscoN.setBounds(323, 33, 15, 14);
 		datosPersonales.add(lblAsteriscoN);
 		
@@ -502,7 +549,7 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.add(lblNroDni);
 		
 		JLabel lblAsteriscoDNI = new JLabel("(*)");
-		lblAsteriscoDNI.setForeground(Color.RED);
+		lblAsteriscoDNI.setForeground(Warning);
 		lblAsteriscoDNI.setBounds(57, 62, 15, 14);
 		panelDocimento.add(lblAsteriscoDNI);
 		
@@ -514,7 +561,7 @@ public class AltaPasajeroGUI extends JFrame{
 		JLabel lblAsteriscoDoc = new JLabel("(*)");
 		lblAsteriscoDoc.setBounds(80, 0, 15, 14);
 		panelDocimento.add(lblAsteriscoDoc);
-		lblAsteriscoDoc.setForeground(Color.RED);
+		lblAsteriscoDoc.setForeground(Warning);
 		
 		lblEmail = new JLabel("E-Mail");
 		lblEmail.setBounds(10, 157, 46, 14);
@@ -530,7 +577,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblTelefono);
 		
 		JLabel lblAsteriscoT = new JLabel("(*)");
-		lblAsteriscoT.setForeground(Color.RED);
+		lblAsteriscoT.setForeground(Warning);
 		lblAsteriscoT.setBounds(77, 198, 15, 14);
 		datosPersonales.add(lblAsteriscoT);
 		
@@ -544,7 +591,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblOcupacion);
 		
 		JLabel lblAsteriscoO = new JLabel("(*)");
-		lblAsteriscoO.setForeground(Color.RED);
+		lblAsteriscoO.setForeground(Warning);
 		lblAsteriscoO.setBounds(330, 198, 15, 14);
 		datosPersonales.add(lblAsteriscoO);
 		
@@ -566,7 +613,7 @@ public class AltaPasajeroGUI extends JFrame{
 		lblTIVA.setBounds(261, 248, 46, 14);
 		datosPersonales.add(lblTIVA);
 		
-		JComboBox<String> cbxIVA = new JComboBox<String>();
+		cbxIVA = new JComboBox<String>();
 		cbxIVA.setBounds(320, 243, 150, 24);
 		cbxIVA.addItem("Responsable No Inscripto");
 		datosPersonales.add(cbxIVA);
@@ -656,7 +703,7 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.add(lblCalle);
 		
 		JLabel lblAsterisco = new JLabel("(*)");
-		lblAsterisco.setForeground(Color.RED);
+		lblAsterisco.setForeground(Warning);
 		lblAsterisco.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAsterisco.setBounds(62, 144, 14, 14);
 		direccion.add(lblAsterisco);
@@ -668,7 +715,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		JLabel lblAsterisco1 = new JLabel("(*)");
 		lblAsterisco1.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsterisco1.setForeground(Color.RED);
+		lblAsterisco1.setForeground(Warning);
 		lblAsterisco1.setBounds(279, 111, 14, 14);
 		direccion.add(lblAsterisco1);
 		
@@ -684,7 +731,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		JLabel lblAsterisco2 = new JLabel("(*)");
 		lblAsterisco2.setHorizontalAlignment(SwingConstants.CENTER);
-		lblAsterisco2.setForeground(Color.RED);
+		lblAsterisco2.setForeground(Warning);
 		lblAsterisco2.setBounds(279, 144, 14, 14);
 		direccion.add(lblAsterisco2);
 		
@@ -698,16 +745,31 @@ public class AltaPasajeroGUI extends JFrame{
 		checkDpto.addActionListener(e -> {
 			if(checkDpto.isSelected()) {
 				lblDpto.setEnabled(true);
+				lblDpto.setForeground(null);
+				lblDpto.updateUI();
 				tbxDpto.setEnabled(true);
+				tbxDpto.setBorder(null);
+				tbxDpto.updateUI();
 				lblPiso.setEnabled(true);
+				lblPiso.setForeground(null);
+				lblPiso.updateUI();
 				tbxPiso.setEnabled(true);
+				tbxPiso.setBorder(null);
+				tbxPiso.updateUI();
 			}
 			else {
 				lblDpto.setEnabled(false);
+				lblDpto.setForeground(null);
+				lblDpto.updateUI();
 				tbxDpto.setEnabled(false);
+				tbxDpto.setBorder(null);
+				tbxDpto.updateUI();
 				lblPiso.setEnabled(false);
+				lblPiso.setForeground(null);
+				lblPiso.updateUI();
 				tbxPiso.setEnabled(false);
-			}
+				tbxPiso.setBorder(null);
+				tbxPiso.updateUI();			}
 		});
 		direccion.add(checkDpto);
 		
@@ -756,4 +818,15 @@ public class AltaPasajeroGUI extends JFrame{
 			this.cbxNacionalidad.addItem(ListNacionalidades.get(i));
 		}
 	}
+
+	public int optionMessageGUI(String titulo, String detalle, Object[] options){
+		JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+		return JOptionPane.showOptionDialog(padre,
+				detalle,titulo,JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,     //do not use a custom Icon
+				options,  //the titles of buttons
+				options[0]);
+	}
 }
+
