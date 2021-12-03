@@ -58,9 +58,14 @@ public class PasajeroServicio {
 	}
 
 	public void revisarDocExistente(String Ndoc, String TipoDoc) throws DuplicateDocNumberException{
+		daoManager = new DAOManager();
+		pasajerodao = daoManager.getPasajeroDAO();
 
 		IDType ID = IDServicio.getIDType(TipoDoc);
+		daoManager.begin();
 		pasajerodao.docRepetido(ID,Ndoc);
+		daoManager.commit();
+		daoManager.disconnect();
 	}
 	
 	public void DarAltaPasajero(boolean skip, PasajeroDTO unPasajeroDTO) throws DuplicateDocNumberException {

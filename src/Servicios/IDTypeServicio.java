@@ -30,7 +30,7 @@ public class IDTypeServicio {
         daoManager.disconnect();
 
 
-        return IDDAO.getIDType(ID);
+        return idType;
     }
     public List<IDTypeDTO> getAllIDType(){
         daoManager = new DAOManager();
