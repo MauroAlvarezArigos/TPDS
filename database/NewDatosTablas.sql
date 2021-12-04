@@ -38,8 +38,8 @@ insert into provincia (nombre, codigoProvincia, Pais) values ('Sao Paulo', 5, '4
 insert into provincia (nombre, codigoProvincia, Pais) values ('Bahia', 6, '4');
 insert into provincia (nombre, codigoProvincia, Pais) values ('Moscu', 7, '3');
 insert into provincia (nombre, codigoProvincia, Pais) values ('Antofagasta', 8, '1');
-insert into provincia (nombre, codigoProvincia, Pais) values ('Valparaíso', 9, '1');
-insert into provincia (nombre, codigoProvincia, Pais) values ('Normandía', 10, '5');
+insert into provincia (nombre, codigoProvincia, Pais) values ('Valparaï¿½so', 9, '1');
+insert into provincia (nombre, codigoProvincia, Pais) values ('Normandï¿½a', 10, '5');
 
 --Datos Localidad
 insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Santa fe ciudad', '3000', 1, '1');
@@ -51,7 +51,7 @@ insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Housto
 insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Moscu', '586', 7, '7');
 insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Rouen', '123', 8, '5');
 insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Castilho', '3075', 9, '5');
-insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Valparaíso', '9345', 10, '9');
+insert into localidad (nombre, codPostal, codigoLocalidad, prov) values ('Valparaï¿½so', '9345', 10, '9');
 
 --Datos IDType
 insert into IDType (tipoDeID) values ('DNI');

@@ -10,11 +10,11 @@ public class DB {
 	String pass=" ";
 	private static Boolean conexion = true;
 
-    private static Connection crearConexion() {
+    private static Connection crearConexion() { 
 
-        String url =  "jdbc:postgresql://localhost:5432/TPDisenio";
+        String url =  "jdbc:postgresql://localhost:5432/disenioSistemasTP";
         String user = "postgres";
-        String pass = "0000";
+        String pass = "000";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url, user, pass);
