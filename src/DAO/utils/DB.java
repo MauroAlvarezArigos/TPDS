@@ -10,7 +10,7 @@ public class DB {
 	String pass=" ";
 	private static Boolean conexion = true;
 
-    private static Connection crearConexion() {
+    private static Connection crearConexion() { 
 
         String url =  "jdbc:postgresql://localhost:5432/disenioSistemasTP";
         String user = "postgres";
