@@ -37,16 +37,22 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	//---
 	private static final String INSERT_PASAJERO =
 			"\n"+
-			" INSERT INTO PASAJERO(IDPERSONA, CUIT, NOMBRE, APELLIDO,"
+			" INSERT INTO PASAJERO(IDPERSONA, NOMBRE, APELLIDO,"
 			+"NDOC, TIPODOC, OCUPACION, FECHANAC, NACIONALIDAD)"
-			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String INSERT_PERSONA =
 			"\n"+
-			" INSERT INTO PERSONA(IDPERSONA, TELEFONO, EMAIL, CUIT, CALLE, ALTURA, POSIVA)"
-			+"VALUES(?, ?, ?, ?, ?, ?, ?)";
+			" INSERT INTO PERSONA(TELEFONO, EMAIL, CUIT, CALLE, ALTURA, POSIVA, LOCALIDAD)"
+			+"VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING idpersona";
+	private static final String INSERT_PASAJERO_PERSONA =
+			"\n" +
+			" DO $$" +
+			"DECLARE id int " +
+			"BEGIN "+INSERT_PERSONA+" RETURNING idpersona into id; " +
+			INSERT_PASAJERO+";end$$;";
 	private static final String BUSCAR_DOC_REPETIDO =
 			"\n"+
-			" SELECT FROM PASAJERO p" +
+			" SELECT * FROM PASAJERO p" +
 			" JOIN PERSONA per ON (p.idpersona = per.idpersona)" +
 			" JOIN IDTYPE id ON (p.tipodoc = id.tipodeid)" +
 			" WHERE (? = id.tipodeid AND ? = p.ndoc)";
@@ -61,28 +67,37 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	@Override
 	public Pasajero insert(Pasajero unPasajero) {
 		PreparedStatement pstmt = null;
-		try{
-			pstmt = conn.prepareStatement(INSERT_PASAJERO+INSERT_PERSONA);
-			//Parte de Pasajero
-			//pstmt.setString(1,//todo Generate random unique id);
-			pstmt.setString(2, unPasajero.getCuit_cif());
-			pstmt.setString(3, unPasajero.getNombre());
-			pstmt.setString(4, unPasajero.getApellido());
-			pstmt.setString(5, unPasajero.getNdoc());
-			pstmt.setString(6, unPasajero.getTipodoc().getTipoDeID());
-			pstmt.setString(7, unPasajero.getOcupacion());
-			pstmt.setDate(8, unPasajero.getFechanacimiento());
-			pstmt.setInt(9, unPasajero.getNacionalidad().getCodigo());
+		try {
+			pstmt = conn.prepareStatement(INSERT_PERSONA);
+
 			//parte de Persona
-			//pstmt.setString(10,//todo Generate random unique id);
-			pstmt.setString(11, unPasajero.getTelefono());
-			pstmt.setString(12, unPasajero.getEmail());
-			pstmt.setString(13, unPasajero.getCuit_cif());
-			pstmt.setString(14, unPasajero.getCalle());
-			pstmt.setString(15, unPasajero.getAltura());
-			pstmt.setInt(16, unPasajero.getIVA().getID());
-				
+			pstmt.setString(1, unPasajero.getTelefono());
+			pstmt.setString(2, unPasajero.getEmail());
+			pstmt.setString(3, unPasajero.getCuit_cif());
+			pstmt.setString(4, unPasajero.getCalle());
+			pstmt.setString(5, unPasajero.getAltura());
+			pstmt.setInt(6, unPasajero.getIVA().getID());
+			pstmt.setInt(7, unPasajero.getLocalidad().getCodigoLocalidad());
+			pstmt.execute();
+			ResultSet resultSet = pstmt.getResultSet();
+			int id = 0;
+			if (resultSet.next()) {
+				id = resultSet.getInt(1);
+			}
+
+			//Parte de Pasajero
+			pstmt = conn.prepareStatement(INSERT_PASAJERO);
+			pstmt.setInt(1, id);
+			pstmt.setString(2, unPasajero.getNombre());
+			pstmt.setString(3, unPasajero.getApellido());
+			pstmt.setString(4, unPasajero.getNdoc());
+			pstmt.setString(5, unPasajero.getTipodoc().getTipoDeID());
+			pstmt.setString(6, unPasajero.getOcupacion());
+			pstmt.setDate(7, unPasajero.getFechanacimiento());
+			pstmt.setInt(8, unPasajero.getNacionalidad().getCodigo());
+
 			pstmt.executeUpdate();
+
 		} catch(SQLException e) {
 				e.printStackTrace();
 		}
@@ -127,7 +142,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setOcupacion(rs.getString("OCUPACION"));
 				//Puede estar mal este set
 				p.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
-				p.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getString("LOCALIDAD")));
+				p.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getInt("LOCALIDAD")));
 
 				lista.add(p);
 			}
@@ -160,7 +175,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Pasajero p = new Pasajero();
-				p.setID(rs.getInt("idpersona"));
+				p.setIdpersona(rs.getInt("idpersona"));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
 				p.setNdoc(rs.getString("NDOC"));
@@ -241,7 +256,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				unPasajero.setID(rs.getInt("idpersona"));
+				unPasajero.setIdpersona(rs.getInt("idpersona"));
 				unPasajero.setTelefono(rs.getString("TELEFONO"));
 				unPasajero.setEmail(rs.getString("EMAIL"));
 				unPasajero.setCuit_cif(rs.getString("CUIT"));
@@ -257,7 +272,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				unPasajero.setOcupacion(rs.getString("OCUPACION"));
 				//Puede estar mal este set
 				unPasajero.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
-				unPasajero.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getString("LOCALIDAD")));
+				unPasajero.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getInt("LOCALIDAD")));
 			}}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {

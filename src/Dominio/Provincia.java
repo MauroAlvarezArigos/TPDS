@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Provincia{
 	private String nombre;
-	private Integer codigoProvincia;
+	private int codigoProvincia;
 	private List<Localidad> localidades;
 	private Pais pais;
 	

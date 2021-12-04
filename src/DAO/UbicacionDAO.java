@@ -12,7 +12,7 @@ public interface UbicacionDAO {
     public Provincia insertProvincia(Provincia unProvincia, int CodPais);
     public Provincia buscarCodeProvincia(int Codigo);
     public Localidad insertLocalidad(Localidad unLocalidad, int CodProv);
-    public Localidad buscarLocalidad(String Codigo);
+    public Localidad buscarLocalidad(int Codigo);
     public Pais getNacionalidad(String nacionalidad);
     public List<Provincia> buscarProvinciasPais(int codigo);
     public List<Localidad> buscarLocalidaProvincias(int codigo);

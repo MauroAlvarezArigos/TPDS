@@ -54,7 +54,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                     " WHERE PROV =";
     private static final String SEARCH_NACIONALIDAD =
             "SELECT * FROM PAIS" +
-                    " WHERE NACIONALIDAD =";
+                    " WHERE NACIONALIDAD = ";
     private static final String ALL_NACIONALIDAD = 
     		"SELECT NACIONALIDAD FROM PAIS";
     private static final String SEARCH_NOMBRE_LOCALIDAD =
@@ -194,7 +194,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             pstmt = conn.prepareStatement(INSERT_LOCALIDAD);
             pstmt.setString(1, unLocalidad.getNombre());
             pstmt.setString(2, unLocalidad.getCodPostal());
-            pstmt.setString(3, unLocalidad.getCodigoLocalidad().toString());
+            pstmt.setInt(3, unLocalidad.getCodigoLocalidad());
             pstmt.setInt(4, CodProv);
 
             pstmt.executeUpdate();
@@ -213,8 +213,8 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 //BuscarLocalidad
 
     @Override
-    public Localidad buscarLocalidad(String Codigo) {
-        String sentencia = SEARCH_CODE_LOCALIDAD + "\'" + Codigo + "\'";
+    public Localidad buscarLocalidad(int Codigo) {
+        String sentencia = SEARCH_CODE_LOCALIDAD + Codigo;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         Localidad loc = new Localidad();
@@ -311,7 +311,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
     @Override
     public Pais getNacionalidad(String nacionalidad){
-        String sentencia = SEARCH_NACIONALIDAD + nacionalidad;
+        String sentencia = SEARCH_NACIONALIDAD + "\'"+nacionalidad+"\'";
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 
@@ -350,12 +350,11 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             pstmt.setString(3,pais);
 
             rs = pstmt.executeQuery();
-            //Lo siguiente puede ser ineficiente revisar
             if(rs.next()) {
-                String codigo = rs.getString("CODIGOLOCALIDAD");
+                int codigo = rs.getInt("CODIGOLOCALIDAD");
                 loc = buscarLocalidad(codigo);
             }
-            //
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

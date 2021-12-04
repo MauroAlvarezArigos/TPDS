@@ -34,6 +34,9 @@ public class PosIVADAOSQL implements PosIVADAO {
             "\n" +
                     "SELECT * FROM POSIVA" +
                     " WHERE IDENT=";
+    private static final String ALL_IVA =
+            "\n" +
+                    "SELECT * FROM POSIVA ";
 
 
     //Guardar una nueva posicion IVA --(Revisar: puede no ser necesario)--
@@ -95,7 +98,7 @@ public class PosIVADAOSQL implements PosIVADAO {
     //Obtiene la Posicion de IVA que representa una String
     //---
     public PosIVA getIVA(String PosIVA){
-        String Sentencia = GET_IVA + PosIVA;
+        String Sentencia = GET_IVA + "\'"+PosIVA+"\'";
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         PosIVA iva = new PosIVA();
@@ -153,4 +156,35 @@ public class PosIVADAOSQL implements PosIVADAO {
 
 
     }
+
+    public List<PosIVA> getAllIVA(){
+        String Sentencia = ALL_IVA;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        List<PosIVA> Liva = new ArrayList<>();
+        try {
+            pstmt = conn.prepareStatement(Sentencia);
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                PosIVA iva = new PosIVA();
+                iva.setID(rs.getInt("IDENT"));
+                iva.setTipo(rs.getString("TIPO"));
+                Liva.add(iva);
+            }
+        }catch(SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(pstmt != null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return Liva;
+
+    }
+
 }

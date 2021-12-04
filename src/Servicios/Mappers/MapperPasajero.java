@@ -39,6 +39,9 @@ public class MapperPasajero {
 
     public Pasajero toDomain(PasajeroDTO unPasajeroDTO){
         Pasajero unPasajero = new Pasajero();
+        ubicacionServicio = new UbicacionServicio();
+        IVAServicio = new IVAServicio();
+        IDServicio = new IDTypeServicio();
 
         unPasajero.setNombre(unPasajeroDTO.getNombre());
         unPasajero.setApellido(unPasajeroDTO.getApellido());

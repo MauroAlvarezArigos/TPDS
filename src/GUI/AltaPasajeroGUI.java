@@ -290,7 +290,7 @@ public class AltaPasajeroGUI extends JFrame{
 	public String getSelectedCbxIVA(){
 		if(this.cbxIVA.getSelectedItem() != null)
 		{
-			return this.cbxPais.getSelectedItem().toString();
+			return this.cbxIVA.getSelectedItem().toString();
 		}else return null;
 	}
 	public String getSelectedCbxPais(){
@@ -446,20 +446,11 @@ public class AltaPasajeroGUI extends JFrame{
 		getContentPane().add(btnSiguiente);
 
 		btnSiguiente.addActionListener(e -> {
-			try {
-				if(controller.InformarOmisionnesDatosGUI()) {
-					System.out.println("Revisado DOC");
-					try{controller.revisarDocExistente(this.getTbxNroDocStr(), this.getSelectedCbxTipoDNI());
-					}catch (DuplicateDocNumberException e1){
-						controller.informarDocExistenteGUI();
-					}
-				}
-			} catch (Exception e1) {
-				System.out.println("Es en el try de gestion pasajero");
-				e1.printStackTrace();
-
-			}
+				controller.InformarOmisionnesDatosGUI();
 		});
+
+
+
 
 		this.setVisible(true);
 			
@@ -613,9 +604,9 @@ public class AltaPasajeroGUI extends JFrame{
 		lblTIVA.setBounds(261, 248, 46, 14);
 		datosPersonales.add(lblTIVA);
 		
-		cbxIVA = new JComboBox<String>();
+
 		cbxIVA.setBounds(320, 243, 150, 24);
-		cbxIVA.addItem("Responsable No Inscripto");
+		controller.cargarIVA();
 		datosPersonales.add(cbxIVA);
 
 

@@ -14,7 +14,7 @@ public class MapperPasajeroBusqueda {
     public PasajeroBusquedaDTO toDTO(Pasajero unPasajero){
         //todo: Agregar id Pasajero
         PasajeroBusquedaDTO unPasajeroBusquedaDTO = new PasajeroBusquedaDTO();
-        unPasajeroBusquedaDTO.setDbid(unPasajero.getID());
+        unPasajeroBusquedaDTO.setDbid(unPasajero.getIdpersona());
         unPasajeroBusquedaDTO.setNombre(unPasajero.getNombre());
         unPasajeroBusquedaDTO.setApellido(unPasajero.getApellido());
         unPasajeroBusquedaDTO.setNdoc(unPasajero.getNdoc());

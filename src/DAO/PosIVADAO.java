@@ -9,4 +9,5 @@ public interface PosIVADAO {
     public List<PosIVA> GetListIVA();
     public PosIVA getIVA(String PosIVA);
     public PosIVA BuscarIVA(int ident);
+    public List<PosIVA> getAllIVA();
 }

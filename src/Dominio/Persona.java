@@ -1,6 +1,7 @@
 package Dominio;
 
 public class Persona {
+	private int idpersona;
 	private String telefono;
 	private String email;
 	private String cuit_cif;
@@ -16,6 +17,15 @@ public class Persona {
 	}
 
 	//Getters and Setters
+
+	public int getIdpersona() {
+		return idpersona;
+	}
+
+	public void setIdpersona(int idpersona) {
+		this.idpersona = idpersona;
+	}
+
 	public String getTelefono() {
 		return telefono;
 	}
