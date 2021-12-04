@@ -77,4 +77,14 @@ public class PasajeroServicio {
 		pasajerodao.insert(unPasajero);
 	}
 
+	public void guardarPasajero(PasajeroDTO unPasajeroDTO){
+		daoManager = new DAOManager();
+		pasajerodao = daoManager.getPasajeroDAO();
+
+		daoManager.begin();
+		pasajerodao.insert(mapperP.toDomain(unPasajeroDTO));
+		daoManager.commit();
+		daoManager.disconnect();
+	}
+
 }

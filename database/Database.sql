@@ -22,24 +22,23 @@ create table provincia(
 create table localidad(
 	nombre character varying(50),
 	codPostal character varying(10),
-	codigoLocalidad character varying(10),
+	codigoLocalidad int,
 	prov int,
 	constraint pk_codigoLocalidad primary key (codigoLocalidad),
 	constraint fk_prov foreign key (prov) REFERENCES provincia (codigoProvincia)
 );
 
 create table persona(
-	idPersona int,
+	idPersona int GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
 	telefono character varying(25),
 	email character varying(50),
 	CUIT character varying(50) NOT NULL,
 	calle character varying(25),
 	altura character varying(20),
 	PosIVA int,
-	Localidad character varying(10),
+	Localidad int,
 	constraint fk_PosIVA foreign key (PosIVA) REFERENCES posIVA (ident),
-	constraint fk_Localidad foreign key (Localidad) REFERENCES localidad (codigoLocalidad),
-	constraint pk_ID primary key(idPersona)
+	constraint fk_Localidad foreign key (Localidad) REFERENCES localidad (codigoLocalidad)
 );
 
 
@@ -58,7 +57,7 @@ create table pasajero(
 	FechaNac date,
 	Nacionalidad int,
 	constraint fk_idpersona foreign key (idPersona) REFERENCES persona (idPersona),
-	constraint pk_Ndoc primary key (Ndoc),
+	constraint pk_idPersona primary key (idPersona),
 	constraint fk_nacionalidad foreign key (Nacionalidad) REFERENCES pais (codigoPais),
 	constraint fk_TipoDoc foreign key (TipoDoc) REFERENCES IDtype (tipoDeID)
 );

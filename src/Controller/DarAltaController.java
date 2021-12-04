@@ -66,7 +66,6 @@ public class DarAltaController {
         if(AltaPsjeroGUI.getDatePanelFechNac() == null){
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblFecNac(), AltaPsjeroGUI.getDatePicker());
-            //todo highlightInput(AltaPsjeroGUI);
         }
         //AltaPsjeroGUI.getTbxEmail();
         if(AltaPsjeroGUI.getTbxNroDocStr().equals("") || AltaPsjeroGUI.getTbxNroDocStr() == null){
@@ -224,6 +223,8 @@ public class DarAltaController {
         pasajeroDTO.setCalle(AltaPsjeroGUI.getTbxCalleStr());
         pasajeroDTO.setAltura(AltaPsjeroGUI.getTbxDireccionNroStr());
         pasajeroDTO.setIVA(AltaPsjeroGUI.getSelectedCbxIVA());
+
+        pasajeroServicio.guardarPasajero(pasajeroDTO);
         cargarOtroMensajeGUI();
     }
 
