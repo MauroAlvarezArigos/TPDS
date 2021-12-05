@@ -1,18 +1,10 @@
 package Controller;
 
-import java.text.DateFormat;
+import java.awt.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
-
-import javax.swing.SwingUtilities;
-import javax.swing.text.DateFormatter;
 
 import Exceptions.DesdeMayorException;
 import Exceptions.FechaIncorrectaException;
@@ -21,35 +13,35 @@ import GUI.MostrarEstadoHabitacionGUI;
 
 public class HabitacionController {
 	private static final String ZoneId = null;
-	MostrarEstadoHabitacionGUI meh;
+	MostrarEstadoHabitacionGUI MostarEstadoGUI;
 	
 	
 	public HabitacionController(MostrarEstadoHabitacionGUI mostrarEstado) {
-		this.meh = mostrarEstado;
+		this.MostarEstadoGUI = mostrarEstado;
 	}
 	
 	public void mostrarEstado() throws DesdeMayorException, FechaIncorrectaException, ParseException{
 		
-		if(meh.getDesde().getModel().getValue() == null) {
+		if(MostarEstadoGUI.getDesde().getModel().getValue() == null) {
 			System.out.println("Desde NULL");
 			throw new FechaIncorrectaException();
 			
 		}
-		if(meh.getHasta().getModel().getValue() == null) {
+		if(MostarEstadoGUI.getHasta().getModel().getValue() == null) {
 			System.out.println("Hasta NULL");
 			throw new FechaIncorrectaException();
 		}
 		else {
 			Calendar dateDesde = Calendar.getInstance();
-			dateDesde.set(meh.getDesde().getModel().getYear()
-						 ,meh.getDesde().getModel().getMonth()
-						 ,meh.getDesde().getModel().getDay());
+			dateDesde.set(MostarEstadoGUI.getDesde().getModel().getYear()
+						 , MostarEstadoGUI.getDesde().getModel().getMonth()
+						 , MostarEstadoGUI.getDesde().getModel().getDay());
         	Date desde = dateDesde.getTime();             
         	
         	Calendar dateHasta = Calendar.getInstance();
-			dateHasta.set(meh.getHasta().getModel().getYear()
-						 ,meh.getHasta().getModel().getMonth()
-						 ,meh.getHasta().getModel().getDay());
+			dateHasta.set(MostarEstadoGUI.getHasta().getModel().getYear()
+						 , MostarEstadoGUI.getHasta().getModel().getMonth()
+						 , MostarEstadoGUI.getHasta().getModel().getDay());
         	Date hasta = dateHasta.getTime();             
         	
 			if(desde.getTime() < hasta.getTime()) {
@@ -69,7 +61,26 @@ public class HabitacionController {
 		}
 		
 	}
-	
-	
 
+	public void verficarFechas(){
+		try {
+			mostrarEstado();
+		} catch (DesdeMayorException e1) {
+			MostarEstadoGUI.mostrarError("","La fecha \"Desde\" es mayor a la fecha \"Hasta\"");
+			MostarEstadoGUI.getDatePickerDesde().getModel().setValue(null);
+			MostarEstadoGUI.getDatePickerHasta().getModel().setValue(null);
+
+		} catch (FechaIncorrectaException e1) {
+			if(MostarEstadoGUI.getDatePickerHasta().getModel().getValue() == null) {
+				MostarEstadoGUI.getDatePickerDesde().setBackground(new Color(255, 0, 0));
+			}
+			if(MostarEstadoGUI.getDatePickerHasta().getModel().getValue() == null) {
+				MostarEstadoGUI.getDatePickerHasta().setBackground(new Color(255, 0, 0));
+			}
+			MostarEstadoGUI.mostrarError("","Debe indicar una fecha correcta");
+		} catch (ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 }

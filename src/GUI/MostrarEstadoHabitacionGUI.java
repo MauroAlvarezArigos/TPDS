@@ -1,6 +1,7 @@
 package GUI;
 
 import java.awt.Color;
+import java.awt.event.ActionListener;
 import java.text.ParseException;
 import java.util.Properties;
 
@@ -29,7 +30,23 @@ public class MostrarEstadoHabitacionGUI extends JFrame{
 	private HabitacionController controller;
 	private JDatePickerImpl datePickerDesde;
 	private JDatePickerImpl datePickerHasta;
-	
+
+	public JDatePickerImpl getDatePickerDesde() {
+		return datePickerDesde;
+	}
+
+	public void setDatePickerDesde(JDatePickerImpl datePickerDesde) {
+		this.datePickerDesde = datePickerDesde;
+	}
+
+	public JDatePickerImpl getDatePickerHasta() {
+		return datePickerHasta;
+	}
+
+	public void setDatePickerHasta(JDatePickerImpl datePickerHasta) {
+		this.datePickerHasta = datePickerHasta;
+	}
+
 	public MostrarEstadoHabitacionGUI() {
 		controller = new HabitacionController(this);
 		this.setLocationRelativeTo(null);
@@ -95,6 +112,7 @@ public class MostrarEstadoHabitacionGUI extends JFrame{
 		btnAceptar.setBackground(new Color(50, 205, 50));
 		btnAceptar.setBounds(444, 210, 85, 21);
 		getContentPane().add(btnAceptar);
+
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(new Color(255, 255, 255));
@@ -105,25 +123,7 @@ public class MostrarEstadoHabitacionGUI extends JFrame{
 		btnCancelar.addActionListener(e->dispose());
 		
 		btnAceptar.addActionListener(e->{
-			try {
-				controller.mostrarEstado();
-			} catch (DesdeMayorException e1) {
-				mostrarError("","La fecha \"Desde\" es mayor a la fecha \"Hasta\"");
-				datePickerDesde.getModel().setValue(null);
-				datePickerHasta.getModel().setValue(null);
-				
-			} catch (FechaIncorrectaException e1) {
-				if(datePickerDesde.getModel().getValue() == null) {
-					datePickerDesde.setBackground(new Color(255, 0, 0));
-				}
-				if(datePickerHasta.getModel().getValue() == null) {
-					datePickerHasta.setBackground(new Color(255, 0, 0));
-				}
-				mostrarError("","Debe indicar una fecha correcta");
-			} catch (ParseException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}			
+			controller.verficarFechas();
 		});
 		
 	}
