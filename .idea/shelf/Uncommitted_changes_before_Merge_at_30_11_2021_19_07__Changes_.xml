@@ -1,0 +1,24 @@
+<changelist name="Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]" date="1638310180758" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Merge at 30/11/2021 19:07 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Servicios/IDTypeServicio.class" />
+    <option name="AFTER_PATH" value="bin/Servicios/IDTypeServicio.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/IDTypeServicio.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Servicios/IVAServicio.class" />
+    <option name="AFTER_PATH" value="bin/Servicios/IVAServicio.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/IVAServicio.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Servicios/Mappers/MapperID.class" />
+    <option name="AFTER_PATH" value="bin/Servicios/Mappers/MapperID.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/MapperID.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="bin/Servicios/UbicacionServicio.class" />
+    <option name="AFTER_PATH" value="bin/Servicios/UbicacionServicio.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/UbicacionServicio.class" />
+  </binary>
+</changelist>

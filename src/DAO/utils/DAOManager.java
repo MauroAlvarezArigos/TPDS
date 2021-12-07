@@ -18,6 +18,7 @@ public class DAOManager {
     private PasajeroDAOSQL pasajeroDAO = null;
     private PosIVADAOSQL posIVADAO = null;
     private UbicacionDAOSQL ubicacionDAO = null;
+    private HabitacionDAOSQL habitacionDAO = null;
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -65,6 +66,13 @@ public class DAOManager {
             this.ubicacionDAO = new UbicacionDAOSQL(wrapper.getConnection());
         }
         return ubicacionDAO;
+    }
+
+    public HabitacionDAOSQL getHabitacionDAO(){
+        if(this.habitacionDAO == null){
+            this.habitacionDAO = new HabitacionDAOSQL(wrapper.getConnection());
+        }
+        return habitacionDAO;
     }
 
 }

@@ -1,7 +1,6 @@
 package GUI;
 
 import Controller.DarAltaController;
-import Exceptions.DuplicateDocNumberException;
 import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
@@ -21,41 +20,23 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-
-@SuppressWarnings("serial")
 public class AltaPasajeroGUI extends JFrame{
 	//Colors
 	Color Warning;
 	Color CancelButton;
 	Color NextButton;
-
-	//Getters and Setters
-
-	public Color getWarningColor() {
-		return Warning;
-	}
-
+	//Getters and Setters For Colors
 	public void setWarningColor(Color warning) {
 		Warning = warning;
 	}
-
-	public Color getCancelButtonColor() {
-		return CancelButton;
-	}
-
 	public void setCancelButtonColor(Color cancelButton) {
 		CancelButton = cancelButton;
 	}
-
-	public Color getNextButtonColor() {
-		return NextButton;
-	}
-
 	public void setNextButtonColor(Color nextButton) {
 		NextButton = nextButton;
 	}
 
-	//Personal data
+	//Personal Data
 	private JTextField tbxApellido;
 	private JTextField tbxNombre;
 	private JTextField tbxEmail;
@@ -65,16 +46,7 @@ public class AltaPasajeroGUI extends JFrame{
 	private JTextField tbxCuit;
 	JDatePanelImpl datePanel;
 	JDatePickerImpl datePicker;
-
-	public JDatePickerImpl getDatePicker() {
-		return datePicker;
-	}
-
-	public void setDatePicker(JDatePickerImpl datePicker) {
-		this.datePicker = datePicker;
-	}
-
-	//String Getters And Setters
+	//String Getters And Setters For Personal Data
 	public String getTbxApellidoStr() {
 		if(this.tbxApellido != null){
 			return this.tbxApellido.getText();
@@ -82,8 +54,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return null;
 		}
 	}
-	public void setTbxApellido(JTextField tbxApellido) {
-		this.tbxApellido = tbxApellido;
+	public void setTbxApellidoStr(String tbxApellido) {
+		this.tbxApellido.setText(tbxApellido);
 	}
 	public String getTbxNombreStr() {
 		if(this.tbxNombre != null)
@@ -93,7 +65,9 @@ public class AltaPasajeroGUI extends JFrame{
 			return null;
 		}
 	}
-	public void setTbxNombre(JTextField tbxNombre) { this.tbxNombre = tbxNombre; }
+	public void setTbxNombre(String tbxNombre) {
+		this.tbxNombre.setText(tbxNombre);
+	}
 	public String getTbxEmailStr() {
 		if(this.tbxEmail != null)
 		{
@@ -102,8 +76,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return null;
 		}
 	}
-	public void setTbxEmail(JTextField tbxEmail) {
-		this.tbxEmail = tbxEmail;
+	public void setTbxEmail(String tbxEmail) {
+		this.tbxEmail.setText(tbxEmail);
 	}
 	public String getTbxNroDocStr() {
 		if(this.tbxNroDoc != null)
@@ -111,8 +85,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return this.tbxNroDoc.getText();
 		}else return null;
 	}
-	public void setTbxNroDoc(JTextField tbxNroDoc) {
-		this.tbxNroDoc = tbxNroDoc;
+	public void setTbxNroDoc(String tbxNroDoc) {
+		this.tbxNroDoc.setText(tbxNroDoc);
 	}
 	public String getTbxTelefonoStr() {
 		if(this.tbxTelefono != null)
@@ -120,8 +94,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return this.tbxTelefono.getText();
 		}else return null;
 	}
-	public void setTbxTelefono(JTextField tbxTelefono) {
-		this.tbxTelefono = tbxTelefono;
+	public void setTbxTelefono(String tbxTelefono) {
+		this.tbxTelefono.setText(tbxTelefono);
 	}
 	public String getTbxOcupacionStr() {
 		if(this.tbxOcupacion != null)
@@ -129,8 +103,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return this.tbxOcupacion.getText();
 		}else return null;
 	}
-	public void setTbxOcupacion(JTextField tbxOcupacion) {
-		this.tbxOcupacion = tbxOcupacion;
+	public void setTbxOcupacion(String tbxOcupacion) {
+		this.tbxOcupacion.setText(tbxOcupacion);
 	}
 	public String getTbxCuitStr() {
 		if(this.tbxCuit != null)
@@ -138,8 +112,8 @@ public class AltaPasajeroGUI extends JFrame{
 			return this.tbxCuit.getText();
 		}else return null;
 	}
-	public void setTbxCuit(JTextField tbxCuit) {
-		this.tbxCuit = tbxCuit;
+	public void setTbxCuit(String tbxCuit) {
+		this.tbxCuit.setText(tbxCuit);
 	}
 	public Date getDatePanelFechNac(){
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
@@ -155,8 +129,13 @@ public class AltaPasajeroGUI extends JFrame{
 		}
 		return sqlDate;
 }
-
-	//Getters
+	public JDatePickerImpl getDatePicker() {
+		return datePicker;
+	}
+	public void setDatePicker(JDatePickerImpl datePicker) {
+		this.datePicker = datePicker;
+	}
+	//Getters For Personal Data
 	public JTextField getTbxApellido() {
 		return tbxApellido;
 	}
@@ -178,14 +157,14 @@ public class AltaPasajeroGUI extends JFrame{
 	public JTextField getTbxCuit() {
 		return tbxCuit;
 	}
+
 	//Direction
 	private JTextField tbxCalle;
 	private JTextField tbxCodPostal;
 	private JTextField tbxDireccionNro;
 	private JTextField tbxDpto;
 	private JTextField tbxPiso;
-
-	//String Getters and Setters
+	//String Getters and Setters For Direction
 	public String getTbxCalleStr() {
 		if(this.tbxCalle != null)
 		{
@@ -231,8 +210,7 @@ public class AltaPasajeroGUI extends JFrame{
 	public void setTbxPiso(JTextField tbxPiso) {
 		this.tbxPiso = tbxPiso;
 	}
-	
-	//Getters
+	//Getters For Direction
 	public JTextField getTbxCalle() {
 		return tbxCalle;
 	}
@@ -249,10 +227,9 @@ public class AltaPasajeroGUI extends JFrame{
 		return tbxPiso;
 	}
 
-	//Check Box
+	//CheckBox
 	JCheckBox checkDpto;
-
-	//Getters and Setters
+	//Getters and Setters For CheckBox
 	public JCheckBox getCheckDpto() {
 		return checkDpto;
 	}
@@ -268,13 +245,12 @@ public class AltaPasajeroGUI extends JFrame{
 	private JComboBox<String> cbxLocalidad = new JComboBox<>();
 	private JComboBox<String> cbxIVA = new JComboBox<>();
 
-	//getters and setters
+	//getters and setters for Combobox
 	public void setCbxTipoDNI(JComboBox<String> cbxTipoDNI) {this.cbxTDoc = cbxTipoDNI;}
 	public void setCbxPais(JComboBox<String> cbxPais) {this.cbxPais = cbxPais;}
 	public void setCbxProvincia(JComboBox<String> cbxProvincia) {this.cbxProvincia = cbxProvincia;}
 	public void setCbxLocalidad(JComboBox<String> cbxLocalidad) {this.cbxLocalidad = cbxLocalidad;}
 	public void setCbxIVA(JComboBox<String> cbxIVA) {this.cbxIVA = cbxIVA;}
-
 	public JComboBox<String> getCbxTipoDNI(){return this.cbxTDoc;}
 	public JComboBox<String> getCbxPais(){return this.cbxPais;}
 	public JComboBox<String> getCbxProvincia(){return this.cbxProvincia;}
@@ -286,7 +262,7 @@ public class AltaPasajeroGUI extends JFrame{
 		return cbxNacionalidad;
 	}
 	public JComboBox<String> getCbxIVA(){ return cbxIVA;}
-
+	//Get Selected for Combobox
 	public String getSelectedCbxIVA(){
 		if(this.cbxIVA.getSelectedItem() != null)
 		{
@@ -344,10 +320,7 @@ public class AltaPasajeroGUI extends JFrame{
 	private JLabel lblCalle;
 	private JLabel lblCP;
 	private JLabel lblDirNumero;
-
-	//Getters and setters
-
-
+	//Getters and setters for labels
 	public JLabel getLblDpto() {
 		return lblDpto;
 	}
@@ -406,10 +379,10 @@ public class AltaPasajeroGUI extends JFrame{
 		return lblDirNumero;
 	}
 
+
 	//Controller
 	private DarAltaController controller;
-
-	//Getters and setters
+	//Setter For Controller
 	public void setController(DarAltaController unController) { controller = unController;
 	}
 
@@ -437,6 +410,9 @@ public class AltaPasajeroGUI extends JFrame{
 		btnCancelar.setBackground(CancelButton);
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.setBounds(721, 375, 117, 36);
+		btnCancelar.addActionListener(e1 ->{
+				controller.mensajeAceptarCancelarGUI();
+		});
 		getContentPane().add(btnCancelar);
 		
 		JButton btnSiguiente = new JButton("Siguiente");
@@ -482,7 +458,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		cbxNacionalidad = new JComboBox<String>();
 		cbxNacionalidad.setBounds(135, 71, 107, 24);
-		llenarListaNacionalidad();
+		controller.cargarNacionalidad();
 		datosPersonales.add(cbxNacionalidad);
 		
 		JLabel lblAsteriscoNac = new JLabel("(*)");
@@ -791,23 +767,11 @@ public class AltaPasajeroGUI extends JFrame{
 		return direccion;
 	}
 
-
-
-
 	public void mostrarError(String titulo,String detalle) {
 		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
 		JOptionPane.showMessageDialog(padre,
 				detalle,titulo,
 				JOptionPane.ERROR_MESSAGE);
-	}
-
-	public void llenarListaNacionalidad() {
-		List<String> ListNacionalidades = new ArrayList<>();
-		ListNacionalidades = controller.cargarNacionalidadGUI();
-		cbxNacionalidad.addItem("");
-		for(int i=0; i<ListNacionalidades.size(); i++) {
-			this.cbxNacionalidad.addItem(ListNacionalidades.get(i));
-		}
 	}
 
 	public int optionMessageGUI(String titulo, String detalle, Object[] options){

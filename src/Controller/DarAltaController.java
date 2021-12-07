@@ -1,3 +1,6 @@
+//todo al guardar la localidad y provincia verficar que pertenezcan al pais y provincia respectivamente
+//todo autocompletar el CP al seleccionar una ciudad y automcompletar ciudad al ingresar un CP con pais seleccionado
+
 package Controller;
 
 import DTO.*;
@@ -14,6 +17,7 @@ import Servicios.UbicacionServicio;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class DarAltaController {
@@ -136,7 +140,7 @@ public class DarAltaController {
                 informarDocExistenteGUI();
             }
             if (success){
-                guardarPasajero();
+                cargarPasajeroGUI();
             }
         }
         //return bool;
@@ -201,6 +205,16 @@ public class DarAltaController {
         }
     }
 
+    public void cargarNacionalidad(){
+        List<String> ListNacionalidades = ubicacionServicio.getAllNacionalidad();
+        JComboBox<String> nac = AltaPsjeroGUI.getCbxNacionalidad();
+
+       nac.addItem("");
+        for (String Nacionalidad : ListNacionalidades) {
+            nac.addItem(Nacionalidad);
+        }
+    }
+
     public void revisarDocExistente(String NDoc, String TipoDoc) throws DuplicateDocNumberException {
         pasajeroServicio.revisarDocExistente(NDoc, TipoDoc);
     }
@@ -214,7 +228,7 @@ public class DarAltaController {
                   == JOptionPane.YES_OPTION){
 
               System.out.println("Guardar Pasajero");
-              this.guardarPasajero();
+              this.cargarPasajeroGUI();
 
           }else{
               AltaPsjeroGUI.getCbxTDoc().requestFocus();
@@ -225,7 +239,7 @@ public class DarAltaController {
           }
     }
 
-    public void guardarPasajero() {
+    public void cargarPasajeroGUI() {
         pasajeroDTO = new PasajeroDTO();
         pasajeroDTO.setApellido(AltaPsjeroGUI.getTbxApellidoStr());
         pasajeroDTO.setNombre(AltaPsjeroGUI.getTbxNombreStr());
@@ -264,16 +278,15 @@ public class DarAltaController {
         }
     }
 
-    public void cargarPasajeroGUI(){
-
-    }
 
     public void mensajeAceptarCancelarGUI(){
-
-    }
-    
-    public List<String> cargarNacionalidadGUI(){
-    	return ubicacionServicio.getAllNacionalidad();
+        if(AltaPsjeroGUI.optionMessageGUI(
+                "Cancelar",
+                "Esta Seguro que desea cerrar esta ventana",
+                new String[]{"SI","NO"})
+                == JOptionPane.YES_OPTION){
+            AltaPsjeroGUI.dispose();
+        }
     }
 
     public void highlightInput(JComponent label, JComponent container, Color highlightColor){
@@ -281,7 +294,4 @@ public class DarAltaController {
         label.setForeground(Red);
         container.setBorder(BorderFactory.createLineBorder(Red));
     }
-
-
-
 }

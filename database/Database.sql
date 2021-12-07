@@ -1,3 +1,4 @@
+
 create table posIVA (
 	ident int,
 	tipo character varying(50),
