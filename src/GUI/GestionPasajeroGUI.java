@@ -1,13 +1,9 @@
 package GUI;
 
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 import javax.swing.*;
 import Controller.PasajeroController;
-import DTO.PasajeroBusquedaDTO;
 import Exceptions.NoConcordanciaException;
 
 import java.awt.Color;
@@ -26,7 +22,6 @@ public class GestionPasajeroGUI extends JFrame{
 		this.controller = new PasajeroController(this);
 		this.controller.cargarTDNI();
 		this.setLayout(null);
-		this.setLocationRelativeTo(null);
 		this.setSize(500,300);		
 		
 		JPanel panelDatos = new JPanel();
@@ -97,7 +92,6 @@ public class GestionPasajeroGUI extends JFrame{
 				e1.printStackTrace();
 				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
 			} catch (Exception e1) {
-				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();
 				
 			}

@@ -23,12 +23,10 @@ public class HabitacionController {
 	public void mostrarEstado() throws DesdeMayorException, FechaIncorrectaException, ParseException{
 		
 		if(MostarEstadoGUI.getDesde().getModel().getValue() == null) {
-			System.out.println("Desde NULL");
 			throw new FechaIncorrectaException();
 			
 		}
 		if(MostarEstadoGUI.getHasta().getModel().getValue() == null) {
-			System.out.println("Hasta NULL");
 			throw new FechaIncorrectaException();
 		}
 		else {
@@ -45,13 +43,9 @@ public class HabitacionController {
         	Date hasta = dateHasta.getTime();             
         	
 			if(desde.getTime() < hasta.getTime()) {
-				System.out.println("Fecha Valida");
 	        	SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
 	        	String date1 = format1.format(desde); 
 	        	String date2 = format1.format(hasta); 
-
-	        	System.out.println(date1);   
-	        	System.out.println(date2);   
 	        	EstadoHabitacionesGUI eh = new EstadoHabitacionesGUI(desde, hasta);
 	        	eh.setVisible(true);
 			}

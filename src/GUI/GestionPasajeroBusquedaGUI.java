@@ -144,14 +144,14 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		if (e.getActionCommand().equals("Siguiente")) {
 			if ((bg.getSelection()) == null) {
 				try {
-					AltaPasajeroGUI a = new AltaPasajeroGUI();
-					DarAltaController controllerAlta = new DarAltaController(a);
+					AltaPasajeroGUI altaPasajero = new AltaPasajeroGUI();
+					altaPasajero.setLocationRelativeTo(null);
+					DarAltaController controllerAlta = new DarAltaController(altaPasajero);
 					controllerAlta.DarAltaPasajero();
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
 			} else {
-				System.out.println("Selected Radio Button: " + lista.get((Integer.parseInt(bg.getSelection().getActionCommand()))).toString());
 				@SuppressWarnings("unused")
 				PasajeroBusquedaDTO unPasajeroBusquedaDTO = lista.get((Integer.parseInt(bg.getSelection().getActionCommand())));
 				//todo modificarPasajeroGUI();

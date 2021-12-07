@@ -1,12 +1,8 @@
 package Controller;
 
 import DTO.*;
-import Dominio.Pasajero;
-import Dominio.PosIVA;
 import Exceptions.DuplicateDocNumberException;
 import GUI.AltaPasajeroGUI;
-import GUI.GestionPasajeroBusquedaGUI;
-import GUI.GestionPasajeroGUI;
 import Servicios.IDTypeServicio;
 import Servicios.IVAServicio;
 import Servicios.PasajeroServicio;
@@ -26,10 +22,6 @@ public class DarAltaController {
     private PasajeroServicio pasajeroServicio;
     private UbicacionServicio ubicacionServicio;
     private IDTypeServicio IDServicio;
-    private Pasajero pasajero;
-    private List<PasajeroDTO> lista;
-    private GestionPasajeroGUI gestionGUI;
-    private GestionPasajeroBusquedaGUI gbusquedaGUI;
     private AltaPasajeroGUI AltaPsjeroGUI;
     private PasajeroDTO pasajeroDTO;
     private IVAServicio IVAServicio;
@@ -47,7 +39,6 @@ public class DarAltaController {
     }
 
     public void DarAltaPasajero(){
-        //AltaPsjeroGUI.setController(this);
         AltaPsjeroGUI.setVisible(true);
     }
 
@@ -70,7 +61,6 @@ public class DarAltaController {
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblFecNac(), AltaPsjeroGUI.getDatePicker(),Warning);
         }
-        //AltaPsjeroGUI.getTbxEmail();
         if(AltaPsjeroGUI.getTbxNroDocStr().equals("") || AltaPsjeroGUI.getTbxNroDocStr() == null){
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblNroDni(),AltaPsjeroGUI.getTbxNroDoc(),Warning);
@@ -83,8 +73,6 @@ public class DarAltaController {
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblOcupacion(), AltaPsjeroGUI.getTbxOcupacion(),Warning);
         }
-        //AltaPsjeroGUI.getTbxCuitStr();
-
         if(AltaPsjeroGUI.getTbxCalleStr().equals("") || AltaPsjeroGUI.getTbxCalleStr() == null){
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblCalle(),AltaPsjeroGUI.getTbxCalle(),Warning);
@@ -98,17 +86,15 @@ public class DarAltaController {
             highlightInput(AltaPsjeroGUI.getLblDirNumero(), AltaPsjeroGUI.getTbxDireccionNro(),Warning);
         }
         if(AltaPsjeroGUI.getCheckDpto().isSelected()){
-        if(AltaPsjeroGUI.getTbxDptoStr().equals("") || AltaPsjeroGUI.getTbxDptoStr() == null){
-            bool = false;
-            highlightInput(AltaPsjeroGUI.getLblDpto(), AltaPsjeroGUI.getTbxDpto(), Warning);
+        	if(AltaPsjeroGUI.getTbxDptoStr().equals("") || AltaPsjeroGUI.getTbxDptoStr() == null){
+	            bool = false;
+	            highlightInput(AltaPsjeroGUI.getLblDpto(), AltaPsjeroGUI.getTbxDpto(), Warning);
+            }
+	        if(AltaPsjeroGUI.getTbxPisoStr().equals("") || AltaPsjeroGUI.getTbxPisoStr() == null){
+	            bool = false;
+	            highlightInput(AltaPsjeroGUI.getLblPiso(), AltaPsjeroGUI.getTbxPiso(),Warning);
+	        }
         }
-        if(AltaPsjeroGUI.getTbxPisoStr().equals("") || AltaPsjeroGUI.getTbxPisoStr() == null){
-            bool = false;
-            highlightInput(AltaPsjeroGUI.getLblPiso(), AltaPsjeroGUI.getTbxPiso(),Warning);
-        }
-        }
-
-
         if(AltaPsjeroGUI.getSelectedCbxPais() == null || AltaPsjeroGUI.getSelectedCbxPais().equals("")){
             bool = false;
             highlightInput(AltaPsjeroGUI.getLblPais(), AltaPsjeroGUI.getCbxPais(),Warning);
@@ -128,36 +114,32 @@ public class DarAltaController {
 
         boolean success = false;
         if(bool){
-            try
-            {
+            try {
                 revisarDocExistente(AltaPsjeroGUI.getTbxNroDocStr(),AltaPsjeroGUI.getSelectedCbxTipoDNI());
                 success = true;
             }catch (DuplicateDocNumberException e){
                 informarDocExistenteGUI();
             }
-            if (success){
+            if(success){
                 guardarPasajero();
             }
         }
-        //return bool;
     }
 
     public void cargarIVA(){
-        JComboBox<String> tiva = AltaPsjeroGUI.getCbxIVA();
-        tiva.removeAllItems();
+        JComboBox<String> cargaIva = AltaPsjeroGUI.getCbxIVA();
+        cargaIva.removeAllItems();
         List<PosIVADTO> ListaPosIVA = IVAServicio.getAllIVA();
-        tiva.addItem("");
         for (PosIVADTO p : ListaPosIVA){
-            tiva.addItem(p.getTipo());
+        	cargaIva.addItem(p.getTipo());
         }
-        AltaPsjeroGUI.setCbxIVA(tiva);
+        AltaPsjeroGUI.setCbxIVA(cargaIva);
     }
 
     public void cargarTDNI() {
         JComboBox<String> tdni = AltaPsjeroGUI.getCbxTipoDNI();
         tdni.removeAllItems();
         List<IDTypeDTO> ListaIDT = IDServicio.getAllIDType();
-        tdni.addItem("");
         for (IDTypeDTO idTypeDTO : ListaIDT) {
             tdni.addItem(idTypeDTO.getTipo());
         }
@@ -173,7 +155,6 @@ public class DarAltaController {
         for (PaisDTO paisDTO : ListaPaisesDTO) {
             lpais.addItem(paisDTO.getPais());
         }
-        //AltaPsjeroGUI.setCbxPais(lpais);
     }
 
     public void cargarProvincia(){
@@ -181,7 +162,6 @@ public class DarAltaController {
         lprov.removeAllItems();
         String n_pais = AltaPsjeroGUI.getSelectedCbxPais();
         List<ProvDTO> ListaProvDTO = ubicacionServicio.getAllProvinciasPais(n_pais);
-
         lprov.addItem("");
         for (ProvDTO provDTO : ListaProvDTO){
             lprov.addItem(provDTO.getProv());
@@ -208,12 +188,10 @@ public class DarAltaController {
     public void informarDocExistenteGUI(){
           if(AltaPsjeroGUI.optionMessageGUI(
                   "Numero de Documento Existente",
-                  "¡CUIDADO! el tipo y numero de documento ya existen en el sistema",
+                  "ï¿½CUIDADO! el tipo y numero de documento ya existen en el sistema",
                   new String[]{"ACEPTAR IGUALMENTE",
                           "CORREGIR"})
                   == JOptionPane.YES_OPTION){
-
-              System.out.println("Guardar Pasajero");
               this.guardarPasajero();
 
           }else{
@@ -253,8 +231,8 @@ public class DarAltaController {
         if(AltaPsjeroGUI.optionMessageGUI(
                 "Pasajero Guardado",
                 "El pasajero "+/*pasajeroDTO.getNombre()+*/" "
-                        +/*pasajeroDTO.getApellido()+*/" ha sido satisfactoriamente cargado al sistema." +
-                        " ¿desea cargar otro?",
+                        +/*pasajeroDTO.getApellido()+*/"ha sido satisfactoriamente cargado al sistema." +
+                        " ï¿½desea cargar otro?",
                 new String[]{"SI","NO"})
         == JOptionPane.NO_OPTION){
             AltaPsjeroGUI.dispose();

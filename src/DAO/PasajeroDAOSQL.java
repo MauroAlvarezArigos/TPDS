@@ -299,11 +299,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			return p1 + "order by APELLIDO, NOMBRE";
 		} else {
 			tmp = tmp + "WHERE ";
-			System.out.println("Where concatenado");
-
 			if(!nombre.equals("")) {
-				System.out.println("Nombre concatenado");
-
 				tmp = tmp + " NOMBRE LIKE '%"+ nombre +"%'";
 				cont++;
 			}
@@ -316,31 +312,23 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 					tmp = tmp + " AND APELLIDO LIKE '%"+ apellido +"%'";
 
 				}
-				System.out.println("apellido concatenado");
-
 				cont++;
 			}
 			if(!tipoDoc.equals("")) {
-				System.out.println("tdoc concatenado");
-
 				if(cont == 0) {
 					tmp = tmp + " TIPODOC = '"+ tipoDoc +"'";
 				}
 				else {
 					tmp = tmp + " AND TIPODOC = '"+ tipoDoc +"'";
-
 				}
 				cont++;
 			}
 			if(!ndoc.equals("")) {
-				System.out.println("doc concatenado");
-
 				if(cont == 0) {
 					tmp = tmp + "NDOC = '"+ ndoc + "'";
 				}
 				else {
 					tmp = tmp + " AND NDOC = '"+ ndoc +"'";
-
 				}
 				cont++;
 			}

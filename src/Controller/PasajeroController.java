@@ -3,14 +3,10 @@ package Controller;
 import java.util.List;
 
 import javax.swing.JComboBox;
-import javax.swing.JTable;
-
 import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
-import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
-//import GUI.DarAltaPsjeroGUI;
-import GUI.AltaPasajeroGUI;
+
 import GUI.GestionPasajeroBusquedaGUI;
 import GUI.GestionPasajeroGUI;
 import Servicios.IDTypeServicio;
@@ -19,16 +15,12 @@ import Servicios.PasajeroServicio;
 public class PasajeroController {
 	private PasajeroServicio pasajeroServicio;
 	private IDTypeServicio IDServicio;
-	private Pasajero pasajero;
 	private List<PasajeroBusquedaDTO> lista;
 	private GestionPasajeroGUI gestionGUI;
 	private GestionPasajeroBusquedaGUI gbusquedaGUI;
-	private AltaPasajeroGUI AltaPsjeroGUI;
-	private final JTable table;
 	
 	//Constructor
 	public PasajeroController(GestionPasajeroGUI g) {
-		this.table = new JTable();
 		this.pasajeroServicio = new PasajeroServicio();
 		this.IDServicio = new IDTypeServicio();
 		this.gestionGUI = g;
@@ -42,35 +34,21 @@ public class PasajeroController {
 		String s;
 		
 		try {
-			System.out.println("Entre al Try block");
 			lista = pasajeroServicio.buscarPasajero(n, a, td, d);
-					//System.out.println("busque los pasajeros");
 			s = prepararTitulo(n,a,td,d);
-					//System.out.println("Prepare el titulo");
-			
 			gbusquedaGUI = new GestionPasajeroBusquedaGUI(lista, s);
-					//System.out.println("Cree gbusquedaGUI");
+			gbusquedaGUI.setLocationRelativeTo(null);
 			gbusquedaGUI.setController(this);
-					//System.out.println("Setee el controller");
-
-	
 		    gestionGUI.setVisible(false);
-		    		//System.out.println("Escondi gestionGUI");
 		    gbusquedaGUI.setVisible(true);
-		    		//System.out.println("Mostre gBusquedaGUI");
 		    
 		} catch (NoConcordanciaException e) {
 			throw e;
 		} catch (Exception e2) {
-			System.out.println("Capture e2");
 			e2.printStackTrace();
 		}
 	}
 	
-	public JTable getTabla() {
-		return this.table;
-	}
-
 	public void cargarTDNI() {
 		JComboBox<String> tdni = new JComboBox<String>();
 		List<IDTypeDTO> ListaIDT = IDServicio.getAllIDType();
@@ -79,45 +57,27 @@ public class PasajeroController {
 		for(int c = 0; c < size; c++) {
 			tdni.addItem((ListaIDT.get(c)).getTipo());
 		}
-		//tdni.addItem("");
-		//tdni.addItem("DNI");
-		//tdni.addItem("LE");
-		//tdni.addItem("LC");
-		//tdni.addItem("Pasaporte");
-		//tdni.addItem("Otro");
 		gestionGUI.setCbxTipoDNI(tdni);
 	}
 	
 	private String prepararTitulo(String nombre, String apellido, String tipoDoc, String ndoc) {
 		String tmp = "";
-		
 		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
-			return "Busqueda Sin Parámetros";
+			return "Busqueda Sin Parï¿½metros";
 		} else {
-			
 			if(!apellido.equals("")) {
 				tmp = tmp + "Apellido: '" + apellido+"'";
-				System.out.println("apellido concatenado");
 			}
-		
-			if(!nombre.equals("")) {
-				System.out.println("Nombre concatenado");
-					
+			if(!nombre.equals("")) {	
 				tmp = tmp + " Nombre: '"+nombre+"'";
 			}
-		
 			if(!tipoDoc.equals("")) {
-				System.out.println("tdoc concatenado");
-		
 				tmp = tmp + " Tipo Documento: '"+ tipoDoc+"'";				
 			}
 			if(!ndoc.equals("")) {
-				System.out.println("doc concatenado");
-				tmp = tmp + " Número: '"+ ndoc+"'";				
+				tmp = tmp + " Nï¿½mero: '"+ ndoc+"'";				
 			}
-		
 		}
 		return tmp;
 	}
-
 }

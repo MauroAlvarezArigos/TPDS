@@ -1,7 +1,6 @@
 package GUI;
 
 import Controller.DarAltaController;
-import Exceptions.DuplicateDocNumberException;
 import modelosTabla.DateLabelFormatter;
 
 import java.awt.Color;
@@ -86,8 +85,7 @@ public class AltaPasajeroGUI extends JFrame{
 		this.tbxApellido = tbxApellido;
 	}
 	public String getTbxNombreStr() {
-		if(this.tbxNombre != null)
-		{
+		if(this.tbxNombre != null){
 			return this.tbxNombre.getText();
 		}else{
 			return null;
@@ -95,8 +93,7 @@ public class AltaPasajeroGUI extends JFrame{
 	}
 	public void setTbxNombre(JTextField tbxNombre) { this.tbxNombre = tbxNombre; }
 	public String getTbxEmailStr() {
-		if(this.tbxEmail != null)
-		{
+		if(this.tbxEmail != null){
 			return this.tbxEmail.getText();
 		}else{
 			return null;
@@ -106,8 +103,7 @@ public class AltaPasajeroGUI extends JFrame{
 		this.tbxEmail = tbxEmail;
 	}
 	public String getTbxNroDocStr() {
-		if(this.tbxNroDoc != null)
-		{
+		if(this.tbxNroDoc != null){
 			return this.tbxNroDoc.getText();
 		}else return null;
 	}
@@ -115,8 +111,7 @@ public class AltaPasajeroGUI extends JFrame{
 		this.tbxNroDoc = tbxNroDoc;
 	}
 	public String getTbxTelefonoStr() {
-		if(this.tbxTelefono != null)
-		{
+		if(this.tbxTelefono != null){
 			return this.tbxTelefono.getText();
 		}else return null;
 	}
@@ -124,8 +119,7 @@ public class AltaPasajeroGUI extends JFrame{
 		this.tbxTelefono = tbxTelefono;
 	}
 	public String getTbxOcupacionStr() {
-		if(this.tbxOcupacion != null)
-		{
+		if(this.tbxOcupacion != null){
 			return this.tbxOcupacion.getText();
 		}else return null;
 	}
@@ -133,8 +127,7 @@ public class AltaPasajeroGUI extends JFrame{
 		this.tbxOcupacion = tbxOcupacion;
 	}
 	public String getTbxCuitStr() {
-		if(this.tbxCuit != null)
-		{
+		if(this.tbxCuit != null){
 			return this.tbxCuit.getText();
 		}else return null;
 	}
@@ -279,47 +272,37 @@ public class AltaPasajeroGUI extends JFrame{
 	public JComboBox<String> getCbxPais(){return this.cbxPais;}
 	public JComboBox<String> getCbxProvincia(){return this.cbxProvincia;}
 	public JComboBox<String> getCbxLocalidad(){return this.cbxLocalidad;}
-	public JComboBox<String> getCbxTDoc() {
-		return cbxTDoc;
-	}
-	public JComboBox<String> getCbxNacionalidad() {
-		return cbxNacionalidad;
-	}
+	public JComboBox<String> getCbxTDoc() {return cbxTDoc;}
+	public JComboBox<String> getCbxNacionalidad() {return cbxNacionalidad;}
 	public JComboBox<String> getCbxIVA(){ return cbxIVA;}
 
 	public String getSelectedCbxIVA(){
-		if(this.cbxIVA.getSelectedItem() != null)
-		{
+		if(this.cbxIVA.getSelectedItem() != null){
 			return this.cbxIVA.getSelectedItem().toString();
 		}else return null;
 	}
 	public String getSelectedCbxPais(){
-		if(this.cbxPais.getSelectedItem() != null)
-	{
+		if(this.cbxPais.getSelectedItem() != null){
 		return this.cbxPais.getSelectedItem().toString();
 	}else return null;
 	}
 	public String getSelectedCbxProvincia(){
-		if(this.cbxProvincia.getSelectedItem() != null)
-		{
+		if(this.cbxProvincia.getSelectedItem() != null){
 			return this.cbxProvincia.getSelectedItem().toString();
 		}else return null;
 	}
 	public String getSelectedCbxLocalidad(){
-		if(this.cbxLocalidad.getSelectedItem() != null)
-		{
+		if(this.cbxLocalidad.getSelectedItem() != null){
 			return this.cbxLocalidad.getSelectedItem().toString();
 		}else return null;
 	}
 	public String getSelectedCbxTipoDNI(){
-		if(this.cbxTDoc.getSelectedItem() != null)
-		{
+		if(this.cbxTDoc.getSelectedItem() != null){
 			return this.cbxTDoc.getSelectedItem().toString();
 		}else return null;
 	}
 	public String getSelectedCbxNacionalidad(){
-		if(this.cbxNacionalidad.getSelectedItem() != null)
-		{
+		if(this.cbxNacionalidad.getSelectedItem() != null){
 			return this.cbxNacionalidad.getSelectedItem().toString();
 		}else return null;
 	}
@@ -346,8 +329,6 @@ public class AltaPasajeroGUI extends JFrame{
 	private JLabel lblDirNumero;
 
 	//Getters and setters
-
-
 	public JLabel getLblDpto() {
 		return lblDpto;
 	}
@@ -415,7 +396,6 @@ public class AltaPasajeroGUI extends JFrame{
 
 	public AltaPasajeroGUI() {
 		this.setVisible(false);
-
 		controller = new DarAltaController(this);
 		getContentPane().setLayout(null);
 		this.setSize(1000, 500);
@@ -445,15 +425,11 @@ public class AltaPasajeroGUI extends JFrame{
 		btnSiguiente.setBounds(848, 375, 117, 36);
 		getContentPane().add(btnSiguiente);
 
+		btnCancelar.addActionListener(e -> dispose());
 		btnSiguiente.addActionListener(e -> {
 				controller.InformarOmisionnesDatosGUI();
 		});
-
-
-
-
 		this.setVisible(true);
-			
 	}
 	
 	private JPanel datosPersonales() {
@@ -601,12 +577,10 @@ public class AltaPasajeroGUI extends JFrame{
 		lblTIVA = new JLabel("Tipo IVA");
 		lblTIVA.setBounds(261, 248, 46, 14);
 		datosPersonales.add(lblTIVA);
-		
 
 		cbxIVA.setBounds(320, 243, 150, 24);
 		controller.cargarIVA();
 		datosPersonales.add(cbxIVA);
-
 
 		datosPersonales.setSize(500, 300);
 		return datosPersonales;
@@ -618,9 +592,15 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.setBorder(new TitledBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)), "Direccion", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		
 		lblPais = new JLabel("Pais");
-		lblPais.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblPais.setBounds(25, 40, 46, 14);
+		lblPais.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPais.setBounds(6, 40, 46, 14);
 		direccion.add(lblPais);
+		
+		JLabel lblAsterisco_pais = new JLabel("(*)");
+		lblAsterisco_pais.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsterisco_pais.setForeground(Warning);
+		lblAsterisco_pais.setBounds(62, 112, 14, 14);
+		direccion.add(lblAsterisco_pais);
 		
 		cbxPais.setBounds(81, 35, 130, 24);
 		direccion.add(cbxPais);
@@ -632,24 +612,26 @@ public class AltaPasajeroGUI extends JFrame{
 					cbxProvincia.setEnabled(true);
 					controller.cargarProvincia();
 					cbxLocalidad.removeAllItems();
-			}else
-			{
-				cbxProvincia.setEnabled(false);
-				cbxLocalidad.setEnabled(false);
-				cbxProvincia.removeAllItems();
-				cbxLocalidad.removeAllItems();}
-			}
-		};
+					}else {
+						cbxProvincia.setEnabled(false);
+						cbxLocalidad.setEnabled(false);
+						cbxProvincia.removeAllItems();
+						cbxLocalidad.removeAllItems();}
+					}
+			};
 		cbxPais.addActionListener(cbxPaisActionListener);
 
-
 		lblProvincia = new JLabel("Provincia");
-		lblProvincia.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblProvincia.setBounds(14, 76, 57, 14);
+		lblProvincia.setHorizontalAlignment(SwingConstants.LEFT);
+		lblProvincia.setBounds(6, 76, 57, 14);
 		direccion.add(lblProvincia);
+		
+		JLabel lblAsterisco_provincia = new JLabel("(*)");
+		lblAsterisco_provincia.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsterisco_provincia.setForeground(Warning);
+		lblAsterisco_provincia.setBounds(62, 77, 14, 14);
+		direccion.add(lblAsterisco_provincia);
 
-		//controller.cargarProvincia();
-		//JComboBox<String> cbxProvincia = new JComboBox<String>();
 		cbxProvincia.setBounds(81, 71, 130, 24);
 		cbxProvincia.setEnabled(false);
 		direccion.add(cbxProvincia);
@@ -668,16 +650,20 @@ public class AltaPasajeroGUI extends JFrame{
 		};
 		cbxProvincia.addActionListener(CbxProvinciaActionListener);
 
-		//controller.cargarLocalidad();
-		//JComboBox<String> cbxLocalidad = new JComboBox<String>();
 		cbxLocalidad.setBounds(81, 106, 130, 24);
 		cbxLocalidad.setEnabled(false);
 		direccion.add(cbxLocalidad);
 		
 		lblLocalidad = new JLabel("Localidad");
-		lblLocalidad.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblLocalidad.setBounds(14, 111, 57, 14);
+		lblLocalidad.setHorizontalAlignment(SwingConstants.LEFT);
+		lblLocalidad.setBounds(6, 111, 57, 14);
 		direccion.add(lblLocalidad);
+		
+		JLabel lblAsterisco_localidad = new JLabel("(*)");
+		lblAsterisco_localidad.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAsterisco_localidad.setForeground(Warning);
+		lblAsterisco_localidad.setBounds(62, 41, 14, 14);
+		direccion.add(lblAsterisco_localidad);
 		
 		tbxCalle = new JTextField();
 		tbxCalle.setBounds(81, 141, 130, 20);
@@ -685,8 +671,8 @@ public class AltaPasajeroGUI extends JFrame{
 		tbxCalle.setColumns(10);
 		
 		lblCalle = new JLabel("Calle");
-		lblCalle.setHorizontalAlignment(SwingConstants.RIGHT);
-		lblCalle.setBounds(14, 144, 46, 14);
+		lblCalle.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCalle.setBounds(6, 143, 46, 14);
 		direccion.add(lblCalle);
 		
 		JLabel lblAsterisco = new JLabel("(*)");
