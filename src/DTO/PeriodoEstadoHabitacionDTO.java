@@ -1,6 +1,6 @@
 package DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class PeriodoEstadoHabitacionDTO {
     private String estado;
@@ -13,13 +13,13 @@ public class PeriodoEstadoHabitacionDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    public Date getDesde() {
+    public java.sql.Date getDesde() {
         return desde;
     }
     public void setDesde(Date desde) {
         this.desde = desde;
     }
-    public Date getHasta() {
+    public java.sql.Date getHasta() {
         return hasta;
     }
     public void setHasta(Date hasta) {

@@ -25,19 +25,19 @@ public class HabitacionDAOSQL implements HabitacionDAO {
     private static final String GET_ALL_RESERVAS_HABITACION =
             "\n" +
             "SELECT * FROM RESERVA" +
-                    " WHERE numerohabitacion = ? AND pisohabitacion = ? ";
+                    " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_RESERVAS_HABITACION_DESDE_HASTA =
             GET_ALL_RESERVAS_HABITACION+" AND ((fechadesde BETWEEN ? AND ?) or (fechahasta BETWEEN ? AND ?)) ";
     private static final String GET_ALL_OCUPACIONES_HABITACION =
             "\n" +
             "SELECT * FROM OCUPACION" +
-            " WHERE numerohabitacion = ? AND pisohabitacion = ? ";
+            " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_OCUPACIONES_HABITACION_DESDE_HASTA =
             GET_ALL_OCUPACIONES_HABITACION + " AND ((checkin BETWEEN ? AND ?) or (checkout BETWEEN ? AND ?)) ";
     private static final String GET_ALL_FUERADESERVICIO_HABITACION =
             "\n" +
             "SELECT * FROM FUERADESERVICIO" +
-            " WHERE numerohabitacion = ? AND pisohabitacion = ? ";
+            " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_FUERADESERVICIO_HABITACION_DESDE_HASTA =
             GET_ALL_FUERADESERVICIO_HABITACION + " AND ((desde BETWEEN ? AND ?) or (hasta BETWEEN ? AND ?)) ";
 
@@ -240,9 +240,9 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 FueraDeServicio f = new FueraDeServicio();
                 f.setHabitacion(unHab);
-                f.setDesde(rs.getDate("CHECKIN"));
-                f.setHasta(rs.getDate("CHECKOUT"));
-                f.setId(rs.getInt("ID_OCUPACION"));
+                f.setDesde(rs.getDate("DESDE"));
+                f.setHasta(rs.getDate("HASTA"));
+                f.setId(rs.getInt("ID_FUERADESERVICIO"));
                 LFueraDeServicio.add(f);
             }
         }catch (SQLException e) {
@@ -267,7 +267,7 @@ public class HabitacionDAOSQL implements HabitacionDAO {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         try {
-            pstmt = conn.prepareStatement(GET_ALL_OCUPACIONES_HABITACION_DESDE_HASTA);
+            pstmt = conn.prepareStatement(GET_ALL_FUERADESERVICIO_HABITACION_DESDE_HASTA);
             pstmt.setInt(1,unHab.getNumero());
             pstmt.setInt(2,unHab.getPiso());
             pstmt.setDate(3,desde);
@@ -278,9 +278,9 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 FueraDeServicio f = new FueraDeServicio();
                 f.setHabitacion(unHab);
-                f.setDesde(rs.getDate("CHECKIN"));
-                f.setHasta(rs.getDate("CHECKOUT"));
-                f.setId(rs.getInt("ID_OCUPACION"));
+                f.setDesde(rs.getDate("DESDE"));
+                f.setHasta(rs.getDate("HASTA"));
+                f.setId(rs.getInt("ID_FUERADESERVICIO"));
                 LFueraDeServicio.add(f);
             }
         }catch (SQLException e) {

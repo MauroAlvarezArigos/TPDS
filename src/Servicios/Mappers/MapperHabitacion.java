@@ -20,9 +20,9 @@ public class MapperHabitacion {
         mapperFueraDeServicio = new MapperFueraDeServicio();
 
         HabitacionDTO dto = new HabitacionDTO();
-        String numero = Integer.toString(unHab.getNumero());
+        String numero = String.format("%0"+Num_Digits+"d",unHab.getNumero());
         numero = numero.substring(numero.length()-Num_Digits);
-        String piso = Integer.toString(unHab.getPiso());
+        String piso = String.format("%0"+Piso_Digits+"d",unHab.getPiso());
         piso = piso.substring(piso.length()-Piso_Digits);
 
         dto.setCapacidad(unHab.getCapacidad());

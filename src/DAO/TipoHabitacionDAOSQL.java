@@ -21,7 +21,7 @@ public class TipoHabitacionDAOSQL {
     //Query
     private static final String GET_TIPO_HABITACION =
             "\n" +
-            "SLECT * FROM TIPOHABITACION t" +
+            "SELECT * FROM TIPOHABITACION t " +
                     "WHERE id = ?";
 
     public TipoHabitacion getTipoHabitacion(int id){

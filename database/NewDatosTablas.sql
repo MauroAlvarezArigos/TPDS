@@ -83,4 +83,30 @@ insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, Fec
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id8, 'Ewan', 'Latek', '0084924403', 'LC', 'Office Assistant I', '2021-04-03', 5);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id9, 'Shandee', 'Record', '3017832678', 'DNI', 'Biostatistician III', '2021-02-23', 8);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '2021-09-20', 7);
+
+--Datos TipoHabitacion
+insert into tipohabitacion (id, tipo, costo) values (1, 'Simple', 99.99);
+insert into tipohabitacion (id, tipo, costo) values (2, 'Doble', 199.99);
+
+--Datos Habitacion
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 1, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 1, 2, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 1, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 2, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 2, 2, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 2, 1, 2, 0);
+
+--Datos Reserva
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021-09-11', '2021-09-20');
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (2, 1, 1, 'Franny', 'Gumme', '9093832379', '2021-09-21', '2021-09-30');
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (3, 1, 1, 'Richy', 'Wieprecht', '3533356477', '2021-09-01', '2021-09-10');
+
+--Datos Ocupacion
+insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (1, 1, 2, id1, '2021-09-21', '2021-09-30');
+insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (2, 1, 2, id2, '2021-09-01', '2021-09-12');
+insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (3, 1, 2, id3, '2021-09-13', '2021-09-15');
+
+--Datos Fuera De Servicio
+insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021-09-01', '2021-09-30');
+
 end$$;

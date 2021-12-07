@@ -1,14 +1,15 @@
 package Controller;
 
 import java.awt.*;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.*;
 import java.sql.Date;
 import java.util.List;
 
 import DTO.HabitacionDTO;
+import DTO.PeriodoEstadoHabitacionDTO;
 import Exceptions.DesdeMayorException;
 import Exceptions.FechaIncorrectaException;
 import GUI.EstadoHabitacionesGUI;
@@ -18,7 +19,8 @@ import Servicios.HabitacionServicio;
 public class HabitacionController {
 	private HabitacionServicio habServicio;
 	private static final String ZoneId = null;
-	MostrarEstadoHabitacionGUI MostarEstadoGUI;
+	private MostrarEstadoHabitacionGUI MostarEstadoGUI;
+	private EstadoHabitacionesGUI EstadoGUI;
 	List<HabitacionDTO> LHab = new ArrayList<>();
 	
 	
@@ -58,9 +60,10 @@ public class HabitacionController {
 	        	String date2 = format1.format(hasta); 
 
 	        	System.out.println(date1);   
-	        	System.out.println(date2);   
-	        	EstadoHabitacionesGUI eh = new EstadoHabitacionesGUI(desde, hasta);
-	        	eh.setVisible(true);
+	        	System.out.println(date2);
+				this.getHabDA(convertJavaDateToSqlDate(desde), convertJavaDateToSqlDate(hasta));
+				EstadoGUI = new EstadoHabitacionesGUI(desde, hasta, LHab, this);
+				EstadoGUI.setVisible(true);
 			}
 	        else {
 	        	throw new DesdeMayorException();
@@ -94,5 +97,44 @@ public class HabitacionController {
 	public void getHabDA(Date Desde, Date Hasta){
 
 		LHab = habServicio.getHabDA(Desde, Hasta, 1, 2);
+	}
+
+	public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
+		return new java.sql.Date(date.getTime());
+	}
+
+	public String getEstadoHabitacionFecha(Date fecha, HabitacionDTO hab){
+		String Estado = "Libre";
+		for (PeriodoEstadoHabitacionDTO p : hab.getReservas()) {
+			if(!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())){
+				Estado = "Reservada";
+			}
+		}
+		for (PeriodoEstadoHabitacionDTO p : hab.getOcupaciones()) {
+			if(!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())){
+				Estado = "Ocupada";
+			}
+		}
+		for (PeriodoEstadoHabitacionDTO p : hab.getFueraDeServicio()) {
+			if (!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())) {
+				Estado = "Fuera de Servicio";
+			}
+		}
+		return Estado;
+	}
+
+	public java.sql.Date convertStringtosqlDate(String str){
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+		Date sqlDate = null;
+		try {
+			java.util.Date date = format.parse(str);
+			sqlDate = new java.sql.Date(date.getTime());
+		} catch (ParseException e){
+			//todo
+		}finally {
+			//todo
+		}
+		return sqlDate;
 	}
 }

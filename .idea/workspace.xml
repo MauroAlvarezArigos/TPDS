@@ -2,15 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HabitacionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/TipoHabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TipoHabitacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +38,14 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="427e40c2-1c72-4f58-b660-50b998990854" />
+        <option name="url" value="https://github.com/MauroAlvarezArigos/TPDS.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -122,5 +130,16 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Arreglos generales para DarAlta" />
     <option name="LAST_COMMIT_MESSAGE" value="Arreglos generales para DarAlta" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
