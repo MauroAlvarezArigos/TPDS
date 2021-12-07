@@ -6,12 +6,11 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TPDS/lib/jdatepicker-1.3.4.jar">
+	<classpathentry kind="lib" path="E:/Programacion/Java/TPDS/lib/jdatepicker-1.3.4.jar">
 		<attributes>
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TPDS/lib/postgresql-42.2.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/mati9/OneDrive - UTN - Santa Fe/Facultad/Diseño de sistemas/TP/TPDS/lib/miglayout15-swing.jar"/>
+	<classpathentry kind="lib" path="E:/Programacion/Java/TPDS/lib/postgresql-42.2.23.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

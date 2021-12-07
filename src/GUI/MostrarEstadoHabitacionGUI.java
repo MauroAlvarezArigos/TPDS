@@ -112,7 +112,6 @@ public class MostrarEstadoHabitacionGUI extends JFrame{
 		btnAceptar.setBackground(new Color(50, 205, 50));
 		btnAceptar.setBounds(444, 210, 85, 21);
 		getContentPane().add(btnAceptar);
-
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(new Color(255, 255, 255));
