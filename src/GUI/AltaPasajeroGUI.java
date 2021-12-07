@@ -525,11 +525,9 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(panelDocimento);
 		panelDocimento.setLayout(null);
 
-
 		controller.cargarTDNI();
 		cbxTDoc.setBounds(83, 21, 86, 24);
 		panelDocimento.add(cbxTDoc);
-
 		
 		lblTipo = new JLabel("Tipo");
 		lblTipo.setBounds(10, 26, 30, 14);
@@ -624,8 +622,6 @@ public class AltaPasajeroGUI extends JFrame{
 		lblPais.setBounds(25, 40, 46, 14);
 		direccion.add(lblPais);
 		
-
-
 		cbxPais.setBounds(81, 35, 130, 24);
 		direccion.add(cbxPais);
 		controller.cargarPais();
@@ -790,9 +786,6 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		return direccion;
 	}
-
-
-
 
 	public void mostrarError(String titulo,String detalle) {
 		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);

@@ -1,9 +1,13 @@
 package GUI;
 
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.*;
 import Controller.PasajeroController;
+import DTO.PasajeroBusquedaDTO;
 import Exceptions.NoConcordanciaException;
 
 import java.awt.Color;

@@ -296,7 +296,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		int cont = 0;
 
 		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
-			return p1;
+			return p1 + "order by APELLIDO, NOMBRE";
 		} else {
 			tmp = tmp + "WHERE ";
 			System.out.println("Where concatenado");
@@ -344,9 +344,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				}
 				cont++;
 			}
-
 		}
-		System.out.println(tmp);
 		return p1.concat(tmp);
 	}
 }

@@ -1,11 +1,8 @@
 package GUI;
 
-
 import Controller.DarAltaController;
-
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
