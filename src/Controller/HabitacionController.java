@@ -16,11 +16,19 @@ import GUI.EstadoHabitacionesGUI;
 import GUI.MostrarEstadoHabitacionGUI;
 import Servicios.HabitacionServicio;
 
+import javax.swing.*;
+
 public class HabitacionController {
 	private HabitacionServicio habServicio;
 	private static final String ZoneId = null;
 	private MostrarEstadoHabitacionGUI MostarEstadoGUI;
 	private EstadoHabitacionesGUI EstadoGUI;
+
+	private Color Disponible = new Color(118, 203, 78);
+	private Color Reservado = new Color(255, 226, 32);
+	private Color Ocupado = new Color(203, 76, 76);
+	private Color FueraDeServicio = new Color(64, 131, 231);
+
 	List<HabitacionDTO> LHab = new ArrayList<>();
 	
 	
@@ -136,5 +144,42 @@ public class HabitacionController {
 			//todo
 		}
 		return sqlDate;
+	}
+
+	public List<String> getAllTiposHabDisponibles(List<HabitacionDTO> LHabDTO){
+		List<String> LTipos = new ArrayList<>();
+
+		for(HabitacionDTO h : LHabDTO){
+			boolean ifcond = true;
+			for(String t : LTipos) {
+				if (h.getTipo().equals(t)) {
+					ifcond = false;
+				}
+			}
+				if(ifcond){
+					LTipos.add(h.getTipo());
+				}
+
+			}
+
+		return LTipos;
+	}
+
+	public Color GetColor(String Value){
+		ArrayList<JCheckBox> LCheckBox = new ArrayList<>();
+
+
+			Color returnvalue = new Color(0,0,0);
+			if      (Value.equals("Ocupada")) {
+				returnvalue = Ocupado;
+			}else if(Value.equals("Reservada")){
+				returnvalue = Reservado;
+			}else if(Value.equals("Fuera de Servicio")){
+				returnvalue = FueraDeServicio;
+			}else{
+				returnvalue = Disponible;
+			};
+
+		return returnvalue;
 	}
 }

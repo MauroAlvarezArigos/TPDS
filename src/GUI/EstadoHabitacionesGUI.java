@@ -1,6 +1,6 @@
 package GUI;
 
-import java.awt.GridLayout;
+import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,6 +12,7 @@ import Controller.HabitacionController;
 import DTO.HabitacionDTO;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -29,71 +30,73 @@ public class EstadoHabitacionesGUI extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new GridLayout());
 		setContentPane(contentPane);
-		
-		///Primera Tabla
-		ArrayList<String> dataArray1 = generarFechas(desde, hasta);
-		Object[] data1 = dataArray1.toArray();
-		DefaultTableModel model1 = new DefaultTableModel();
 
-		model1.addColumn("Numero de habitacion", data1);
-
-		ArrayList<ArrayList<String>> EstadoArray = new ArrayList<ArrayList<String>>();
-
-		int size = Lhab.size();
-		for(int c = 0; c < size; c++){
-			EstadoArray.add(new ArrayList<>());
-			for(int x = 0; x < dataArray1.size(); x++){
-				EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(controller.convertStringtosqlDate(dataArray1.get(x)),Lhab.get(c)));
-			}
-			Object[] estadoColumna = EstadoArray.get(c).toArray();
-			model1.addColumn(Lhab.get(c).getNumero(), estadoColumna);
-		}
-
-		Object[] estado = EstadoArray.toArray();
-		JTable table1 = new JTable(model1);
-		table1.getColumnModel().getColumn(0).setPreferredWidth(150);
-		for (int c = 1; c < table1.getColumnCount(); c++){
-			table1.getColumnModel().getColumn(c).setPreferredWidth(50);
-		}
-		JScrollPane scrollPane1 = new JScrollPane(table1);
-		///
-		ArrayList<String> dataArray2 = generarFechas(desde, hasta);
-		Object[] data2 = dataArray2.toArray();
-		DefaultTableModel model2 = new DefaultTableModel();
-		model2.addColumn("  ", data2);
-		JTable table2 = new JTable(model2);
-		JScrollPane scrollPane2 = new JScrollPane(table2);
-
-
-		//todo volver procedural en base a los datos de la DB
-		///TabSheets
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		JPanel indEstandar = new JPanel();
-		indEstandar.add(scrollPane1);
-		tabbedPane.addTab("Individual Estandar", indEstandar);
-		
-		JPanel dobEstandar = new JPanel();
-		dobEstandar.add(scrollPane2);
-		tabbedPane.addTab("Doble Estandar", dobEstandar);
-		
-		JPanel dobSuperior = new JPanel();
-		tabbedPane.addTab("Doble Superior", dobSuperior);
-		
-		JPanel supFamily = new JPanel();
-		tabbedPane.addTab("Superior Family", supFamily);
-		
-		JPanel suiDoble = new JPanel();
-		tabbedPane.addTab("Suite Doble", suiDoble);		
-		
-		
+		///Primera Tabla
+		List<String> LTipos = controller.getAllTiposHabDisponibles(Lhab);
+
+		for(String tipo : LTipos) {
+
+			ArrayList<String> dataArray1 = generarFechas(desde, hasta);
+			Object[] data1 = dataArray1.toArray();
+			DefaultTableModel model1 = new DefaultTableModel();
+
+			JTable table1 = new JTable(model1);
+
+			model1.addColumn("Numero de habitacion", data1);
+
+			ArrayList<ArrayList<String>> EstadoArray = new ArrayList<ArrayList<String>>();
+
+
+			int size = Lhab.size();
+			for (int c = 0; c < size; c++) {
+					EstadoArray.add(new ArrayList<>());
+					for (int x = 0; x < dataArray1.size(); x++) {
+						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(controller.convertStringtosqlDate(dataArray1.get(x)), Lhab.get(c)));
+					}
+				if(Lhab.get(c).getTipo().equals(tipo)) {
+
+
+					Object[] estadoColumna = EstadoArray.get(c).toArray();
+
+					model1.addColumn(Lhab.get(c).getNumero(), estadoColumna);
+					}
+			}
+
+			table1.getColumnModel().getColumn(0).setPreferredWidth(150);
+			table1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			table1.setColumnSelectionAllowed(false);
+			table1.setRowSelectionAllowed(false);
+			for (int c = 1; c < table1.getColumnCount(); c++) {
+				//table1.getColumnModel().getColumn(c).setCellEditor(table1.getDefaultEditor(Boolean.class));
+				table1.getColumnModel().getColumn(c).setPreferredWidth(50);
+				table1.getColumnModel().getColumn(c).setCellRenderer(new DefaultTableCellRenderer(){
+					@Override
+					public Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row,int column) {
+						JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+						c.setBackground(controller.GetColor((String) value));
+						c.setForeground(new Color(0,0,0,0));
+						return c;
+					}
+				});
+			}
+
+
+
+			JScrollPane scrollPane1 = new JScrollPane(table1);
+
+			JPanel indEstandar = new JPanel();
+			indEstandar.add(scrollPane1);
+			tabbedPane.addTab(tipo, indEstandar);
+		}
+
 		contentPane.add(tabbedPane);
-		
-		
+
 		SwingUtilities.updateComponentTreeUI(this);
 
 	}
-	
+
 	private ArrayList<String> generarFechas(Date desde, Date hasta){
 		ArrayList<String> list = new ArrayList<String>();
 

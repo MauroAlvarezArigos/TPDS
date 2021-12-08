@@ -2,15 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_11_2021_19_00_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_30_11_2021_19_00__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/IDTypeServicio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/IVAServicio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/MapperID.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/UbicacionServicio.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_30_11_2021_19_07__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HabitacionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/TipoHabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/TipoHabitacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,16 +132,5 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Arreglos generales para DarAlta" />
     <option name="LAST_COMMIT_MESSAGE" value="Arreglos generales para DarAlta" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java</url>
-          <line>50</line>
-          <option name="timeStamp" value="13" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
