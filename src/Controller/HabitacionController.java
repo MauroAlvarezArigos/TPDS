@@ -182,13 +182,12 @@ public class HabitacionController {
 
 
 		new Color(0, 0, 0);
-		Color returnvalue = switch (Value) {
+
+		return switch (Value) {
 			case "Ocupado" -> Ocupado;
 			case "Reservado" -> Reservado;
 			case "Fuera de Servicio" -> FueraDeServicio;
 			default -> Disponible;
 		};
-
-		return returnvalue;
 	}
 }
