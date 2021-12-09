@@ -20,8 +20,8 @@ import javax.swing.table.TableCellRenderer;
 @SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
 	private HabitacionController controller;
-	private JTable table;
 	private Converter converter = new Converter();
+	private List<JTable> LTables = new ArrayList<>();
 	
 	public EstadoHabitacionesGUI(Date desde, Date hasta, List<HabitacionDTO> Lhab, HabitacionController uncontroller) {
 
@@ -35,15 +35,16 @@ public class EstadoHabitacionesGUI extends JFrame {
 		setContentPane(contentPane);
 
 		JTabbedPane tabbedPane = new JTabbedPane();
-		
-		///Generar Tabla
+
 		List<String> LTipos = controller.getAllTiposHabDisponibles(Lhab);
 
+		//......Generar Tabla
 		for(String tipo : LTipos) {
 
 			ArrayList<String> DateArray = generarFechas(desde, hasta);
 			Object[] DateData = DateArray.toArray();
-			DefaultTableModel model1 = new DefaultTableModel();
+
+			DefaultTableModel model = new DefaultTableModel();
 
 			List<HabitacionDTO> SubLHab = new ArrayList<>();
 			for(HabitacionDTO h: Lhab){
@@ -52,7 +53,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 				}
 			}
 
-			JTable table1 = new JTable(model1){
+			JTable table = new JTable(model){
 				@Override
 				public Class getColumnClass(int column){
 					if(column < 1){
@@ -62,8 +63,11 @@ public class EstadoHabitacionesGUI extends JFrame {
 					}
 				}
 			};
-			model1.addColumn("Numero de habitacion", DateData);
+			model.addColumn("Numero de habitacion", DateData);
 
+
+			//Generar Lista de Bools para LosCheckboxes y Lista de estados
+			//.......Start
 			ArrayList<ArrayList<String>> EstadoArray = new ArrayList<ArrayList<String>>();
 			ArrayList<ArrayList<Boolean>> BoolArray = new ArrayList<ArrayList<Boolean>>();
 
@@ -75,22 +79,22 @@ public class EstadoHabitacionesGUI extends JFrame {
 						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(converter.convertStrtoLocalDate(DateArray.get(x)), SubLHab.get(c)));
 						BoolArray.get(c).add(false);
 					}
-				if(SubLHab.get(c).getTipo().equals(tipo)) {
-					//Object[] estadoColumna = EstadoArray.get(c).toArray();*/
 					Object[] estadoColumna = BoolArray.get(c).toArray();
-					model1.addColumn(Lhab.get(c).getNumero(), estadoColumna);
-					}
+					model.addColumn(SubLHab.get(c).getNumero(), estadoColumna);
 			}
+			//.......End
 
-			table1.setDefaultRenderer(String.class, new DefaultTableCellRenderer());
-			//todo averiguar por que no estan correctos los datos de estado
-			table1.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
+			//Setear los CellRenderers para los distintos tipos de datos
+			//.......Start
+			table.setDefaultRenderer(String.class, new DefaultTableCellRenderer());
+			table.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
 				@Override
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 					if(value instanceof Boolean){
 						if(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupado")){
 							JCheckBox c = new JCheckBox("", false);
 							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+							c.setEnabled(false);
 							c.setHorizontalAlignment(SwingConstants.CENTER);
 							return c;
 						}else {
@@ -103,23 +107,28 @@ public class EstadoHabitacionesGUI extends JFrame {
 					else return getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				}
 			});
+			//.......End
 
-			table1.getColumnModel().getColumn(0).setPreferredWidth(150);
-			table1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-			table1.setColumnSelectionAllowed(false);
-    		table1.setRowSelectionAllowed(false);
-			table1.setCellSelectionEnabled(true);
-			for (int c = 1; c < table1.getColumnCount(); c++) {
-				table1.getColumnModel().getColumn(c).setPreferredWidth(50);
+			//Setear tamaños y apariencia de cada columna
+			table.getColumnModel().getColumn(0).setPreferredWidth(150);
+			table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+			table.setColumnSelectionAllowed(false);
+    		table.setRowSelectionAllowed(false);
+			table.setCellSelectionEnabled(true);
+			for (int c = 1; c < table.getColumnCount(); c++) {
+				table.getColumnModel().getColumn(c).setPreferredWidth(50);
 			}
 
 
 
-			JScrollPane scrollPane1 = new JScrollPane(table1);
+			JScrollPane scrollPane = new JScrollPane(table);
 
 			JPanel indEstandar = new JPanel();
-			indEstandar.add(scrollPane1);
+			indEstandar.add(scrollPane);
 			tabbedPane.addTab(tipo, indEstandar);
+
+			//Add generated table to external table array
+			LTables.add(table);
 		}
 
 		contentPane.add(tabbedPane);

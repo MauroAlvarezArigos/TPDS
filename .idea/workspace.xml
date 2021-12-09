@@ -3,12 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
