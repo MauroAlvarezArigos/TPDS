@@ -14,6 +14,7 @@ import DTO.HabitacionDTO;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 @SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
@@ -33,7 +34,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane();
 		
-		///Primera Tabla
+		///Generar Tabla
 		List<String> LTipos = controller.getAllTiposHabDisponibles(Lhab);
 
 		for(String tipo : LTipos) {
@@ -42,44 +43,65 @@ public class EstadoHabitacionesGUI extends JFrame {
 			Object[] data1 = dataArray1.toArray();
 			DefaultTableModel model1 = new DefaultTableModel();
 
-			JTable table1 = new JTable(model1);
+			List<HabitacionDTO> SubLHab = new ArrayList<>();
+			for(HabitacionDTO h: Lhab){
+				if(h.getTipo().equals(tipo)) {
+					SubLHab.add(h);
+				}
+			}
+
+			JTable table1 = new JTable(model1){
+				@Override
+				public Class getColumnClass(int column){
+					if(column < 1){
+						return String.class;
+					}else{
+						return Boolean.class;
+					}
+				}
+			};
 
 			model1.addColumn("Numero de habitacion", data1);
 
 			ArrayList<ArrayList<String>> EstadoArray = new ArrayList<ArrayList<String>>();
+			ArrayList<ArrayList<Boolean>> BoolArray = new ArrayList<ArrayList<Boolean>>();
 
-
-			int size = Lhab.size();
+			int size = SubLHab.size();
 			for (int c = 0; c < size; c++) {
 					EstadoArray.add(new ArrayList<>());
+					BoolArray.add(new ArrayList<>());
 					for (int x = 0; x < dataArray1.size(); x++) {
-						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(controller.convertStringtosqlDate(dataArray1.get(x)), Lhab.get(c)));
+						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(controller.convertStringtosqlDate(dataArray1.get(x)), SubLHab.get(c)));
+						BoolArray.get(c).add(false);
 					}
-				if(Lhab.get(c).getTipo().equals(tipo)) {
-
-
-					Object[] estadoColumna = EstadoArray.get(c).toArray();
-
+				/*if(Lhab.get(c).getTipo().equals(tipo)) {
+					//Object[] estadoColumna = EstadoArray.get(c).toArray();*/
+					Object[] estadoColumna = BoolArray.get(c).toArray();
 					model1.addColumn(Lhab.get(c).getNumero(), estadoColumna);
-					}
+					//}
 			}
+
+			table1.setDefaultRenderer(String.class, new DefaultTableCellRenderer());
+			table1.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
+				@Override
+				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+					if(value instanceof Boolean){
+						JCheckBox c = new JCheckBox("", value.equals(true));
+						c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+						c.setHorizontalAlignment(SwingConstants.CENTER);
+						return c;
+					}
+					else return getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
+				}
+			});
 
 			table1.getColumnModel().getColumn(0).setPreferredWidth(150);
 			table1.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			table1.setColumnSelectionAllowed(false);
-			table1.setRowSelectionAllowed(false);
+    		table1.setRowSelectionAllowed(false);
+			table1.setCellSelectionEnabled(true);
 			for (int c = 1; c < table1.getColumnCount(); c++) {
-				//table1.getColumnModel().getColumn(c).setCellEditor(table1.getDefaultEditor(Boolean.class));
 				table1.getColumnModel().getColumn(c).setPreferredWidth(50);
-				table1.getColumnModel().getColumn(c).setCellRenderer(new DefaultTableCellRenderer(){
-					@Override
-					public Component getTableCellRendererComponent(JTable table,Object value,boolean isSelected,boolean hasFocus,int row,int column) {
-						JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-						c.setBackground(controller.GetColor((String) value));
-						c.setForeground(new Color(0,0,0,0));
-						return c;
-					}
-				});
 			}
 
 

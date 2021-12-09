@@ -31,8 +31,5 @@ public class HabitacionesDisponiblesTableModel extends AbstractTableModel {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-	
-	
-
 
 }
