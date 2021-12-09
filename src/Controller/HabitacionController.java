@@ -178,16 +178,16 @@ public class HabitacionController {
 	}
 
 	public Color GetColor(String Value){
-		ArrayList<JCheckBox> LCheckBox = new ArrayList<>();
 
-
-		new Color(0, 0, 0);
-
-		return switch (Value) {
-			case "Ocupado" -> Ocupado;
-			case "Reservado" -> Reservado;
-			case "Fuera de Servicio" -> FueraDeServicio;
-			default -> Disponible;
-		};
+		switch (Value) {
+			case "Ocupado":
+				return Ocupado;
+			case "Reservado":
+				return Reservado;
+			case "Fuera de Servicio":
+				return FueraDeServicio;
+			default:
+				return Disponible;
+		}
 	}
 }
