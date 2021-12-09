@@ -3,22 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HabitacionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/FueraDeServicioDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/FueraDeServicioDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/PasajeroDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PasajeroDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PeriodoEstadoHabitacionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/ReservaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/ReservaDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/FueraDeServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/FueraDeServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Ocupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Ocupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Pasajero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Pasajero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Reserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/PasajeroController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/IDTypeDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroBusquedaGUI.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/GestionPasajeroGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

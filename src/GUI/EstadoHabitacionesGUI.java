@@ -75,11 +75,11 @@ public class EstadoHabitacionesGUI extends JFrame {
 						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(converter.convertStrtoLocalDate(DateArray.get(x)), SubLHab.get(c)));
 						BoolArray.get(c).add(false);
 					}
-				/*if(Lhab.get(c).getTipo().equals(tipo)) {
+				if(SubLHab.get(c).getTipo().equals(tipo)) {
 					//Object[] estadoColumna = EstadoArray.get(c).toArray();*/
 					Object[] estadoColumna = BoolArray.get(c).toArray();
 					model1.addColumn(Lhab.get(c).getNumero(), estadoColumna);
-					//}
+					}
 			}
 
 			table1.setDefaultRenderer(String.class, new DefaultTableCellRenderer());
