@@ -82,14 +82,22 @@ public class EstadoHabitacionesGUI extends JFrame {
 			}
 
 			table1.setDefaultRenderer(String.class, new DefaultTableCellRenderer());
+			//todo averiguar por que no estan correctos los datos de estado
 			table1.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
 				@Override
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 					if(value instanceof Boolean){
-						JCheckBox c = new JCheckBox("", value.equals(true));
-						c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
-						c.setHorizontalAlignment(SwingConstants.CENTER);
-						return c;
+						if(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupada")){
+							JCheckBox c = new JCheckBox("", false);
+							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+							c.setHorizontalAlignment(SwingConstants.CENTER);
+							return c;
+						}else {
+							JCheckBox c = new JCheckBox("", value.equals(true));
+							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+							c.setHorizontalAlignment(SwingConstants.CENTER);
+							return c;
+						}
 					}
 					else return getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				}
