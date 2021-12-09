@@ -1,11 +1,11 @@
 package DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class PeriodoEstadoHabitacionDTO {
     private String estado;
-    private Date desde;
-    private Date hasta;
+    private LocalDate desde;
+    private LocalDate hasta;
 
     public String getEstado() {
         return estado;
@@ -13,16 +13,16 @@ public class PeriodoEstadoHabitacionDTO {
     public void setEstado(String estado) {
         this.estado = estado;
     }
-    public java.sql.Date getDesde() {
+    public LocalDate getDesde() {
         return desde;
     }
-    public void setDesde(Date desde) {
+    public void setDesde(LocalDate desde) {
         this.desde = desde;
     }
-    public java.sql.Date getHasta() {
+    public LocalDate getHasta() {
         return hasta;
     }
-    public void setHasta(Date hasta) {
+    public void setHasta(LocalDate hasta) {
         this.hasta = hasta;
     }
 }

@@ -1,6 +1,7 @@
 package DAO;
 
 import Dominio.*;
+import utils.Converter;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class HabitacionDAOSQL implements HabitacionDAO {
 
     private Connection conn;
     private TipoHabitacionDAOSQL TipoHabDAO;
+    private Converter converter = new Converter();
 
     //---
     //Constructor
@@ -67,7 +69,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -94,8 +95,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
                 r.setIdReserva(rs.getInt("ID_RESERVA"));
                 r.setTelefono(rs.getString("TELEFONO"));
                 r.setHabitacion(unHab);
-                r.setFechaDesde(rs.getDate("FECHADESDE"));
-                r.setFechaHasta(rs.getDate("FECHAHASTA"));
+                r.setFechaDesde(converter.convertToLocalDateViaInstant(rs.getDate("FECHADESDE")));
+                r.setFechaHasta(converter.convertToLocalDateViaInstant(rs.getDate("FECHAHASTA")));
                 LReservas.add(r);
             }
         }catch (SQLException e) {
@@ -104,7 +105,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -135,8 +135,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
                 r.setIdReserva(rs.getInt("ID_RESERVA"));
                 r.setTelefono(rs.getString("TELEFONO"));
                 r.setHabitacion(unHab);
-                r.setFechaDesde(rs.getDate("FECHADESDE"));
-                r.setFechaHasta(rs.getDate("FECHAHASTA"));
+                r.setFechaDesde(converter.convertToLocalDateViaInstant(rs.getDate("FECHADESDE")));
+                r.setFechaHasta(converter.convertToLocalDateViaInstant(rs.getDate("FECHAHASTA")));
                 LReservas.add(r);
             }
         }catch (SQLException e) {
@@ -145,7 +145,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -168,8 +167,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 Ocupacion o = new Ocupacion();
                 o.setHabitacion(unHab);
-                o.setCheckIn(rs.getDate("CHECKIN"));
-                o.setCheckOut(rs.getDate("CHECKOUT"));
+                o.setCheckIn(converter.convertToLocalDateViaInstant(rs.getDate("CHECKIN")));
+                o.setCheckOut(converter.convertToLocalDateViaInstant(rs.getDate("CHECKOUT")));
                 o.setId(rs.getInt("ID_OCUPACION"));
                 LOcupaciones.add(o);
             }
@@ -179,7 +178,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -206,8 +204,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 Ocupacion o = new Ocupacion();
                 o.setHabitacion(unHab);
-                o.setCheckIn(rs.getDate("CHECKIN"));
-                o.setCheckOut(rs.getDate("CHECKOUT"));
+                o.setCheckIn(converter.convertToLocalDateViaInstant(rs.getDate("CHECKIN")));
+                o.setCheckOut(converter.convertToLocalDateViaInstant(rs.getDate("CHECKOUT")));
                 o.setId(rs.getInt("ID_OCUPACION"));
                 LOcupaciones.add(o);
             }
@@ -217,7 +215,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -240,8 +237,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 FueraDeServicio f = new FueraDeServicio();
                 f.setHabitacion(unHab);
-                f.setDesde(rs.getDate("DESDE"));
-                f.setHasta(rs.getDate("HASTA"));
+                f.setDesde(converter.convertToLocalDateViaInstant(rs.getDate("DESDE")));
+                f.setHasta(converter.convertToLocalDateViaInstant(rs.getDate("HASTA")));
                 f.setId(rs.getInt("ID_FUERADESERVICIO"));
                 LFueraDeServicio.add(f);
             }
@@ -251,7 +248,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {
@@ -278,8 +274,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             while(rs.next()){
                 FueraDeServicio f = new FueraDeServicio();
                 f.setHabitacion(unHab);
-                f.setDesde(rs.getDate("DESDE"));
-                f.setHasta(rs.getDate("HASTA"));
+                f.setDesde(converter.convertToLocalDateViaInstant(rs.getDate("DESDE")));
+                f.setHasta(converter.convertToLocalDateViaInstant(rs.getDate("HASTA")));
                 f.setId(rs.getInt("ID_FUERADESERVICIO"));
                 LFueraDeServicio.add(f);
             }
@@ -289,7 +285,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             try {
                 if (pstmt != null) pstmt.close();
                 if (pstmt != null) {
-                    System.out.println("Cerre pstmt");
                     pstmt.close();
                 }
             } catch (SQLException e) {

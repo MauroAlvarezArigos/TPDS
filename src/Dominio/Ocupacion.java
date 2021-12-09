@@ -1,13 +1,13 @@
 package Dominio;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Ocupacion {
     private int id;
     private Pasajero Responsable;
     private Habitacion habitacion;
-    private Date checkIn;
-    private Date checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
 
     public int getId() {
         return id;
@@ -27,16 +27,16 @@ public class Ocupacion {
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
     }
-    public Date getCheckIn() {
+    public LocalDate getCheckIn() {
         return checkIn;
     }
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
-    public Date getCheckOut() {
+    public LocalDate getCheckOut() {
         return checkOut;
     }
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
 }

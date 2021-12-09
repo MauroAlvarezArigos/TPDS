@@ -6,10 +6,13 @@ import modelosTabla.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 import javax.swing.*;
@@ -115,19 +118,18 @@ public class AltaPasajeroGUI extends JFrame{
 	public void setTbxCuit(String tbxCuit) {
 		this.tbxCuit.setText(tbxCuit);
 	}
-	public Date getDatePanelFechNac(){
-		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
-		format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-		Date sqlDate = null;
+	public LocalDate getDatePanelFechNac(){
+		DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.US);
+		//format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+		LocalDate localDate = null;
 		try {
-			java.util.Date date = format.parse(this.datePicker.getJFormattedTextField().getText());
-			sqlDate = new java.sql.Date(date.getTime());
-		} catch (ParseException e){
-			//todo
+			localDate = LocalDate.parse(this.datePicker.getJFormattedTextField().getText(),format);
+		}catch (DateTimeParseException e){
+			System.out.println("Date data could not be parsed");
 		}finally {
 			//todo
 		}
-		return sqlDate;
+		return localDate;
 }
 	public JDatePickerImpl getDatePicker() {
 		return datePicker;

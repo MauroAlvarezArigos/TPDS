@@ -1,21 +1,21 @@
 package DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class OcupacionDTO {
-    private Date checkIn;
-    private Date checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
 
-    public Date getCheckIn() {
+    public LocalDate getCheckIn() {
         return checkIn;
     }
-    public void setCheckIn(Date checkIn) {
+    public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
-    public Date getCheckOut() {
+    public LocalDate getCheckOut() {
         return checkOut;
     }
-    public void setCheckOut(Date checkOut) {
+    public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
 }

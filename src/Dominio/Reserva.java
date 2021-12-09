@@ -1,17 +1,16 @@
 package Dominio;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Reserva {
     private int idReserva;
     private String apellido;
     private String nombre;
     private String telefono;
-    private Date fechaDesde;
-    private Date fechaHasta;
+    private LocalDate fechaDesde;
+    private LocalDate fechaHasta;
 
     private Habitacion habitacion;
-
     public int getIdReserva() {
         return idReserva;
     }
@@ -36,16 +35,16 @@ public class Reserva {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public Date getFechaDesde() {
+    public LocalDate getFechaDesde() {
         return fechaDesde;
     }
-    public void setFechaDesde(Date fechaDesde) {
+    public void setFechaDesde(LocalDate fechaDesde) {
         this.fechaDesde = fechaDesde;
     }
-    public Date getFechaHasta() {
+    public LocalDate getFechaHasta() {
         return fechaHasta;
     }
-    public void setFechaHasta(Date fechaHasta) {
+    public void setFechaHasta(LocalDate fechaHasta) {
         this.fechaHasta = fechaHasta;
     }
     public Habitacion getHabitacion() {

@@ -10,7 +10,7 @@ import java.awt.Color;
 
 @SuppressWarnings("serial")
 public class GestionPasajeroGUI extends JFrame{
-	
+
 	private PasajeroController controller;
 	private JComboBox<String> cbxTipoDNI;	
 	private JTextField tbxApellido;
@@ -93,7 +93,6 @@ public class GestionPasajeroGUI extends JFrame{
 				e1.printStackTrace();
 				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
 			} catch (Exception e1) {
-				System.out.println("Es en el try de gestion pasajero");
 				e1.printStackTrace();
 				
 			}

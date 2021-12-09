@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import Controller.HabitacionController;
 import DTO.HabitacionDTO;
+import utils.Converter;
 
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -20,12 +21,13 @@ import javax.swing.table.TableCellRenderer;
 public class EstadoHabitacionesGUI extends JFrame {
 	private HabitacionController controller;
 	private JTable table;
+	private Converter converter = new Converter();
 	
 	public EstadoHabitacionesGUI(Date desde, Date hasta, List<HabitacionDTO> Lhab, HabitacionController uncontroller) {
 
 		controller = uncontroller;
 
-		this.setBounds(100, 100, 676, 483);
+		this.setBounds(100, 100, 676, 500);
 		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -39,8 +41,8 @@ public class EstadoHabitacionesGUI extends JFrame {
 
 		for(String tipo : LTipos) {
 
-			ArrayList<String> dataArray1 = generarFechas(desde, hasta);
-			Object[] data1 = dataArray1.toArray();
+			ArrayList<String> DateArray = generarFechas(desde, hasta);
+			Object[] DateData = DateArray.toArray();
 			DefaultTableModel model1 = new DefaultTableModel();
 
 			List<HabitacionDTO> SubLHab = new ArrayList<>();
@@ -60,8 +62,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 					}
 				}
 			};
-
-			model1.addColumn("Numero de habitacion", data1);
+			model1.addColumn("Numero de habitacion", DateData);
 
 			ArrayList<ArrayList<String>> EstadoArray = new ArrayList<ArrayList<String>>();
 			ArrayList<ArrayList<Boolean>> BoolArray = new ArrayList<ArrayList<Boolean>>();
@@ -70,8 +71,8 @@ public class EstadoHabitacionesGUI extends JFrame {
 			for (int c = 0; c < size; c++) {
 					EstadoArray.add(new ArrayList<>());
 					BoolArray.add(new ArrayList<>());
-					for (int x = 0; x < dataArray1.size(); x++) {
-						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(controller.convertStringtosqlDate(dataArray1.get(x)), SubLHab.get(c)));
+					for (int x = 0; x < DateArray.size(); x++) {
+						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(converter.convertStrtoLocalDate(DateArray.get(x)), SubLHab.get(c)));
 						BoolArray.get(c).add(false);
 					}
 				/*if(Lhab.get(c).getTipo().equals(tipo)) {
@@ -87,7 +88,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 				@Override
 				public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
 					if(value instanceof Boolean){
-						if(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupada")){
+						if(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupado")){
 							JCheckBox c = new JCheckBox("", false);
 							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
 							c.setHorizontalAlignment(SwingConstants.CENTER);
@@ -143,7 +144,6 @@ public class EstadoHabitacionesGUI extends JFrame {
 			Date sig = new Date(date.getTime() + (1000 * 60 * 60 * 24));
 			date = sig;
 		}
-		
 		list.add(date2);
 		
 		return list;

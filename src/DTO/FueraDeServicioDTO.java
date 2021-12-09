@@ -1,21 +1,21 @@
 package DTO;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class FueraDeServicioDTO {
-    private Date desde;
-    private Date hasta;
+    private LocalDate desde;
+    private LocalDate hasta;
 
-    public Date getDesde() {
+    public LocalDate getDesde() {
         return desde;
     }
-    public void setDesde(Date desde) {
+    public void setDesde(LocalDate desde) {
         this.desde = desde;
     }
-    public Date getHasta() {
+    public LocalDate getHasta() {
         return hasta;
     }
-    public void setHasta(Date hasta) {
+    public void setHasta(LocalDate hasta) {
         this.hasta = hasta;
     }
 }

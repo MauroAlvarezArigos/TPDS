@@ -1,6 +1,6 @@
 package DTO;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class PasajeroDTO {
 //Pasajero
@@ -10,7 +10,7 @@ public class PasajeroDTO {
     private String ndoc;
     private String tipodoc;
     private String ocupacion;
-    private Date fechanacimiento;
+    private LocalDate fechanacimiento;
     private String nacionalidad;
     private String pais;
     private String provincia;
@@ -55,10 +55,10 @@ public class PasajeroDTO {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
-    public Date getFechanacimiento() {
+    public LocalDate getFechanacimiento() {
         return fechanacimiento;
     }
-    public void setFechanacimiento(Date fechanacimiento) {
+    public void setFechanacimiento(LocalDate fechanacimiento) {
         this.fechanacimiento = fechanacimiento;
     }
     public String getNacionalidad() {

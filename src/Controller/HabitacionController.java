@@ -5,7 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import DTO.HabitacionDTO;
@@ -15,6 +15,7 @@ import Exceptions.FechaIncorrectaException;
 import GUI.EstadoHabitacionesGUI;
 import GUI.MostrarEstadoHabitacionGUI;
 import Servicios.HabitacionServicio;
+import utils.Converter;
 
 import javax.swing.*;
 
@@ -23,6 +24,7 @@ public class HabitacionController {
 	private static final String ZoneId = null;
 	private MostrarEstadoHabitacionGUI MostarEstadoGUI;
 	private EstadoHabitacionesGUI EstadoGUI;
+	private Converter converter = new Converter();
 
 	private Color Disponible = new Color(118, 203, 78);
 	private Color Reservado = new Color(255, 226, 32);
@@ -40,12 +42,10 @@ public class HabitacionController {
 	public void mostrarEstado() throws DesdeMayorException, FechaIncorrectaException, ParseException{
 		
 		if(MostarEstadoGUI.getDesde().getModel().getValue() == null) {
-			System.out.println("Desde NULL");
 			throw new FechaIncorrectaException();
 			
 		}
 		if(MostarEstadoGUI.getHasta().getModel().getValue() == null) {
-			System.out.println("Hasta NULL");
 			throw new FechaIncorrectaException();
 		}
 		else {
@@ -62,14 +62,12 @@ public class HabitacionController {
 			java.util.Date hasta = dateHasta.getTime();
         	
 			if(desde.getTime() < hasta.getTime()) {
-				System.out.println("Fecha Valida");
 	        	SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
 	        	String date1 = format1.format(desde); 
 	        	String date2 = format1.format(hasta); 
 
-	        	System.out.println(date1);   
-	        	System.out.println(date2);
-				this.getHabDA(convertJavaDateToSqlDate(desde), convertJavaDateToSqlDate(hasta));
+				this.getHabDA(converter.convertCalendarToLocalDate(dateDesde) ,
+						converter.convertCalendarToLocalDate(dateHasta));
 				EstadoGUI = new EstadoHabitacionesGUI(desde, hasta, LHab, this);
 				EstadoGUI.setVisible(true);
 			}
@@ -102,7 +100,7 @@ public class HabitacionController {
 		}
 	}
 
-	public void getHabDA(Date Desde, Date Hasta){
+	public void getHabDA(LocalDate Desde, LocalDate Hasta){
 
 		LHab = habServicio.getHabDA(Desde, Hasta, 1, 2);
 	}
@@ -111,21 +109,21 @@ public class HabitacionController {
 		return new java.sql.Date(date.getTime());
 	}
 
-	public String getEstadoHabitacionFecha(Date fecha, HabitacionDTO hab){
+	public String getEstadoHabitacionFecha(LocalDate fecha, HabitacionDTO hab){
 		String Estado = "Libre";
 		for (PeriodoEstadoHabitacionDTO p : hab.getReservas()) {
-			if(!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())){
-				Estado = "Reservada";
+			if( (fecha.isAfter(p.getDesde()) && fecha.isBefore(p.getHasta())) || (fecha.isEqual(p.getDesde()) || fecha.isEqual(p.getHasta())) ){
+				Estado = p.getEstado();
 			}
 		}
 		for (PeriodoEstadoHabitacionDTO p : hab.getOcupaciones()) {
-			if(!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())){
-				Estado = "Ocupada";
+			if( (fecha.isAfter(p.getDesde()) && fecha.isBefore(p.getHasta())) || (fecha.isEqual(p.getDesde()) || fecha.isEqual(p.getHasta())) ){
+				Estado = p.getEstado();
 			}
 		}
 		for (PeriodoEstadoHabitacionDTO p : hab.getFueraDeServicio()) {
-			if (!fecha.after(p.getDesde()) || !fecha.before(p.getHasta())) {
-				Estado = "Fuera de Servicio";
+			if( (fecha.isAfter(p.getDesde()) && fecha.isBefore(p.getHasta())) || (fecha.isEqual(p.getDesde()) || fecha.isEqual(p.getHasta())) ){
+				Estado = p.getEstado();
 			}
 		}
 		return Estado;
@@ -134,7 +132,7 @@ public class HabitacionController {
 	public java.sql.Date convertStringtosqlDate(String str){
 		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
 		format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
-		Date sqlDate = null;
+		java.sql.Date sqlDate = null;
 		try {
 			java.util.Date date = format.parse(str);
 			sqlDate = new java.sql.Date(date.getTime());
@@ -144,6 +142,20 @@ public class HabitacionController {
 			//todo
 		}
 		return sqlDate;
+	}
+
+	public java.util.Date convertStringtoUtilDate(String str){
+		DateFormat format = new SimpleDateFormat("dd/MM/yyyy", Locale.US);
+		format.setTimeZone(TimeZone.getTimeZone("Etc/UTC"));
+		java.util.Date utilDate = null;
+		try {
+			utilDate = format.parse(str);
+		} catch (ParseException e){
+			//todo
+		}finally {
+			//todo
+		}
+		return utilDate;
 	}
 
 	public List<String> getAllTiposHabDisponibles(List<HabitacionDTO> LHabDTO){
@@ -169,16 +181,13 @@ public class HabitacionController {
 		ArrayList<JCheckBox> LCheckBox = new ArrayList<>();
 
 
-			Color returnvalue = new Color(0,0,0);
-			if      (Value.equals("Ocupada")) {
-				returnvalue = Ocupado;
-			}else if(Value.equals("Reservada")){
-				returnvalue = Reservado;
-			}else if(Value.equals("Fuera de Servicio")){
-				returnvalue = FueraDeServicio;
-			}else{
-				returnvalue = Disponible;
-			};
+		new Color(0, 0, 0);
+		Color returnvalue = switch (Value) {
+			case "Ocupado" -> Ocupado;
+			case "Reservado" -> Reservado;
+			case "Fuera de Servicio" -> FueraDeServicio;
+			default -> Disponible;
+		};
 
 		return returnvalue;
 	}

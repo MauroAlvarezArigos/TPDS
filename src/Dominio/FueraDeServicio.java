@@ -1,12 +1,12 @@
 package Dominio;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class FueraDeServicio {
     private int id;
     private Habitacion habitacion;
-    private Date desde;
-    private Date hasta;
+    private LocalDate desde;
+    private LocalDate hasta;
 
     public int getId() {
         return id;
@@ -14,22 +14,22 @@ public class FueraDeServicio {
     public void setId(int id) {
         this.id = id;
     }
-    public Date getDesde() {
-        return desde;
-    }
-    public void setDesde(Date desde) {
-        this.desde = desde;
-    }
-    public Date getHasta() {
-        return hasta;
-    }
-    public void setHasta(Date hasta) {
-        this.hasta = hasta;
-    }
     public Habitacion getHabitacion() {
         return habitacion;
     }
     public void setHabitacion(Habitacion habitacion) {
         this.habitacion = habitacion;
+    }
+    public LocalDate getDesde() {
+        return desde;
+    }
+    public void setDesde(LocalDate desde) {
+        this.desde = desde;
+    }
+    public LocalDate getHasta() {
+        return hasta;
+    }
+    public void setHasta(LocalDate hasta) {
+        this.hasta = hasta;
     }
 }

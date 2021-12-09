@@ -14,6 +14,7 @@ import Dominio.IDType;
 import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import Exceptions.NoConcordanciaException;
+import utils.Converter;
 
 public class PasajeroDAOSQL implements PasajeroDAO{
 	private Connection conn;
@@ -22,6 +23,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	private IDTypeDAOSQL IDDAO;
 	private UbicacionDAOSQL UBICACIONDAO;
 	private PosIVADAOSQL IVADAO;
+	private Converter converter = new Converter();
 
 
 	public PasajeroDAOSQL(Connection unConn){
@@ -93,7 +95,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			pstmt.setString(4, unPasajero.getNdoc());
 			pstmt.setString(5, unPasajero.getTipodoc().getTipoDeID());
 			pstmt.setString(6, unPasajero.getOcupacion());
-			pstmt.setDate(7, unPasajero.getFechanacimiento());
+			pstmt.setDate(7, converter.convertToDateViaSqlDate(unPasajero.getFechanacimiento()));
 			pstmt.setInt(8, unPasajero.getNacionalidad().getCodigo());
 
 			pstmt.executeUpdate();
@@ -136,7 +138,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
 				p.setNdoc(rs.getString("NDOC"));
-				p.setFechanacimiento(rs.getDate("FECHANAC"));
+				p.setFechanacimiento(converter.convertToLocalDateViaInstant(rs.getDate("FECHANAC")));
 				//Puede estar mal este set
 				p.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
 				p.setOcupacion(rs.getString("OCUPACION"));
@@ -266,7 +268,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				unPasajero.setNombre(rs.getString("NOMBRE"));
 				unPasajero.setApellido(rs.getString("APELLIDO"));
 				unPasajero.setNdoc(rs.getString("NDOC"));
-				unPasajero.setFechanacimiento(rs.getDate("FECHANAC"));
+				unPasajero.setFechanacimiento(converter.convertToLocalDateViaInstant(rs.getDate("FECHANAC")));
 				//Puede estar mal este set
 				unPasajero.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
 				unPasajero.setOcupacion(rs.getString("OCUPACION"));
@@ -299,10 +301,8 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			return p1;
 		} else {
 			tmp = tmp + "WHERE ";
-			System.out.println("Where concatenado");
 
 			if(!nombre.equals("")) {
-				System.out.println("Nombre concatenado");
 
 				tmp = tmp + " NOMBRE LIKE '%"+ nombre +"%'";
 				cont++;
@@ -316,12 +316,10 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 					tmp = tmp + " AND APELLIDO LIKE '%"+ apellido +"%'";
 
 				}
-				System.out.println("apellido concatenado");
 
 				cont++;
 			}
 			if(!tipoDoc.equals("")) {
-				System.out.println("tdoc concatenado");
 
 				if(cont == 0) {
 					tmp = tmp + " TIPODOC = '"+ tipoDoc +"'";
@@ -333,7 +331,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				cont++;
 			}
 			if(!ndoc.equals("")) {
-				System.out.println("doc concatenado");
 
 				if(cont == 0) {
 					tmp = tmp + "NDOC = '"+ ndoc + "'";
@@ -346,7 +343,6 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			}
 
 		}
-		System.out.println(tmp);
 		return p1.concat(tmp);
 	}
 }

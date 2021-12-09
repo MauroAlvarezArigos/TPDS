@@ -5,7 +5,6 @@ package Controller;
 
 import DTO.*;
 import Dominio.Pasajero;
-import Dominio.PosIVA;
 import Exceptions.DuplicateDocNumberException;
 import GUI.AltaPasajeroGUI;
 import GUI.GestionPasajeroBusquedaGUI;
@@ -17,7 +16,6 @@ import Servicios.UbicacionServicio;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DarAltaController {
@@ -227,7 +225,6 @@ public class DarAltaController {
                           "CORREGIR"})
                   == JOptionPane.YES_OPTION){
 
-              System.out.println("Guardar Pasajero");
               this.cargarPasajeroGUI();
 
           }else{
