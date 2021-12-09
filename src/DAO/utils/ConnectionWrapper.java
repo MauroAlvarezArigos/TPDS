@@ -1,7 +1,6 @@
 package DAO.utils;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 //TEST 1
 
@@ -16,7 +15,8 @@ public class ConnectionWrapper {
     private Connection connection;
 
 
-    public ConnectionWrapper() {
+    @SuppressWarnings("static-access")
+	public ConnectionWrapper() {
         this.dataSource = new DB();
         this.connection = dataSource.getConnection();
     }

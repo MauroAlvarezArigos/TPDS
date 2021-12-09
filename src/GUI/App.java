@@ -1,11 +1,8 @@
 package GUI;
 
-
 import Controller.DarAltaController;
-
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,11 +17,7 @@ public class App extends JFrame {
 			public void run() {
 				try {
 					App frame = new App();
-					frame.setTitle("Sistema de Gestion de Viajes");
-					frame.pack();
-					frame.setSize(600,400);
 					frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +27,9 @@ public class App extends JFrame {
 	}
 	
 	public App() {
+		setTitle("Sistema de Gestion de Viajes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		JPanel panelMenu = new JPanel();
 		setContentPane(panelMenu);
 		panelMenu.setLayout(new FlowLayout());
@@ -52,17 +47,20 @@ public class App extends JFrame {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
 			ap.setController(new DarAltaController(ap));
 			ap.setVisible(true);
+			ap.setLocationRelativeTo(null);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 
 		botonGestionarPasajero.addActionListener(e -> {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();
+			gp.setLocationRelativeTo(null);
 			gp.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 		
 		btnMostrarEstadoHabitacion.addActionListener(e -> {
 			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
+			me.setLocationRelativeTo(null);
 			me.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});

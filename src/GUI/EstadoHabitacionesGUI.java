@@ -15,7 +15,6 @@ import utils.Converter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 @SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
@@ -109,7 +108,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 			});
 			//.......End
 
-			//Setear tamaños y apariencia de cada columna
+			//Setear tamaï¿½os y apariencia de cada columna
 			table.getColumnModel().getColumn(0).setPreferredWidth(150);
 			table.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
 			table.setColumnSelectionAllowed(false);

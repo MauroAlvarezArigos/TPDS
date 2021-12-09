@@ -1,8 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.awt.event.ActionListener;
-import java.text.ParseException;
 import java.util.Properties;
 
 import javax.swing.JFrame;
@@ -14,8 +12,6 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import Controller.HabitacionController;
-import Exceptions.DesdeMayorException;
-import Exceptions.FechaIncorrectaException;
 import modelosTabla.DateLabelFormatter;
 
 import javax.swing.JLabel;

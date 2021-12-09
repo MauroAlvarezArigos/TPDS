@@ -46,12 +46,12 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			"\n"+
 			" INSERT INTO PERSONA(TELEFONO, EMAIL, CUIT, CALLE, ALTURA, POSIVA, LOCALIDAD)"
 			+"VALUES(?, ?, ?, ?, ?, ?, ?) RETURNING idpersona";
-	private static final String INSERT_PASAJERO_PERSONA =
+	/*private static final String INSERT_PASAJERO_PERSONA =
 			"\n" +
 			" DO $$" +
 			"DECLARE id int " +
 			"BEGIN "+INSERT_PERSONA+" RETURNING idpersona into id; " +
-			INSERT_PASAJERO+";end$$;";
+			INSERT_PASAJERO+";end$$;";*/
 	private static final String BUSCAR_DOC_REPETIDO =
 			"\n"+
 			" SELECT * FROM PASAJERO p" +
@@ -66,6 +66,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 
 	//Insert Pasajero
 	//---
+	@SuppressWarnings("resource")
 	@Override
 	public Pasajero insert(Pasajero unPasajero) {
 		PreparedStatement pstmt = null;
@@ -298,7 +299,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		int cont = 0;
 
 		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
-			return p1;
+			return p1 + "order by APELLIDO, NOMBRE";
 		} else {
 			tmp = tmp + "WHERE ";
 
@@ -326,22 +327,18 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 				}
 				else {
 					tmp = tmp + " AND TIPODOC = '"+ tipoDoc +"'";
-
 				}
 				cont++;
 			}
 			if(!ndoc.equals("")) {
-
 				if(cont == 0) {
 					tmp = tmp + "NDOC = '"+ ndoc + "'";
 				}
 				else {
 					tmp = tmp + " AND NDOC = '"+ ndoc +"'";
-
 				}
 				cont++;
 			}
-
 		}
 		return p1.concat(tmp);
 	}

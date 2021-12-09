@@ -2,8 +2,6 @@ package DAO.utils;
 
 import DAO.*;
 
-import java.sql.SQLException;
-
 //from http://tutorials.jenkov.com/java-persistence/dao-manager.html
 //from http://tutorials.jenkov.com/java-persistence/dao-design-problems.html
 

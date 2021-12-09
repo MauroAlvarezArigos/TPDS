@@ -22,7 +22,6 @@ public class GestionPasajeroGUI extends JFrame{
 		this.controller = new PasajeroController(this);
 		this.controller.cargarTDNI();
 		this.setLayout(null);
-		this.setLocationRelativeTo(null);
 		this.setSize(500,300);		
 		
 		JPanel panelDatos = new JPanel();
