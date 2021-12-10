@@ -4,19 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.UbicacionDAO;
-import DAO.UbicacionDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.LocalidadDTO;
 import DTO.PaisDTO;
-import DTO.PasajeroBusquedaDTO;
 import DTO.ProvDTO;
 import Dominio.Localidad;
 import Dominio.Pais;
-import Dominio.Pasajero;
 import Dominio.Provincia;
 import Servicios.Mappers.MapperLocalidad;
 import Servicios.Mappers.MapperPais;
-import Servicios.Mappers.MapperPasajero;
 import Servicios.Mappers.MapperProvincia;
 
 public class UbicacionServicio {

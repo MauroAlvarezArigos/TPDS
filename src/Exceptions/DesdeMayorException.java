@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class DesdeMayorException extends Exception {
 	
 	public DesdeMayorException() {

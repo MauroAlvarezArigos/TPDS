@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class DuplicateDocNumberException extends Exception {
 
     public DuplicateDocNumberException() {

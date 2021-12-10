@@ -1,13 +1,9 @@
 package Servicios;
 
 import DAO.PosIVADAO;
-import DAO.PosIVADAOSQL;
 import DAO.utils.DAOManager;
-import DTO.PaisDTO;
 import DTO.PosIVADTO;
-import Dominio.Pais;
 import Dominio.PosIVA;
-import Servicios.Mappers.MapperPais;
 import Servicios.Mappers.MapperPosIVA;
 
 import java.util.ArrayList;

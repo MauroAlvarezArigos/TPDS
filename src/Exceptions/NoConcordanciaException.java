@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class NoConcordanciaException extends Exception {
 	
 	public NoConcordanciaException() {

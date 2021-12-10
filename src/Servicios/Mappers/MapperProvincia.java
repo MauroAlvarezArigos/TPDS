@@ -1,8 +1,6 @@
 package Servicios.Mappers;
 
-import DTO.PaisDTO;
 import DTO.ProvDTO;
-import Dominio.Pais;
 import Dominio.Provincia;
 
 public class MapperProvincia {

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DAO.PasajeroDAO;
-import DAO.PasajeroDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;

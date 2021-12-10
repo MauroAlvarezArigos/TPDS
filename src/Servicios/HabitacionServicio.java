@@ -1,17 +1,13 @@
 package Servicios;
 
-import DAO.HabitacionDAO;
 import DAO.HabitacionDAOSQL;
-import DAO.IDTypeDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.HabitacionDTO;
 import Dominio.Habitacion;
-import Dominio.Ocupacion;
 import Servicios.Mappers.MapperHabitacion;
 import utils.Converter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class HabitacionServicio {

@@ -1,9 +1,7 @@
 package Servicios.Mappers;
 
-import DTO.OcupacionDTO;
 import DTO.PeriodoEstadoHabitacionDTO;
 import Dominio.Ocupacion;
-import Dominio.Reserva;
 
 import java.util.ArrayList;
 import java.util.List;

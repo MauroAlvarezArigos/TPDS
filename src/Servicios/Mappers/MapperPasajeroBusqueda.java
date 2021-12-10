@@ -3,7 +3,6 @@ package Servicios.Mappers;
 import DAO.PasajeroDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.PasajeroBusquedaDTO;
-import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 
 public class MapperPasajeroBusqueda {

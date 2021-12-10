@@ -1,7 +1,5 @@
 package DTO;
 
-import Dominio.Ocupacion;
-
 import java.util.List;
 
 public class HabitacionDTO {

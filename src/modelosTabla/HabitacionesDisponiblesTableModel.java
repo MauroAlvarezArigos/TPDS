@@ -2,6 +2,7 @@ package modelosTabla;
 
 import javax.swing.table.AbstractTableModel;
 
+@SuppressWarnings("serial")
 public class HabitacionesDisponiblesTableModel extends AbstractTableModel {
 	
 	private Object[][] data = null;
