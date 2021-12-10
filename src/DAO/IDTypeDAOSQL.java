@@ -65,8 +65,14 @@ public class IDTypeDAOSQL implements IDTypeDAO {
     //---
     @Override
     public IDType getIDType(String ID) {
-        ID = ID.toUpperCase();
-        String Sentencia = GET_ID + "\'"+ID+"\'" + ")";
+    	String Sentencia = "";
+    	if(ID.equals("Otro")) {
+    		Sentencia =  GET_ID + "\'Otro\'" + ")";}
+    	else if(ID.equals("Pasaporte")) {
+    		Sentencia =  GET_ID + "\'Pasaporte\'" + ")";}
+    	else {
+	        ID = ID.toUpperCase();
+	        Sentencia = GET_ID + "\'"+ID+"\'" + ")";}
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         IDType unID = new IDType();

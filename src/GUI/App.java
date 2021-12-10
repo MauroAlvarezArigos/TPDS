@@ -17,6 +17,8 @@ public class App extends JFrame {
 			public void run() {
 				try {
 					App frame = new App();
+					frame.pack();
+					frame.setSize(600,400);
 					frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
 					frame.setVisible(true);
 				} catch (Exception e) {
