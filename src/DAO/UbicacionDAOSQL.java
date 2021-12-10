@@ -29,11 +29,11 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             "SELECT * FROM PAIS " +
             "WHERE NOMBRE = ";
     private static final String INSERT_PAIS =
-            "INSERT INTO PAIS(NOMBRE, CODIGOPAIS, NACIONALIDAD)"
+            "INSERT INTO PAIS(NOMBRE, id_pais, NACIONALIDAD)"
                     + " VALUES(?, ?, ?)";
     private static final String SEARCH_CODE_PAIS =
             "SELECT * FROM PAIS"
-                    + " WHERE CODIGOPAIS=";
+                    + " WHERE id_pais=";
     private static final String INSERT_PROVINCIA =
             "INSERT INTO PROVINCIA(NOMBRE, CODIGOPROVINCIA, PAIS)"
                     + " VALUES( ?, ?, ?)";
@@ -60,7 +60,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
     private static final String SEARCH_NOMBRE_LOCALIDAD =
             "SELECT l.NOMBRE, l.CODPOSTAL, l.CODIGOLOCALIDAD, l.PROV FROM LOCALIDAD l " +
                     "JOIN PROVINCIA p ON (p.CODIGOPROVINCIA = l.PROV) " +
-                    "JOIN PAIS c ON (c.CODIGOPAIS = p.PAIS)" +
+                    "JOIN PAIS c ON (c.id_pais = p.PAIS)" +
                     " WHERE ((l.NOMBRE = ?) AND (p.NOMBRE = ?) AND (c.NOMBRE = ?))";
     private static final String ALL_PAIS =
             " SELECT * FROM PAIS ";
@@ -108,7 +108,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
                 rs = pstmt.executeQuery();
             if(rs.next()) {
                 pais.setNombre(rs.getString("NOMBRE"));
-                pais.setCodigo(rs.getInt("CODIGOPAIS"));
+                pais.setCodigo(rs.getInt("id_pais"));
                 pais.setNacionalidad(rs.getString("NACIONALIDAD"));
                 pais.setListProvincias(buscarProvinciasPais(Codigo));
             }
@@ -321,7 +321,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             pstmt = conn.prepareStatement(sentencia);
             rs = pstmt.executeQuery();
             if(rs.next()) {
-                int codigo = rs.getInt("CODIGOPAIS");
+                int codigo = rs.getInt("id_pais");
                 unPais = buscarCodePais(codigo);
             }
 
@@ -401,7 +401,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
             while(rs.next()) {
                 Pais p = new Pais();
                 p.setNacionalidad(rs.getString("NACIONALIDAD"));
-                p.setCodigo(rs.getInt("CODIGOPAIS"));
+                p.setCodigo(rs.getInt("id_pais"));
                 p.setNombre(rs.getString("NOMBRE"));
                 LPais.add(p);
             }
@@ -446,7 +446,7 @@ public class UbicacionDAOSQL implements UbicacionDAO {
 
             if(rs.next()) {
               pais.setNombre(rs.getString("NOMBRE"));
-              pais.setCodigo(rs.getInt("CODIGOPAIS"));
+              pais.setCodigo(rs.getInt("id_pais"));
               pais.setNacionalidad(rs.getString("NACIONALIDAD"));
 
             }
