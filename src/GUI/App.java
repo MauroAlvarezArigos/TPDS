@@ -43,6 +43,9 @@ public class App extends JFrame {
 		JButton btnMostrarEstadoHabitacion = new JButton("Mostrar Estado Habitacion");
 		panelMenu.add(btnMostrarEstadoHabitacion);
 		
+		JButton btnOcuparHabitacion = new JButton("Ocupar Habitacion");
+		panelMenu.add(btnOcuparHabitacion);
+		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
 			ap.setController(new DarAltaController(ap));
@@ -61,6 +64,12 @@ public class App extends JFrame {
 		btnMostrarEstadoHabitacion.addActionListener(e -> {
 			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
 			me.setLocationRelativeTo(null);
+			me.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		btnOcuparHabitacion.addActionListener(e -> {
+			OcuparHabitacionGUI me = new OcuparHabitacionGUI();
 			me.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
