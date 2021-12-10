@@ -35,6 +35,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		getContentPane().add(btnMostrarEstado);
 		btnMostrarEstado.addActionListener(e->{
 			MostrarEstadoHabitacionGUI mostrarEstado = new MostrarEstadoHabitacionGUI();
+			mostrarEstado.setLocationRelativeTo(null);
 			mostrarEstado.setVisible(true);
 		});
 		
@@ -134,18 +135,19 @@ public class OcuparHabitacionGUI extends JFrame{
 		panel.add(suiteDoble);
 		
 		JButton btnAsignarHab = new JButton("Asignar Habitacion");
-		btnAsignarHab.setBounds(306, 323, 156, 21);
+		btnAsignarHab.setBounds(306, 323, 156, 25);
 		btnAsignarHab.setForeground(new Color(255, 255, 255));
-		btnAsignarHab.setBackground(new Color(50, 205, 50));
+		btnAsignarHab.setBackground(new Color(0, 128, 0));
 		getContentPane().add(btnAsignarHab);
 		btnAsignarHab.addActionListener(e->{
 			OcuparHabAsigPasajeroGUI oh = new OcuparHabAsigPasajeroGUI();
+			oh.setLocationRelativeTo(null);
 			oh.setVisible(true);
 			this.dispose();
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(211, 323, 85, 21);
+		btnCancelar.setBounds(211, 323, 85, 25);
 		btnCancelar.setForeground(new Color(255, 255, 255));
 		btnCancelar.setBackground(new Color(255, 0, 0));
 		getContentPane().add(btnCancelar);

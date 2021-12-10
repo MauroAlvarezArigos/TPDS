@@ -64,7 +64,7 @@ public class GestionPasajeroGUI extends JFrame{
 		
 		//Buttons
 		JButton Cancelar = new JButton("Cancelar");
-		Cancelar.setBounds(210,150,90,25);
+		Cancelar.setBounds(210,150,100,25);
 		Cancelar.setBackground(Color.RED);
 		Cancelar.setForeground(Color.WHITE);
 		panelDatos.add(Cancelar);

@@ -74,9 +74,9 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 		
 		JPanel boton = new JPanel();
 		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(306, 323, 156, 21);
+		btnAceptar.setBounds(306, 323, 156, 25);
 		btnAceptar.setForeground(new Color(255, 255, 255));
-		btnAceptar.setBackground(new Color(50, 205, 50));
+		btnAceptar.setBackground(new Color(0, 128, 0));
 		boton.add(btnAceptar, BorderLayout.SOUTH);
 		tablaGUI.add(boton, BorderLayout.SOUTH);
 		
