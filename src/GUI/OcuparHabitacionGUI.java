@@ -1,7 +1,6 @@
 package GUI;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
 import java.awt.Color;
 
 import javax.swing.border.TitledBorder;
@@ -12,9 +11,7 @@ import org.jdatepicker.impl.UtilDateModel;
 
 import modelosTabla.DateLabelFormatter;
 
-import java.awt.GridBagLayout;
 import java.util.Properties;
-import java.awt.GridBagConstraints;
 
 @SuppressWarnings("serial")
 public class OcuparHabitacionGUI extends JFrame{

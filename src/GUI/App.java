@@ -62,15 +62,16 @@ public class App extends JFrame {
 		});
 		
 		btnMostrarEstadoHabitacion.addActionListener(e -> {
-			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
-			me.setLocationRelativeTo(null);
-			me.setVisible(true);
+			MostrarEstadoHabitacionGUI mostrarEstadoHabitacion = new MostrarEstadoHabitacionGUI();
+			mostrarEstadoHabitacion.setLocationRelativeTo(null);
+			mostrarEstadoHabitacion.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 		
 		btnOcuparHabitacion.addActionListener(e -> {
-			OcuparHabitacionGUI me = new OcuparHabitacionGUI();
-			me.setVisible(true);
+			OcuparHabitacionGUI ocuparHabitacion = new OcuparHabitacionGUI();
+			ocuparHabitacion.setLocationRelativeTo(null);
+			ocuparHabitacion.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 	}

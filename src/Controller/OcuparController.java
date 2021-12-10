@@ -9,9 +9,7 @@ import javax.swing.SwingUtilities;
 
 import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
-import Dominio.Pasajero;
 import Exceptions.NoConcordanciaException;
-import GUI.GestionPasajeroBusquedaGUI;
 import GUI.OcuparHabAsigPasajeroGUI;
 import Servicios.IDTypeServicio;
 import Servicios.PasajeroServicio;
@@ -19,7 +17,6 @@ import Servicios.PasajeroServicio;
 public class OcuparController {
 	private PasajeroServicio pasajeroServicio;
 	private IDTypeServicio IDServicio;
-	private Pasajero pasajero;
 	private List<PasajeroBusquedaDTO> lista;
 	private OcuparHabAsigPasajeroGUI ocuparGUI;
 	

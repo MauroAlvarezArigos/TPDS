@@ -4,7 +4,6 @@
 package Controller;
 
 import DTO.*;
-import Dominio.Pasajero;
 import Exceptions.DuplicateDocNumberException;
 import GUI.AltaPasajeroGUI;
 import Servicios.IDTypeServicio;
