@@ -165,7 +165,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 		
 		
 	}
-
+	
 	public List<Pasajero> buscarGestion(String nombre, String apellido, String tipoDoc, String ndoc) throws NoConcordanciaException{
 		String sentencia = prepararSentencia(nombre, apellido, tipoDoc, ndoc);
 

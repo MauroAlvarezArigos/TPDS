@@ -63,7 +63,7 @@ public class PasajeroController {
 	private String prepararTitulo(String nombre, String apellido, String tipoDoc, String ndoc) {
 		String tmp = "";
 		if(nombre.equals("") && apellido.equals("") && tipoDoc.equals("") && ndoc.equals("")) {
-			return "Busqueda Sin Par�metros";
+			return "Busqueda Sin Parametros";
 		} else {
 			if(!apellido.equals("")) {
 				tmp = tmp + "Apellido: '" + apellido+"'";
@@ -76,7 +76,7 @@ public class PasajeroController {
 				tmp = tmp + " Tipo Documento: '"+ tipoDoc+"'";				
 			}
 			if(!ndoc.equals("")) {
-				tmp = tmp + " N�mero: '"+ ndoc+"'";				
+				tmp = tmp + " Numero: '"+ ndoc+"'";				
 			}
 		}
 		return tmp;

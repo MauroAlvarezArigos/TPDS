@@ -8,6 +8,8 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import Controller.FacturarController;
+import Exceptions.CampoFaltanteException;
+import Exceptions.NoConcordanciaException;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,14 +22,20 @@ import javax.swing.JTable;
 @SuppressWarnings("serial")
 public class FacturarGUI extends JFrame {
 
-	private JTextField textNumHabitacion;
-	private JTextField textHoraSalida;
-	private JTextField textCuit;
+	private JLabel lblNumHabitacion;
+	private JLabel lblHoraDeSalida;
+	private JLabel lblCuit;
+	private JTextField tbxNumHabitacion;
+	private JTextField tbxHoraSalida;
+	private JTextField tbxCuit;
 	private JTable tablePasajero;
+	private JCheckBox cbxFacturaTercero;
+	
 	private FacturarController controller;
 
+	
 	public FacturarGUI() {
-		
+		this.controller = new FacturarController(this);
 		this.setSize(700, 350);
 		this.setTitle("Facturar");
 		getContentPane().setLayout(null);
@@ -38,23 +46,23 @@ public class FacturarGUI extends JFrame {
 		checkOut.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Check Out", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		checkOut.setLayout(null);
 		
-		JLabel lblNumHabitacion = new JLabel("Numero de habitacion");
+		lblNumHabitacion = new JLabel("Numero de habitacion");
 		lblNumHabitacion.setBounds(10, 28, 125, 20);
 		checkOut.add(lblNumHabitacion);
 		
-		textNumHabitacion = new JTextField();
-		textNumHabitacion.setBounds(162, 29, 96, 20);
-		checkOut.add(textNumHabitacion);
-		textNumHabitacion.setColumns(10);
+		tbxNumHabitacion = new JTextField();
+		tbxNumHabitacion.setBounds(162, 29, 96, 20);
+		tbxNumHabitacion.setColumns(10);
+		checkOut.add(tbxNumHabitacion);
 		
-		JLabel lblHoraDeSalida = new JLabel("Hora de salida");
+		lblHoraDeSalida = new JLabel("Hora de salida");
 		lblHoraDeSalida.setBounds(10, 58, 125, 20);
 		checkOut.add(lblHoraDeSalida);
 		
-		textHoraSalida = new JTextField();
-		textHoraSalida.setColumns(10);
-		textHoraSalida.setBounds(162, 59, 96, 20);
-		checkOut.add(textHoraSalida);
+		tbxHoraSalida = new JTextField();
+		tbxHoraSalida.setColumns(10);
+		tbxHoraSalida.setBounds(162, 59, 96, 20);
+		checkOut.add(tbxHoraSalida);
 		
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setForeground(Color.WHITE);
@@ -71,6 +79,13 @@ public class FacturarGUI extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 		
 		btnBuscar.addActionListener(e -> {
+			try {
+				controller.checkOut();
+			} catch (CampoFaltanteException e1) {
+				mostrarError(" ", "Falta rellenar un campo");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+			}
 			
 		});
 		
@@ -80,18 +95,29 @@ public class FacturarGUI extends JFrame {
 		getContentPane().add(panelFacturaTercero);
 		panelFacturaTercero.setLayout(null);
 		
-		JLabel lblcuit = new JLabel("CUIT");
-		lblcuit.setBounds(10, 22, 90, 20);
-		panelFacturaTercero.add(lblcuit);
+		lblCuit = new JLabel("CUIT");
+		lblCuit.setBounds(10, 22, 90, 20);
+		lblCuit.setEnabled(false);
+		panelFacturaTercero.add(lblCuit);
 		
-		textCuit = new JTextField();
-		textCuit.setBounds(103, 23, 145, 20);
-		panelFacturaTercero.add(textCuit);
-		textCuit.setColumns(10);
+		tbxCuit = new JTextField();
+		tbxCuit.setBounds(103, 23, 145, 20);
+		tbxCuit.setColumns(10);
+		tbxCuit.setEnabled(false);
+		panelFacturaTercero.add(tbxCuit);
 		
-		JCheckBox chckbxFacturaTercero = new JCheckBox("Facturar a tercero");
-		chckbxFacturaTercero.setBounds(50, 48, 145, 21);
-		panelFacturaTercero.add(chckbxFacturaTercero);
+		cbxFacturaTercero = new JCheckBox("Facturar a tercero");
+		cbxFacturaTercero.setBounds(50, 48, 145, 21);
+		cbxFacturaTercero.addActionListener(e->{
+			if(cbxFacturaTercero.isSelected()) {
+				lblCuit.setEnabled(true);
+				tbxCuit.setEnabled(true);
+			}else {
+				lblCuit.setEnabled(false);
+				tbxCuit.setEnabled(false);
+			}
+		});
+		panelFacturaTercero.add(cbxFacturaTercero);
 		
 		JPanel panelOcupanteHabitacion = new JPanel();
 		panelOcupanteHabitacion.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ocupantes de la Habitacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
@@ -108,32 +134,41 @@ public class FacturarGUI extends JFrame {
 		btnFacturar.setBackground(new Color(0, 128, 0));
 		btnFacturar.setBounds(580, 256, 96, 20);
 		getContentPane().add(btnFacturar);
+		
+		btnFacturar.addActionListener(e->{
+			try {
+				controller.facturar();
+			} catch (NoConcordanciaException e1) {
+				mostrarError("","No se encontro la Persona Juridica");
+			}
+		});
 	}
 	
-	//Getters and setters for labels
-	public JTextField gettextNumHabitacion() {
-		return textNumHabitacion;
-	}
-	public void setNumHabitacion(JTextField textNumHabitacion) {
-		this.textNumHabitacion = textNumHabitacion;
-	}
-	public JTextField gettextHoraSalida() {
-		return textHoraSalida;
-	}
-	public void settextHoraSalida(JTextField textHoraSalida) {
-		this.textHoraSalida = textHoraSalida;
-	}
-	public JTextField getTextCuit() {
-		return textCuit;
-	}
-	public void setTextCuit(JTextField textCuit) {
-		this.textCuit = textCuit;
-	}
-	public JTable getTablePasajero() {
-		return tablePasajero;
-	}
-	public void setTablePasajero(JTable tablePasajero) {
-		this.tablePasajero = tablePasajero;
+	//Getters and setters
+	public JLabel getLblNumHabitacion() {return lblNumHabitacion;}
+	public void setLblNumHabitacion(JLabel lblNumHabitacion) {this.lblNumHabitacion = lblNumHabitacion;}
+	public JLabel getLblHoraDeSalida() {return lblHoraDeSalida;}
+	public void setLblHoraDeSalida(JLabel lblHoraDeSalida) {this.lblHoraDeSalida = lblHoraDeSalida;}
+	public JLabel getLblCuit() {return lblCuit;}
+	public void setLblCuit(JLabel lblCuit) {this.lblCuit = lblCuit;}
+	public JTextField getTbxNumHabitacion() {return tbxNumHabitacion;}
+	public void setTbxNumHabitacion(JTextField tbxNumHabitacion) {this.tbxNumHabitacion = tbxNumHabitacion;}
+	public JTextField getTbxHoraSalida() {return tbxHoraSalida;}
+	public void setTbxHoraSalida(JTextField tbxHoraSalida) {this.tbxHoraSalida = tbxHoraSalida;}
+	public JTextField getTbxCuit() {return tbxCuit;}
+	public void setTbxCuit(JTextField tbxCuit) {this.tbxCuit = tbxCuit;}
+	public JTable getTablePasajero() {return tablePasajero;}
+	public void setTablePasajero(JTable tablePasajero) {this.tablePasajero = tablePasajero;}
+	public JCheckBox getCbxFacturaTercero() {return cbxFacturaTercero;}
+	public void setCbxFacturaTercero(JCheckBox cbxFacturaTercero) {this.cbxFacturaTercero = cbxFacturaTercero;}
+	public FacturarController getController() {return controller;}
+	public void setController(FacturarController controller) {this.controller = controller;}
+
+	public void mostrarError(String titulo,String detalle) {
+		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
+		JOptionPane.showMessageDialog(padre,
+			    detalle,titulo,
+			    JOptionPane.ERROR_MESSAGE);
 	}
 	
 	public int optionMessageGUI(String titulo, String detalle, Object[] options){

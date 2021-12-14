@@ -90,29 +90,46 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		btnSearch.addActionListener(e->{
 			String resultSearch = textSearch.getText();
 			List<PasajeroBusquedaDTO> newLista = new ArrayList<PasajeroBusquedaDTO>();
-			resultados.removeAll();
-			scrollPane.removeAll();
-			for(int i=0; i<lista.size(); i++) {
-				if((lista.get(i).getApellido()).equals(resultSearch) || (lista.get(i).getNombre()).equals(resultSearch) || (lista.get(i).getNdoc()).equals(resultSearch)) {
-					newLista.add(lista.get(i));
+			
+			if(resultSearch.isEmpty() || resultSearch.isBlank()) {
+				
+				resultados.removeAll();
+				scrollPane.removeAll();
+				
+				setJPanelPasajero(lista);
+				scrollPane.add(resultados);
+				scrollPane.revalidate();
+				scrollPane.repaint(); 
+			}
+			else {
+				scrollPane.removeAll();
+				resultados.removeAll();
+			
+				for(int i=0; i<lista.size(); i++) {
+					if((lista.get(i).getApellido()).toLowerCase().equals(resultSearch.toLowerCase()) 
+						|| (lista.get(i).getNombre()).toLowerCase().equals(resultSearch.toLowerCase()) 
+						|| (lista.get(i).getTipodoc().toLowerCase().equals(resultSearch.toLowerCase()))
+						|| (lista.get(i).getNdoc()).equals(resultSearch)) {
+						newLista.add(lista.get(i));
+					}
+				}
+				if(newLista.size() == 0) {
+					warning.setVisible(true);
+				}else {
+					warning.setVisible(false);
+					setJPanelPasajero(newLista);
+					scrollPane.add(resultados);
 				}
 			}
-			if(newLista.size() == 0) {
-				warning.setVisible(true);
-			}else {
-				warning.setVisible(false);
-				setJPanelPasajero(newLista);
-				scrollPane.add(resultados);
-			}
-			resultados.updateUI();
-			scrollPane.updateUI();
+			update();
+
 		});
 		
 		cancelar.addActionListener(e->dispose());
 		
 		next.addActionListener(e -> actionPerformed(e));
 		
-		SwingUtilities.updateComponentTreeUI(this);
+		update();
 	}
 	
 	public void update() {

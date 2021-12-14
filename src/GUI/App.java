@@ -51,6 +51,9 @@ public class App extends JFrame {
 		JButton btnFacturar = new JButton("Facturar");
 		panelMenu.add(btnFacturar);
 		
+		JButton btnFacturar2 = new JButton("Facturar2");
+		panelMenu.add(btnFacturar2);
+		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
 			ap.setController(new DarAltaController(ap));
@@ -86,5 +89,14 @@ public class App extends JFrame {
 			facturar.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
+		
+		btnFacturar2.addActionListener(e -> {
+			FacturarElementosGUI facturar2 = new FacturarElementosGUI(null,"Microsoft","A");
+			facturar2.setLocationRelativeTo(null);
+			facturar2.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		
 	}
 }
