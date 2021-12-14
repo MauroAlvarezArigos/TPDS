@@ -90,38 +90,27 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		btnSearch.addActionListener(e->{
 			String resultSearch = textSearch.getText();
 			List<PasajeroBusquedaDTO> newLista = new ArrayList<PasajeroBusquedaDTO>();
-			
-			if(resultSearch.isEmpty() || resultSearch.isBlank()) {
-				
-				resultados.removeAll();
-				scrollPane.removeAll();
-				
-				setJPanelPasajero(lista);
-				scrollPane.add(resultados);
-				scrollPane.revalidate();
-				scrollPane.repaint(); 
-			}
-			else {
-				scrollPane.removeAll();
-				resultados.removeAll();
-			
-				for(int i=0; i<lista.size(); i++) {
-					if((lista.get(i).getApellido()).toLowerCase().equals(resultSearch.toLowerCase()) 
-						|| (lista.get(i).getNombre()).toLowerCase().equals(resultSearch.toLowerCase()) 
-						|| (lista.get(i).getTipodoc().toLowerCase().equals(resultSearch.toLowerCase()))
-						|| (lista.get(i).getNdoc()).equals(resultSearch)) {
+			for(int i=0; i<lista.size(); i++) {
+				if((lista.get(i).getApellido()).toLowerCase().equals(resultSearch.toLowerCase()) 
+					|| (lista.get(i).getNombre()).toLowerCase().equals(resultSearch.toLowerCase()) 
+					|| (lista.get(i).getTipodoc().toLowerCase().equals(resultSearch.toLowerCase()))
+					|| (lista.get(i).getNdoc()).equals(resultSearch)) {
+						resultados.removeAll();
+						//scrollPane.removeAll();
 						newLista.add(lista.get(i));
-					}
 				}
-				if(newLista.size() == 0) {
-					warning.setVisible(true);
-				}else {
-					warning.setVisible(false);
-					setJPanelPasajero(newLista);
+			}
+			if(newLista.size() == 0) {
+				warning.setVisible(true);
+			}else {
+				warning.setVisible(false);
+				setJPanelPasajero(newLista);
+				if(newLista.size() > 5) {
 					scrollPane.add(resultados);
 				}
+				
 			}
-			update();
+		update();
 
 		});
 		
