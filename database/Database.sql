@@ -75,7 +75,7 @@ create table persona(
 	idPersona int GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
 	telefono character varying(25),
 	email character varying(50),
-	CUIT character varying(50) NOT NULL,
+	CUIT character varying(50),
 	calle character varying(25),
 	altura character varying(20),
 	PosIVA int,
