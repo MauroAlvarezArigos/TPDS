@@ -3,7 +3,9 @@ package Servicios;
 import DAO.HabitacionDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.HabitacionDTO;
+import DTO.OcupacionDTO;
 import Dominio.Habitacion;
+import Dominio.Ocupacion;
 import Servicios.Mappers.MapperHabitacion;
 import utils.Converter;
 
@@ -39,6 +41,22 @@ public class HabitacionServicio {
         daoManager.disconnect();
         mapperHabitacion = new MapperHabitacion();
         return mapperHabitacion.listToDTO(Lhab, n_piso, n_numero);
+    }
+    
+    public OcupacionDTO getOcupantes(String NHabitacion){
+    	Ocupacion ocupacion;
+    	Habitacion habitacion;
+    	daoManager = new DAOManager();
+    	HabDAO = daoManager.getHabitacionDAO();
+    	daoManager.begin();
+    	habitacion = HabDAO.getHabitacion(Integer.parseInt(NHabitacion.substring(1, 3)), Integer.parseInt(NHabitacion.substring(0, 1)));
+    	ocupacion  = HabDAO.getOcupacionesHabDesdeHasta(habitacion,converter.convertToDateViaSqlDate(LocalDate.now()),converter.convertToDateViaSqlDate(LocalDate.now())).get(0);
+    	
+    	daoManager.commit();
+        daoManager.disconnect();
+        
+        
+    	return null;
     }
 
 }

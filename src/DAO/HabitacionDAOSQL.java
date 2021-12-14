@@ -24,6 +24,10 @@ public class HabitacionDAOSQL implements HabitacionDAO {
     private static final String GET_ALL =
             "\n" +
             "SELECT * FROM HABITACION ";
+    private static final String GET_HAB_NUM =
+            "\n" +
+            "SELECT * FROM HABITACION WHERE numero = ? AND piso = ? ";
+    
     private static final String GET_ALL_RESERVAS_HABITACION =
             "\n" +
             "SELECT * FROM RESERVA" +
@@ -295,5 +299,40 @@ public class HabitacionDAOSQL implements HabitacionDAO {
         return LFueraDeServicio;
     }
 
+	@Override
+	public Habitacion getHabitacion(Integer nroHab, Integer piso) {
+		 Habitacion hab = new Habitacion();
+	        PreparedStatement pstmt = null;
+	        ResultSet rs = null;
+	        try {
+	            pstmt = conn.prepareStatement(GET_HAB_NUM);
+	            pstmt.setInt(1,nroHab);
+	            pstmt.setInt(2,piso);
+
+	            rs = pstmt.executeQuery();
+	            if(rs.next()) {
+	                hab.setCapacidad(rs.getInt("CAPACIDAD"));
+	                hab.setNumero(rs.getInt("NUMERO"));
+	                hab.setPiso(rs.getInt("PISO"));
+	                hab.setDescuento(rs.getInt("DESCUENTO"));
+	                hab.setTipo(TipoHabDAO.getTipoHabitacion(rs.getInt("TIPO")));
+	            }
+	            else {
+	            	return null;
+	            }
+	        }catch (SQLException e) {
+	            e.printStackTrace();
+	        } finally {
+	            try {
+	                if (pstmt != null) pstmt.close();
+	                if (pstmt != null) {
+	                    pstmt.close();
+	                }
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+	        return hab;
+	}
 
 }

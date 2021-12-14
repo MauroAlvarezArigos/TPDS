@@ -23,9 +23,9 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 	private JTextField tbxNombre;
 	private JTextField tbxNDoc;
 	
-	public OcuparHabAsigPasajeroGUI() {
+	public OcuparHabAsigPasajeroGUI(OcuparController controller) {
 	
-		this.controller = new OcuparController(this);
+		this.controller = controller;
 		this.controller.cargarTDNI();
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);

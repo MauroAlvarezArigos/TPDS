@@ -10,4 +10,5 @@ public interface HabitacionDAO {
     public List<Habitacion> getAllHabitaciones();
     public List<Reserva> getReservasHab(Habitacion unHab);
     public List<Ocupacion> getOcupacionesHab(Habitacion unHab);
+    public Habitacion getHabitacion(Integer nroHab, Integer piso);
 }

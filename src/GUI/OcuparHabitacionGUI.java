@@ -9,6 +9,7 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
+import Controller.OcuparController;
 import modelosTabla.DateLabelFormatter;
 
 import java.util.Properties;
@@ -17,7 +18,15 @@ import java.util.Properties;
 public class OcuparHabitacionGUI extends JFrame{
 	private JDatePickerImpl datePickerDesde;
 	private JDatePickerImpl datePickerHasta;
-
+	
+	private OcuparController controller;
+	
+	private JCheckBox chbxIndEstandar;
+	private JCheckBox chbxDobEstandar;
+	private JCheckBox chbxDobSuperior; 
+	private JCheckBox chbxSupFamily;
+	private JCheckBox chbxSuiteDoble;
+	
 	private JSpinner indEstandar;
 	private JSpinner dobEstandar;
 	private JSpinner dobSuperior;
@@ -26,6 +35,7 @@ public class OcuparHabitacionGUI extends JFrame{
 	
 	
 	public OcuparHabitacionGUI() {
+		this.controller = new OcuparController(this);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		this.setSize(500, 400);
@@ -84,7 +94,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		panel.add(lblCantHab);
 		
 		//SPINNERS
-		JCheckBox chbxIndEstandar = new JCheckBox("Individual Estandar");
+		chbxIndEstandar = new JCheckBox("Individual Estandar");
 		chbxIndEstandar.setBounds(31, 100, 146, 25);
 		panel.add(chbxIndEstandar);
 		
@@ -94,7 +104,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		indEstandar.setBounds(249, 100, 36, 25);
 		panel.add(indEstandar);
 		
-		JCheckBox chbxDobEstandar = new JCheckBox("Doble Estandar");
+		chbxDobEstandar = new JCheckBox("Doble Estandar");
 		chbxDobEstandar.setBounds(31, 130, 146, 25);
 		panel.add(chbxDobEstandar);
 		
@@ -104,7 +114,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobEstandar.setBounds(249, 130, 36, 25);
 		panel.add(dobEstandar);
 		
-		JCheckBox chbxDobSuperior = new JCheckBox("Doble Superior");
+		chbxDobSuperior = new JCheckBox("Doble Superior");
 		chbxDobSuperior.setBounds(31, 160, 146, 25);
 		panel.add(chbxDobSuperior);
 		
@@ -114,7 +124,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobSuperior.setBounds(249, 160, 36, 25);
 		panel.add(dobSuperior);
 		
-		JCheckBox chbxSupFamily = new JCheckBox("Superior Family Plan");
+		chbxSupFamily = new JCheckBox("Superior Family Plan");
 		chbxSupFamily.setBounds(31, 190, 146, 25);
 		panel.add(chbxSupFamily);
 		
@@ -124,7 +134,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		supFamily.setBounds(249, 190, 36, 25);
 		panel.add(supFamily);
 		
-		JCheckBox chbxSuiteDoble = new JCheckBox("Suite Doble");
+		chbxSuiteDoble = new JCheckBox("Suite Doble");
 		chbxSuiteDoble.setBounds(31, 220, 146, 25);
 		panel.add(chbxSuiteDoble);
 		
@@ -139,11 +149,9 @@ public class OcuparHabitacionGUI extends JFrame{
 		btnAsignarHab.setForeground(new Color(255, 255, 255));
 		btnAsignarHab.setBackground(new Color(0, 128, 0));
 		getContentPane().add(btnAsignarHab);
+		
 		btnAsignarHab.addActionListener(e->{
-			OcuparHabAsigPasajeroGUI oh = new OcuparHabAsigPasajeroGUI();
-			oh.setLocationRelativeTo(null);
-			oh.setVisible(true);
-			this.dispose();
+			controller.verificarHabitaciones();
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -177,6 +185,34 @@ public class OcuparHabitacionGUI extends JFrame{
 		
 		
 		
-		
 	}
+
+
+	//Getters and Setters
+	public JDatePickerImpl getDatePickerDesde() {return datePickerDesde;}
+	public void setDatePickerDesde(JDatePickerImpl datePickerDesde) {this.datePickerDesde = datePickerDesde;}
+	public JDatePickerImpl getDatePickerHasta() {return datePickerHasta;}
+	public void setDatePickerHasta(JDatePickerImpl datePickerHasta) {this.datePickerHasta = datePickerHasta;}
+	public OcuparController getController() {return controller;}
+	public void setController(OcuparController controller) {this.controller = controller;}
+	public JCheckBox getChbxIndEstandar() {return chbxIndEstandar;}
+	public void setChbxIndEstandar(JCheckBox chbxIndEstandar) {this.chbxIndEstandar = chbxIndEstandar;}
+	public JCheckBox getChbxDobEstandar() {return chbxDobEstandar;}
+	public void setChbxDobEstandar(JCheckBox chbxDobEstandar) {this.chbxDobEstandar = chbxDobEstandar;}
+	public JCheckBox getChbxDobSuperior() {return chbxDobSuperior;}
+	public void setChbxDobSuperior(JCheckBox chbxDobSuperior) {this.chbxDobSuperior = chbxDobSuperior;}
+	public JCheckBox getChbxSupFamily() {return chbxSupFamily;}
+	public void setChbxSupFamily(JCheckBox chbxSupFamily) {this.chbxSupFamily = chbxSupFamily;}
+	public JCheckBox getChbxSuiteDoble() {return chbxSuiteDoble;}
+	public void setChbxSuiteDoble(JCheckBox chbxSuiteDoble) {this.chbxSuiteDoble = chbxSuiteDoble;}
+	public JSpinner getIndEstandar() {return indEstandar;}
+	public void setIndEstandar(JSpinner indEstandar) {this.indEstandar = indEstandar;}
+	public JSpinner getDobEstandar() {return dobEstandar;}
+	public void setDobEstandar(JSpinner dobEstandar) {this.dobEstandar = dobEstandar;}
+	public JSpinner getDobSuperior() {return dobSuperior;}
+	public void setDobSuperior(JSpinner dobSuperior) {this.dobSuperior = dobSuperior;}
+	public JSpinner getSupFamily() {return supFamily;}
+	public void setSupFamily(JSpinner supFamily) {this.supFamily = supFamily;}
+	public JSpinner getSuiteDoble() {return suiteDoble;}
+	public void setSuiteDoble(JSpinner suiteDoble) {this.suiteDoble = suiteDoble;}
 }

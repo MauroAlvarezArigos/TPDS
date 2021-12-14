@@ -74,7 +74,7 @@ public class DAOManager {
         return habitacionDAO;
     }
 
-	public PersonaJuridicaDAO getPersonaJuridicaDAO() {
+	public PersonaJuridicaDAOSQL getPersonaJuridicaDAO() {
 		if(this.personaJuridicaDAO == null) {
 			this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
 		}

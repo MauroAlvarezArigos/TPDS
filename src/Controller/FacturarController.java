@@ -10,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import DTO.OcupacionDTO;
 import DTO.PasajeroDTO;
 import Dominio.PersonaJuridica;
 import Exceptions.CampoFacturarIncorrecto;
@@ -17,12 +18,14 @@ import Exceptions.CampoFaltanteException;
 import Exceptions.NoConcordanciaException;
 import GUI.FacturarElementosGUI;
 import GUI.FacturarGUI;
+import Servicios.HabitacionServicio;
 import Servicios.PersonaJuridicaServicio;
 
 public class FacturarController {
 
 	Color Warning = new Color(255,0,0);
-	List<PasajeroDTO> ocupantes;
+	
+	OcupacionDTO ocupantes;
 	
 	private FacturarGUI facturaGUI;
 	private PersonaJuridicaServicio pjServicio;
@@ -33,12 +36,10 @@ public class FacturarController {
 	public FacturarController(FacturarGUI facturarGUI) {
 		this.facturaGUI = facturarGUI;
 		this.pjServicio = new PersonaJuridicaServicio();
-		ocupantes = new ArrayList<PasajeroDTO>();
-		
 	}
 	
 	public void checkOut() throws CampoFacturarIncorrecto, CampoFaltanteException{
-		boolean bool = false;
+		boolean bool = true;
 		
 		if((facturaGUI.getTbxNumHabitacion()).getText().isEmpty() || (facturaGUI.getTbxNumHabitacion()).getText().isBlank()) {
             bool = false;
@@ -51,7 +52,9 @@ public class FacturarController {
 		
 		if(bool) {
 			try {
-				ocupantes = buscarOcupantesHabitacion();
+				System.out.println("ANA: "+Integer.parseInt(facturaGUI.getTbxNumHabitacion().getText().substring(1, 3)));
+				System.out.println("SHE: "+Integer.parseInt(facturaGUI.getTbxNumHabitacion().getText().substring(0, 1)));
+				buscarOcupantesHabitacion();
 				//Armar la tabla con los ocupantes
 			}
 			catch(Exception e) {
@@ -60,8 +63,9 @@ public class FacturarController {
 		}
 	}
 	
-	public List<PasajeroDTO> buscarOcupantesHabitacion() {
-		return null;
+	public OcupacionDTO buscarOcupantesHabitacion() {
+		HabitacionServicio hs = new HabitacionServicio();
+		return hs.getOcupantes(facturaGUI.getTbxNumHabitacion().getText());
 	}
 	
 	public void informarError(){
@@ -85,7 +89,6 @@ public class FacturarController {
 	public void facturar() throws NoConcordanciaException {
 		
 		//Recordar Si facturas por tercero el tipo de factura es A, si no es B
-		
 		if(facturaGUI.getCbxFacturaTercero().isSelected()) {
 			//Factura por 3ro
 			if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
@@ -107,6 +110,9 @@ public class FacturarController {
 				}
 			}
 			
+		}
+		else {
+			//No facturar por tercero
 		}
 	}
 	
