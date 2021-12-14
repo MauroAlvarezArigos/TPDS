@@ -99,6 +99,13 @@ create table pasajero(
 	constraint fk_TipoDoc foreign key (TipoDoc) REFERENCES IDtype (tipoDeID)
 );
 
+create table persona_juridica(
+	idPersona int primary key,
+	domicilioFiscal character varying(50),
+	razonSocial character varying(50),
+	constraint fk_idpersona foreign key (idPersona) REFERENCES persona (idPersona)
+);
+
 create table ocupacion (
     id_ocupacion int,
     numero int,

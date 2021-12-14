@@ -10,6 +10,9 @@ id7 int;
 id8 int;
 id9 int;
 id10 int;
+id11 int;
+id12 int;
+id13 int;
 
 begin
 --Datos Pos Iva
@@ -156,7 +159,10 @@ insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) v
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '9037432352', 'gshakshaft7@photobucket.com', '20456932159', 'Susan', '5514', 3, 7)returning idpersona into id8;
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '1816528986', 'rfriedman8@imdb.com', '9632541596', 'Buhler', '624', 2, 3)returning idpersona into id9;
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '9630048949', 'lthuillier9@wisc.edu', '6325964203', 'Sherman', '1129', 3, 8)returning idpersona into id10;
-
+insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '4323212', 'mcdonalds@gmail.com', '123456789', 'Los Cardenales', '123', 3, 8)returning idpersona into id11;
+insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '4565621', 'microsft@gmail.com', '123321123', 'Las Hienas', '543', 3, 8)returning idpersona into id12;
+insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '4329873', 'contact@riotgames.com', '456654456', 'Olympic Blvd', '12333', 3, 8)returning idpersona into id13;
+	
 --Datos Pasajero
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Bondy', 'Rylatt', '3808721502', 'LC', 'Office Assistant IV', '2021-09-11', 054);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id2, 'Luce', 'Theml', '9936502027', 'LE', 'Chief Design Engineer', '2021-02-13', 056);
@@ -168,6 +174,11 @@ insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, Fec
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id8, 'Ewan', 'Latek', '0084924403', 'LC', 'Office Assistant I', '2021-04-03', 055);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id9, 'Shandee', 'Record', '3017832678', 'DNI', 'Biostatistician III', '2021-02-23', 058);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '2021-09-20', 057);
+
+--Datos Persona Juridica
+insert into persona_juridica (idpersona, domiciliofiscal, razonsocial) values (id11, 'Los Cardenales 123', 'McDonalds');
+insert into persona_juridica (idpersona, domiciliofiscal, razonsocial) values (id12, 'Las Hienas 543', 'Microsoft');
+insert into persona_juridica (idpersona, domiciliofiscal, razonsocial) values (id13, 'Olympic Blvd 12333', 'Riot Games');
 
 --Datos Reserva
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021-09-11', '2021-09-20');
