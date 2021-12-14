@@ -7,7 +7,6 @@ import javax.swing.JComponent;
 import javax.swing.JOptionPane;
 
 import Exceptions.CampoFacturarIncorrecto;
-import Exceptions.DuplicateDocNumberException;
 import GUI.FacturarGUI;
 
 public class FacturarController {
@@ -42,7 +41,7 @@ public class FacturarController {
 	public void informarError(){
         if(facturaGUI.optionMessageGUI(
                 "Error",
-                "Número de habitación faltante, incorrecto o habitación no ocupada; hora faltante o incorrecta",
+                "Nï¿½mero de habitaciï¿½n faltante, incorrecto o habitaciï¿½n no ocupada; hora faltante o incorrecta",
                 new String[]{"OK"}) == JOptionPane.YES_OPTION){
         }else{
         	facturaGUI.gettextNumHabitacion().requestFocus();

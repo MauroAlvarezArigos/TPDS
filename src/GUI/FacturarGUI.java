@@ -1,7 +1,6 @@
 package GUI;
 
 import java.awt.Color;
-import java.lang.ModuleLayer.Controller;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;

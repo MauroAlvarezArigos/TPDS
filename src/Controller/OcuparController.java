@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 
 import DTO.IDTypeDTO;
@@ -20,10 +19,7 @@ public class OcuparController {
 	private List<PasajeroBusquedaDTO> lista;
 	private OcuparHabAsigPasajeroGUI ocuparGUI;
 	
-	private final JTable table;
-	
 	public OcuparController(OcuparHabAsigPasajeroGUI oHab) {
-		this.table = new JTable();
 		this.pasajeroServicio = new PasajeroServicio();
 		this.IDServicio = new IDTypeServicio();
 		this.ocuparGUI = oHab;

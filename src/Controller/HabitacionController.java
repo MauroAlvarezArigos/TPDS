@@ -17,11 +17,9 @@ import GUI.MostrarEstadoHabitacionGUI;
 import Servicios.HabitacionServicio;
 import utils.Converter;
 
-import javax.swing.*;
 
 public class HabitacionController {
 	private HabitacionServicio habServicio;
-	private static final String ZoneId = null;
 	private MostrarEstadoHabitacionGUI MostarEstadoGUI;
 	private EstadoHabitacionesGUI EstadoGUI;
 	private Converter converter = new Converter();
