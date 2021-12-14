@@ -85,16 +85,16 @@ insert into tipohabitacion (id, tipo, costo) values (1, 'Simple', 99.99);
 insert into tipohabitacion (id, tipo, costo) values (2, 'Doble', 199.99);
 
 --Item consumo
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0199, 'Higene', 'PapelHigenico', '$52.95');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0299, 'Bebida sin alcohol', 'Sprite', '$7.57');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0399, 'Belleza', 'Sombra para Ojos', '$92.40');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0499, 'Bebida sin alcohol', 'Cocacola', '$8.36');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0599, 'Comida', 'Hamburguesa con papas', '$77.88');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0699, 'Comida', 'Hamburguesa con papas', '$29.36');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0799, 'Higene', 'Desodorante', '$91.67');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0899, 'Farmacia', 'Ibuprofeno', '$61.10');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (0999, 'Farmacia', 'Paracetamol', '$52.54');
-insert into itemconsumo (id_item, categoria, nombre, costo) values (01099, 'Bebida con alcohol', 'Vino Blanco', '$35.41');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0199, 'Higene', 'PapelHigenico', '52.95');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0299, 'Bebida sin alcohol', 'Sprite', '7.57');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0399, 'Belleza', 'Sombra para Ojos', '92.40');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0499, 'Bebida sin alcohol', 'Cocacola', '8.36');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0599, 'Comida', 'Hamburguesa con papas', '77.88');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0699, 'Comida', 'Hamburguesa con papas', '29.36');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0799, 'Higene', 'Desodorante', '91.67');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0899, 'Farmacia', 'Ibuprofeno', '61.10');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (0999, 'Farmacia', 'Paracetamol', '52.54');
+insert into itemconsumo (id_item, categoria, nombre, costo) values (01099, 'Bebida con alcohol', 'Vino Blanco', '35.41');
 
 --Datos Habitacion
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 1, 1, 1, 0);
@@ -110,28 +110,28 @@ insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkou
 insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (3, 1, 2, id3, '2021-09-13', '2021-09-15');
 
 --Periodo estadia
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00001, 1, '25/11/2021', '21/05/2023', '$600.86');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00002, 2, '12/01/2021', '22/02/2023', '$6758.76');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00003, 3, '23/03/2021', '23/08/2023', '$8523.47');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00004, 2, '07/09/2021', '06/06/2023', '$2145.57');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00005, 3, '24/07/2021', '16/05/2023', '$7609.79');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00006, 1, '21/02/2021', '03/06/2023', '$5541.41');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00007, 3, '14/09/2021', '19/03/2022', '$9025.69');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00008, 2, '20/10/2021', '31/01/2023', '$6675.94');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00009, 1, '04/01/2021', '06/01/2022', '$4943.51');
-insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (000010,3, '16/04/2021', '18/08/2023', '$1221.74');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00001, 1, '25/11/2021', '21/05/2023', '600.86');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00002, 2, '12/01/2021', '22/02/2023', '6758.76');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00003, 3, '23/03/2021', '23/08/2023', '8523.47');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00004, 2, '07/09/2021', '06/06/2023', '2145.57');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00005, 3, '24/07/2021', '16/05/2023', '7609.79');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00006, 1, '21/02/2021', '03/06/2023', '5541.41');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00007, 3, '14/09/2021', '19/03/2022', '9025.69');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00008, 2, '20/10/2021', '31/01/2023', '6675.94');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (00009, 1, '04/01/2021', '06/01/2022', '4943.51');
+insert into periodoestadia (id_estadia, ocupacion, fechainicio, fechafinal, monto) values (000010,3, '16/04/2021', '18/08/2023', '1221.74');
 
 --Consumo servicio
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (01, 1, '$3724.02');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (02, 2, '$1216.90');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (03, 1, '$4066.48');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (04, 3, '$443.56');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (05, 3, '$4937.15');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (06, 3, '$4785.82');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (07, 1, '$5041.43');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (08, 2, '$8699.82');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (09, 2, '$9159.50');
-insert into consumoservicios (id_consumo, ocupacion, costototal) values (011, 2, '$9969.75');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (01, 1, '3724.02');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (02, 2, '1216.90');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (03, 1, '4066.48');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (04, 3, '443.56');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (05, 3, '4937.15');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (06, 3, '4785.82');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (07, 1, '5041.43');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (08, 2, '8699.82');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (09, 2, '9159.50');
+insert into consumoservicios (id_consumo, ocupacion, costototal) values (011, 2, '9969.75');
 
 --Consumo unidades
 insert into consumounidades (id_unidades, id_consumo, id_item) values (019, 01, 0199);
@@ -176,5 +176,78 @@ insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fecha
 
 --Datos Fuera De Servicio
 insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021-09-01', '2021-09-30');
+
+--Nota de credito
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (177, 3, '12/05/2021', 374.79, 971.47, '9093832379');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (277, 4, '01/04/2021', 986.39, 665.4, '3533356477');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (377, 6, '09/05/2021', 23.24, 271.56, '0084924403');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (477, 8, '22/10/2021', 551.37, 673.71, '9936502027');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (577, 10, '06/06/2021', 810.78, 464.44, '3828106110');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (677, 3, '17/08/2020', 233.9, 551.26, '7519091015');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (777, 2, '25/11/2021', 41.66, 169.14, '3533356477');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (877, 4, '16/08/2020', 670.19, 909.86, '7519091015');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (977, 3, '08/11/2021', 381.02, 484.23, '3017832678');
+insert into notadecredito (id_nota, ResponsablePago, FechaFactura, ImpNeto, IVA, DNICUIT) values (1077, 1, '18/11/2020', 360.52, 541.88, '9936502027');
+
+--Responsable de pago
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (188, 10, '8268408731', '7', '9881593437');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (288, 6, '7615091365', '45', '9294515057');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (388, 2, '4606590734', '24', '7865390980');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (488, 5, '4406968032', '18', '5776171919');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (588, 5, '9208176436', '5674', '6235825609');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (688, 9, '4428602197', '35', '8953264011');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (788, 5, '1020257814', '735', '1737370647');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (888, 9, '4010710020', '65757', '2135008904');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (988, 6, '8064642833', '4441', '9277477022');
+insert into RespDePago (id_respDePago, id_Persona, DNICUIT, NumDireccion, Telefono) values (1088, 7, '4962572946', '45', '3693238755');
+
+--Factura
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (10990, 00001, 177, 188, '1/2/2022', '3338.06');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (20990, 00002, 277, 288, '22/10/2022', '2218.04');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (30990, 00003, 377, 388, '13/12/2022', '8924.07');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (40990, 00004, 477, 488, '19/05/2021', '9581.97');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (50990, 00005, 577, 588, '16/04/2023', '3572.90');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (60990, 00006, 677, 688, '27/08/2021', '2170.36');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (70990, 00007, 777, 788, '28/09/2022', '1074.74');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (80990, 00008, 877, 888, '20/12/2021', '1907.52');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (90990, 00009, 977, 988, '21/05/2023', '1971.98');
+insert into factura (id_factura, id_estadia, nota_credito, id_respdepago, fecha, monto_total) values (100990, 000010, 1077, 1088, '15/11/2022', '5441.09');
+
+--Pago 
+insert into pago (id_pago, id_factura, monto) values (10770, 10990, '269.79');
+insert into pago (id_pago, id_factura, monto) values (20770, 20990, '790.70');
+insert into pago (id_pago, id_factura, monto) values (30770, 30990, '954.36');
+insert into pago (id_pago, id_factura, monto) values (40770, 40990, '748.78');
+insert into pago (id_pago, id_factura, monto) values (50770, 50990, '143.90');
+insert into pago (id_pago, id_factura, monto) values (60770, 60990, '157.95');
+insert into pago (id_pago, id_factura, monto) values (70770, 70990, '189.41');
+insert into pago (id_pago, id_factura, monto) values (80770, 80990, '176.24');
+insert into pago (id_pago, id_factura, monto) values (90770, 90990, '93.82');
+insert into pago (id_pago, id_factura, monto) values (100770, 100990, '641.14');
+
+
+--Detalle Factura
+insert into detallesfactura (id_factura, id_detalle, costototal) values (10990, 111222, '265.27');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (20990, 222333, '649.85');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (30990, 333444, '381.23');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (40990, 444555, '843.96');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (50990, 555666, '575.21');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (60990, 666777, '941.52');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (70990, 777888, '506.75');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (80990, 888999, '486.14');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (90990, 9991010, '346.96');
+insert into detallesfactura (id_factura, id_detalle, costototal) values (100990, 10101111, '3.44');
+
+--Detalle Unidad
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (019, 111222, 0199);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (029, 222333, 0299);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (039, 333444, 0399);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (049, 444555, 0499);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (059, 555666, 0599);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (069, 666777, 0699);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (079, 777888, 0799);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (089, 888999, 0899);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (099, 9991010, 0999);
+insert into detalleunidades (id_unidades, id_detalle, id_item) values (0119, 10101111, 01099);
 
 end$$;

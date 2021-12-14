@@ -161,3 +161,61 @@ create table fueradeservicio (
     constraint pk_id_fueradeservicio primary key (id_fueradeservicio),
     constraint fk_habitacion foreign key (numero, piso) REFERENCES habitacion (numero, piso)
 );
+
+create table notadecredito (
+	id_nota INT,
+	ResponsablePago INT,
+	FechaFactura DATE,
+	ImpNeto DECIMAL(6,2),
+	IVA DECIMAL(6,2),
+	DNICUIT VARCHAR(10),
+	constraint pk_notadecredito primary key (id_nota)
+);
+
+create table RespDePago (
+	id_respDePago INT,
+	id_Persona INT,
+	DNICUIT VARCHAR(50),
+	NumDireccion VARCHAR(50),
+	Telefono VARCHAR(50),
+	constraint pk_respdepago primary key (id_respDePago)
+);
+
+create table factura (
+	id_factura INT,
+	id_estadia INT,
+	nota_credito int,
+	id_respdepago INT,
+	fecha DATE,
+	monto_total VARCHAR(50),
+	constraint pk_factura primary key (id_factura),
+	constraint fk_estadia foreign key (id_estadia) references periodoestadia(id_estadia),
+	constraint fk_notacredito foreign key (nota_credito) references notadecredito(id_nota),
+	constraint fk_resp_pago foreign key (id_respdepago) references respdepago(id_respdepago)
+);
+
+create table pago (
+	id_pago INT,
+	id_factura INT,
+	monto VARCHAR(50),
+	constraint pk_pago primary key (id_pago),
+	constraint fk_factura foreign key (id_factura) references factura(id_factura)
+);
+
+create table detallesfactura (
+	id_factura INT,
+	id_detalle INT,
+	costototal VARCHAR(50),
+	constraint pk_detallesfactura primary key (id_detalle),
+	constraint fk_factura foreign key (id_factura) references factura(id_factura)
+);
+
+create table detalleunidades (
+	id_unidades INT,
+	id_detalle int,
+	id_item int,
+	constraint pk_detalleunidades primary key (id_item,id_unidades,id_detalle),
+	constraint fk_item foreign key (id_item) references itemconsumo(id_item),
+	constraint fk_unidades foreign key (id_unidades) references unidades(id_unidades),
+	constraint fk_detalle foreign key (id_detalle) references detallesfactura(id_detalle)
+);
