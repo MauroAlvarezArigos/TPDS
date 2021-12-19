@@ -11,6 +11,7 @@ public class HabitacionDAOSQL implements HabitacionDAO {
 
     private Connection conn;
     private TipoHabitacionDAOSQL TipoHabDAO;
+    private PasajeroDAOSQL PasajeroDAO;
     private Converter converter = new Converter();
 
     //---
@@ -18,34 +19,45 @@ public class HabitacionDAOSQL implements HabitacionDAO {
     public HabitacionDAOSQL(Connection unConn){
         this.conn = unConn;
         this.TipoHabDAO = new TipoHabitacionDAOSQL(unConn);
+        this.PasajeroDAO = new PasajeroDAOSQL(unConn);
     }
 
     //Query Sentences
     private static final String GET_ALL =
             "\n" +
-            "SELECT * FROM HABITACION ";
+            " SELECT * FROM HABITACION ";
+    private static final String GET_HAB_NUM =
+            "\n" +
+                    "SELECT * FROM HABITACION WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_RESERVAS_HABITACION =
             "\n" +
-            "SELECT * FROM RESERVA" +
+            " SELECT * FROM RESERVA" +
                     " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_RESERVAS_HABITACION_DESDE_HASTA =
             GET_ALL_RESERVAS_HABITACION+" AND ((fechadesde BETWEEN ? AND ?) or (fechahasta BETWEEN ? AND ?)) ";
     private static final String GET_ALL_OCUPACIONES_HABITACION =
             "\n" +
-            "SELECT * FROM OCUPACION" +
+            " SELECT * FROM OCUPACION" +
             " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_OCUPACIONES_HABITACION_DESDE_HASTA =
             GET_ALL_OCUPACIONES_HABITACION + " AND ((checkin BETWEEN ? AND ?) or (checkout BETWEEN ? AND ?)) ";
     private static final String GET_ALL_FUERADESERVICIO_HABITACION =
             "\n" +
-            "SELECT * FROM FUERADESERVICIO" +
+            " SELECT * FROM FUERADESERVICIO" +
             " WHERE numero = ? AND piso = ? ";
     private static final String GET_ALL_FUERADESERVICIO_HABITACION_DESDE_HASTA =
             GET_ALL_FUERADESERVICIO_HABITACION + " AND ((desde BETWEEN ? AND ?) or (hasta BETWEEN ? AND ?)) ";
+    private static final String INSERT_OCUPACION =
+            "\n" +
+            " INSERT INTO OCUPACION( numero, piso, responsable, checkin, checkout)" +
+            " VALUES( ?, ?, ?, ?, ?) RETURNING id_ocupacion";
+    private static final String INSERT_ACOMPANANTES =
+            "\n" +
+            " INSERT INTO ACOMPANANTES(pasajero,ocupacion)" +
+            " VALUES( ?, ?)";
 
-    /*public List<Ocupacion> getOcupacionDesdeHasta(){
-        //todo mover a OcupacionDAO
-    }*/
+        //todo separar en OcupacionDAO, ReservaDAO, HabitacionDAO, FueraDeServicioDAO
+
 
     public List<Habitacion> getAllHabitaciones(){
         List<Habitacion> lista = new ArrayList<>();
@@ -206,6 +218,8 @@ public class HabitacionDAOSQL implements HabitacionDAO {
                 o.setHabitacion(unHab);
                 o.setCheckIn(converter.convertToLocalDateViaInstant(rs.getDate("CHECKIN")));
                 o.setCheckOut(converter.convertToLocalDateViaInstant(rs.getDate("CHECKOUT")));
+                o.setResponsable(this.PasajeroDAO.getPasajeroDbid(rs.getInt("RESPONSABLE")));
+                o.setAcompanantes(this.PasajeroDAO.getAcompanantesOcupacion(o.getId()));
                 o.setId(rs.getInt("ID_OCUPACION"));
                 LOcupaciones.add(o);
             }
@@ -295,5 +309,84 @@ public class HabitacionDAOSQL implements HabitacionDAO {
         return LFueraDeServicio;
     }
 
+    public Habitacion getHabitacion(Integer nroHab, Integer piso) {
+        Habitacion hab = new Habitacion();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_HAB_NUM);
+            pstmt.setInt(1,nroHab);
+            pstmt.setInt(2,piso);
 
-}
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                hab.setCapacidad(rs.getInt("CAPACIDAD"));
+                hab.setNumero(rs.getInt("NUMERO"));
+                hab.setPiso(rs.getInt("PISO"));
+                hab.setDescuento(rs.getInt("DESCUENTO"));
+                hab.setTipo(TipoHabDAO.getTipoHabitacion(rs.getInt("TIPO")));
+            }
+            else {
+                return null;
+            }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return hab;
+    }
+
+    public void guardarOcupacion(Ocupacion unOcupacion){
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = conn.prepareStatement(INSERT_OCUPACION);
+
+            //parte de Persona
+            pstmt.setInt(1, unOcupacion.getHabitacion().getNumero());
+            pstmt.setInt(2, unOcupacion.getHabitacion().getPiso());
+            pstmt.setInt(3, unOcupacion.getResponsable().getIdpersona());
+            pstmt.setDate(4, converter.convertToDateViaSqlDate(unOcupacion.getCheckIn()));
+            pstmt.setDate(5, converter.convertToDateViaSqlDate(unOcupacion.getCheckOut()));
+
+            pstmt.execute();
+            ResultSet resultSet = pstmt.getResultSet();
+            int id = 0;
+            if (resultSet.next()) {
+                id = resultSet.getInt(1);
+            }
+
+            for(Pasajero p :unOcupacion.getAcompanantes()){
+                pstmt = conn.prepareStatement(INSERT_ACOMPANANTES);
+                pstmt.setInt(1,p.getIdpersona());
+                pstmt.setInt(2,id);
+                pstmt.executeUpdate();
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    }
+
+
+
+
+

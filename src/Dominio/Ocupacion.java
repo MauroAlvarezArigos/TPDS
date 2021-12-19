@@ -1,10 +1,12 @@
 package Dominio;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Ocupacion {
     private int id;
     private Pasajero Responsable;
+    private List<Pasajero> Acompanantes;
     private Habitacion habitacion;
     private LocalDate checkIn;
     private LocalDate checkOut;
@@ -38,5 +40,11 @@ public class Ocupacion {
     }
     public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
+    }
+    public List<Pasajero> getAcompanantes() {
+        return Acompanantes;
+    }
+    public void setAcompanantes(List<Pasajero> acompanantes) {
+        Acompanantes = acompanantes;
     }
 }

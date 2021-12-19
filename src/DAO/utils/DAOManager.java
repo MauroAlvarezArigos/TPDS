@@ -19,6 +19,8 @@ public class DAOManager {
     private PosIVADAOSQL posIVADAO = null;
     private UbicacionDAOSQL ubicacionDAO = null;
     private HabitacionDAOSQL habitacionDAO = null;
+    private PersonaJuridicaDAOSQL personaJuridicaDAO = null;
+    private OcupacionDAOSQL ocupacionDAO = null;
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -73,6 +75,20 @@ public class DAOManager {
             this.habitacionDAO = new HabitacionDAOSQL(wrapper.getConnection());
         }
         return habitacionDAO;
+    }
+
+    public PersonaJuridicaDAOSQL getPersonaJuridicaDAO() {
+        if (this.personaJuridicaDAO == null) {
+            this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
+        }
+        return personaJuridicaDAO;
+    }
+
+    public OcupacionDAOSQL getOcupacionDAO() {
+        if (this.ocupacionDAO == null) {
+            this.ocupacionDAO = new OcupacionDAOSQL(wrapper.getConnection());
+        }
+        return ocupacionDAO;
     }
 
 }

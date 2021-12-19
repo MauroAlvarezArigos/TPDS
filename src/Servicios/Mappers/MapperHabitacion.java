@@ -1,9 +1,8 @@
 package Servicios.Mappers;
 
 import DTO.HabitacionDTO;
-import DTO.ReservaDTO;
 import Dominio.Habitacion;
-import Dominio.Reserva;
+import Servicios.HabitacionServicio;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +27,10 @@ public class MapperHabitacion {
         dto.setCapacidad(unHab.getCapacidad());
         dto.setTipo(unHab.getTipo().getTipo());
         dto.setNumero(piso+numero);
+        dto.setN_hab(unHab.getNumero());
+        dto.setPiso(unHab.getPiso());
         dto.setReservas(mapperReserva.listToDTO(unHab.getReservas()));
-        dto.setOcupaciones(mapperOcupacion.listToDTO(unHab.getOcupaciones()));
+        dto.setOcupaciones(mapperOcupacion.listToSimplifiedDTO(unHab.getOcupaciones()));
         dto.setFueraDeServicio(mapperFueraDeServicio.listToDTO(unHab.getPeriodosFueraDeServicio()));
 
         return dto;
@@ -43,6 +44,14 @@ public class MapperHabitacion {
 
         }
         return LDTO;
+    }
+
+    public Habitacion toDomain(HabitacionDTO dto){
+        Habitacion resultobj;
+        HabitacionServicio servicio = new HabitacionServicio();
+        resultobj = servicio.getHabNumeroPiso(dto.getN_hab(), dto.getPiso());
+
+        return resultobj;
     }
 
 }

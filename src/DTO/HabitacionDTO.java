@@ -6,6 +6,8 @@ import java.util.List;
 
 public class HabitacionDTO {
     private String numero;
+    private int n_hab;
+    private int piso;
     private String tipo;
     private int capacidad;
 
@@ -48,5 +50,17 @@ public class HabitacionDTO {
     }
     public void setFueraDeServicio(List<PeriodoEstadoHabitacionDTO> fueraDeServicio) {
         FueraDeServicio = fueraDeServicio;
+    }
+    public int getN_hab() {
+        return n_hab;
+    }
+    public void setN_hab(int n_hab) {
+        this.n_hab = n_hab;
+    }
+    public int getPiso() {
+        return piso;
+    }
+    public void setPiso(int piso) {
+        this.piso = piso;
     }
 }

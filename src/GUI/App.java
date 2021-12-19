@@ -1,11 +1,8 @@
 package GUI;
 
-
 import Controller.DarAltaController;
-
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
-import java.text.ParseException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,11 +17,9 @@ public class App extends JFrame {
 			public void run() {
 				try {
 					App frame = new App();
-					frame.setTitle("Sistema de Gestion de Viajes");
 					frame.pack();
 					frame.setSize(600,400);
 					frame.setExtendedState(java.awt.Frame.MAXIMIZED_BOTH);
-					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,7 +29,9 @@ public class App extends JFrame {
 	}
 	
 	public App() {
+		setTitle("Sistema de Gestion de Viajes");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 		JPanel panelMenu = new JPanel();
 		setContentPane(panelMenu);
 		panelMenu.setLayout(new FlowLayout());
@@ -48,23 +45,58 @@ public class App extends JFrame {
 		JButton btnMostrarEstadoHabitacion = new JButton("Mostrar Estado Habitacion");
 		panelMenu.add(btnMostrarEstadoHabitacion);
 		
+		JButton btnOcuparHabitacion = new JButton("Ocupar Habitacion");
+		panelMenu.add(btnOcuparHabitacion);
+		
+		JButton btnFacturar = new JButton("Facturar");
+		panelMenu.add(btnFacturar);
+		
+		JButton btnFacturar2 = new JButton("Facturar2");
+		panelMenu.add(btnFacturar2);
+		
 		btnAltaPasajero.addActionListener(e -> {
 			AltaPasajeroGUI ap = new AltaPasajeroGUI();
 			ap.setController(new DarAltaController(ap));
 			ap.setVisible(true);
+			ap.setLocationRelativeTo(null);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 
 		botonGestionarPasajero.addActionListener(e -> {
 			GestionPasajeroGUI gp = new GestionPasajeroGUI();
+			gp.setLocationRelativeTo(null);
 			gp.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
 		
 		btnMostrarEstadoHabitacion.addActionListener(e -> {
-			MostrarEstadoHabitacionGUI me = new MostrarEstadoHabitacionGUI();
-			me.setVisible(true);
+			MostrarEstadoHabitacionGUI mostrarEstadoHabitacion = new MostrarEstadoHabitacionGUI();
+			mostrarEstadoHabitacion.setLocationRelativeTo(null);
+			mostrarEstadoHabitacion.setVisible(true);
 			SwingUtilities.updateComponentTreeUI(panelMenu);
 		});
+		
+		btnOcuparHabitacion.addActionListener(e -> {
+			OcuparHabitacionGUI ocuparHabitacion = new OcuparHabitacionGUI();
+			ocuparHabitacion.setLocationRelativeTo(null);
+			ocuparHabitacion.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		btnFacturar.addActionListener(e -> {
+			FacturarGUI facturar = new FacturarGUI();
+			facturar.setLocationRelativeTo(null);
+			facturar.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		btnFacturar2.addActionListener(e -> {
+			FacturarElementosGUI facturar2 = new FacturarElementosGUI(null,"Microsoft","A");
+			facturar2.setLocationRelativeTo(null);
+			facturar2.setVisible(true);
+			SwingUtilities.updateComponentTreeUI(panelMenu);
+		});
+		
+		
 	}
 }

@@ -85,16 +85,26 @@ insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, Fec
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '2021-09-20', 7);
 
 --Datos TipoHabitacion
-insert into tipohabitacion (id, tipo, costo) values (1, 'Simple', 99.99);
-insert into tipohabitacion (id, tipo, costo) values (2, 'Doble', 199.99);
+insert into tipohabitacion (id, tipo, costo) values (1, 'Individual Estandar', 99.99);
+insert into tipohabitacion (id, tipo, costo) values (2, 'Doble Estandar', 199.99);
+insert into tipohabitacion (id, tipo, costo) values (3, 'Doble Superior', 299.99);
+insert into tipohabitacion (id, tipo, costo) values (4, 'Superior Family Plan', 399.99);
+insert into tipohabitacion (id, tipo, costo) values (5, 'Suite Doble', 999.99);
 
 --Datos Habitacion
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 1, 1, 1, 0);
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 1, 2, 2, 0);
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 1, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 4, 1, 3, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 5, 1, 4, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 6, 1, 5, 2, 0);
+
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 2, 1, 1, 0);
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 2, 2, 2, 0);
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 2, 1, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 4, 2, 3, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 5, 2, 4, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 6, 2, 5, 2, 0);
 
 --Datos Reserva
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021-09-11', '2021-09-20');
@@ -102,9 +112,10 @@ insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fecha
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (3, 1, 1, 'Richy', 'Wieprecht', '3533356477', '2021-09-01', '2021-09-10');
 
 --Datos Ocupacion
-insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (1, 1, 2, id1, '2021-09-21', '2021-09-30');
-insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (2, 1, 2, id2, '2021-09-01', '2021-09-12');
-insert into ocupacion (id_ocupacion, numero, piso, responsable, checkin, checkout) values (3, 1, 2, id3, '2021-09-13', '2021-09-15');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id1, '2021-09-21', '2021-09-30');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id2, '2021-09-01', '2021-09-12');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-09-13', '2021-09-15');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-12-13', '2021-12-30');
 
 --Datos Fuera De Servicio
 insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021-09-01', '2021-09-30');

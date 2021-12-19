@@ -5,9 +5,11 @@ import DAO.HabitacionDAOSQL;
 import DAO.IDTypeDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.HabitacionDTO;
+import DTO.OcupacionDTO;
 import Dominio.Habitacion;
 import Dominio.Ocupacion;
 import Servicios.Mappers.MapperHabitacion;
+import Servicios.Mappers.MapperOcupacion;
 import utils.Converter;
 
 import java.time.LocalDate;
@@ -21,6 +23,35 @@ public class HabitacionServicio {
     DAOManager daoManager;
     HabitacionDAOSQL HabDAO;
     MapperHabitacion mapperHabitacion;
+    MapperOcupacion mapperOcupacion;
+
+    public void guardarOcupacion(List<OcupacionDTO> Ldto){
+
+        daoManager = new DAOManager();
+        HabDAO = daoManager.getHabitacionDAO();
+        mapperOcupacion = new MapperOcupacion();
+
+        daoManager.begin();
+        for(OcupacionDTO dto : Ldto) {
+            HabDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
+        }
+
+
+        daoManager.commit();
+        daoManager.disconnect();
+    }
+
+    public Habitacion getHabNumeroPiso(int numero, int piso){
+        daoManager = new DAOManager();
+        HabDAO = daoManager.getHabitacionDAO();
+
+        daoManager.begin();
+        Habitacion returnobj = HabDAO.getHabitacion(numero, piso);
+        daoManager.commit();
+        daoManager.disconnect();
+
+        return  returnobj;
+    }
 
 
     public List<HabitacionDTO> getHabDA(LocalDate desde, LocalDate hasta, int n_piso, int n_numero){

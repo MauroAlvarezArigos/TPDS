@@ -15,31 +15,48 @@ import utils.Converter;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 
 @SuppressWarnings("serial")
 public class EstadoHabitacionesGUI extends JFrame {
 	private HabitacionController controller;
 	private Converter converter = new Converter();
 	private List<JTable> LTables = new ArrayList<>();
-	
-	public EstadoHabitacionesGUI(Date desde, Date hasta, List<HabitacionDTO> Lhab, HabitacionController uncontroller) {
+	private JButton btnAceptar;
+
+	//Getters
+	public List<JTable> getLTables() {
+		return LTables;
+	}
+	public JButton getBtnAceptar() {
+		return btnAceptar;
+	}
+
+	public EstadoHabitacionesGUI(Date desde, Date hasta, List<HabitacionDTO> Lhab, List<String> LTiposSelect, HabitacionController uncontroller) {
 
 		controller = uncontroller;
 
-		this.setBounds(100, 100, 676, 500);
+		this.setBounds(100, 100, 676, 600);
 		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new GridLayout());
+		contentPane.setLayout(new BoxLayout(contentPane,BoxLayout.Y_AXIS));
 		setContentPane(contentPane);
+
 
 		JTabbedPane tabbedPane = new JTabbedPane();
 
 		List<String> LTipos = controller.getAllTiposHabDisponibles(Lhab);
+		List<String> LTiposFinal = new ArrayList<>();
 
+		for(String tipo : LTipos){
+			for(String tipoSelected : LTiposSelect){
+				if(tipoSelected.equals(tipo)){
+					LTiposFinal.add(tipo);
+				}
+			}
+		}
 		//......Generar Tabla
-		for(String tipo : LTipos) {
+		for(String tipo : LTiposFinal) {
 
 			ArrayList<String> DateArray = generarFechas(desde, hasta);
 			Object[] DateData = DateArray.toArray();
@@ -52,18 +69,6 @@ public class EstadoHabitacionesGUI extends JFrame {
 					SubLHab.add(h);
 				}
 			}
-
-			JTable table = new JTable(model){
-				@Override
-				public Class getColumnClass(int column){
-					if(column < 1){
-						return String.class;
-					}else{
-						return Boolean.class;
-					}
-				}
-			};
-			model.addColumn("Numero de habitacion", DateData);
 
 
 			//Generar Lista de Bools para LosCheckboxes y Lista de estados
@@ -79,8 +84,36 @@ public class EstadoHabitacionesGUI extends JFrame {
 						EstadoArray.get(c).add(controller.getEstadoHabitacionFecha(converter.convertStrtoLocalDate(DateArray.get(x)), SubLHab.get(c)));
 						BoolArray.get(c).add(false);
 					}
-					Object[] estadoColumna = BoolArray.get(c).toArray();
-					model.addColumn(SubLHab.get(c).getNumero(), estadoColumna);
+
+			}
+
+			JTable table = new JTable(model){
+				@Override
+				public Class getColumnClass(int column){
+					if(column < 1){
+						return String.class;
+					}else{
+						return Boolean.class;
+					}
+				}
+				@Override
+				public boolean isCellSelected(int row, int column){return column != 0;}
+
+				@Override
+				public boolean isCellEditable (int row, int column){
+					if (column > 0) {
+						return !(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupado"));
+					}else{
+						return false;
+					}
+				}
+			};
+			model.addColumn("Numero de habitacion", DateData);
+
+
+			for (int q = 0; q < size; q++){
+				Object[] estadoColumna = BoolArray.get(q).toArray();
+				model.addColumn(SubLHab.get(q).getNumero(), estadoColumna);
 			}
 			//.......End
 
@@ -93,13 +126,13 @@ public class EstadoHabitacionesGUI extends JFrame {
 					if(value instanceof Boolean){
 						if(EstadoArray.get(column-1).get(row).equals("Fuera de Servicio") || EstadoArray.get(column-1).get(row).equals("Ocupado")){
 							JCheckBox c = new JCheckBox("", false);
-							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+							c.setBackground(controller.getColor(EstadoArray.get(column-1).get(row)));
 							c.setEnabled(false);
 							c.setHorizontalAlignment(SwingConstants.CENTER);
 							return c;
 						}else {
 							JCheckBox c = new JCheckBox("", value.equals(true));
-							c.setBackground(controller.GetColor(EstadoArray.get(column-1).get(row)));
+							c.setBackground(controller.getColor(EstadoArray.get(column-1).get(row)));
 							c.setHorizontalAlignment(SwingConstants.CENTER);
 							return c;
 						}
@@ -107,6 +140,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 					else return getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 				}
 			});
+
 			//.......End
 
 			//Setear tamaños y apariencia de cada columna
@@ -132,6 +166,80 @@ public class EstadoHabitacionesGUI extends JFrame {
 		}
 
 		contentPane.add(tabbedPane);
+
+		JPanel ButtonContainer = new JPanel();
+		ButtonContainer.setLayout(new FlowLayout());
+
+		JPanel Labels = new JPanel();
+		Labels.setLayout(new FlowLayout());
+
+		JPanel Button = new JPanel();
+		Button.setLayout(new FlowLayout());
+
+		JLabel lblLibre = new JLabel();
+		lblLibre.setSize(20,20);
+		lblLibre.setOpaque(true);
+		lblLibre.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblLibre.setText("Libre");
+		lblLibre.setForeground(Color.BLACK);
+		lblLibre.setBackground(controller.getDisponible());
+		Labels.add(lblLibre);
+
+		JLabel lblFueraDeServicio = new JLabel();
+		lblFueraDeServicio.setSize(20,20);
+		lblFueraDeServicio.setOpaque(true);
+		lblFueraDeServicio.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblFueraDeServicio.setText("Fuera de Servicio");
+		lblFueraDeServicio.setForeground(Color.BLACK);
+		lblFueraDeServicio.setBackground(controller.getFueraDeServicio());
+		Labels.add(lblFueraDeServicio);
+
+		JLabel lblOcupado = new JLabel();
+		lblOcupado.setSize(20,20);
+		lblOcupado.setOpaque(true);
+		lblOcupado.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblOcupado.setText("Ocupado");
+		lblOcupado.setForeground(Color.BLACK);
+		lblOcupado.setBackground(controller.getOcupado());
+		Labels.add(lblOcupado);
+
+		JLabel lblReservado = new JLabel();
+		lblReservado.setSize(20,20);
+		lblReservado.setOpaque(true);
+		lblReservado.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+		lblReservado.setText("Reservado");
+		lblReservado.setForeground(Color.BLACK);
+		lblReservado.setBackground(controller.getReservado());
+		Labels.add(lblReservado);
+
+
+		//------------------------------------------------------------
+
+		JButton btnCancelar = new JButton();
+		btnCancelar.setText("Cancelar");
+		btnCancelar.setBounds(0, 0, 160, 80);
+		btnCancelar.setForeground(new Color(255, 255, 255));
+		btnCancelar.setBackground(new Color(205, 50, 50));
+		Button.add(btnCancelar);
+		btnCancelar.addActionListener(e ->{
+			dispose();
+		});
+
+		btnAceptar = new JButton();
+		btnAceptar.setText("Aceptar");
+		btnAceptar.setBounds(0, 0, 160, 80);
+		btnAceptar.setForeground(new Color(255, 255, 255));
+		btnAceptar.setBackground(new Color(50, 205, 50));
+		Button.add(btnAceptar);
+		/*btnAceptar.addActionListener(e ->{
+			controller.getSelections(LTables);
+			controller.getSelectedHab(LTables);
+		});*/
+
+		ButtonContainer.add(Button, BorderLayout.EAST);
+
+		contentPane.add(Labels);
+		contentPane.add(ButtonContainer);
 
 		SwingUtilities.updateComponentTreeUI(this);
 

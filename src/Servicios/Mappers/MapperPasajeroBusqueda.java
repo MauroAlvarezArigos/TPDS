@@ -6,6 +6,9 @@ import DTO.PasajeroBusquedaDTO;
 import DTO.PasajeroDTO;
 import Dominio.Pasajero;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MapperPasajeroBusqueda {
 
     private PasajeroDAOSQL pasajeroDAO;
@@ -21,6 +24,14 @@ public class MapperPasajeroBusqueda {
         unPasajeroBusquedaDTO.setTipodoc(unPasajero.getTipodoc().getTipoDeID());
 
         return unPasajeroBusquedaDTO;
+    }
+
+    public List<PasajeroBusquedaDTO> toDTO(List<Pasajero> Lpasajeros){
+       List<PasajeroBusquedaDTO> LDTO = new ArrayList<>();
+        for (Pasajero p : Lpasajeros){
+            LDTO.add(this.toDTO(p));
+        }
+        return LDTO;
     }
 
     public Pasajero toDomain(PasajeroBusquedaDTO unPasajeroBusquedaDTO){

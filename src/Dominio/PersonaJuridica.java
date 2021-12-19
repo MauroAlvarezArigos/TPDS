@@ -5,11 +5,7 @@ public class PersonaJuridica extends Persona {
 	private String domicilioFiscal;
 	
 	//Constructor
-	public PersonaJuridica(String razonSocial, String domicilioFiscal) {
-		super();
-		this.razonSocial = razonSocial;
-		this.domicilioFiscal = domicilioFiscal;
-	}
+	public PersonaJuridica() {super();}
 	
 	//Getters and Setters
 	public String getRazonSocial() {

@@ -3,6 +3,7 @@ package Dominio;
 import java.time.LocalDate;
 
 public class Reserva {
+
     private int idReserva;
     private String apellido;
     private String nombre;
@@ -11,6 +12,7 @@ public class Reserva {
     private LocalDate fechaHasta;
 
     private Habitacion habitacion;
+
     public int getIdReserva() {
         return idReserva;
     }
