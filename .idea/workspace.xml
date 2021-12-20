@@ -3,42 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAO.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Dominio/PersonaJuridica.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/PersonaJuridica.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/App$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/GUI/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/Servicios/Mappers/MapperPasajero.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Servicios/Mappers/MapperPasajero.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/consumoservicios.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/consumounidades.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/datosTablas.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/itemconsumo.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/pais.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/periodoestadia.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/unidades.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/HabitacionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/HabitacionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/FacturarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturarController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Dominio/Ocupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Ocupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/Reserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Reserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFueraDeServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFueraDeServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajero.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajeroBusqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajeroBusqueda.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperReserva.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperReserva.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/Converter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/Converter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Persona.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Persona.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FacturarGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FacturarGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,6 +28,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -140,7 +116,21 @@
       <option name="project" value="LOCAL" />
       <updated>1638642292489</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Arreglos generales para DarAlta">
+      <created>1639950200512</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1639950200512</updated>
+    </task>
+    <task id="LOCAL-00004" summary="subiendo cambios de la semana">
+      <created>1639950278768</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1639950278768</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -157,7 +147,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Arreglos generales para DarAlta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglos generales para DarAlta" />
+    <MESSAGE value="subiendo cambios de la semana" />
+    <option name="LAST_COMMIT_MESSAGE" value="subiendo cambios de la semana" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TPDS$App.ic" NAME="App Coverage Results" MODIFIED="1639075671642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

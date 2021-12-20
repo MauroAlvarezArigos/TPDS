@@ -1,6 +1,6 @@
 package Dominio;
 
-public class Persona {
+public abstract class Persona {
 	private int idpersona;
 	private String telefono;
 	private String email;

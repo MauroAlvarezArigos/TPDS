@@ -23,9 +23,12 @@ public class FacturarController {
 	OcupacionDTO ocupacionDTO;
 
 	Color Warning = new Color(255,0,0);
+
 	List<PasajeroBusquedaDTO> ocupantes;
+	PasajeroBusquedaDTO responsable = null;
 	
 	private FacturarGUI facturaGUI;
+	private FacturarElementosGUI facturarElementosGUI;
 	private PersonaJuridicaServicio pjServicio;
 	private PersonaJuridica personaJuridica;
 	private	String opciones[] = {"Cancelar","Aceptar"}; 
@@ -118,27 +121,62 @@ public class FacturarController {
 		//Recordar Si facturas por tercero el tipo de factura es A, si no es B
 		
 		if(facturaGUI.getCbxFacturaTercero().isSelected()) {
-			//Factura por 3ro
-			if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
-				JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(facturaGUI);
-				JOptionPane.showMessageDialog(padre,"Pasamos al CU03","No Ingreso CUIT",JOptionPane.ERROR_MESSAGE);
+			facturarTercero();
+		}else{
+			facturarConsumidorFinal();
+		}
+	}
+
+	private void facturarConsumidorFinal(){
+		JTable table = facturaGUI.getTablePasajero();
+		int size = table.getRowCount();
+		int selected = -1;
+		for(int c = 0; c < size; c++){
+			if((Boolean) table.getValueAt(c,0)){
+				selected = c;
+				break;
+			}
+		}
+		if(selected >= 0) {
+			responsable = ocupantes.get(selected);
+			facturarElementos();
+		}else{
+			facturaGUI.mostrarError("No se ha seleccionado un responsable", "Por favor seleccione a uno de los ocupantes como responsable");
+		}
+	}
+
+	private void facturarElementos(){
+		facturarElementosGUI = new FacturarElementosGUI(this, responsable.getApellido()+" ,"+responsable.getNombre(), "A");
+		facturarElementosGUI.setVisible(true);
+		JTable table = facturarElementosGUI.getTable();
+		DefaultTableModel model = facturarElementosGUI.getModel();
+		model.addColumn("Consumos de la Habitacion");
+		model.addColumn("Precio");
+		model.addColumn("Seleccion");
+		ocupacionDTO.getConsumo();
+	}
+
+	private void facturarTercero() throws NoConcordanciaException {
+		//Factura por 3ro
+		if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
+			JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(facturaGUI);
+			JOptionPane.showMessageDialog(padre,"Pasamos al CU03","No Ingreso CUIT",JOptionPane.ERROR_MESSAGE);
+		}else {
+			personaJuridica = pjServicio.getPersonaJuridica(facturaGUI.getTbxCuit().getText());
+			if(personaJuridica == null) {
+				throw new NoConcordanciaException();
 			}else {
-				personaJuridica = pjServicio.getPersonaJuridica(facturaGUI.getTbxCuit().getText());
-				if(personaJuridica == null) {
-					throw new NoConcordanciaException();
-				}else {
-					if(optionMessageGUI("Desea Facturar al Tercero?", personaJuridica.getRazonSocial(), opciones) == 1) {
-						FacturarElementosGUI fe = new FacturarElementosGUI(this, personaJuridica.getRazonSocial(), "A");
-						facturaGUI.dispose();
-						fe.setVisible(true);	
-					}
-					else {
-						facturaGUI.getTbxCuit().setText("");
-					}
+				if(optionMessageGUI("Desea Facturar al Tercero?", personaJuridica.getRazonSocial(), opciones) == 1) {
+					FacturarElementosGUI fe = new FacturarElementosGUI(this, personaJuridica.getRazonSocial(), "A");
+					facturaGUI.dispose();
+					fe.setVisible(true);
+				}
+				else {
+					facturaGUI.getTbxCuit().setText("");
 				}
 			}
-			
 		}
+
 	}
 	
 	public int optionMessageGUI(String titulo, String detalle, Object[] options){

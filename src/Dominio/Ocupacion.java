@@ -10,6 +10,7 @@ public class Ocupacion {
     private Habitacion habitacion;
     private LocalDate checkIn;
     private LocalDate checkOut;
+    private Consumo consumos;
 
     public int getId() {
         return id;
@@ -46,5 +47,11 @@ public class Ocupacion {
     }
     public void setAcompanantes(List<Pasajero> acompanantes) {
         Acompanantes = acompanantes;
+    }
+    public Consumo getConsumos() {
+        return consumos;
+    }
+    public void setConsumos(Consumo consumos) {
+        this.consumos = consumos;
     }
 }

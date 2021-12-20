@@ -106,6 +106,11 @@ insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 4, 2,
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 5, 2, 4, 2, 0);
 insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 6, 2, 5, 2, 0);
 
+--Datos Seccion_Consumo
+insert into seccion_consumo (id_categoria, tipo) values (1, 'Lavado y Planchado');
+insert into seccion_consumo (id_categoria, tipo) values (2, 'Sauna');
+insert into seccion_consumo (id_categoria, tipo) values (3, 'Bar');
+
 --Datos Reserva
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021-09-11', '2021-09-20');
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (2, 1, 1, 'Franny', 'Gumme', '9093832379', '2021-09-21', '2021-09-30');
@@ -119,5 +124,58 @@ insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1
 
 --Datos Fuera De Servicio
 insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021-09-01', '2021-09-30');
+
+--Datos Item Consumo
+insert into item_consumo(id_item, id_categoria, nombre, costo) values(1,1,'planchado pantalon',100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (2,1,'lavado camisa', 150);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (3,1,'lavado remera', 100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (4,1,'planchado camisa', 150);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (5,1,'lavado ropa interior', 100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (6,2,'masaje',1500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (7,2,'sauna finlandes',1000);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (8,2,'manicuria',900);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (9,2,'fangoterapia',2500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (10,2,'reflexologia',2500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (11,3,'gaseosa',250);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (12,3,'cerveza nacional',350);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (13,3,'cerveza importada',500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (14,3,'paquete pringles',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (15,3,'paquete oreo',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (16,3,'paquete mani',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (17,3,'botella espumante chandon',900);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (18,3,'botella espumante navarro correa',1000);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (19,3,'agua mineral sin gas',250);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (20,3,'agua mineral con gas',250);
+
+--Datos Tipo de Tarjeta de Credito
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (1, 'visa');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (2, 'master card');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (3, 'amex');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (4, 'tarjeta naranja');
+
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (5, 'maestro');
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (6, 'visa debito');
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (7, 'cabal debito');
+
+--Datos Tipo de Cheque
+insert into tipocheque (id_tipo_cheque, tipo_cheque) values (1,'cheque no a la orden');
+insert into tipocheque (id_tipo_cheque, tipo_cheque) values (2, 'cheque posdatado');
+
+--Datos Tipo de Factura
+insert into tipodefactura (id_tipo_factura, tipo) values (1, 'Factura A responsable inscripto');
+insert into tipodefactura (id_tipo_factura, tipo) values (2, 'Factura B consumidor final');
+insert into tipodefactura (id_tipo_factura, tipo) values (3, 'Factura B sujeto exento');
+
+--Datos Tipo de Moneda
+insert into tipomoneda (id_moneda, moneda, simbolo) values (1, 'peso argentino', '$');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (2, 'dolar','u$s');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (3, 'euro', '€');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (4, 'peso uruguayo', '$U');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (5, 'yen', '¥');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (6, 'franco suizo', 'CFH');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (7, 'real', 'R$');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (8, 'peso chileno', '$CLP');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (9, 'guaranì', '₲');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (10, 'sol peruano', 'S/');
 
 end$$;

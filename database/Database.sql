@@ -121,17 +121,17 @@ create table unidades (
     unidades int NOT NULL
 );
 
-create table secccion_consumo (
+create table seccion_consumo (
     id_categoria int PRIMARY KEY,
     tipo character varying(50)
 );
 
 create table item_consumo (
-    id_item int PRIMARY KEY,
+    id_item int PRIMARY KEY ,
     id_categoria int NOT NULL,
     nombre character varying(50),
     costo double precision,
-    constraint fk_categoria foreign key (id_categoria) REFERENCES secccion_consumo (id_categoria)
+    constraint fk_categoria foreign key (id_categoria) REFERENCES seccion_consumo (id_categoria)
 );
 
 create table periodoestadia(
@@ -223,7 +223,7 @@ create table fueradeservicio (
 create table tipomoneda (
     id_moneda int PRIMARY KEY,
     moneda character varying(25),
-    simbolo character
+    simbolo character varying(5)
 );
 
 create table efectivo (
@@ -256,7 +256,7 @@ create table tarjeta (
     vencimiento Date,
     nombre character varying (50),
     dni character varying (25),
-    constraint fk_pago foreign key (id_pago) REFERENCES pago (id_pago),
+    constraint fk_pago foreign key (id_pago) REFERENCES pago (id_pago)
 );
 
 create table tipodebito (
@@ -273,7 +273,7 @@ create table tarjeta_de_credito (
     id_pago int PRIMARY KEY,
     cant_cuotas int NOT NULL,
     recargo int NOT NULL,
-    id_tipo_credito NOT NULL,
+    id_tipo_credito int NOT NULL,
     constraint fk_pago foreign key (id_pago) REFERENCES pago (id_pago),
     constraint fk_tipo_credito foreign key (id_tipo_credito) REFERENCES tipocredito (id_tipo_credito)
 );
@@ -284,3 +284,22 @@ create table tarjeta_de_debito (
     constraint fk_pago foreign key (id_pago) REFERENCES pago (id_pago),
     constraint fk_tipo_debito foreign key (id_tipo_debito) REFERENCES tipodebito (id_tipo_debito)
 );
+
+create table consumos_ocupacion (
+    costoTotal double precision,
+    id_ocupacion int NOT NULL,
+    id_consumo int PRIMARY KEY,
+    constraint fk_ocupacion foreign key (id_ocupacion) REFERENCES ocupacion (id_ocupacion)
+);
+
+create table consumo_unidades (
+    id_unidades int NOT NULL,
+    id_consumo int NOT NULL,
+    id_item int NOT NULL,
+    constraint pk_consumo_unidades PRIMARY KEY (id_unidades , id_consumo, id_item),
+    constraint fk_unidades foreign key (id_unidades) REFERENCES unidades (id_unidades),
+    constraint fk_consumo foreign key (id_consumo) REFERENCES consumos_ocupacion (id_consumo),
+    constraint fk_item foreign key (id_item) REFERENCES item_consumo (id_item)
+);
+
+

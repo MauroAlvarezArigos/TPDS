@@ -22,15 +22,38 @@ import Controller.FacturarController;
 @SuppressWarnings("serial")
 public class FacturarElementosGUI extends JFrame{
 	private JTable table;
+	private DefaultTableModel model;
 	private FacturarController controller;
-	
+
+	public JTable getTable() {
+		return table;
+	}
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
 	public FacturarElementosGUI(FacturarController controller, String facturarA, String tipoFactura) {
 		this.controller = controller;
 		this.setSize(700, 350);
 		this.setTitle("Facturar");
 		getContentPane().setLayout(null);
-		
-		table = new JTable();
+
+
+		model = new DefaultTableModel();
+		table = new JTable(model){
+			@Override
+			public Class getColumnClass(int column){
+				if(column == 2){
+					return Boolean.class;
+				}else{
+					return String.class;
+				}
+			}
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 2;
+			}
+		};
 		
 		
 		table.setBounds(37, 132, 356, 151);

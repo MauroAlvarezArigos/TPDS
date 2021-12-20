@@ -133,6 +133,10 @@ public class FacturarGUI extends JFrame {
 					return String.class;
 				}
 			}
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 0;
+			}
 		};
 
 		tablePasajero.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
