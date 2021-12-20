@@ -22,6 +22,8 @@ public class OcupacionServicio {
     DAOManager daoManager;
     OcupacionDAOSQL ocupacionDAO;
     HabitacionDAOSQL habitacionDAO;
+    ConsumosServicio consumosServicio;
+
     MapperOcupacion mapperOcupacion;
 
     public OcupacionDTO buscarOcupacionActual(int numero, int piso){
@@ -30,6 +32,7 @@ public class OcupacionServicio {
         ocupacionDAO = daoManager.getOcupacionDAO();
         habitacionDAO = daoManager.getHabitacionDAO();
         mapperOcupacion = new MapperOcupacion();
+        consumosServicio = new ConsumosServicio();
 
         Habitacion hab = habitacionDAO.getHabitacion(numero, piso);
         List<Ocupacion> locupacion = ocupacionDAO.getOcupacionesHabDesdeHasta(hab ,LocalDate.now(), LocalDate.now());
@@ -39,6 +42,7 @@ public class OcupacionServicio {
 
         if(!locupacion.isEmpty()) {
             ocupacion = locupacion.get(0);
+            ocupacion.setConsumos(consumosServicio.getConsumosOcupacion(ocupacion));
             dto = mapperOcupacion.toDTO(ocupacion);
         }
         return dto;

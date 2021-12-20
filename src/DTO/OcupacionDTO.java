@@ -8,6 +8,7 @@ public class OcupacionDTO {
     private PasajeroBusquedaDTO responsable;
     private List<PasajeroBusquedaDTO> listaOcupantes;
     private HabitacionDTO habitacion;
+    private ConsumoDTO consumo;
     private LocalDate checkIn;
     private LocalDate checkOut;
 
@@ -46,5 +47,11 @@ public class OcupacionDTO {
     }
     public void setListaOcupantes(List<PasajeroBusquedaDTO> Acompanantes) {
         this.listaOcupantes = Acompanantes;
+    }
+    public ConsumoDTO getConsumo() {
+        return consumo;
+    }
+    public void setConsumo(ConsumoDTO consumo) {
+        this.consumo = consumo;
     }
 }

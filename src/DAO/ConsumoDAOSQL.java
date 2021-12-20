@@ -51,7 +51,7 @@ public class ConsumoDAOSQL implements ConsumoDAO{
             pstmt.setInt(1,unOcupacion.getId());
             rs = pstmt.executeQuery();
             if(rs.next()){
-                consumo.setId_consumo(rs.getInt("ID_COMSUMO"));
+                consumo.setId_consumo(rs.getInt("ID_CONSUMO"));
                 consumo.setOcupacion(unOcupacion);
                 consumo.setListaItems(getUnidades(consumo));
             }

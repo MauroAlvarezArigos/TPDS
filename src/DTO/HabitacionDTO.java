@@ -9,7 +9,9 @@ public class HabitacionDTO {
     private int n_hab;
     private int piso;
     private String tipo;
+    private double valordiario;
     private int capacidad;
+    private int descuento;
 
     private List<PeriodoEstadoHabitacionDTO> Reservas;
     private List<PeriodoEstadoHabitacionDTO> Ocupaciones;
@@ -62,5 +64,17 @@ public class HabitacionDTO {
     }
     public void setPiso(int piso) {
         this.piso = piso;
+    }
+    public double getValordiario() {
+        return valordiario;
+    }
+    public void setValordiario(double valordiario) {
+        this.valordiario = valordiario;
+    }
+    public int getDescuento() {
+        return descuento;
+    }
+    public void setDescuento(int descuento) {
+        this.descuento = descuento;
     }
 }

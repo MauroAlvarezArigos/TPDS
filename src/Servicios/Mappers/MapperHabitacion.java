@@ -29,9 +29,12 @@ public class MapperHabitacion {
         dto.setNumero(piso+numero);
         dto.setN_hab(unHab.getNumero());
         dto.setPiso(unHab.getPiso());
+        dto.setValordiario(unHab.getTipo().getCosto());
+        dto.setDescuento(unHab.getDescuento());
         dto.setReservas(mapperReserva.listToDTO(unHab.getReservas()));
         dto.setOcupaciones(mapperOcupacion.listToSimplifiedDTO(unHab.getOcupaciones()));
         dto.setFueraDeServicio(mapperFueraDeServicio.listToDTO(unHab.getPeriodosFueraDeServicio()));
+
 
         return dto;
     }

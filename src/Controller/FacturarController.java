@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import DTO.OcupacionDTO;
 import DTO.PasajeroBusquedaDTO;
+import DTO.UnidadesDTO;
 import Dominio.PersonaJuridica;
 import Exceptions.CampoFacturarIncorrecto;
 import Exceptions.CampoFaltanteException;
@@ -26,6 +27,8 @@ public class FacturarController {
 
 	List<PasajeroBusquedaDTO> ocupantes;
 	PasajeroBusquedaDTO responsable = null;
+
+	double valorIVA = 0.105;
 	
 	private FacturarGUI facturaGUI;
 	private FacturarElementosGUI facturarElementosGUI;
@@ -152,8 +155,62 @@ public class FacturarController {
 		DefaultTableModel model = facturarElementosGUI.getModel();
 		model.addColumn("Consumos de la Habitacion");
 		model.addColumn("Precio");
-		model.addColumn("Seleccion");
-		ocupacionDTO.getConsumo();
+		model.addColumn("");
+		table.getColumnModel().getColumn(0).setMaxWidth(300);
+		table.getColumnModel().getColumn(1).setMaxWidth(75);
+		table.getColumnModel().getColumn(2).setMaxWidth(50);
+		List<UnidadesDTO> LItems = ocupacionDTO.getConsumo().getListaItems();
+		for(UnidadesDTO item : LItems){
+			model.addRow(new Object[]{item.getNombre()+" X"+item.getCantidad(), item.getCostoUnitario()*item.getCantidad(), false});
+		}
+		facturarElementosGUI.getCbxEstadia().setText("Valor de la estadia: "+ "$" + getValorEstadia(ocupacionDTO));
+	}
+
+	public void updateTotalValue(){
+		double subtotal = calcularSubtotal();
+		String StrSubTotal = "" + Math.round(  subtotal * 100) / 100.0;
+		facturarElementosGUI.getLblValorSubtotal().setText(" $ "+StrSubTotal);
+
+		double iva = calcularIVA(subtotal);
+		String StrIva = "" + iva;
+		facturarElementosGUI.getLblValorIVA().setText(" $ "+StrIva);
+
+		double total = subtotal+iva;
+		String StrTotal = "" + Math.round(  total * 100) / 100.0;
+		facturarElementosGUI.getLblValorTotal().setText(" $ "+StrTotal);
+	}
+
+	private double calcularSubtotal(){
+		double subtotal = 0.0;
+		if(facturarElementosGUI.getCbxEstadia().isSelected()){
+			subtotal = subtotal + Double.parseDouble(getValorEstadia(ocupacionDTO));
+		}
+		JTable table = facturarElementosGUI.getTable();
+		int size = table.getRowCount();
+		for(int c = 0; c < size; c++){
+			if((Boolean) table.getValueAt(c,2)){
+				subtotal = subtotal + (double) table.getValueAt(c,1);
+			}
+		}
+
+		return subtotal;
+	}
+
+	private double calcularIVA(double subtotal){
+		double iva = 0.0;
+		iva = Math.round(  valorIVA*subtotal * 100) / 100.0;
+		return iva;
+	}
+
+	private String getValorEstadia(OcupacionDTO unOcupacionDTO){
+		String valor = "0";
+		if(unOcupacionDTO != null) {
+			int dias = unOcupacionDTO.getCheckOut().compareTo(unOcupacionDTO.getCheckIn());
+			double valorxDia = unOcupacionDTO.getHabitacion().getValordiario();
+			double valorfinal = Math.round(valorxDia * dias * 100) / 100.0;
+			valor = "" + valorfinal;
+		}
+		return valor;
 	}
 
 	private void facturarTercero() throws NoConcordanciaException {

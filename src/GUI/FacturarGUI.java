@@ -120,7 +120,9 @@ public class FacturarGUI extends JFrame {
 		panelOcupanteHabitacion.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ocupantes de la Habitacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		panelOcupanteHabitacion.setBounds(288, 20, 388, 226);
 		getContentPane().add(panelOcupanteHabitacion);
-		panelOcupanteHabitacion.setLayout(null);
+		panelOcupanteHabitacion.setLayout(new BoxLayout(panelOcupanteHabitacion, BoxLayout.Y_AXIS));
+
+
 
 		model = new DefaultTableModel();
 
@@ -161,15 +163,26 @@ public class FacturarGUI extends JFrame {
 			}
 		});
 
-		tablePasajero.setBounds(10, 20, 368, 196);
+		tablePasajero.setBounds(20, 20, 300, 196);
 		model.addColumn("Seleccionar", new Object[]{});
 		model.addColumn("Nombre", new Object[]{});
 		model.addColumn("Apellido", new Object[]{});
 		model.addColumn("DNI", new Object[]{});
 		model.addColumn("TipoDNI", new Object[]{});
 
+		tablePasajero.getColumnModel().getColumn(0).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(1).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(2).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(3).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(4).setMaxWidth(75);
+
+		tablePasajero.getTableHeader().setReorderingAllowed(false);
+
 		tablePasajero.setVisible(true);
-		panelOcupanteHabitacion.add(tablePasajero);
+		JScrollPane scrollPane = new JScrollPane(tablePasajero);
+		tablePasajero.setFillsViewportHeight(true);
+		scrollPane.setVisible(true);
+		panelOcupanteHabitacion.add(scrollPane);
 		
 		JButton btnFacturar = new JButton("Facturar");
 		btnFacturar.setForeground(Color.WHITE);

@@ -178,4 +178,17 @@ insert into tipomoneda (id_moneda, moneda, simbolo) values (8, 'peso chileno', '
 insert into tipomoneda (id_moneda, moneda, simbolo) values (9, 'guaranì', '₲');
 insert into tipomoneda (id_moneda, moneda, simbolo) values (10, 'sol peruano', 'S/');
 
+--Datos Consumo
+insert into consumos_ocupacion (id_ocupacion, id_consumo) values (4,1);
+
+insert into unidades (id_unidades, fecha_consumo, unidades) values (1, '2021-12-12', 2);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (1, 1, 1);
+
+insert into unidades (id_unidades, fecha_consumo, unidades) values (2, '2021-12-12', 4);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (2, 1, 2);
+
+insert into unidades (id_unidades, fecha_consumo, unidades) values (3, '2021-12-12', 1);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (3, 1, 11);
+
+
 end$$;

@@ -17,6 +17,7 @@ public class MapperOcupacion {
     DAOManager daoManager;
     MapperHabitacion mapperHabitacion;
     MapperPasajeroBusqueda mapperPasajeroBusqueda;
+    MapperConsumo mapperConsumo;
 
     public PeriodoEstadoHabitacionDTO toSimplifiedDTO(Ocupacion unOcupacion){
         PeriodoEstadoHabitacionDTO dto = new PeriodoEstadoHabitacionDTO();
@@ -68,6 +69,7 @@ public class MapperOcupacion {
         OcupacionDTO dto = new OcupacionDTO();
         mapperHabitacion = new MapperHabitacion();
         mapperPasajeroBusqueda = new MapperPasajeroBusqueda();
+        mapperConsumo = new MapperConsumo();
 
         if(dominio == null){
             return null;
@@ -78,6 +80,7 @@ public class MapperOcupacion {
             dto.setId(dominio.getId());
             dto.setListaOcupantes(mapperPasajeroBusqueda.toDTO(dominio.getAcompanantes()));
             dto.setResponsable(mapperPasajeroBusqueda.toDTO(dominio.getResponsable()));
+            dto.setConsumo(mapperConsumo.toDTO(dominio.getConsumos()));
         }
         return dto;
 
