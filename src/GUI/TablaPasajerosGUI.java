@@ -104,6 +104,9 @@ public class TablaPasajerosGUI extends JFrame {
                 }
             });
         }
+
+        tabla.getTableHeader().setReorderingAllowed(false);
+
         tabla.getColumnModel().getColumn(0).setPreferredWidth(5);
         tabla.setPreferredScrollableViewportSize(new Dimension(400, 200));
         JScrollPane sp = new JScrollPane(tabla);

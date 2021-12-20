@@ -21,11 +21,16 @@ public class MapperUnidades {
     }
 
     public List<UnidadesDTO> toDTO(List<Unidades> LDominio){
-        List<UnidadesDTO> Ldto = new ArrayList<>();
-        for (Unidades u : LDominio){
-            Ldto.add(toDTO(u));
+        if(LDominio == null){
+            List<UnidadesDTO> Unidades = new ArrayList<>();
+            return Unidades;
+        }else {
+            List<UnidadesDTO> Ldto = new ArrayList<>();
+            for (Unidades u : LDominio) {
+                Ldto.add(toDTO(u));
+            }
+            return Ldto;
         }
-        return Ldto;
     }
 
 }

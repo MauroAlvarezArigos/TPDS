@@ -108,6 +108,8 @@ public class EstadoHabitacionesGUI extends JFrame {
 					}
 				}
 			};
+			table.getTableHeader().setReorderingAllowed(false);
+
 			model.addColumn("Numero de habitacion", DateData);
 
 

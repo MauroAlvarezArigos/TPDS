@@ -49,4 +49,20 @@ public class OcupacionServicio {
 
     }
 
+    public void guardarOcupacion(List<OcupacionDTO> Ldto){
+
+        daoManager = new DAOManager();
+        ocupacionDAO = daoManager.getOcupacionDAO();
+        mapperOcupacion = new MapperOcupacion();
+
+        daoManager.begin();
+        for(OcupacionDTO dto : Ldto) {
+            ocupacionDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
+        }
+
+
+        daoManager.commit();
+        daoManager.disconnect();
+    }
+
 }

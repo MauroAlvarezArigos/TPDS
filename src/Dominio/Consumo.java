@@ -5,7 +5,6 @@ import java.util.List;
 public class Consumo {
     private double CostoTotal;
     private int id_consumo;
-    private Ocupacion ocupacion;
     private List<Unidades> ListaItems;
 
     public double getCostoTotal() {
@@ -19,12 +18,6 @@ public class Consumo {
     }
     public void setId_consumo(int id_consumo) {
         this.id_consumo = id_consumo;
-    }
-    public Ocupacion getOcupacion() {
-        return ocupacion;
-    }
-    public void setOcupacion(Ocupacion ocupacion) {
-        this.ocupacion = ocupacion;
     }
     public List<Unidades> getListaItems() {
         return ListaItems;

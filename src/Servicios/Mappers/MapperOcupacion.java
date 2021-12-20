@@ -46,6 +46,7 @@ public class MapperOcupacion {
         dominio.setCheckIn(dto.getCheckIn());
         dominio.setCheckOut(dto.getCheckOut());
         dominio.setHabitacion(habitacionDAO.getHabitacion(dto.getHabitacion().getN_hab(), dto.getHabitacion().getPiso()));
+        dominio.setConsumos(null);
         daoManager.commit();
         daoManager.disconnect();
 

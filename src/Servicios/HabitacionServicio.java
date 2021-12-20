@@ -26,23 +26,6 @@ public class HabitacionServicio {
     MapperHabitacion mapperHabitacion;
     MapperOcupacion mapperOcupacion;
 
-    public void guardarOcupacion(List<OcupacionDTO> Ldto){
-
-        daoManager = new DAOManager();
-        HabDAO = daoManager.getHabitacionDAO();
-        ocupacionDAO = daoManager.getOcupacionDAO();
-        mapperOcupacion = new MapperOcupacion();
-
-        daoManager.begin();
-        for(OcupacionDTO dto : Ldto) {
-            ocupacionDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
-        }
-
-
-        daoManager.commit();
-        daoManager.disconnect();
-    }
-
     public Habitacion getHabNumeroPiso(int numero, int piso){
         daoManager = new DAOManager();
         HabDAO = daoManager.getHabitacionDAO();

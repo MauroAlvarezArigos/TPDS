@@ -13,6 +13,7 @@ import GUI.OcuparHabitacionGUI;
 import GUI.TablaPasajerosGUI;
 import Servicios.HabitacionServicio;
 import Servicios.IDTypeServicio;
+import Servicios.OcupacionServicio;
 import Servicios.PasajeroServicio;
 
 public class OcuparController {
@@ -24,6 +25,7 @@ public class OcuparController {
 	private OcuparHabAsigPasajeroGUI BuscarOcuparGUI;
 	private List<OcupacionDTO> LOcupacion;
 	private TablaPasajerosGUI TablaGUI;
+	private OcupacionServicio ocupacionServicio;
 
 	//Getters and Setters
 
@@ -36,6 +38,7 @@ public class OcuparController {
 	public OcuparController(OcuparHabitacionGUI oHab) {
 		this.pasajeroServicio = new PasajeroServicio();
 		this.habitacionServicio = new HabitacionServicio();
+		this.ocupacionServicio = new OcupacionServicio();
 		this.IDServicio = new IDTypeServicio();
 		this.ocuparGUI = oHab;
 	}
@@ -220,7 +223,7 @@ public class OcuparController {
 	}
 
 	private void GuardarOcupacion(){
-		habitacionServicio.guardarOcupacion(LOcupacion);
+		ocupacionServicio.guardarOcupacion(LOcupacion);
 	}
 
 

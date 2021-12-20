@@ -39,6 +39,10 @@ public class OcupacionDAOSQL implements OcupacionDAO{
             "\n" +
                     " INSERT INTO ACOMPANANTES(pasajero,ocupacion)" +
                     " VALUES( ?, ?)";
+    private static final String INSERT_CONSUMO =
+            "\n" +
+                    " INSERT INTO CONSUMOS_OCUPACION(id_ocupacion)" +
+                    " VALUES(?)";
 
 
     public List<Ocupacion> getOcupacionesHab(Habitacion unHab){
@@ -131,18 +135,23 @@ public class OcupacionDAOSQL implements OcupacionDAO{
 
             pstmt.execute();
             ResultSet resultSet = pstmt.getResultSet();
-            int id = 0;
+            int id = -1;
             if (resultSet.next()) {
                 id = resultSet.getInt(1);
             }
+            if(id >= 0) {
+                for (Pasajero p : unOcupacion.getAcompanantes()) {
+                    pstmt = conn.prepareStatement(INSERT_ACOMPANANTES);
+                    pstmt.setInt(1, p.getIdpersona());
+                    pstmt.setInt(2, id);
+                    pstmt.executeUpdate();
+                }
 
-            for(Pasajero p :unOcupacion.getAcompanantes()){
-                pstmt = conn.prepareStatement(INSERT_ACOMPANANTES);
-                pstmt.setInt(1,p.getIdpersona());
-                pstmt.setInt(2,id);
-                pstmt.executeUpdate();
+                if (unOcupacion.getConsumos() == null) {
+                    pstmt = conn.prepareStatement(INSERT_CONSUMO);
+                    pstmt.setInt(1, id);
+                }
             }
-
         } catch(SQLException e) {
             e.printStackTrace();
         }
