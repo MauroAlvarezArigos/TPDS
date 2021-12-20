@@ -24,11 +24,13 @@ public class FacturarController {
 	OcupacionDTO ocupacionDTO;
 
 	Color Warning = new Color(255,0,0);
+	Color Normal = new Color(128,128,128);
 
 	List<PasajeroBusquedaDTO> ocupantes;
 	PasajeroBusquedaDTO responsable = null;
 
 	double valorIVA = 0.105;
+	char TipoFactura;
 	
 	private FacturarGUI facturaGUI;
 	private FacturarElementosGUI facturarElementosGUI;
@@ -46,17 +48,36 @@ public class FacturarController {
 	
 	public void checkOut() throws CampoFacturarIncorrecto, CampoFaltanteException{
 		boolean bool = true;
-		
+
+
+		if(((facturaGUI.getTbxNumHabitacion().getText())).replaceAll("[\uFEFF-\uFFFF]", "").length() != 3){
+			bool = false;
+			facturaGUI.mostrarError("Error", "El numero de habitacion debe estar conformado por 3 (tres) digitos");
+			highlightInput(facturaGUI.getLblNumHabitacion(), facturaGUI.getTbxNumHabitacion(),Warning);
+		}else if(facturaGUI.getTbxNumHabitacion().getText().replaceAll("[0123456789]","").length() != 0){
+			bool = false;
+			facturaGUI.mostrarError("Error", "El numero de habitacion debe contener solo digitos numericos");
+			highlightInput(facturaGUI.getLblNumHabitacion(), facturaGUI.getTbxNumHabitacion(),Warning);
+		}else
 		if((facturaGUI.getTbxNumHabitacion()).getText().isEmpty() || (facturaGUI.getTbxNumHabitacion()).getText().isBlank()) {
             bool = false;
             highlightInput(facturaGUI.getLblNumHabitacion(), facturaGUI.getTbxNumHabitacion(),Warning);
-		}
-		else if(facturaGUI.getTbxHoraSalida().getText().isEmpty() || facturaGUI.getTbxHoraSalida().getText().isBlank()) {
+		}else{
+			highlightInput(facturaGUI.getLblNumHabitacion(), facturaGUI.getTbxNumHabitacion(),Normal);}
+
+		if(facturaGUI.getTbxHoraSalida().getText().isEmpty() || facturaGUI.getTbxHoraSalida().getText().isBlank()) {
 			bool = false;
             highlightInput(facturaGUI.getLblHoraDeSalida(), facturaGUI.getTbxHoraSalida(),Warning);			
+		}else
+		if(!(facturaGUI.getTbxHoraSalida().getText().replaceAll("[\uFEFF-\uFFFF]", "").length() == 5 &&
+     		facturaGUI.getTbxHoraSalida().getText().replaceAll("[0123456789]", "").equals(":"))){
+			bool = false;
+			highlightInput(facturaGUI.getLblHoraDeSalida(), facturaGUI.getTbxHoraSalida(),Warning);
+			facturaGUI.mostrarError("Error", "La hora de salida debe tener el formato HH:MM");
+		}else{
+			highlightInput(facturaGUI.getLblHoraDeSalida(), facturaGUI.getTbxHoraSalida(),Normal);
 		}
 
-		bool = true;
 		
 		if(bool) {
 			try {
@@ -114,9 +135,8 @@ public class FacturarController {
         }
 	}
 	 public void highlightInput(JComponent label, JComponent container, Color highlightColor){
-	        Color Red = new Color(255,0,0);
-	        label.setForeground(Red);
-	        container.setBorder(BorderFactory.createLineBorder(Red));
+	        label.setForeground(highlightColor);
+	        container.setBorder(BorderFactory.createLineBorder(highlightColor));
 	    }
 
 	public void facturar() throws NoConcordanciaException {
@@ -131,6 +151,7 @@ public class FacturarController {
 	}
 
 	private void facturarConsumidorFinal(){
+		TipoFactura = 'A';
 		JTable table = facturaGUI.getTablePasajero();
 		int size = table.getRowCount();
 		int selected = -1;
@@ -149,7 +170,7 @@ public class FacturarController {
 	}
 
 	private void facturarElementos(){
-		facturarElementosGUI = new FacturarElementosGUI(this, responsable.getApellido()+" ,"+responsable.getNombre(), "A");
+		facturarElementosGUI = new FacturarElementosGUI(this, responsable.getApellido()+" ,"+responsable.getNombre(), new String(""+TipoFactura));
 		facturarElementosGUI.setVisible(true);
 		JTable table = facturarElementosGUI.getTable();
 		DefaultTableModel model = facturarElementosGUI.getModel();
@@ -198,7 +219,7 @@ public class FacturarController {
 
 	private double calcularIVA(double subtotal){
 		double iva = 0.0;
-		iva = Math.round(  valorIVA*subtotal * 100) / 100.0;
+		if(TipoFactura == 'A'){iva = Math.round(  valorIVA*subtotal * 100) / 100.0;}
 		return iva;
 	}
 
@@ -214,6 +235,7 @@ public class FacturarController {
 	}
 
 	private void facturarTercero() throws NoConcordanciaException {
+		TipoFactura = 'B';
 		//Factura por 3ro
 		if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
 			JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(facturaGUI);

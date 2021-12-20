@@ -22,6 +22,8 @@ public class DAOManager {
     private PersonaJuridicaDAOSQL personaJuridicaDAO = null;
     private OcupacionDAOSQL ocupacionDAO = null;
     private ConsumoDAOSQL consumoDAO = null;
+    private ReservaDAOSQL reservaDAO = null;
+    private FueraDeServicioDAOSQL fueraDeServicioDAO = null;
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -97,6 +99,20 @@ public class DAOManager {
             this.consumoDAO = new ConsumoDAOSQL(wrapper.getConnection());
         }
         return consumoDAO;
+    }
+
+    public ReservaDAOSQL getReservaDAO() {
+        if (this.reservaDAO == null) {
+            this.reservaDAO = new ReservaDAOSQL(wrapper.getConnection());
+        }
+        return reservaDAO;
+    }
+
+    public FueraDeServicioDAOSQL getFueraDeServicioDAO() {
+        if (this.fueraDeServicioDAO == null) {
+            this.fueraDeServicioDAO = new FueraDeServicioDAOSQL(wrapper.getConnection());
+        }
+        return fueraDeServicioDAO;
     }
 
 }

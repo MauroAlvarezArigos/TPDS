@@ -1,8 +1,6 @@
 package Servicios;
 
-import DAO.HabitacionDAO;
-import DAO.HabitacionDAOSQL;
-import DAO.IDTypeDAOSQL;
+import DAO.*;
 import DAO.utils.DAOManager;
 import DTO.HabitacionDTO;
 import DTO.OcupacionDTO;
@@ -22,6 +20,9 @@ public class HabitacionServicio {
 
     DAOManager daoManager;
     HabitacionDAOSQL HabDAO;
+    OcupacionDAOSQL ocupacionDAO;
+    ReservaDAOSQL reservaDAO;
+    FueraDeServicioDAOSQL fueraDeServicioDAO;
     MapperHabitacion mapperHabitacion;
     MapperOcupacion mapperOcupacion;
 
@@ -29,11 +30,12 @@ public class HabitacionServicio {
 
         daoManager = new DAOManager();
         HabDAO = daoManager.getHabitacionDAO();
+        ocupacionDAO = daoManager.getOcupacionDAO();
         mapperOcupacion = new MapperOcupacion();
 
         daoManager.begin();
         for(OcupacionDTO dto : Ldto) {
-            HabDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
+            ocupacionDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
         }
 
 
@@ -57,18 +59,18 @@ public class HabitacionServicio {
     public List<HabitacionDTO> getHabDA(LocalDate desde, LocalDate hasta, int n_piso, int n_numero){
         daoManager = new DAOManager();
         HabDAO = daoManager.getHabitacionDAO();
+        ocupacionDAO = daoManager.getOcupacionDAO();
+        reservaDAO = daoManager.getReservaDAO();
+        fueraDeServicioDAO = daoManager.getFueraDeServicioDAO();
 
 
          daoManager.begin();
         List<Habitacion> Lhab = HabDAO.getAllHabitaciones();
 
         for (Habitacion habitacion : Lhab) {
-            habitacion.setReservas(HabDAO.getReservasHabitacionDesdeHasta(habitacion,
-                    converter.convertToDateViaSqlDate(desde), converter.convertToDateViaSqlDate(hasta)));
-            habitacion.setOcupaciones(HabDAO.getOcupacionesHabDesdeHasta(habitacion,
-                    converter.convertToDateViaSqlDate(desde), converter.convertToDateViaSqlDate(hasta)));
-            habitacion.setPeriodosFueraDeServicio(HabDAO.getAllFueraDeServiciohabitacionDesdeHasta(habitacion,
-                    converter.convertToDateViaSqlDate(desde), converter.convertToDateViaSqlDate(hasta)));
+            habitacion.setReservas(reservaDAO.getReservasHabitacionDesdeHasta(habitacion, desde, hasta));
+            habitacion.setOcupaciones(ocupacionDAO.getOcupacionesHabDesdeHasta(habitacion, desde, hasta));
+            habitacion.setPeriodosFueraDeServicio(fueraDeServicioDAO.getAllFueraDeServiciohabitacionDesdeHasta(habitacion, desde,hasta));
         }
         daoManager.commit();
         daoManager.disconnect();

@@ -27,6 +27,8 @@ public class FacturarGUI extends JFrame {
 	private JTable tablePasajero;
 	private JCheckBox cbxFacturaTercero;
 	private DefaultTableModel model;
+	private JPanel panelOcupanteHabitacion;
+	private JScrollPane scrollPane;
 	
 	private FacturarController controller;
 
@@ -109,14 +111,20 @@ public class FacturarGUI extends JFrame {
 			if(cbxFacturaTercero.isSelected()) {
 				lblCuit.setEnabled(true);
 				tbxCuit.setEnabled(true);
+				panelOcupanteHabitacion.setEnabled(false);
+				tablePasajero.setVisible(false);
+				scrollPane.setVisible(false);
 			}else {
 				lblCuit.setEnabled(false);
 				tbxCuit.setEnabled(false);
+				panelOcupanteHabitacion.setEnabled(true);
+				tablePasajero.setVisible(true);
+				scrollPane.setVisible(true);
 			}
 		});
 		panelFacturaTercero.add(cbxFacturaTercero);
 		
-		JPanel panelOcupanteHabitacion = new JPanel();
+		panelOcupanteHabitacion = new JPanel();
 		panelOcupanteHabitacion.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ocupantes de la Habitacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		panelOcupanteHabitacion.setBounds(288, 20, 388, 226);
 		getContentPane().add(panelOcupanteHabitacion);
@@ -179,7 +187,7 @@ public class FacturarGUI extends JFrame {
 		tablePasajero.getTableHeader().setReorderingAllowed(false);
 
 		tablePasajero.setVisible(true);
-		JScrollPane scrollPane = new JScrollPane(tablePasajero);
+		scrollPane = new JScrollPane(tablePasajero);
 		tablePasajero.setFillsViewportHeight(true);
 		scrollPane.setVisible(true);
 		panelOcupanteHabitacion.add(scrollPane);

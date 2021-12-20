@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
+    <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Dominio/Persona.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Dominio/Persona.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/FacturarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturarController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/ConsumoDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/ConsumoDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/OcupacionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/OcupacionDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/OcupacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/OcupacionDAOSQL.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/OcupacionDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GUI/FacturarGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FacturarGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperHabitacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -141,7 +139,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640010492846</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI">
+      <created>1640026951420</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1640026951420</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -160,7 +165,8 @@
     <MESSAGE value="Arreglos generales para DarAlta" />
     <MESSAGE value="subiendo cambios de la semana" />
     <MESSAGE value="Avances en items de consumo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Avances en items de consumo" />
+    <MESSAGE value="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TPDS$App.ic" NAME="App Coverage Results" MODIFIED="1639075671642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
