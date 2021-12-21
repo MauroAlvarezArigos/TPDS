@@ -10,7 +10,7 @@ public class FacturaDTO {
     private double montoTotal;
     private Object responsable;
     private String tipo;
-    private PagoDTO pago;
+    private boolean pago;
     private DetalleFacturaDTO detalle;
     private Boolean notaDeCredito;
     private PeriodoEstadiaDTO estadia;
@@ -46,12 +46,13 @@ public class FacturaDTO {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public PagoDTO getPago() {
+    public boolean isPago() {
         return pago;
     }
-    public void setPago(PagoDTO pago) {
+    public void setPago(boolean pago) {
         this.pago = pago;
     }
+
     public DetalleFacturaDTO getDetalle() {
         return detalle;
     }

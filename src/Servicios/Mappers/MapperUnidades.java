@@ -60,11 +60,13 @@ public class MapperUnidades {
             for (UnidadesDTO u : Ldto) {
                 LDominio.add(toDomain(u));
             }
-
+            daoManager.commit();
+            daoManager.disconnect();
             return LDominio;
         }else{
             return new ArrayList<>();
         }
+
     }
 
 }

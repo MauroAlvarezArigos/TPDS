@@ -3,6 +3,8 @@ package Servicios.Mappers;
 import DTO.ConsumoDTO;
 import Dominio.Consumo;
 
+import java.util.List;
+
 public class MapperConsumo {
 
     MapperUnidades mapperUnidades;
@@ -15,5 +17,15 @@ public class MapperConsumo {
         dto.setListaItems(mapperUnidades.toDTO(dominio.getListaItems()));
 
         return dto;
+    }
+
+    public Consumo toDomain(ConsumoDTO dto){
+        Consumo dominio = new Consumo();
+        mapperUnidades = new MapperUnidades();
+
+        dominio.setCostoTotal(dto.getCostoTotal());
+        dominio.setListaItems(mapperUnidades.toDomain(dto.getListaItems()));
+
+        return dominio;
     }
 }

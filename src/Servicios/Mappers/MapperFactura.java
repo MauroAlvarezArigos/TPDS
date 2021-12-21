@@ -5,11 +5,15 @@ import DAO.OcupacionDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.FacturaDTO;
 import DTO.PasajeroBusquedaDTO;
+import DTO.PeriodoEstadiaDTO;
 import DTO.ResponsableDePagoDTO;
 import Dominio.Factura;
 import Dominio.Pasajero;
 import Dominio.PeriodoEstadia;
 import Dominio.ResponsableDePago;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MapperFactura {
 
@@ -17,6 +21,8 @@ public class MapperFactura {
     FacturaDAOSQL facturaDAO;
     OcupacionDAOSQL ocupacionDAO;
     MapperDetalle mapperDetalle;
+    MapperPago mapperPago;
+    MapperResponsable mapperResponsable;
     MapperPasajeroBusqueda mapperPasajeroBusqueda;
 
     public Factura toDomain(FacturaDTO dto){
@@ -68,5 +74,49 @@ public class MapperFactura {
 
         return dominio;
 
+    }
+
+    public FacturaDTO toDTO(Factura dominio){
+        FacturaDTO dto = new FacturaDTO();
+        dto.setId_ocupacion(dominio.getOcupacion().getId());
+        dto.setMontoTotal(dominio.getMontoTotal());
+
+        if(dominio.getPago() != null){
+            dto.setPago(true);
+        }else{
+            dto.setPago(false);
+        }
+
+        dto.setDetalle(mapperDetalle.toDTO(dominio.getDetalle()));
+        dto.setResponsable(mapperResponsable.toDTO(dominio.getResponsable()));
+
+        if(dominio.getNotaDeCredito() != null){
+            dto.setNotaDeCredito(true);
+        }else{
+            dto.setNotaDeCredito(false);
+        }
+
+        PeriodoEstadiaDTO estadia = new PeriodoEstadiaDTO();
+        estadia.setMediaEstadia(dominio.getEstadia().getMediaEstadia());
+        estadia.setMonto(dominio.getEstadia().getMonto());
+        estadia.setFechaInicio(dominio.getEstadia().getFechaInicio());
+        estadia.setFechaFinal(dominio.getEstadia().getFechaFinal());
+        estadia.setId_estadia(dominio.getEstadia().getId_estadia());
+        dto.setEstadia(estadia);
+
+        dto.setTipo(dominio.getTipo().getTipo());
+        dto.setFecha(dominio.getFecha());
+        dto.setId_factura(dominio.getId_factura());
+
+        return dto;
+    }
+
+    public List<FacturaDTO> toDTO(List<Factura> LFacturas){
+        List<FacturaDTO> LDTO = new ArrayList<>();
+
+        for(Factura f : LFacturas){
+            LDTO.add(toDTO(f));
+        }
+        return LDTO;
     }
 }

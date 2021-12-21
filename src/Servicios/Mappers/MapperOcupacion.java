@@ -35,6 +35,7 @@ public class MapperOcupacion {
         daoManager = new DAOManager();
         PasajeroDAOSQL pasajeroDAO = daoManager.getPasajeroDAO();
         HabitacionDAOSQL habitacionDAO = daoManager.getHabitacionDAO();
+        mapperConsumo = new MapperConsumo();
 
         daoManager.begin();
 
@@ -47,7 +48,7 @@ public class MapperOcupacion {
         dominio.setCheckIn(dto.getCheckIn());
         dominio.setCheckOut(dto.getCheckOut());
         dominio.setHabitacion(habitacionDAO.getHabitacion(dto.getHabitacion().getN_hab(), dto.getHabitacion().getPiso()));
-        dominio.setConsumos(null);
+        dominio.setConsumos(mapperConsumo.toDomain(dto.getConsumo()));
         daoManager.commit();
         daoManager.disconnect();
 
@@ -78,13 +79,13 @@ public class MapperOcupacion {
         }else {
             dto.setCheckIn(dominio.getCheckIn());
             dto.setCheckOut(dominio.getCheckOut());
-            HabitacionDTO habDTO = new HabitacionDTO();
+            /*HabitacionDTO habDTO = new HabitacionDTO();
             habDTO.setN_hab(dominio.getHabitacion().getNumero());
             habDTO.setPiso(dominio.getHabitacion().getPiso());
             habDTO.setDescuento(dominio.getHabitacion().getDescuento());
             habDTO.setTipo(dominio.getHabitacion().getTipo().getTipo());
             habDTO.setCapacidad(dominio.getHabitacion().getCapacidad());
-            habDTO.setValordiario(dominio.getHabitacion().getTipo().getCosto());
+            habDTO.setValordiario(dominio.getHabitacion().getTipo().getCosto());*/
             dto.setHabitacion(mapperHabitacion.toDTO(dominio.getHabitacion(), 1, 2));
             dto.setId(dominio.getId());
             dto.setListaOcupantes(mapperPasajeroBusqueda.toDTO(dominio.getAcompanantes()));

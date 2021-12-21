@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
+import DAO.FacturaDAOSQL;
 import DTO.*;
 import Dominio.DetalleFactura;
 import Dominio.Factura;
@@ -32,6 +33,7 @@ public class FacturarController {
 	Color Warning = new Color(255,0,0);
 	Color Normal = new Color(128,128,128);
 
+	List<UnidadesDTO> LItemsPendientes = new ArrayList<>();
 	List<PasajeroBusquedaDTO> ocupantes;
 	PasajeroBusquedaDTO responsable = null;
 
@@ -41,7 +43,9 @@ public class FacturarController {
 	private FacturarGUI facturaGUI;
 	private FacturarElementosGUI facturarElementosGUI;
 	private PersonaJuridicaServicio pjServicio;
+	private FacturaServicio facturaServicio;
 	private PersonaJuridica personaJuridica;
+	private List<UnidadesDTO> ItemsPendientes;
 	private	String opciones[] = {"Cancelar","Aceptar"};
 
 	private double subtotal;
@@ -54,6 +58,7 @@ public class FacturarController {
 	public FacturarController(FacturarGUI facturarGUI) {
 		this.facturaGUI = facturarGUI;
 		this.pjServicio = new PersonaJuridicaServicio();
+		facturaServicio = new FacturaServicio();
 		ocupantes = new ArrayList<PasajeroBusquedaDTO>();
 		
 	}
@@ -103,11 +108,42 @@ public class FacturarController {
 						model.insertRow(table.getRowCount(), new Object[]{false, p.getApellido(), p.getNombre(), p.getNdoc(), p.getTipodoc()});
 					}
 				}
+				obtenerItemsPendientes();
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public List<UnidadesDTO> obtenerItemsPendientes(){
+		List<FacturaDTO> Lfacturas = new ArrayList<>();
+		List<UnidadesDTO> LItemsFacturados = new ArrayList<>();
+
+		Lfacturas = facturaServicio.getFacturasOcuapcion(ocupacionDTO);
+
+
+		for (FacturaDTO f : Lfacturas) {
+			int size = f.getDetalle().getListaItems().size();
+			for (int c = 0; c < size; c++) {
+				LItemsFacturados.add(f.getDetalle().getListaItems().get(c));
+			}
+		}
+		List<UnidadesDTO> LFinal = new ArrayList<>();
+		for(UnidadesDTO u : LItemsFacturados){
+			boolean op = false;
+			for(UnidadesDTO uocup : ocupacionDTO.getConsumo().getListaItems()){
+				if(uocup == u){
+					op = true;
+				}
+				if(op){
+					LFinal.add(u);
+				}
+
+			}
+		}
+		ItemsPendientes = LFinal;
+		return ItemsPendientes;
 	}
 	
 	public List<PasajeroBusquedaDTO> buscarOcupantesHabitacion() {
@@ -309,7 +345,7 @@ public class FacturarController {
 			facturaDTO.setMontoTotal(total);
 			facturaDTO.setNotaDeCredito(false);
 			facturaDTO.setTipo(new String(""+TipoFactura));
-			facturaDTO.setPago(null);
+			facturaDTO.setPago(false);
 			if(TipoFactura == 'A'){
 				facturaDTO.setResponsable(responsable);
 			}

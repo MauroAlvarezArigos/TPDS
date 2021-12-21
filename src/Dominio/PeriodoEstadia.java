@@ -16,6 +16,8 @@ public class PeriodoEstadia {
         this.mediaEstadia = mediaEstadia;
     }
 
+    public PeriodoEstadia(){super();}
+
     public int getId_estadia() {
         return id_estadia;
     }

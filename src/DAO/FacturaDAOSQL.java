@@ -4,17 +4,20 @@ import Dominio.*;
 import utils.Converter;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FacturaDAOSQL implements FacturaDAO{
 
     private Connection conn;
     private Converter converter = new Converter();
+    private PasajeroDAOSQL pasajeroDAO;
 
     //---
     //Constructor
     public FacturaDAOSQL(Connection unConn){
         this.conn = unConn;
+        this.pasajeroDAO = new PasajeroDAOSQL(unConn);
     }
 
     //Query Sentences
@@ -46,6 +49,42 @@ public class FacturaDAOSQL implements FacturaDAO{
             "\n" +
                     " INSERT INTO RESPONSABLEDEPAGO ( IDPERSONA, RAZONSOCIAL, CUITDNI, NUMDIRECCION, CALLE, TELEFONO)" +
                     " VALUES ( ?, ?, ?, ?, ?, ?) RETURNING ID_RESPONSABLE";
+    private static final String GET_FACTURA_OCUPACION =
+            "\n" +
+                    " SELECT * FROM FACTURA " +
+                    " WHERE (id_ocupacion = ?)";
+    private static final String GET_RESPONSABLE =
+            "\n" +
+                    " SELECT * FROM RESPONSABLEDEPAGO " +
+                    " WHERE (id_responsable = ?)";
+    private static final String GET_NOTA_CREDITO =
+            "\n" +
+                    " SELECT * FROM NOTADECREDITO " +
+                    " WHERE (id_nota_de_credito = ?)";
+    private static final String GET_ESTADIA =
+            "\n" +
+                    " SELECT * FROM PERIODOESTADIA " +
+                    " WHERE (id_estadia = ?)";
+    private static final String GET_TIPO_ID =
+            "\n" +
+                    " SELECT * FROM TIPODEFACTURA " +
+                    " WHERE (id_tipo_factura = ?)";
+    private static final String GET_DETALLE =
+            "\n" +
+                    " SELECT * FROM DETALLEFACTURA " +
+                    " WHERE (id_detalle = ?)";
+    private static final String GET_UNIDADES_DETALLE =
+            "\n" +
+                    " SELECT * FROM DETALLEUNIDADES " +
+                    " WHERE (id_detalle = ?)";
+    private static final String GET_ITEM_UNIDADES =
+            "\n" +
+                    " SELECT * FROM ITEM_CONSUMO" +
+                    " WHERE id_item = ?";
+    private static final String GET_SECCION_CONSUMO =
+            "\n" +
+                    " SELECT * FROM SECCION_CONSUMO" +
+                    " WHERE id_categoria = ?";
 
     public TipoDeFactura getTipoFactura(String tipo){
         PreparedStatement pstmt = null;
@@ -210,6 +249,276 @@ public class FacturaDAOSQL implements FacturaDAO{
                 e.printStackTrace();
             }
         }
+    }
+
+    public List<Factura> getFacturaOcupacion(Ocupacion unOcupacion){
+        List<Factura> LFacturas = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_FACTURA_OCUPACION);
+            pstmt.setInt(1,unOcupacion.getId());
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Factura f = new Factura();
+                f.setOcupacion(unOcupacion);
+                f.setId_factura(rs.getInt("ID_FACTURA"));
+                f.setFecha(converter.convertToLocalDateViaInstant(rs.getDate("FECHA")));
+                f.setMontoTotal(rs.getDouble("MONTOTOTAL"));
+                f.setResponsable(this.getResponsable(rs.getInt("ID_RESPONSABLE")));
+                f.setNotaDeCredito(this.getNotaDeCredito(rs.getInt("ID_NOTA_DE_CREDITO")));
+                f.setEstadia(this.getEstadia(rs.getInt("ID_ESTADIA")));
+                f.setTipo(this.getTipoFacturaID(rs.getInt("ID_TIPO_FACTURA")));
+                f.setDetalle(this.getDetalle(rs.getInt("ID_DETALLE")));
+
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return LFacturas;
+
+    }
+
+    private PeriodoEstadia getEstadia(int id){
+        PeriodoEstadia estadia = new PeriodoEstadia();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_ESTADIA);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                estadia.setId_estadia(id);
+                estadia.setMediaEstadia(rs.getBoolean("MEDIA_ESTADIA"));
+                estadia.setFechaFinal(converter.convertToLocalDateViaInstant(rs.getDate("FECHAHASTA")));
+                estadia.setFechaInicio(converter.convertToLocalDateViaInstant(rs.getDate("FECHADESDE")));
+                estadia.setMonto(rs.getDouble("MONTO"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return estadia;
+    }
+
+    private ResponsableDePago getResponsable(int id){
+        ResponsableDePago responsable = new ResponsableDePago();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_RESPONSABLE);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                responsable.setId_responsableDePago(id);
+                responsable.setCuitDni(rs.getString("CUITDNI"));
+                responsable.setNumDireccion(rs.getString("NUMDIRECCION"));
+                responsable.setCalle(rs.getString("CALLE"));
+                responsable.setTelefono(rs.getString("TELEFONO"));
+                responsable.setRazonSocial(rs.getString("RAZONSOCIAL"));
+                if(rs.getObject("idpersona") == null){
+                    responsable.setPersona_asociada(null);
+                }else{
+                    responsable.setPersona_asociada(pasajeroDAO.getPasajeroDbid(rs.getInt("idpersona")));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return responsable;
+
+    }
+
+    private NotaDeCredito getNotaDeCredito(int id){
+        NotaDeCredito nota = new NotaDeCredito();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_NOTA_CREDITO);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                nota.setId_nota(rs.getInt("ID_NOTA_DE_CREDITO"));
+                nota.setResponsable(rs.getString("RESPONSABLE_PAGO"));
+                nota.setCodigo_factura(rs.getInt("CODIGO_FACTURA"));
+                nota.setFechaFactura(converter.convertToLocalDateViaInstant(rs.getDate("FECHAFACTURA")));
+                nota.setIva(rs.getDouble("IVA"));
+                nota.setDnicuit(rs.getString("CUIT_DNI"));
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return nota;
+    }
+
+    private TipoDeFactura getTipoFacturaID(int id){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        TipoDeFactura TipoFactura = new TipoDeFactura();
+
+        try {
+            pstmt = conn.prepareStatement(GET_TIPO_ID);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                TipoFactura.setTipo(rs.getString("TIPO"));
+                TipoFactura.setId_tipo(rs.getInt("ID_TIPO_FACTURA"));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return TipoFactura;
+    }
+
+    private DetalleFactura getDetalle(int id){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        DetalleFactura detalle = new DetalleFactura();
+
+        try {
+            pstmt = conn.prepareStatement(GET_TIPO_ID);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            if(rs.next()) {
+                detalle.setId_detalle(id);
+                detalle.setCostoTotal(rs.getDouble("COSTOTOTAL"));
+                detalle.setListaItems(getListaItems(id));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return detalle;
+
+    }
+
+    private List<Unidades> getListaItems(int id){
+        List<Unidades> LUnidades = new ArrayList<>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_UNIDADES_DETALLE);
+            pstmt.setInt(1,id);
+            rs = pstmt.executeQuery();
+            while(rs.next()){
+                Unidades u = new Unidades();
+                u.setFechaConsumo(converter.convertToLocalDateViaInstant(rs.getDate("FECHA_CONSUMO")));
+                u.setCantidad(rs.getInt("UNIDADES"));
+                u.setItemConsumo(getItem(rs.getInt("ID_ITEM")));
+                LUnidades.add(u);
+            }
+        }catch (SQLException e){
+                e.printStackTrace();
+        }finally {
+            try {
+                if(pstmt != null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return LUnidades;
+    }
+
+    private ItemConsumo getItem(int id_item ){
+        ItemConsumo item = new ItemConsumo();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_ITEM_UNIDADES);
+            pstmt.setInt(1,id_item);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                item.setId_item(rs.getInt("ID_ITEM"));
+                item.setNombre(rs.getString("NOMBRE"));
+                item.setCosto(rs.getDouble("COSTO"));
+                item.setSeccionConsumo(getSeccionConsumo(rs.getInt("ID_CATEGORIA")));
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(pstmt != null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return item;
+    }
+
+    private SeccionConsumo getSeccionConsumo(int id_seccion){
+        SeccionConsumo seccionConsumo = new SeccionConsumo();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_SECCION_CONSUMO);
+            pstmt.setInt(1,id_seccion);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                seccionConsumo.setId_categoria(rs.getInt("ID_CATEGORIA"));
+                seccionConsumo.setSeccion(rs.getString("TIPO"));
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if(pstmt != null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return seccionConsumo;
     }
 
 }

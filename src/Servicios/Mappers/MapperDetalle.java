@@ -16,4 +16,16 @@ public class MapperDetalle {
 
         return dominio;
     }
+
+    public DetalleFacturaDTO toDTO(DetalleFactura detalle){
+        DetalleFacturaDTO dto = new DetalleFacturaDTO();
+        mapperUnidades = new MapperUnidades();
+
+        dto.setId_detalle(detalle.getId_detalle());
+        dto.setCostoTotal(detalle.getCostoTotal());
+        dto.setListaItems(mapperUnidades.toDTO(detalle.getListaItems()));
+
+        return dto;
+
+    }
 }
