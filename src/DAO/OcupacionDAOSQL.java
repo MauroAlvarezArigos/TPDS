@@ -14,11 +14,15 @@ public class OcupacionDAOSQL implements OcupacionDAO{
 
     private Connection conn;
     private PasajeroDAOSQL PasajeroDAO;
+    private HabitacionDAOSQL habitacionDAO;
+    private ConsumoDAOSQL consumoDAO;
     private Converter converter = new Converter();
 
     public OcupacionDAOSQL(Connection unConn){
         this.conn = unConn;
         this.PasajeroDAO = new PasajeroDAOSQL(unConn);
+        this.consumoDAO = new ConsumoDAOSQL(unConn);
+
     }
 
     private static final String GET_ALL_OCUPACIONES_HABITACION =
@@ -43,6 +47,10 @@ public class OcupacionDAOSQL implements OcupacionDAO{
             "\n" +
                     " INSERT INTO CONSUMOS_OCUPACION(id_ocupacion)" +
                     " VALUES(?)";
+    private static final String GET_OCUPACION_ID =
+            "\n" +
+                    " SELECT * FROM OCUPACION" +
+                    " WHERE id_ocupacion = ? ";
 
 
     public List<Ocupacion> getOcupacionesHab(Habitacion unHab){
@@ -121,12 +129,44 @@ public class OcupacionDAOSQL implements OcupacionDAO{
         return LOcupaciones;
     }
 
+    public Ocupacion getOcupacion(int id){
+        Ocupacion o = new Ocupacion();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            pstmt = conn.prepareStatement(GET_OCUPACION_ID);
+            pstmt.setInt(1, id);
+            rs = pstmt.executeQuery();
+            if(rs.next()){
+                this.habitacionDAO = new HabitacionDAOSQL(conn);
+                o.setHabitacion(habitacionDAO.getHabitacion(rs.getInt("NUMERO"),rs.getInt("PISO")));
+                o.setId(rs.getInt("ID_OCUPACION"));
+                o.setCheckIn(converter.convertToLocalDateViaInstant(rs.getDate("CHECKIN")));
+                o.setCheckOut(converter.convertToLocalDateViaInstant(rs.getDate("CHECKOUT")));
+                o.setResponsable(this.PasajeroDAO.getPasajeroDbid(rs.getInt("RESPONSABLE")));
+                o.setAcompanantes(this.PasajeroDAO.getAcompanantesOcupacion(o.getId()));
+                o.setConsumos(consumoDAO.getConsumoOcupacion(o));
+            }
+
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+            }
+            catch(SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return o;
+    }
+
     public void guardarOcupacion(Ocupacion unOcupacion){
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement(INSERT_OCUPACION);
 
-            //parte de Persona
             pstmt.setInt(1, unOcupacion.getHabitacion().getNumero());
             pstmt.setInt(2, unOcupacion.getHabitacion().getPiso());
             pstmt.setInt(3, unOcupacion.getResponsable().getIdpersona());

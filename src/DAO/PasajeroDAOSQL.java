@@ -229,6 +229,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Pasajero p = new Pasajero();
+				p.setFechanacimiento(converter.convertToLocalDateViaInstant(rs.getDate("FECHANAC")));
 				p.setIdpersona(rs.getInt("idpersona"));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));

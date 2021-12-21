@@ -3,6 +3,7 @@ package Servicios.Mappers;
 import DAO.HabitacionDAOSQL;
 import DAO.PasajeroDAOSQL;
 import DAO.utils.DAOManager;
+import DTO.HabitacionDTO;
 import DTO.OcupacionDTO;
 import DTO.PasajeroBusquedaDTO;
 import DTO.PeriodoEstadoHabitacionDTO;
@@ -68,8 +69,8 @@ public class MapperOcupacion {
 
     public OcupacionDTO toDTO(Ocupacion dominio){
         OcupacionDTO dto = new OcupacionDTO();
-        mapperHabitacion = new MapperHabitacion();
         mapperPasajeroBusqueda = new MapperPasajeroBusqueda();
+        mapperHabitacion = new MapperHabitacion();
         mapperConsumo = new MapperConsumo();
 
         if(dominio == null){
@@ -77,6 +78,13 @@ public class MapperOcupacion {
         }else {
             dto.setCheckIn(dominio.getCheckIn());
             dto.setCheckOut(dominio.getCheckOut());
+            HabitacionDTO habDTO = new HabitacionDTO();
+            habDTO.setN_hab(dominio.getHabitacion().getNumero());
+            habDTO.setPiso(dominio.getHabitacion().getPiso());
+            habDTO.setDescuento(dominio.getHabitacion().getDescuento());
+            habDTO.setTipo(dominio.getHabitacion().getTipo().getTipo());
+            habDTO.setCapacidad(dominio.getHabitacion().getCapacidad());
+            habDTO.setValordiario(dominio.getHabitacion().getTipo().getCosto());
             dto.setHabitacion(mapperHabitacion.toDTO(dominio.getHabitacion(), 1, 2));
             dto.setId(dominio.getId());
             dto.setListaOcupantes(mapperPasajeroBusqueda.toDTO(dominio.getAcompanantes()));

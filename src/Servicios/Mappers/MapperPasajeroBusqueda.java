@@ -15,13 +15,13 @@ public class MapperPasajeroBusqueda {
     private DAOManager daoManager;
 
     public PasajeroBusquedaDTO toDTO(Pasajero unPasajero){
-        //todo: Agregar id Pasajero
         PasajeroBusquedaDTO unPasajeroBusquedaDTO = new PasajeroBusquedaDTO();
         unPasajeroBusquedaDTO.setDbid(unPasajero.getIdpersona());
         unPasajeroBusquedaDTO.setNombre(unPasajero.getNombre());
         unPasajeroBusquedaDTO.setApellido(unPasajero.getApellido());
         unPasajeroBusquedaDTO.setNdoc(unPasajero.getNdoc());
         unPasajeroBusquedaDTO.setTipodoc(unPasajero.getTipodoc().getTipoDeID());
+        unPasajeroBusquedaDTO.setFechaNacimiento(unPasajero.getFechanacimiento());
 
         return unPasajeroBusquedaDTO;
     }

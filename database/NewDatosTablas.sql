@@ -10,6 +10,7 @@ id7 int;
 id8 int;
 id9 int;
 id10 int;
+idOcup1 int;
 
 begin
 --Datos Pos Iva
@@ -73,16 +74,16 @@ insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) v
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '9630048949', 'lthuillier9@wisc.edu', '6325964203', 'Sherman', '1129', 3, 8)returning idpersona into id10;
 
 --Datos Pasajero
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Bondy', 'Rylatt', '3808721502', 'LC', 'Office Assistant IV', '2021-09-11', 1);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id2, 'Luce', 'Theml', '9936502027', 'LE', 'Chief Design Engineer', '2021-02-13', 1);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id3, 'Ricki', 'Lapworth', '7519091015', 'Otro', 'Food Chemist', '2021-06-21', 4);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id4, 'Franny', 'Gumme', '9093832379', 'LC', 'Junior Executive', '2021-08-10', 5);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id5, 'Renell', 'St. Quentin', '6694351917', 'DNI', 'Nuclear Power Engineer', '2021-01-19', 7);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id6, 'Colene', 'Rogan', '3828106110', 'Otro', 'Assistant Professor', '2021-02-14', 7);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id7, 'Richy', 'Wieprecht', '3533356477', 'LE', 'Geological Engineer', '2021-06-25', 5);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id8, 'Ewan', 'Latek', '0084924403', 'LC', 'Office Assistant I', '2021-04-03', 5);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id9, 'Shandee', 'Record', '3017832678', 'DNI', 'Biostatistician III', '2021-02-23', 8);
-insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '2021-09-20', 7);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Bondy', 'Rylatt', '3808721502', 'LC', 'Office Assistant IV', '2000-09-11', 1);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id2, 'Luce', 'Theml', '9936502027', 'LE', 'Chief Design Engineer', '2000-02-13', 1);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id3, 'Ricki', 'Lapworth', '7519091015', 'Otro', 'Food Chemist', '2000-06-21', 4);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id4, 'Franny', 'Gumme', '9093832379', 'LC', 'Junior Executive', '2000-08-10', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id5, 'Renell', 'St. Quentin', '6694351917', 'DNI', 'Nuclear Power Engineer', '2010-01-19', 7);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id6, 'Colene', 'Rogan', '3828106110', 'Otro', 'Assistant Professor', '2009-02-14', 7);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id7, 'Richy', 'Wieprecht', '3533356477', 'LE', 'Geological Engineer', '2002-06-25', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id8, 'Ewan', 'Latek', '0084924403', 'LC', 'Office Assistant I', '2000-04-03', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id9, 'Shandee', 'Record', '3017832678', 'DNI', 'Biostatistician III', '2000-02-23', 8);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '1999-09-20', 7);
 
 --Datos TipoHabitacion
 insert into tipohabitacion (id, tipo, costo) values (1, 'Individual Estandar', 99.99);
@@ -120,7 +121,7 @@ insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fecha
 insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id1, '2021-09-21', '2021-09-30');
 insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id2, '2021-09-01', '2021-09-12');
 insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-09-13', '2021-09-15');
-insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-12-13', '2021-12-30');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-12-13', '2021-12-30') returning id_ocupacion into idOcup1;
 
 --Datos Fuera De Servicio
 insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021-09-01', '2021-09-30');
@@ -162,9 +163,8 @@ insert into tipocheque (id_tipo_cheque, tipo_cheque) values (1,'cheque no a la o
 insert into tipocheque (id_tipo_cheque, tipo_cheque) values (2, 'cheque posdatado');
 
 --Datos Tipo de Factura
-insert into tipodefactura (id_tipo_factura, tipo) values (1, 'Factura A responsable inscripto');
-insert into tipodefactura (id_tipo_factura, tipo) values (2, 'Factura B consumidor final');
-insert into tipodefactura (id_tipo_factura, tipo) values (3, 'Factura B sujeto exento');
+insert into tipodefactura (id_tipo_factura, tipo) values (1, 'A');
+insert into tipodefactura (id_tipo_factura, tipo) values (2, 'B');
 
 --Datos Tipo de Moneda
 insert into tipomoneda (id_moneda, moneda, simbolo) values (1, 'peso argentino', '$');
@@ -179,15 +179,15 @@ insert into tipomoneda (id_moneda, moneda, simbolo) values (9, 'guaranì', '₲'
 insert into tipomoneda (id_moneda, moneda, simbolo) values (10, 'sol peruano', 'S/');
 
 --Datos Consumo
-insert into consumos_ocupacion (id_ocupacion, id_consumo) values (4,1);
+insert into consumos_ocupacion (id_ocupacion, id_consumo) values (idOcup1,1);
 
-insert into unidades (id_unidades, fecha_consumo, unidades) values (1, '2021-12-12', 2);
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 2);
 insert into consumo_unidades (id_unidades, id_consumo, id_item) values (1, 1, 1);
 
-insert into unidades (id_unidades, fecha_consumo, unidades) values (2, '2021-12-12', 4);
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 4);
 insert into consumo_unidades (id_unidades, id_consumo, id_item) values (2, 1, 2);
 
-insert into unidades (id_unidades, fecha_consumo, unidades) values (3, '2021-12-12', 1);
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 1);
 insert into consumo_unidades (id_unidades, id_consumo, id_item) values (3, 1, 11);
 
 

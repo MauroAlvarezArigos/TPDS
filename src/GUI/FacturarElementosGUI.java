@@ -52,7 +52,7 @@ public class FacturarElementosGUI extends JFrame{
 
 	public FacturarElementosGUI(FacturarController controller, String facturarA, String tipoFactura) {
 		this.controller = controller;
-		this.setSize(700, 350);
+		this.setSize(700, 375);
 		this.setTitle("Facturar");
 		getContentPane().setLayout(null);
 
@@ -174,5 +174,17 @@ public class FacturarElementosGUI extends JFrame{
 		gbc_lblValorTotal.gridx = 1;
 		gbc_lblValorTotal.gridy = 3;
 		panel.add(lblValorTotal, gbc_lblValorTotal);
+
+		JButton btnGuardarFactura = new JButton("Guardar");
+		btnGuardarFactura.setBackground(new Color(0,128,0));
+		btnGuardarFactura.setForeground(Color.WHITE);
+		btnGuardarFactura.setBounds(575,300,100,25);
+		getContentPane().add(btnGuardarFactura);
+		btnGuardarFactura.addActionListener(e -> {
+			controller.guardarFactura();
+
+
+		});
+
 	}
 }

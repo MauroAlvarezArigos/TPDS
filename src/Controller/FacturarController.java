@@ -1,21 +1,27 @@
 package Controller;
 
 import java.awt.Color;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.Period;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import DTO.OcupacionDTO;
-import DTO.PasajeroBusquedaDTO;
-import DTO.UnidadesDTO;
+import DTO.*;
+import Dominio.DetalleFactura;
+import Dominio.Factura;
 import Dominio.PersonaJuridica;
 import Exceptions.CampoFacturarIncorrecto;
 import Exceptions.CampoFaltanteException;
 import Exceptions.NoConcordanciaException;
 import GUI.FacturarElementosGUI;
 import GUI.FacturarGUI;
+import Servicios.FacturaServicio;
 import Servicios.OcupacionServicio;
 import Servicios.PersonaJuridicaServicio;
 
@@ -36,7 +42,13 @@ public class FacturarController {
 	private FacturarElementosGUI facturarElementosGUI;
 	private PersonaJuridicaServicio pjServicio;
 	private PersonaJuridica personaJuridica;
-	private	String opciones[] = {"Cancelar","Aceptar"}; 
+	private	String opciones[] = {"Cancelar","Aceptar"};
+
+	private double subtotal;
+	private double iva;
+	private double total;
+
+	private LocalTime horaSalida;
 
 	
 	public FacturarController(FacturarGUI facturarGUI) {
@@ -80,10 +92,12 @@ public class FacturarController {
 
 		
 		if(bool) {
+			horaSalida = LocalTime.parse(facturaGUI.getTbxHoraSalida().getText(), DateTimeFormatter.ofPattern("HH:mm"));
 			try {
 				ocupantes = buscarOcupantesHabitacion();
 				JTable table = facturaGUI.getTablePasajero();
 				DefaultTableModel model = facturaGUI.getModel();
+				model.setRowCount(0);
 				if (ocupantes != null) {
 					for (PasajeroBusquedaDTO p : ocupantes) {
 						model.insertRow(table.getRowCount(), new Object[]{false, p.getApellido(), p.getNombre(), p.getNdoc(), p.getTipodoc()});
@@ -151,7 +165,7 @@ public class FacturarController {
 	}
 
 	private void facturarConsumidorFinal(){
-		TipoFactura = 'A';
+		TipoFactura = 'B';
 		JTable table = facturaGUI.getTablePasajero();
 		int size = table.getRowCount();
 		int selected = -1;
@@ -162,8 +176,13 @@ public class FacturarController {
 			}
 		}
 		if(selected >= 0) {
-			responsable = ocupantes.get(selected);
-			facturarElementos();
+			Period p = Period.between(ocupantes.get(selected).getFechaNacimiento(), LocalDate.now());
+			if(p.getYears() >= 17) {
+				responsable = ocupantes.get(selected);
+				facturarElementos();
+			}else{
+				facturaGUI.mostrarError("Error", "El responsable seleccionado es menor a 18 años, por favor seleccione a otra persona como responsable");
+			}
 		}else{
 			facturaGUI.mostrarError("No se ha seleccionado un responsable", "Por favor seleccione a uno de los ocupantes como responsable");
 		}
@@ -181,22 +200,24 @@ public class FacturarController {
 		table.getColumnModel().getColumn(1).setMaxWidth(75);
 		table.getColumnModel().getColumn(2).setMaxWidth(50);
 		List<UnidadesDTO> LItems = ocupacionDTO.getConsumo().getListaItems();
+		model.setRowCount(0);
 		for(UnidadesDTO item : LItems){
 			model.addRow(new Object[]{item.getNombre()+" X"+item.getCantidad(), item.getCostoUnitario()*item.getCantidad(), false});
 		}
 		facturarElementosGUI.getCbxEstadia().setText("Valor de la estadia: "+ "$" + getValorEstadia(ocupacionDTO));
+		updateTotalValue();
 	}
 
 	public void updateTotalValue(){
-		double subtotal = calcularSubtotal();
+		subtotal = calcularSubtotal();
 		String StrSubTotal = "" + Math.round(  subtotal * 100) / 100.0;
 		facturarElementosGUI.getLblValorSubtotal().setText(" $ "+StrSubTotal);
 
-		double iva = calcularIVA(subtotal);
+		iva = calcularIVA(subtotal);
 		String StrIva = "" + iva;
 		facturarElementosGUI.getLblValorIVA().setText(" $ "+StrIva);
 
-		double total = subtotal+iva;
+		total = subtotal+iva;
 		String StrTotal = "" + Math.round(  total * 100) / 100.0;
 		facturarElementosGUI.getLblValorTotal().setText(" $ "+StrTotal);
 	}
@@ -204,7 +225,7 @@ public class FacturarController {
 	private double calcularSubtotal(){
 		double subtotal = 0.0;
 		if(facturarElementosGUI.getCbxEstadia().isSelected()){
-			subtotal = subtotal + Double.parseDouble(getValorEstadia(ocupacionDTO));
+			subtotal = subtotal + Double.parseDouble(new String(""+getValorEstadia(ocupacionDTO)));
 		}
 		JTable table = facturarElementosGUI.getTable();
 		int size = table.getRowCount();
@@ -219,19 +240,30 @@ public class FacturarController {
 
 	private double calcularIVA(double subtotal){
 		double iva = 0.0;
-		if(TipoFactura == 'A'){iva = Math.round(  valorIVA*subtotal * 100) / 100.0;}
+		if(TipoFactura == 'B'){iva = Math.round(  valorIVA*subtotal * 100) / 100.0;}
 		return iva;
 	}
 
-	private String getValorEstadia(OcupacionDTO unOcupacionDTO){
-		String valor = "0";
-		if(unOcupacionDTO != null) {
+	private double getValorEstadia(OcupacionDTO unOcupacionDTO) {
+		double valor = 0.0;
+		if (unOcupacionDTO != null) {
 			int dias = unOcupacionDTO.getCheckOut().compareTo(unOcupacionDTO.getCheckIn());
 			double valorxDia = unOcupacionDTO.getHabitacion().getValordiario();
-			double valorfinal = Math.round(valorxDia * dias * 100) / 100.0;
-			valor = "" + valorfinal;
+			valor = Math.round(valorxDia * dias * 100) / 100.0;
+
+		if (horaSalida.isAfter(LocalTime.of(11, 0))) {
+			if (horaSalida.isAfter(LocalTime.of(18, 0))) {
+				return valor;
+			} else {
+				double ddias = unOcupacionDTO.getCheckOut().compareTo(unOcupacionDTO.getCheckIn()) + 0.5;
+				valorxDia = unOcupacionDTO.getHabitacion().getValordiario();
+				valor = Math.round(valorxDia * ddias * 100) / 100.0;
+				return valor;
+			}
 		}
-		return valor;
+
+	}
+	return valor;
 	}
 
 	private void facturarTercero() throws NoConcordanciaException {
@@ -267,4 +299,61 @@ public class FacturarController {
 				options,  //the titles of buttons
 				options[0]);
 	}
+
+	public void guardarFactura(){
+		if(total == 0){
+			facturaGUI.mostrarError("Error", "Seleccione al menos un elemento a facturar");
+		}else{
+			FacturaDTO facturaDTO = new FacturaDTO();
+			facturaDTO.setFecha(LocalDate.now());
+			facturaDTO.setMontoTotal(total);
+			facturaDTO.setNotaDeCredito(false);
+			facturaDTO.setTipo(new String(""+TipoFactura));
+			facturaDTO.setPago(null);
+			if(TipoFactura == 'A'){
+				facturaDTO.setResponsable(responsable);
+			}
+			facturaDTO.setDetalle(generarDetalle());
+			facturaDTO.setEstadia(generarEstadia());
+			facturaDTO.setId_ocupacion(ocupacionDTO.getId());
+
+			FacturaServicio facturaServicio = new FacturaServicio();
+			facturaServicio.guardarFactura(facturaDTO);
+		}
+	}
+
+	public DetalleFacturaDTO generarDetalle(){
+		JTable table = facturarElementosGUI.getTable();
+		int size = table.getRowCount();
+		DetalleFacturaDTO detalle = new DetalleFacturaDTO();
+		List<UnidadesDTO> Lunidades = new ArrayList<>();
+		for(int c = 0; c < size; c++){
+			if((Boolean) table.getValueAt(c,2)) {
+				Lunidades.add(ocupacionDTO.getConsumo().getListaItems().get(c));
+			}
+		}
+		detalle.setListaItems(Lunidades);
+
+		return detalle;
+	}
+
+	public PeriodoEstadiaDTO generarEstadia(){
+		PeriodoEstadiaDTO estadiaDTO = new PeriodoEstadiaDTO();
+		if(horaSalida.isAfter(LocalTime.of(11,0))){
+			if(horaSalida.isAfter(LocalTime.of(18,0))){
+				estadiaDTO.setMediaEstadia(false);
+				//todo OcuparHabitacion y facturar
+			}else{
+				estadiaDTO.setMediaEstadia(true);
+			}
+		}else{
+				estadiaDTO.setMediaEstadia(false);
+		}
+		estadiaDTO.setFechaInicio(ocupacionDTO.getCheckIn());
+		estadiaDTO.setFechaFinal(ocupacionDTO.getCheckOut());
+		estadiaDTO.setMonto(getValorEstadia(ocupacionDTO));
+
+		return estadiaDTO;
+	}
+
 }

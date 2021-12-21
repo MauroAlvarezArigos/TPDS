@@ -24,6 +24,8 @@ public class DAOManager {
     private ConsumoDAOSQL consumoDAO = null;
     private ReservaDAOSQL reservaDAO = null;
     private FueraDeServicioDAOSQL fueraDeServicioDAO = null;
+    private FacturaDAOSQL facturaDAO = null;
+    private ItemDAOSQL itemDAO = null;
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -115,4 +117,17 @@ public class DAOManager {
         return fueraDeServicioDAO;
     }
 
+    public FacturaDAOSQL getFacturaDAO() {
+        if (this.facturaDAO == null) {
+            this.facturaDAO = new FacturaDAOSQL(wrapper.getConnection());
+        }
+        return facturaDAO;
+    }
+
+    public ItemDAOSQL getItemDAO() {
+        if (this.itemDAO == null) {
+            this.itemDAO = new ItemDAOSQL(wrapper.getConnection());
+        }
+        return itemDAO;
+    }
 }

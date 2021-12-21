@@ -32,4 +32,12 @@ public class DetalleFactura {
     public void setListaItems(List<Unidades> listaItems) {
         ListaItems = listaItems;
     }
+
+    public double calcularCostoTotal(){
+        double total = 0.0;
+        for(Unidades u :this.ListaItems){
+            total = total + u.getCantidad()*u.getItemConsumo().getCosto();
+        }
+        return Math.round(total*100)/100.0;
+    }
 }

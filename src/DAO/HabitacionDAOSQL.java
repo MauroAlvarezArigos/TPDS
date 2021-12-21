@@ -32,9 +32,6 @@ public class HabitacionDAOSQL implements HabitacionDAO {
             "\n" +
                     "SELECT * FROM HABITACION WHERE numero = ? AND piso = ? ";
 
-        //todo separar en OcupacionDAO, ReservaDAO, HabitacionDAO, FueraDeServicioDAO
-
-
     public List<Habitacion> getAllHabitaciones(){
         List<Habitacion> lista = new ArrayList<>();
         PreparedStatement pstmt = null;

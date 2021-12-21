@@ -36,6 +36,8 @@ public class DarAltaController {
     private PasajeroDTO pasajeroDTO;
     private IVAServicio IVAServicio;
 
+    private List<LocalidadDTO> ListaLocalidadDTO;
+
 
     public DarAltaController(AltaPasajeroGUI a) {
         this.pasajeroServicio = new PasajeroServicio();
@@ -195,7 +197,7 @@ public class DarAltaController {
         JComboBox<String> lloc = AltaPsjeroGUI.getCbxLocalidad();
         lloc.removeAllItems();
         String n_prov = AltaPsjeroGUI.getSelectedCbxProvincia();
-        List<LocalidadDTO> ListaLocalidadDTO = ubicacionServicio.getAllLocalidadesProv(n_prov);
+        ListaLocalidadDTO = ubicacionServicio.getAllLocalidadesProv(n_prov);
 
         lloc.addItem("");
         for (LocalidadDTO LocDTO : ListaLocalidadDTO){
@@ -290,5 +292,14 @@ public class DarAltaController {
         Color Red = new Color(255,0,0);
         label.setForeground(Red);
         container.setBorder(BorderFactory.createLineBorder(Red));
+    }
+
+    public String getCodigoPostal(){
+        for(LocalidadDTO l : ListaLocalidadDTO){
+            if(l.getLoc().equals(AltaPsjeroGUI.getSelectedCbxLocalidad())){
+                return l.getCodigoPostal();
+            }
+        }
+        return "";
     }
 }

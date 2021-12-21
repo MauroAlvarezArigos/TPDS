@@ -9,6 +9,7 @@ public class MapperLocalidad {
     public LocalidadDTO toDTO(Localidad unLocalidad){
         LocalidadDTO unLocDTO = new LocalidadDTO();
 
+        unLocDTO.setCodigoPostal(unLocalidad.getCodPostal());
         unLocDTO.setLoc(unLocalidad.getNombre());
 
         return unLocDTO;

@@ -3,14 +3,31 @@
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Controller/DarAltaController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/DAO/PasajeroDAOSQL.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/AltaPasajeroGUI.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/Database.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/Database.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/OcuparController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OcuparController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/DarAltaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DarAltaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/FacturarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/ConsumoDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/ConsumoDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/HabitacionDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/OcupacionDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/OcupacionDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DAO/OcupacionDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/OcupacionDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/EstadoHabitacionesGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/HabitacionServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PasajeroDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/utils/DAOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/PasajeroBusquedaDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/PasajeroBusquedaDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/DetalleFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/DetalleFactura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/Factura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/Factura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/NotaDeCredito.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/NotaDeCredito.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/TipoDeFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/TipoDeFactura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/AltaPasajeroGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/FacturarElementosGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajeroBusqueda.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperPasajeroBusqueda.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperUnidades.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperUnidades.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,6 +90,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -152,7 +170,14 @@
       <option name="project" value="LOCAL" />
       <updated>1640031931516</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Arreglando bugs en facturar">
+      <created>1640033752555</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1640033752555</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -173,7 +198,15 @@
     <MESSAGE value="Avances en items de consumo" />
     <MESSAGE value="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI" />
     <MESSAGE value="Separado DAOHabitacion en OcupacionDAO, FueraDeServicioDAO, y ReservaDAO" />
-    <option name="LAST_COMMIT_MESSAGE" value="Separado DAOHabitacion en OcupacionDAO, FueraDeServicioDAO, y ReservaDAO" />
+    <MESSAGE value="Arreglando bugs en facturar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Arreglando bugs en facturar" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.postgresql.jdbc.PgResultSet" memberName="rows" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TPDS$App.ic" NAME="App Coverage Results" MODIFIED="1639075671642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
