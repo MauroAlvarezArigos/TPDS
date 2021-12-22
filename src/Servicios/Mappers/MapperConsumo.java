@@ -22,10 +22,13 @@ public class MapperConsumo {
     public Consumo toDomain(ConsumoDTO dto){
         Consumo dominio = new Consumo();
         mapperUnidades = new MapperUnidades();
+        if(dto != null) {
+            dominio.setCostoTotal(dto.getCostoTotal());
+            dominio.setListaItems(mapperUnidades.toDomain(dto.getListaItems()));
 
-        dominio.setCostoTotal(dto.getCostoTotal());
-        dominio.setListaItems(mapperUnidades.toDomain(dto.getListaItems()));
-
-        return dominio;
+            return dominio;
+        }else{
+            return null;
+        }
     }
 }

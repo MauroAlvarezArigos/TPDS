@@ -11,6 +11,7 @@ public class MapperLocalidad {
 
         unLocDTO.setCodigoPostal(unLocalidad.getCodPostal());
         unLocDTO.setLoc(unLocalidad.getNombre());
+        unLocDTO.setCodigo(unLocalidad.getCodigoLocalidad());
 
         return unLocDTO;
     }

@@ -43,6 +43,7 @@ public class MapperOcupacion {
         for(PasajeroBusquedaDTO p : dto.getListaOcupantes()){
             Lpasajeros.add(pasajeroDAO.getPasajeroDbid(p.getDbid()));
         }
+        dominio.setId(dto.getId());
         dominio.setResponsable(pasajeroDAO.getPasajeroDbid(dto.getResponsable().getDbid()));
         dominio.setAcompanantes(Lpasajeros);
         dominio.setCheckIn(dto.getCheckIn());

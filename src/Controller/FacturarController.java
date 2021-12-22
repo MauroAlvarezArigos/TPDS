@@ -35,7 +35,9 @@ public class FacturarController {
 
 	List<UnidadesDTO> LItemsPendientes = new ArrayList<>();
 	List<PasajeroBusquedaDTO> ocupantes;
-	PasajeroBusquedaDTO responsable = null;
+
+
+	private Object responsable = null;
 
 	double valorIVA = 0.105;
 	char TipoFactura;
@@ -44,8 +46,9 @@ public class FacturarController {
 	private FacturarElementosGUI facturarElementosGUI;
 	private PersonaJuridicaServicio pjServicio;
 	private FacturaServicio facturaServicio;
-	private PersonaJuridica personaJuridica;
+	private PersonaJuridicaDTO personaJuridica;
 	private List<UnidadesDTO> ItemsPendientes;
+	private boolean EstadiaFacturada = false;
 	private	String opciones[] = {"Cancelar","Aceptar"};
 
 	private double subtotal;
@@ -125,24 +128,29 @@ public class FacturarController {
 
 		for (FacturaDTO f : Lfacturas) {
 			int size = f.getDetalle().getListaItems().size();
+			if(f.getEstadia() != null){EstadiaFacturada = true;}
 			for (int c = 0; c < size; c++) {
 				LItemsFacturados.add(f.getDetalle().getListaItems().get(c));
 			}
 		}
 		List<UnidadesDTO> LFinal = new ArrayList<>();
-		for(UnidadesDTO u : LItemsFacturados){
-			boolean op = false;
-			for(UnidadesDTO uocup : ocupacionDTO.getConsumo().getListaItems()){
-				if(uocup == u){
-					op = true;
+		for(UnidadesDTO uocup : ocupacionDTO.getConsumo().getListaItems()){
+			boolean op = true;
+			for(UnidadesDTO u : LItemsFacturados){
+				if(uocup.getId_item() == u.getId_item() && uocup.getCantidad() == u.getCantidad()){
+					op = false;
+					break;
 				}
-				if(op){
-					LFinal.add(u);
-				}
-
+			}
+			if(op){
+				LFinal.add(uocup);
 			}
 		}
 		ItemsPendientes = LFinal;
+		ocupacionDTO.getConsumo().getListaItems();
+
+
+
 		return ItemsPendientes;
 	}
 	
@@ -190,9 +198,7 @@ public class FacturarController {
 	    }
 
 	public void facturar() throws NoConcordanciaException {
-		
-		//Recordar Si facturas por tercero el tipo de factura es A, si no es B
-		
+
 		if(facturaGUI.getCbxFacturaTercero().isSelected()) {
 			facturarTercero();
 		}else{
@@ -225,8 +231,18 @@ public class FacturarController {
 	}
 
 	private void facturarElementos(){
-		facturarElementosGUI = new FacturarElementosGUI(this, responsable.getApellido()+" ,"+responsable.getNombre(), new String(""+TipoFactura));
+
+		if(TipoFactura == 'B') {
+			facturarElementosGUI = new FacturarElementosGUI(this,
+					((PasajeroBusquedaDTO) responsable).getApellido() + " ," + ((PasajeroBusquedaDTO) responsable).getNombre(),
+					"" + TipoFactura);
+		}else{
+			facturarElementosGUI = new FacturarElementosGUI(this,
+					((PersonaJuridicaDTO) responsable).getRazonSocial(),
+					"" + TipoFactura);
+		}
 		facturarElementosGUI.setVisible(true);
+		facturarElementosGUI.getCbxEstadia().setEnabled(!EstadiaFacturada);
 		JTable table = facturarElementosGUI.getTable();
 		DefaultTableModel model = facturarElementosGUI.getModel();
 		model.addColumn("Consumos de la Habitacion");
@@ -235,7 +251,7 @@ public class FacturarController {
 		table.getColumnModel().getColumn(0).setMaxWidth(300);
 		table.getColumnModel().getColumn(1).setMaxWidth(75);
 		table.getColumnModel().getColumn(2).setMaxWidth(50);
-		List<UnidadesDTO> LItems = ocupacionDTO.getConsumo().getListaItems();
+		List<UnidadesDTO> LItems = ItemsPendientes;
 		model.setRowCount(0);
 		for(UnidadesDTO item : LItems){
 			model.addRow(new Object[]{item.getNombre()+" X"+item.getCantidad(), item.getCostoUnitario()*item.getCantidad(), false});
@@ -303,7 +319,7 @@ public class FacturarController {
 	}
 
 	private void facturarTercero() throws NoConcordanciaException {
-		TipoFactura = 'B';
+		TipoFactura = 'A';
 		//Factura por 3ro
 		if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
 			JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(facturaGUI);
@@ -311,12 +327,15 @@ public class FacturarController {
 		}else {
 			personaJuridica = pjServicio.getPersonaJuridica(facturaGUI.getTbxCuit().getText());
 			if(personaJuridica == null) {
+				//facturaGUI.mostrarError("Erorr", "No se ha encontrado una persona juridica que coincida con el CUIT de busqueda");
 				throw new NoConcordanciaException();
 			}else {
 				if(optionMessageGUI("Desea Facturar al Tercero?", personaJuridica.getRazonSocial(), opciones) == 1) {
-					FacturarElementosGUI fe = new FacturarElementosGUI(this, personaJuridica.getRazonSocial(), "A");
-					facturaGUI.dispose();
-					fe.setVisible(true);
+					responsable = personaJuridica;
+					facturarElementos();
+					//facturarElementosGUI = new FacturarElementosGUI(this, ""+personaJuridica.getRazonSocial(), "A");
+					//facturaGUI.dispose();
+					//facturarElementosGUI.setVisible(true);
 				}
 				else {
 					facturaGUI.getTbxCuit().setText("");
@@ -346,15 +365,16 @@ public class FacturarController {
 			facturaDTO.setNotaDeCredito(false);
 			facturaDTO.setTipo(new String(""+TipoFactura));
 			facturaDTO.setPago(false);
-			if(TipoFactura == 'A'){
-				facturaDTO.setResponsable(responsable);
-			}
+			facturaDTO.setResponsable(responsable);
 			facturaDTO.setDetalle(generarDetalle());
 			facturaDTO.setEstadia(generarEstadia());
 			facturaDTO.setId_ocupacion(ocupacionDTO.getId());
 
 			FacturaServicio facturaServicio = new FacturaServicio();
 			facturaServicio.guardarFactura(facturaDTO);
+			facturaGUI.mostrarError("Exito", "La factura ha sido cargada al sistema");
+			facturaGUI.dispose();
+			facturarElementosGUI.dispose();
 		}
 	}
 

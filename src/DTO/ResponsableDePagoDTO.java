@@ -9,7 +9,7 @@ public class ResponsableDePagoDTO {
     private String numDireccion;
     private String calle;
     private String telefono;
-    private PasajeroBusquedaDTO persona_asociada;
+    private Object persona_asociada;
 
     public int getId_responsableDePago() {
         return id_responsableDePago;
@@ -47,10 +47,11 @@ public class ResponsableDePagoDTO {
     public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    public PasajeroBusquedaDTO getPersona_asociada() {
+    public Object getPersona_asociada() {
         return persona_asociada;
     }
     public void setPersona_asociada(PasajeroBusquedaDTO persona_asociada) {
         this.persona_asociada = persona_asociada;
     }
+    public void setPersona_asociada(PersonaJuridicaDTO persona_asociada){this.persona_asociada = persona_asociada;}
 }

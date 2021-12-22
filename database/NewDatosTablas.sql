@@ -10,6 +10,7 @@ id7 int;
 id8 int;
 id9 int;
 id10 int;
+id11 int;
 idOcup1 int;
 
 begin
@@ -72,6 +73,8 @@ insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) v
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '9037432352', 'gshakshaft7@photobucket.com', '20456932159', 'Susan', '5514', 3, 7)returning idpersona into id8;
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '1816528986', 'rfriedman8@imdb.com', '9632541596', 'Buhler', '624', 2, 3)returning idpersona into id9;
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '9630048949', 'lthuillier9@wisc.edu', '6325964203', 'Sherman', '1129', 3, 8)returning idpersona into id10;
+
+insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '6435325467', 'aertgfdryte@hgf.com', '24575464774', '1st Street', '5431', 3, 8)returning idpersona into id11;
 
 --Datos Pasajero
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Bondy', 'Rylatt', '3808721502', 'LC', 'Office Assistant IV', '2000-09-11', 1);
@@ -190,5 +193,6 @@ insert into consumo_unidades (id_unidades, id_consumo, id_item) values (2, 1, 2)
 insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 1);
 insert into consumo_unidades (id_unidades, id_consumo, id_item) values (3, 1, 11);
 
+insert into personajuridica (idpersona, razonsocial, domiciliofiscal) VALUES (id11, 'Tesla S.A.', '1st Street, 5431');
 
 end$$;

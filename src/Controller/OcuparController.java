@@ -26,6 +26,7 @@ public class OcuparController {
 	private List<OcupacionDTO> LOcupacion;
 	private TablaPasajerosGUI TablaGUI;
 	private OcupacionServicio ocupacionServicio;
+	private int OcupacionCounter;
 
 	//Getters and Setters
 
@@ -41,6 +42,7 @@ public class OcuparController {
 		this.ocupacionServicio = new OcupacionServicio();
 		this.IDServicio = new IDTypeServicio();
 		this.ocuparGUI = oHab;
+		this.OcupacionCounter = 0;
 	}
 	
 	public void buscarPasajero(int flag) throws NoConcordanciaException{
@@ -147,15 +149,44 @@ public class OcuparController {
 	}
 
 	public void setResponsable(PasajeroBusquedaDTO pBusqueda){
-		for(OcupacionDTO o : LOcupacion){
-			System.out.println("Responsable");
-			o.setResponsable(pBusqueda);
-		}
+		//for(OcupacionDTO o : LOcupacion){
+		//	System.out.println("Responsable");
+		LOcupacion.get(OcupacionCounter-1).setResponsable(pBusqueda);
+		//}
 	}
 	public void setAcompanantes(List<PasajeroBusquedaDTO> LpBusqueda){
-		for(OcupacionDTO o : LOcupacion){
-			System.out.println("Acompanantes");
-			o.setListaOcupantes(LpBusqueda);
+		//for(OcupacionDTO o : LOcupacion){
+			//System.out.println("Acompanantes");
+		List<PasajeroBusquedaDTO> Locupantes = LOcupacion.get(OcupacionCounter-1).getListaOcupantes();
+		if(Locupantes != null) {
+		for(PasajeroBusquedaDTO p : LpBusqueda){
+				boolean op = true;
+				for (PasajeroBusquedaDTO po : Locupantes) {
+					if (po.getDbid() == p.getDbid()) {
+						op = false;
+					}
+				}
+				if (op) {
+					Locupantes.add(p);
+				}
+			}
+			LOcupacion.get(OcupacionCounter-1).setListaOcupantes(Locupantes);
+		}else{
+			LOcupacion.get(OcupacionCounter-1).setListaOcupantes(LpBusqueda);
+		}
+
+		//}
+	}
+
+	public void setOcupacionCounter(){
+		OcupacionCounter = LOcupacion.size();
+	}
+
+	public void asignarResponsableAcompanantesporOcupacion(){
+		if(OcupacionCounter > 0){
+			asignarResponsableAcompanante();
+		}else{
+			GuardarOcupacion();
 		}
 	}
 
@@ -176,7 +207,7 @@ public class OcuparController {
 		BuscarOcuparGUI.setVisible(true);
 		BuscarOcuparGUI.getBtnSiguiente().addActionListener(e -> {
 			try {
-				this.AsignarResponsable();
+				AsignarResponsable();
 				BuscarOcuparGUI.setVisible(false);
 			}catch (NoConcordanciaException e1){
 				BuscarOcuparGUI.mostrarError("Error de Busqueda", "No existen pasasjeros que cumplan con los requisitos de busqueda");
@@ -190,7 +221,7 @@ public class OcuparController {
 		TablaGUI.getBtnAceptar().addActionListener(e -> {
 			setResponsable(getPasajerosSeleccionados(TablaGUI.getTabla()).get(0));
 			try {
-				this.AsignarAcompanantes();
+				AsignarAcompanantes();
 			}catch (NoConcordanciaException e1){
 				BuscarOcuparGUI.mostrarError("Error de Busqueda", "No existen pasasjeros que cumplan con los requisitos de busqueda");
 			}
@@ -213,8 +244,11 @@ public class OcuparController {
 					TablaGUI.setVisible(false);
 					TablaGUI.dispose();
 					BuscarOcuparGUI.dispose();
-					GuardarOcupacion();
-				});
+					OcupacionCounter = OcupacionCounter - 1;
+					if(OcupacionCounter >= 0){
+						asignarResponsableAcompanantesporOcupacion();
+					}
+					});
 			}catch(NoConcordanciaException e1){
 				BuscarOcuparGUI.mostrarError("Error de Busqueda", "No existen pasasjeros que cumplan con los requisitos de busqueda");				}
 		});

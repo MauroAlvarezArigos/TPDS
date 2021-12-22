@@ -55,14 +55,16 @@ public class OcupacionServicio {
         ocupacionDAO = daoManager.getOcupacionDAO();
         mapperOcupacion = new MapperOcupacion();
 
-        daoManager.begin();
+
         for(OcupacionDTO dto : Ldto) {
+            daoManager.begin();
             ocupacionDAO.guardarOcupacion(mapperOcupacion.toDomain(dto));
+            daoManager.commit();
+
         }
-
-
-        daoManager.commit();
         daoManager.disconnect();
+
+
     }
 
 }

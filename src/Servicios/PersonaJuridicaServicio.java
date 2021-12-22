@@ -2,15 +2,18 @@ package Servicios;
 
 import DAO.PersonaJuridicaDAO;
 import DAO.utils.DAOManager;
+import DTO.PersonaJuridicaDTO;
 import Dominio.PersonaJuridica;
+import Servicios.Mappers.MapperPersonaJuridica;
 
 public class PersonaJuridicaServicio {
 	DAOManager daoManager;
-	PersonaJuridicaDAO pjDAO; 
+	PersonaJuridicaDAO pjDAO;
+	MapperPersonaJuridica mapperPersonaJuridica;
 	
 	public PersonaJuridicaServicio() {super();}
 	
-	public PersonaJuridica getPersonaJuridica(String cuit) {
+	public PersonaJuridicaDTO getPersonaJuridica(String cuit) {
 		daoManager = new DAOManager();
 		pjDAO = daoManager.getPersonaJuridicaDAO();
 		daoManager.begin();
@@ -19,8 +22,12 @@ public class PersonaJuridicaServicio {
 		
 		daoManager.commit();
 		daoManager.disconnect();
-		
-		return pj;
+
+		mapperPersonaJuridica = new MapperPersonaJuridica();
+
+		PersonaJuridicaDTO personaJuridicaDTO = mapperPersonaJuridica.toDTO(pj);
+
+		return personaJuridicaDTO;
 	}
 
 }

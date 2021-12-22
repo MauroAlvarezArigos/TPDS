@@ -3,14 +3,8 @@ package Servicios.Mappers;
 import DAO.FacturaDAOSQL;
 import DAO.OcupacionDAOSQL;
 import DAO.utils.DAOManager;
-import DTO.FacturaDTO;
-import DTO.PasajeroBusquedaDTO;
-import DTO.PeriodoEstadiaDTO;
-import DTO.ResponsableDePagoDTO;
-import Dominio.Factura;
-import Dominio.Pasajero;
-import Dominio.PeriodoEstadia;
-import Dominio.ResponsableDePago;
+import DTO.*;
+import Dominio.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +18,7 @@ public class MapperFactura {
     MapperPago mapperPago;
     MapperResponsable mapperResponsable;
     MapperPasajeroBusqueda mapperPasajeroBusqueda;
+    MapperPersonaJuridica mapperPersonaJuridica;
 
     public Factura toDomain(FacturaDTO dto){
         daoManager = new DAOManager();
@@ -31,6 +26,7 @@ public class MapperFactura {
         ocupacionDAO = daoManager.getOcupacionDAO();
         mapperDetalle = new MapperDetalle();
         mapperPasajeroBusqueda = new MapperPasajeroBusqueda();
+        mapperPersonaJuridica = new MapperPersonaJuridica();
 
         daoManager.begin();
 
@@ -59,13 +55,14 @@ public class MapperFactura {
             responsable.setTelefono(pasajero.getTelefono());
             responsable.setPersona_asociada(pasajero);
             responsable.setRazonSocial(null);
-        }else if (dto.getResponsable() instanceof ResponsableDePagoDTO){
-            responsable.setRazonSocial(((ResponsableDePagoDTO) dto.getResponsable()).getRazonSocial());
-            responsable.setTelefono(((ResponsableDePagoDTO) dto.getResponsable()).getTelefono());
-            responsable.setCalle(((ResponsableDePagoDTO) dto.getResponsable()).getCalle());
-            responsable.setNumDireccion(((ResponsableDePagoDTO) dto.getResponsable()).getNumDireccion());
-            responsable.setCuitDni(((ResponsableDePagoDTO) dto.getResponsable()).getCuitDni());
-            responsable.setPersona_asociada(null);
+        }else if (dto.getResponsable() instanceof PersonaJuridicaDTO){
+            PersonaJuridica personaJuridica = mapperPersonaJuridica.toDomain((PersonaJuridicaDTO) dto.getResponsable());
+            responsable.setRazonSocial(((PersonaJuridicaDTO) dto.getResponsable()).getRazonSocial());
+            responsable.setTelefono(((PersonaJuridicaDTO) dto.getResponsable()).getTelefono());
+            responsable.setCalle(((PersonaJuridicaDTO) dto.getResponsable()).getCalle());
+            responsable.setNumDireccion(((PersonaJuridicaDTO) dto.getResponsable()).getAltura());
+            responsable.setCuitDni(((PersonaJuridicaDTO) dto.getResponsable()).getCuit_cif());
+            responsable.setPersona_asociada(personaJuridica);
         }
         dominio.setResponsable(responsable);
 
@@ -86,6 +83,9 @@ public class MapperFactura {
         }else{
             dto.setPago(false);
         }
+
+        mapperDetalle = new MapperDetalle();
+        mapperResponsable = new MapperResponsable();
 
         dto.setDetalle(mapperDetalle.toDTO(dominio.getDetalle()));
         dto.setResponsable(mapperResponsable.toDTO(dominio.getResponsable()));

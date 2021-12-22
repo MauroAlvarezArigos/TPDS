@@ -23,6 +23,4 @@ public class PersonaJuridica extends Persona {
 	public void setDomicilioFiscal(String domicilioFiscal) {
 		this.domicilioFiscal = domicilioFiscal;
 	}
-		
-	
 }

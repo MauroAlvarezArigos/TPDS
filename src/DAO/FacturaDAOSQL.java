@@ -75,8 +75,10 @@ public class FacturaDAOSQL implements FacturaDAO{
                     " WHERE (id_detalle = ?)";
     private static final String GET_UNIDADES_DETALLE =
             "\n" +
-                    " SELECT * FROM DETALLEUNIDADES " +
-                    " WHERE (id_detalle = ?)";
+                    " SELECT * FROM DETALLEUNIDADES du" +
+                    " JOIN UNIDADES u ON (du.id_unidades = u.id_unidades)"+
+                    " WHERE du.id_detalle = ?";
+
     private static final String GET_ITEM_UNIDADES =
             "\n" +
                     " SELECT * FROM ITEM_CONSUMO" +
@@ -270,7 +272,7 @@ public class FacturaDAOSQL implements FacturaDAO{
                 f.setEstadia(this.getEstadia(rs.getInt("ID_ESTADIA")));
                 f.setTipo(this.getTipoFacturaID(rs.getInt("ID_TIPO_FACTURA")));
                 f.setDetalle(this.getDetalle(rs.getInt("ID_DETALLE")));
-
+                LFacturas.add(f);
 
             }
 
@@ -417,7 +419,7 @@ public class FacturaDAOSQL implements FacturaDAO{
         DetalleFactura detalle = new DetalleFactura();
 
         try {
-            pstmt = conn.prepareStatement(GET_TIPO_ID);
+            pstmt = conn.prepareStatement(GET_DETALLE);
             pstmt.setInt(1,id);
             rs = pstmt.executeQuery();
             if(rs.next()) {

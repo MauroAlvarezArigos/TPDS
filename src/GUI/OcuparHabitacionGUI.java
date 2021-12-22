@@ -203,7 +203,8 @@ public class OcuparHabitacionGUI extends JFrame{
 										habController.getSelections(LTables));
 
 				estadoHabitacionesGUI.setVisible(false);
-				controller.asignarResponsableAcompanante();
+				controller.setOcupacionCounter();
+				controller.asignarResponsableAcompanantesporOcupacion();
 				/*
 				OcuparHabAsigPasajeroGUI oh = new OcuparHabAsigPasajeroGUI(controller);
 				oh.setVisible(true);*/
