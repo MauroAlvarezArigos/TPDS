@@ -8,6 +8,8 @@ import java.util.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.swing.JTable;
+
 import DTO.HabitacionDTO;
 import DTO.PeriodoEstadoHabitacionDTO;
 import Exceptions.DesdeMayorException;
@@ -74,8 +76,10 @@ public class HabitacionController {
         	
 			if(desde.getTime() < hasta.getTime()) {
 	        	SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
-	        	String date1 = format1.format(desde); 
-	        	String date2 = format1.format(hasta); 
+	        	@SuppressWarnings("unused")
+				String date1 = format1.format(desde); 
+	        	@SuppressWarnings("unused")
+				String date2 = format1.format(hasta); 
 
 				this.getHabDA(converter.convertCalendarToLocalDate(dateDesde) ,
 						converter.convertCalendarToLocalDate(dateHasta));
@@ -227,11 +231,13 @@ public class HabitacionController {
 	}
 
 	public List<HabitacionDTO> getSelectedHab(List<JTable> LTables){
+		@SuppressWarnings("unused")
 		List<List<LocalDate>> MatrixDate = new ArrayList<>();
 		List<HabitacionDTO> HabList = new ArrayList<>();
 
 		for(JTable table : LTables){
 			int columns = table.getColumnCount();
+			@SuppressWarnings("unused")
 			int rows = table.getRowCount();
 			for(int c = 1; c < columns; c++){
 				String Num_Hab = table.getColumnName(c);

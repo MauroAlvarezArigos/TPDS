@@ -1,7 +1,5 @@
 package DTO;
 
-import Dominio.Ocupacion;
-import Dominio.Unidades;
 
 import java.util.List;
 

@@ -4,7 +4,6 @@ import DTO.PeriodoEstadoHabitacionDTO;
 import Dominio.Reserva;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class MapperReserva {

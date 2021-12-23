@@ -162,7 +162,8 @@ public class OcupacionDAOSQL implements OcupacionDAO{
         return o;
     }
 
-    public void guardarOcupacion(Ocupacion unOcupacion){
+    @SuppressWarnings("resource")
+	public void guardarOcupacion(Ocupacion unOcupacion){
         PreparedStatement pstmt = null;
         try {
             pstmt = conn.prepareStatement(INSERT_OCUPACION);

@@ -1,6 +1,5 @@
 package DTO;
 
-import Dominio.Persona;
 
 public class ResponsableDePagoDTO {
     private int id_responsableDePago;

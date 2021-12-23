@@ -25,6 +25,7 @@ import Controller.FacturarController;
 public class FacturarElementosGUI extends JFrame{
 	private JTable table;
 	private DefaultTableModel model;
+	@SuppressWarnings("unused")
 	private FacturarController controller;
 	private JCheckBox cbxEstadia;
 	private JLabel lblValorSubtotal;
@@ -62,6 +63,7 @@ public class FacturarElementosGUI extends JFrame{
 
 		model = new DefaultTableModel();
 		table = new JTable(model){
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public Class getColumnClass(int column){
 				if(column == 2){

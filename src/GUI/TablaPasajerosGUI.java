@@ -7,13 +7,14 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+@SuppressWarnings("serial")
 public class TablaPasajerosGUI extends JFrame {
 
-    private OcuparController controller;
+    @SuppressWarnings("unused")
+	private OcuparController controller;
     private JTable tabla;
     private JButton btnAceptar;
     private ActionListener AceptarAction;
@@ -64,7 +65,8 @@ public class TablaPasajerosGUI extends JFrame {
         }
 
         tabla = new JTable(data, columnNames) {
-            @Override
+            @SuppressWarnings( { "rawtypes", "unchecked" } )
+			@Override
             public Class getColumnClass(int column) {
                 switch (column) {
                     case 0:

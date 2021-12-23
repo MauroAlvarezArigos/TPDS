@@ -1,8 +1,5 @@
 package DTO;
 
-import Dominio.ItemConsumo;
-import Dominio.SeccionConsumo;
-
 import java.time.LocalDate;
 
 public class UnidadesDTO {

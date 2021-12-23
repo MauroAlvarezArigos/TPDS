@@ -115,7 +115,8 @@ public class FacturaDAOSQL implements FacturaDAO{
         return TipoFactura;
     }
 
-    private int guardarDetalle(DetalleFactura detalle){
+    @SuppressWarnings("resource")
+	private int guardarDetalle(DetalleFactura detalle){
         int id_detalle = -1;
         PreparedStatement pstmt = null;
         try {

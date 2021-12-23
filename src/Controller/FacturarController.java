@@ -1,7 +1,6 @@
 package Controller;
 
 import java.awt.Color;
-<<<<<<< HEAD
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,48 +10,26 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import DTO.PasajeroDTO;
-=======
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-import DAO.FacturaDAOSQL;
 import DTO.*;
-import Dominio.DetalleFactura;
-import Dominio.Factura;
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
-import Dominio.PersonaJuridica;
 import Exceptions.CampoFacturarIncorrecto;
 import Exceptions.CampoFaltanteException;
 import Exceptions.NoConcordanciaException;
 import GUI.FacturarElementosGUI;
 import GUI.FacturarGUI;
-<<<<<<< HEAD
-=======
 import Servicios.FacturaServicio;
 import Servicios.OcupacionServicio;
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 import Servicios.PersonaJuridicaServicio;
 
 public class FacturarController {
 
-<<<<<<< HEAD
-	Color Warning = new Color(255,0,0);
-	List<PasajeroDTO> ocupantes;
-	
-	private FacturarGUI facturaGUI;
-	private PersonaJuridicaServicio pjServicio;
-	private PersonaJuridica personaJuridica;
-	private	String opciones[] = {"Cancelar","Aceptar"}; 
-=======
 	OcupacionDTO ocupacionDTO;
 
 	Color Warning = new Color(255,0,0);
@@ -81,39 +58,17 @@ public class FacturarController {
 	private double total;
 
 	private LocalTime horaSalida;
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 
 	
 	public FacturarController(FacturarGUI facturarGUI) {
 		this.facturaGUI = facturarGUI;
 		this.pjServicio = new PersonaJuridicaServicio();
-<<<<<<< HEAD
-		ocupantes = new ArrayList<PasajeroDTO>();
-=======
 		facturaServicio = new FacturaServicio();
 		ocupantes = new ArrayList<PasajeroBusquedaDTO>();
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 		
 	}
 	
 	public void checkOut() throws CampoFacturarIncorrecto, CampoFaltanteException{
-<<<<<<< HEAD
-		boolean bool = false;
-		
-		if((facturaGUI.getTbxNumHabitacion()).getText().isEmpty() || (facturaGUI.getTbxNumHabitacion()).getText().isBlank()) {
-            bool = false;
-            highlightInput(facturaGUI.getLblNumHabitacion(), facturaGUI.getTbxNumHabitacion(),Warning);
-		}
-		else if(facturaGUI.getTbxHoraSalida().getText().isEmpty() || facturaGUI.getTbxHoraSalida().getText().isBlank()) {
-			bool = false;
-            highlightInput(facturaGUI.getLblHoraDeSalida(), facturaGUI.getTbxHoraSalida(),Warning);			
-		}
-		
-		if(bool) {
-			try {
-				ocupantes = buscarOcupantesHabitacion();
-				//Armar la tabla con los ocupantes
-=======
 		boolean bool = true;
 
 
@@ -159,18 +114,12 @@ public class FacturarController {
 					}
 				}
 				obtenerItemsPendientes();
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 			}
 			catch(Exception e) {
 				e.printStackTrace();
 			}
 		}
 	}
-<<<<<<< HEAD
-	
-	public List<PasajeroDTO> buscarOcupantesHabitacion() {
-		return null;
-=======
 
 	public List<UnidadesDTO> obtenerItemsPendientes(){
 		List<FacturaDTO> Lfacturas = new ArrayList<>();
@@ -231,7 +180,6 @@ public class FacturarController {
 			}
 			return LPasajeros;
 		}
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 	}
 	
 	public void informarError(){
@@ -247,39 +195,6 @@ public class FacturarController {
         }
 	}
 	 public void highlightInput(JComponent label, JComponent container, Color highlightColor){
-<<<<<<< HEAD
-	        Color Red = new Color(255,0,0);
-	        label.setForeground(Red);
-	        container.setBorder(BorderFactory.createLineBorder(Red));
-	    }
-
-	public void facturar() throws NoConcordanciaException {
-		
-		//Recordar Si facturas por tercero el tipo de factura es A, si no es B
-		
-		if(facturaGUI.getCbxFacturaTercero().isSelected()) {
-			//Factura por 3ro
-			if(facturaGUI.getTbxCuit().getText().isBlank() || facturaGUI.getTbxCuit().getText().isEmpty()) {
-				JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(facturaGUI);
-				JOptionPane.showMessageDialog(padre,"Pasamos al CU03","No Ingreso CUIT",JOptionPane.ERROR_MESSAGE);
-			}else {
-				personaJuridica = pjServicio.getPersonaJuridica(facturaGUI.getTbxCuit().getText());
-				if(personaJuridica == null) {
-					throw new NoConcordanciaException();
-				}else {
-					if(optionMessageGUI("Desea Facturar al Tercero?", personaJuridica.getRazonSocial(), opciones) == 1) {
-						FacturarElementosGUI fe = new FacturarElementosGUI(this, personaJuridica.getRazonSocial(), "A");
-						facturaGUI.dispose();
-						fe.setVisible(true);	
-					}
-					else {
-						facturaGUI.getTbxCuit().setText("");
-					}
-				}
-			}
-			
-		}
-=======
 	        label.setForeground(highlightColor);
 	        container.setBorder(BorderFactory.createLineBorder(highlightColor));
 	    }
@@ -310,7 +225,7 @@ public class FacturarController {
 				responsable = ocupantes.get(selected);
 				facturarElementos();
 			}else{
-				facturaGUI.mostrarError("Error", "El responsable seleccionado es menor a 18 años, por favor seleccione a otra persona como responsable");
+				facturaGUI.mostrarError("Error", "El responsable seleccionado es menor a 18 aï¿½os, por favor seleccione a otra persona como responsable");
 			}
 		}else{
 			facturaGUI.mostrarError("No se ha seleccionado un responsable", "Por favor seleccione a uno de los ocupantes como responsable");
@@ -430,7 +345,6 @@ public class FacturarController {
 			}
 		}
 
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 	}
 	
 	public int optionMessageGUI(String titulo, String detalle, Object[] options){
@@ -442,8 +356,6 @@ public class FacturarController {
 				options,  //the titles of buttons
 				options[0]);
 	}
-<<<<<<< HEAD
-=======
 
 	public void guardarFactura(){
 		if(total == 0){
@@ -502,5 +414,4 @@ public class FacturarController {
 		return estadiaDTO;
 	}
 
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 }

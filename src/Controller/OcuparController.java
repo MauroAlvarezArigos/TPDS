@@ -1,68 +1,29 @@
 package Controller;
 
-<<<<<<< HEAD
 import java.util.List;
 
 import javax.swing.JComboBox;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
 import Exceptions.NoConcordanciaException;
 import GUI.OcuparHabAsigPasajeroGUI;
 import Servicios.IDTypeServicio;
-=======
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.*;
 
 import DTO.*;
-import Exceptions.NoConcordanciaException;
-import GUI.OcuparHabAsigPasajeroGUI;
 import GUI.OcuparHabitacionGUI;
 import GUI.TablaPasajerosGUI;
 import Servicios.HabitacionServicio;
-import Servicios.IDTypeServicio;
 import Servicios.OcupacionServicio;
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 import Servicios.PasajeroServicio;
 
 public class OcuparController {
 	private PasajeroServicio pasajeroServicio;
-<<<<<<< HEAD
-	private IDTypeServicio IDServicio;
-	private List<PasajeroBusquedaDTO> lista;
-	private OcuparHabAsigPasajeroGUI ocuparGUI;
-	
-	public OcuparController(OcuparHabAsigPasajeroGUI oHab) {
-		this.pasajeroServicio = new PasajeroServicio();
-		this.IDServicio = new IDTypeServicio();
-		this.ocuparGUI = oHab;
-	}
-	
-	public void buscarPasajero() throws NoConcordanciaException{
-		String a = ocuparGUI.getTbxApellido().getText();
-		String n = ocuparGUI.getTbxNombre().getText();
-		String d = ocuparGUI.getTbxNDoc().getText();
-		String td = ocuparGUI.getCbxTipoDNI().getSelectedItem().toString();
-		
-		try {
-			JPanel tablaGUI;
-			lista = pasajeroServicio.buscarPasajero(n, a, td, d);
-			System.out.println("tengo la lista "+lista.toString());
-			tablaGUI = ocuparGUI.armarTabla(lista);
-			System.out.println("arme tabla");
-			
-			ocuparGUI.setContentPane(tablaGUI);
-			System.out.println("Set content pane");
-			
-			SwingUtilities.updateComponentTreeUI(ocuparGUI);
-
-		    
-=======
+	@SuppressWarnings("unused")
 	private HabitacionServicio habitacionServicio;
 	private IDTypeServicio IDServicio;
 	private List<PasajeroBusquedaDTO> lista;
@@ -103,7 +64,6 @@ public class OcuparController {
 			System.out.println("tengo la lista "+lista.toString());
 			TablaGUI = new TablaPasajerosGUI(this, lista, flag);
 			TablaGUI.setVisible(true);
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 		} catch (NoConcordanciaException e) {
 			throw e;
 		} catch (Exception e2) {
@@ -120,10 +80,6 @@ public class OcuparController {
 		for(int c = 0; c < size; c++) {
 			tdni.addItem((ListaIDT.get(c)).getTipo());
 		}
-<<<<<<< HEAD
-		ocuparGUI.setCbxTipoDNI(tdni);
-	}
-=======
 		BuscarOcuparGUI.setCbxTipoDNI(tdni);
 	}
 
@@ -311,5 +267,4 @@ public class OcuparController {
 	}
 
 
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 }

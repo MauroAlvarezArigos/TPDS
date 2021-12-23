@@ -1,8 +1,6 @@
 package DAO;
 
 import Dominio.Habitacion;
-import Dominio.Ocupacion;
-import Dominio.Reserva;
 
 import java.util.List;
 

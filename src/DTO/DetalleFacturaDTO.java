@@ -1,8 +1,5 @@
 package DTO;
 
-import Dominio.Factura;
-import Dominio.Unidades;
-
 import java.util.List;
 
 public class DetalleFacturaDTO {

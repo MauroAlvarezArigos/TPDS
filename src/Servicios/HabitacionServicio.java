@@ -3,7 +3,6 @@ package Servicios;
 import DAO.*;
 import DAO.utils.DAOManager;
 import DTO.HabitacionDTO;
-import DTO.OcupacionDTO;
 import Dominio.Habitacion;
 import Servicios.Mappers.MapperHabitacion;
 import Servicios.Mappers.MapperOcupacion;
@@ -14,7 +13,8 @@ import java.util.List;
 
 public class HabitacionServicio {
 
-    private Converter converter = new Converter();
+    @SuppressWarnings("unused")
+	private Converter converter = new Converter();
 
     DAOManager daoManager;
     HabitacionDAOSQL HabDAO;

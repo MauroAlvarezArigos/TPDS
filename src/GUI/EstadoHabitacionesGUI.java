@@ -88,6 +88,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 			}
 
 			JTable table = new JTable(model){
+				@SuppressWarnings({ "unchecked", "rawtypes" })
 				@Override
 				public Class getColumnClass(int column){
 					if(column < 1){

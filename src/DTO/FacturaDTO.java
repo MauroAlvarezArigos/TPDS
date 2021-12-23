@@ -1,6 +1,5 @@
 package DTO;
 
-import Dominio.*;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,5 @@
 package DAO;
 
-import Dominio.Habitacion;
 import Dominio.ItemConsumo;
 import Dominio.SeccionConsumo;
 import utils.Converter;
@@ -14,7 +13,8 @@ public class ItemDAOSQL implements ItemDAO{
 
 
     private Connection conn;
-    private Converter converter = new Converter();
+    @SuppressWarnings("unused")
+	private Converter converter = new Converter();
 
     //---
     //Constructor

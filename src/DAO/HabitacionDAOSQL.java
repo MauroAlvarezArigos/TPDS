@@ -11,9 +11,12 @@ public class HabitacionDAOSQL implements HabitacionDAO {
 
     private Connection conn;
     private TipoHabitacionDAOSQL TipoHabDAO;
-    private PasajeroDAOSQL PasajeroDAO;
-    private OcupacionDAOSQL OcupacionDAO;
-    private Converter converter = new Converter();
+    @SuppressWarnings("unused")
+	private PasajeroDAOSQL PasajeroDAO;
+    @SuppressWarnings("unused")
+	private OcupacionDAOSQL OcupacionDAO;
+    @SuppressWarnings("unused")
+	private Converter converter = new Converter();
 
     //---
     //Constructor

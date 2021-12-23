@@ -12,9 +12,12 @@ import java.util.List;
 public class ReservaDAOSQL implements ReservaDAO{
 
     private Connection conn;
-    private TipoHabitacionDAOSQL TipoHabDAO;
-    private PasajeroDAOSQL PasajeroDAO;
-    private OcupacionDAOSQL OcupacionDAO;
+    @SuppressWarnings("unused")
+	private TipoHabitacionDAOSQL TipoHabDAO;
+    @SuppressWarnings("unused")
+	private PasajeroDAOSQL PasajeroDAO;
+    @SuppressWarnings("unused")
+	private OcupacionDAOSQL OcupacionDAO;
     private Converter converter = new Converter();
 
     //---

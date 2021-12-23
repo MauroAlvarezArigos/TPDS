@@ -1,16 +1,14 @@
 package Servicios;
 
 import DAO.ConsumoDAOSQL;
-import DAO.HabitacionDAOSQL;
 import DAO.utils.DAOManager;
 import Dominio.Consumo;
 import Dominio.Ocupacion;
-import Servicios.Mappers.MapperHabitacion;
-import Servicios.Mappers.MapperOcupacion;
 import utils.Converter;
 
 public class ConsumosServicio {
-    private Converter converter = new Converter();
+    @SuppressWarnings("unused")
+	private Converter converter = new Converter();
 
     DAOManager daoManager;
     ConsumoDAOSQL consumoDAO;

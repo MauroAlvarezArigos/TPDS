@@ -1,5 +1,6 @@
 package Exceptions;
 
+@SuppressWarnings("serial")
 public class CampoFaltanteException extends Exception{
 
 	public CampoFaltanteException() {

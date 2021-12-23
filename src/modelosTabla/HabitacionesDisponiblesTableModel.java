@@ -9,6 +9,7 @@ public class HabitacionesDisponiblesTableModel extends AbstractTableModel {
 	
 	
 	//This method defines how way the data is displayed
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public Class getColumnClass(int c) {
 		return getValueAt(0,c).getClass();
 	}

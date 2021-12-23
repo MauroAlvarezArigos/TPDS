@@ -1,25 +1,15 @@
 package GUI;
 
-import java.awt.Font;
-
 import javax.swing.*;
 
 import Controller.OcuparController;
-import Controller.PasajeroController;
-import DTO.PasajeroBusquedaDTO;
-import Exceptions.NoConcordanciaException;
-
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
-import java.util.List;
+
 
 import javax.swing.border.TitledBorder;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 
-import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
@@ -33,6 +23,7 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 	private JButton btnSiguiente;
 	private ActionListener SiguienteAction;
 
+	@SuppressWarnings("unused")
 	private DefaultTableModel model;
 
 

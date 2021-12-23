@@ -185,7 +185,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		JButton btnAsignarHab = new JButton("Asignar Habitacion");
 		btnAsignarHab.setBounds(306, 323, 156, 21);
 		btnAsignarHab.setForeground(new Color(255, 255, 255));
-		btnAsignarHab.setBackground(new Color(50, 205, 50));
+		btnAsignarHab.setBackground(new Color(0, 128, 0));
 		getContentPane().add(btnAsignarHab);
 		btnAsignarHab.addActionListener(e->{
 			MostrarEstadoHabitacionGUI mostrarEstadoHabitacionGUI = new MostrarEstadoHabitacionGUI();

@@ -1,7 +1,5 @@
 package DTO;
 
-import Dominio.Localidad;
-import Dominio.PosIVA;
 
 public class PersonaJuridicaDTO {
 

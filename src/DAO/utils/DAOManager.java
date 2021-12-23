@@ -18,15 +18,12 @@ public class DAOManager {
     private UbicacionDAOSQL ubicacionDAO = null;
     private HabitacionDAOSQL habitacionDAO = null;
     private PersonaJuridicaDAOSQL personaJuridicaDAO = null;
-<<<<<<< HEAD
-=======
     private OcupacionDAOSQL ocupacionDAO = null;
     private ConsumoDAOSQL consumoDAO = null;
     private ReservaDAOSQL reservaDAO = null;
     private FueraDeServicioDAOSQL fueraDeServicioDAO = null;
     private FacturaDAOSQL facturaDAO = null;
     private ItemDAOSQL itemDAO = null;
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -83,15 +80,6 @@ public class DAOManager {
         return habitacionDAO;
     }
 
-<<<<<<< HEAD
-	public PersonaJuridicaDAO getPersonaJuridicaDAO() {
-		if(this.personaJuridicaDAO == null) {
-			this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
-		}
-		return personaJuridicaDAO;
-	}
-
-=======
     public PersonaJuridicaDAOSQL getPersonaJuridicaDAO() {
         if (this.personaJuridicaDAO == null) {
             this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
@@ -140,5 +128,4 @@ public class DAOManager {
         }
         return itemDAO;
     }
->>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 }

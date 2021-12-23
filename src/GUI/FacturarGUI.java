@@ -145,6 +145,7 @@ public class FacturarGUI extends JFrame {
 		model = new DefaultTableModel();
 
 		tablePasajero = new JTable(model){
+			@SuppressWarnings({ "unchecked", "rawtypes" })
 			@Override
 			public Class getColumnClass(int column){
 				if(column == 0){

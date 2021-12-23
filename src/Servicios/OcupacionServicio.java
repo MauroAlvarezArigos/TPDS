@@ -1,23 +1,20 @@
 package Servicios;
 
 import DAO.HabitacionDAOSQL;
-import DAO.OcupacionDAO;
 import DAO.OcupacionDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.OcupacionDTO;
-import DTO.PasajeroBusquedaDTO;
 import Dominio.Habitacion;
 import Dominio.Ocupacion;
-import Servicios.Mappers.MapperHabitacion;
 import Servicios.Mappers.MapperOcupacion;
 import utils.Converter;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 public class OcupacionServicio {
-    private Converter converter = new Converter();
+    @SuppressWarnings("unused")
+	private Converter converter = new Converter();
 
     DAOManager daoManager;
     OcupacionDAOSQL ocupacionDAO;
