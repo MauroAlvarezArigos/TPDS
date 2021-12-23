@@ -7,7 +7,6 @@ import Dominio.Reserva;
 import java.util.List;
 
 public interface HabitacionDAO {
+    public Habitacion getHabitacion(Integer nroHab, Integer piso);
     public List<Habitacion> getAllHabitaciones();
-    public List<Reserva> getReservasHab(Habitacion unHab);
-    public List<Ocupacion> getOcupacionesHab(Habitacion unHab);
 }

@@ -20,12 +20,15 @@ public class MapperFueraDeServicio {
 
     public List<PeriodoEstadoHabitacionDTO> listToDTO(List<FueraDeServicio> LFueraDeServicio){
         List<PeriodoEstadoHabitacionDTO> LDTO = new ArrayList<>();
-
-        for(FueraDeServicio f : LFueraDeServicio){
-            LDTO.add(this.toDTO(f));
+        if(LFueraDeServicio == null || LFueraDeServicio.isEmpty()){
+            List<PeriodoEstadoHabitacionDTO> L = new ArrayList<>();
+            return L;
+        }else {
+            for (FueraDeServicio f : LFueraDeServicio) {
+                LDTO.add(this.toDTO(f));
+            }
+            return LDTO;
         }
-
-        return LDTO;
     }
 
 }

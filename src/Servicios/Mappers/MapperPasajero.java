@@ -6,6 +6,8 @@ import Servicios.IDTypeServicio;
 import Servicios.IVAServicio;
 import Servicios.UbicacionServicio;
 
+import java.sql.Date;
+import java.util.List;
 
 public class MapperPasajero {
 

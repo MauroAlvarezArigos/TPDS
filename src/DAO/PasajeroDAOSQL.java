@@ -62,7 +62,13 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			"\n"+
 			" SELECT * FROM PASAJERO p " +
 			"JOIN PERSONA per ON (p.idpersona = per.idpersona) "+
-			"WHERE p.ID = ";
+			"WHERE p.idpersona = ?";
+	private static final String GET_ALL_ACOMPANANTES =
+			"\n"+
+			" SELECT * FROM ACOMPANANTES a " +
+			"JOIN PASAJERO pj ON (a.pasajero = pj.idpersona) " +
+			"JOIN PERSONA pr ON (pj.idpersona = pr.idpersona) " +
+			"WHERE a.ocupacion = ? ";
 
 	//Insert Pasajero
 	//---
@@ -113,6 +119,52 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			}
 		}
 		return null;
+	}
+
+	public List<Pasajero> getAcompanantesOcupacion(int ocupacion_id){
+		List<Pasajero> LAcompanantes = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = conn.prepareStatement(GET_ALL_ACOMPANANTES);
+			pstmt.setInt(1,ocupacion_id);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				Pasajero p = new Pasajero();
+				p.setIdpersona(rs.getInt("idpersona"));
+				p.setTelefono(rs.getString("TELEFONO"));
+				p.setEmail(rs.getString("EMAIL"));
+				p.setCuit_cif(rs.getString("CUIT"));
+				p.setCalle(rs.getString("CALLE"));
+				p.setAltura(rs.getString("ALTURA"));
+				p.setIVA(IVADAO.BuscarIVA(rs.getInt("POSIVA")));
+				p.setNombre(rs.getString("NOMBRE"));
+				p.setApellido(rs.getString("APELLIDO"));
+				p.setNdoc(rs.getString("NDOC"));
+				p.setFechanacimiento(converter.convertToLocalDateViaInstant(rs.getDate("FECHANAC")));
+				//Puede estar mal este set
+				p.setTipodoc(IDDAO.getIDType(rs.getString("TIPODOC")));
+				p.setOcupacion(rs.getString("OCUPACION"));
+				//Puede estar mal este set
+				p.setNacionalidad(UBICACIONDAO.buscarCodePais(rs.getInt("NACIONALIDAD")));
+				p.setLocalidad(UBICACIONDAO.buscarLocalidad(rs.getInt("LOCALIDAD")));
+
+				LAcompanantes.add(p);
+
+			}
+		}catch (SQLException e){
+			e.printStackTrace();
+		}finally {
+			try {
+				if(pstmt != null) pstmt.close();
+			}
+			catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return LAcompanantes;
+
 	}
 
 	//Buscar Pasajero por Nombre, Apellido, Tipo y Numero de Documento
@@ -178,6 +230,7 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				Pasajero p = new Pasajero();
+				p.setFechanacimiento(converter.convertToLocalDateViaInstant(rs.getDate("FECHANAC")));
 				p.setIdpersona(rs.getInt("idpersona"));
 				p.setNombre(rs.getString("NOMBRE"));
 				p.setApellido(rs.getString("APELLIDO"));
@@ -249,13 +302,14 @@ public class PasajeroDAOSQL implements PasajeroDAO{
 	//Busca el pasajero que posee la ID = BDID
 	//---
 	public Pasajero getPasajeroDbid(int DBID) {
-		String sentencia = BUSCAR_DBID + DBID;
+		String sentencia = BUSCAR_DBID;
 		Pasajero unPasajero = new Pasajero();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
 		try {
 			pstmt = conn.prepareStatement(sentencia);
+			pstmt.setInt(1,DBID);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {

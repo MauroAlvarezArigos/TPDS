@@ -5,16 +5,24 @@ import java.awt.Color;
 
 import javax.swing.border.TitledBorder;
 
+import Controller.HabitacionController;
+import Controller.OcuparController;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import modelosTabla.DateLabelFormatter;
+import utils.Converter;
 
+import java.util.List;
 import java.util.Properties;
 
 @SuppressWarnings("serial")
 public class OcuparHabitacionGUI extends JFrame{
+	private Converter converter = new Converter();
+
+	private OcuparController controller;
+
 	private JDatePickerImpl datePickerDesde;
 	private JDatePickerImpl datePickerHasta;
 
@@ -23,9 +31,49 @@ public class OcuparHabitacionGUI extends JFrame{
 	private JSpinner dobSuperior;
 	private JSpinner supFamily;
 	private JSpinner suiteDoble;
-	
-	
+
+	private JCheckBox chbxIndEstandar;
+	private JCheckBox chbxDobEstandar;
+	private JCheckBox chbxDobSuperior;
+	private JCheckBox chbxSupFamily;
+	private JCheckBox chbxSuiteDoble;
+
+	//Getters And Setters
+	public JCheckBox getChbxIndEstandar() {
+		return chbxIndEstandar;
+	}
+	public void setChbxIndEstandar(JCheckBox chbxIndEstandar) {
+		this.chbxIndEstandar = chbxIndEstandar;
+	}
+	public JCheckBox getChbxDobEstandar() {
+		return chbxDobEstandar;
+	}
+	public void setChbxDobEstandar(JCheckBox chbxDobEstandar) {
+		this.chbxDobEstandar = chbxDobEstandar;
+	}
+	public JCheckBox getChbxDobSuperior() {
+		return chbxDobSuperior;
+	}
+	public void setChbxDobSuperior(JCheckBox chbxDobSuperior) {
+		this.chbxDobSuperior = chbxDobSuperior;
+	}
+	public JCheckBox getChbxSupFamily() {
+		return chbxSupFamily;
+	}
+	public void setChbxSupFamily(JCheckBox chbxSupFamily) {
+		this.chbxSupFamily = chbxSupFamily;
+	}
+	public JCheckBox getChbxSuiteDoble() {
+		return chbxSuiteDoble;
+	}
+	public void setChbxSuiteDoble(JCheckBox chbxSuiteDoble) {
+		this.chbxSuiteDoble = chbxSuiteDoble;
+	}
+
+
+
 	public OcuparHabitacionGUI() {
+		controller = new OcuparController(this);
 		this.setLocationRelativeTo(null);
 		getContentPane().setLayout(null);
 		this.setSize(500, 400);
@@ -84,7 +132,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		panel.add(lblCantHab);
 		
 		//SPINNERS
-		JCheckBox chbxIndEstandar = new JCheckBox("Individual Estandar");
+		chbxIndEstandar = new JCheckBox("Individual Estandar");
 		chbxIndEstandar.setBounds(31, 100, 146, 25);
 		panel.add(chbxIndEstandar);
 		
@@ -94,7 +142,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		indEstandar.setBounds(249, 100, 36, 25);
 		panel.add(indEstandar);
 		
-		JCheckBox chbxDobEstandar = new JCheckBox("Doble Estandar");
+		chbxDobEstandar = new JCheckBox("Doble Estandar");
 		chbxDobEstandar.setBounds(31, 130, 146, 25);
 		panel.add(chbxDobEstandar);
 		
@@ -104,7 +152,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobEstandar.setBounds(249, 130, 36, 25);
 		panel.add(dobEstandar);
 		
-		JCheckBox chbxDobSuperior = new JCheckBox("Doble Superior");
+		chbxDobSuperior = new JCheckBox("Doble Superior");
 		chbxDobSuperior.setBounds(31, 160, 146, 25);
 		panel.add(chbxDobSuperior);
 		
@@ -114,7 +162,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobSuperior.setBounds(249, 160, 36, 25);
 		panel.add(dobSuperior);
 		
-		JCheckBox chbxSupFamily = new JCheckBox("Superior Family Plan");
+		chbxSupFamily = new JCheckBox("Superior Family Plan");
 		chbxSupFamily.setBounds(31, 190, 146, 25);
 		panel.add(chbxSupFamily);
 		
@@ -124,7 +172,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		supFamily.setBounds(249, 190, 36, 25);
 		panel.add(supFamily);
 		
-		JCheckBox chbxSuiteDoble = new JCheckBox("Suite Doble");
+		chbxSuiteDoble = new JCheckBox("Suite Doble");
 		chbxSuiteDoble.setBounds(31, 220, 146, 25);
 		panel.add(chbxSuiteDoble);
 		
@@ -135,19 +183,41 @@ public class OcuparHabitacionGUI extends JFrame{
 		panel.add(suiteDoble);
 		
 		JButton btnAsignarHab = new JButton("Asignar Habitacion");
-		btnAsignarHab.setBounds(306, 323, 156, 25);
+		btnAsignarHab.setBounds(306, 323, 156, 21);
 		btnAsignarHab.setForeground(new Color(255, 255, 255));
-		btnAsignarHab.setBackground(new Color(0, 128, 0));
+		btnAsignarHab.setBackground(new Color(50, 205, 50));
 		getContentPane().add(btnAsignarHab);
 		btnAsignarHab.addActionListener(e->{
-			OcuparHabAsigPasajeroGUI oh = new OcuparHabAsigPasajeroGUI();
-			oh.setLocationRelativeTo(null);
-			oh.setVisible(true);
-			this.dispose();
+			MostrarEstadoHabitacionGUI mostrarEstadoHabitacionGUI = new MostrarEstadoHabitacionGUI();
+			mostrarEstadoHabitacionGUI.setVisible(false);
+			HabitacionController habController = new HabitacionController(mostrarEstadoHabitacionGUI);
+			EstadoHabitacionesGUI estadoHabitacionesGUI = new EstadoHabitacionesGUI(
+					(converter.convertStringtoDate(datePickerDesde.getJFormattedTextField().getText())) ,
+					(converter.convertStringtoDate(datePickerHasta.getJFormattedTextField().getText())) ,
+					(habController.getHabDA(converter.convertStrtoLocalDate(datePickerDesde.getJFormattedTextField().getText()),
+					(converter.convertStrtoLocalDate(datePickerHasta.getJFormattedTextField().getText())))),
+					controller.getSelectedTipos(),
+					habController);
+			estadoHabitacionesGUI.getBtnAceptar().addActionListener(e1 ->{
+				List<JTable> LTables = estadoHabitacionesGUI.getLTables();
+				controller.getListOcupacion(   habController.getSelectedHab(LTables),
+										habController.getSelections(LTables));
+
+				estadoHabitacionesGUI.setVisible(false);
+				controller.setOcupacionCounter();
+				controller.asignarResponsableAcompanantesporOcupacion();
+				/*
+				OcuparHabAsigPasajeroGUI oh = new OcuparHabAsigPasajeroGUI(controller);
+				oh.setVisible(true);*/
+				this.setVisible(false);
+				//this.dispose();
+			});
+			estadoHabitacionesGUI.setVisible(true);
+
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(211, 323, 85, 25);
+		btnCancelar.setBounds(211, 323, 85, 21);
 		btnCancelar.setForeground(new Color(255, 255, 255));
 		btnCancelar.setBackground(new Color(255, 0, 0));
 		getContentPane().add(btnCancelar);

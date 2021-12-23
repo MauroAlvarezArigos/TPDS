@@ -1,6 +1,9 @@
 package utils;
 
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -34,6 +37,18 @@ public class Converter {
 
     public LocalDate convertCalendarToLocalDate(Calendar calendar){
         return LocalDateTime.ofInstant(calendar.toInstant(), calendar.getTimeZone().toZoneId()).toLocalDate();
+    }
+
+    public java.util.Date convertStringtoDate (String str){
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        java.util.Date date = null;
+        try{
+            date = formatter.parse(str);
+
+        }catch (ParseException e){
+
+        }
+        return date;
     }
 
 }

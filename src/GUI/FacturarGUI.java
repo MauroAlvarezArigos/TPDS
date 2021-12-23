@@ -4,6 +4,9 @@ import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import java.awt.*;
+
+import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
@@ -18,6 +21,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class FacturarGUI extends JFrame {
@@ -30,6 +35,9 @@ public class FacturarGUI extends JFrame {
 	private JTextField tbxCuit;
 	private JTable tablePasajero;
 	private JCheckBox cbxFacturaTercero;
+	private DefaultTableModel model;
+	private JPanel panelOcupanteHabitacion;
+	private JScrollPane scrollPane;
 	
 	private FacturarController controller;
 
@@ -112,22 +120,87 @@ public class FacturarGUI extends JFrame {
 			if(cbxFacturaTercero.isSelected()) {
 				lblCuit.setEnabled(true);
 				tbxCuit.setEnabled(true);
+				panelOcupanteHabitacion.setEnabled(false);
+				tablePasajero.setVisible(false);
+				scrollPane.setVisible(false);
 			}else {
 				lblCuit.setEnabled(false);
 				tbxCuit.setEnabled(false);
+				panelOcupanteHabitacion.setEnabled(true);
+				tablePasajero.setVisible(true);
+				scrollPane.setVisible(true);
 			}
 		});
 		panelFacturaTercero.add(cbxFacturaTercero);
 		
-		JPanel panelOcupanteHabitacion = new JPanel();
+		panelOcupanteHabitacion = new JPanel();
 		panelOcupanteHabitacion.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ocupantes de la Habitacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
 		panelOcupanteHabitacion.setBounds(288, 20, 388, 226);
 		getContentPane().add(panelOcupanteHabitacion);
 		panelOcupanteHabitacion.setLayout(null);
-		
-		tablePasajero = new JTable();
-		tablePasajero.setBounds(10, 20, 368, 196);
-		panelOcupanteHabitacion.add(tablePasajero);
+		panelOcupanteHabitacion.setLayout(new BoxLayout(panelOcupanteHabitacion, BoxLayout.Y_AXIS));
+
+
+
+		model = new DefaultTableModel();
+
+		tablePasajero = new JTable(model){
+			@Override
+			public Class getColumnClass(int column){
+				if(column == 0){
+					return Boolean.class;
+				}else{
+					return String.class;
+				}
+			}
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 0;
+			}
+		};
+
+		tablePasajero.setDefaultRenderer(Boolean.class, new DefaultTableCellRenderer() {
+			@Override
+			public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+				int rowCount = tablePasajero.getRowCount();
+				int cont = 0;
+				for (int c = 0; c < rowCount; c++) {
+					if ((Boolean) table.getModel().getValueAt(c, column))
+						cont++;
+				}
+				if (cont > 1) {
+					for(int x = 0; x < rowCount; x++){
+						if ((Boolean) table.getModel().getValueAt(x, column) && !(x == row)){
+							table.getModel().setValueAt(false, x, column);
+						}
+					}
+				}
+				JCheckBox checkBox = new JCheckBox("", value.equals(true));
+				checkBox.setHorizontalAlignment(SwingConstants.CENTER);
+				return checkBox;
+			}
+		});
+
+		tablePasajero.setBounds(20, 20, 300, 196);
+		model.addColumn("Seleccionar", new Object[]{});
+		model.addColumn("Nombre", new Object[]{});
+		model.addColumn("Apellido", new Object[]{});
+		model.addColumn("DNI", new Object[]{});
+		model.addColumn("TipoDNI", new Object[]{});
+
+		tablePasajero.getColumnModel().getColumn(0).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(1).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(2).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(3).setMaxWidth(75);
+		tablePasajero.getColumnModel().getColumn(4).setMaxWidth(75);
+
+		tablePasajero.getTableHeader().setReorderingAllowed(false);
+
+		tablePasajero.setVisible(true);
+		scrollPane = new JScrollPane(tablePasajero);
+		tablePasajero.setFillsViewportHeight(true);
+		scrollPane.setVisible(true);
+		panelOcupanteHabitacion.add(scrollPane);
 		
 		JButton btnFacturar = new JButton("Facturar");
 		btnFacturar.setForeground(Color.WHITE);
@@ -163,8 +236,11 @@ public class FacturarGUI extends JFrame {
 	public void setCbxFacturaTercero(JCheckBox cbxFacturaTercero) {this.cbxFacturaTercero = cbxFacturaTercero;}
 	public FacturarController getController() {return controller;}
 	public void setController(FacturarController controller) {this.controller = controller;}
+	public DefaultTableModel getModel() {
+		return model;
+	}
 
-	public void mostrarError(String titulo,String detalle) {
+	public void mostrarError(String titulo, String detalle) {
 		JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this);
 		JOptionPane.showMessageDialog(padre,
 			    detalle,titulo,

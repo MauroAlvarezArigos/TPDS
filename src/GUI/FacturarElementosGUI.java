@@ -6,15 +6,17 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JPanel;
-import javax.swing.border.LineBorder;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.awt.Color;
 import javax.swing.border.BevelBorder;
-import java.awt.GridLayout;
 import javax.swing.SwingConstants;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import javax.swing.UIManager;
+import javax.swing.border.TitledBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 
 import Controller.FacturarController;
@@ -22,23 +24,85 @@ import Controller.FacturarController;
 @SuppressWarnings("serial")
 public class FacturarElementosGUI extends JFrame{
 	private JTable table;
+	private DefaultTableModel model;
 	private FacturarController controller;
-	
+	private JCheckBox cbxEstadia;
+	private JLabel lblValorSubtotal;
+	private JLabel lblValorIVA;
+	private JLabel lblValorTotal;
+
+
+
+
+	public JTable getTable() {
+		return table;
+	}
+	public DefaultTableModel getModel() {
+		return model;
+	}
+	public JCheckBox getCbxEstadia() {
+		return cbxEstadia;
+	}
+	public JLabel getLblValorSubtotal() {
+		return lblValorSubtotal;
+	}
+	public JLabel getLblValorIVA() {
+		return lblValorIVA;
+	}
+	public JLabel getLblValorTotal() {
+		return lblValorTotal;
+	}
+
 	public FacturarElementosGUI(FacturarController controller, String facturarA, String tipoFactura) {
 		this.controller = controller;
-		this.setSize(700, 350);
+		this.setSize(700, 375);
 		this.setTitle("Facturar");
 		getContentPane().setLayout(null);
-		
-		table = new JTable();
-		
-		
+
+
+		model = new DefaultTableModel();
+		table = new JTable(model){
+			@Override
+			public Class getColumnClass(int column){
+				if(column == 2){
+					return Boolean.class;
+				}else{
+					return String.class;
+				}
+			}
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				return column == 2;
+			}
+		};
+
+		table.getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				controller.updateTotalValue();
+			}
+		});
+
+		JPanel panelTable = new JPanel();
+		panelTable.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Ocupantes de la Habitacion", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0))));
+		panelTable.setBounds(37, 132, 435, 151);
+		getContentPane().add(panelTable);
+		panelTable.setLayout(new BoxLayout(panelTable, BoxLayout.Y_AXIS));
+
+		table.getTableHeader().setReorderingAllowed(false);
 		table.setBounds(37, 132, 356, 151);
 		getContentPane().add(table);
-		
-		JCheckBox cbxEstadia = new JCheckBox("Valor de la estadia: $");
+		JScrollPane scrollPane = new JScrollPane(table);
+		table.setFillsViewportHeight(true);
+		scrollPane.setVisible(true);
+		panelTable.add(scrollPane);
+
+		cbxEstadia = new JCheckBox("Valor de la estadia: $");
 		cbxEstadia.setBounds(37, 102, 218, 23);
 		getContentPane().add(cbxEstadia);
+		cbxEstadia.addActionListener(e -> {
+				controller.updateTotalValue();
+		});
 		
 		JLabel lblGuia = new JLabel("Seleccione los elementos que seran incluidos dentro de la factura");
 		lblGuia.setHorizontalAlignment(SwingConstants.CENTER);
@@ -73,7 +137,7 @@ public class FacturarElementosGUI extends JFrame{
 		gbc_lblSubTotal.gridy = 0;
 		panel.add(lblSubTotal, gbc_lblSubTotal);
 		
-		JLabel lblValorSubtotal = new JLabel("$ 0.00");
+		lblValorSubtotal = new JLabel("$ 0.00");
 		GridBagConstraints gbc_lblValorSubtotal = new GridBagConstraints();
 		gbc_lblValorSubtotal.anchor = GridBagConstraints.WEST;
 		gbc_lblValorSubtotal.insets = new Insets(0, 0, 5, 0);
@@ -89,7 +153,7 @@ public class FacturarElementosGUI extends JFrame{
 		gbc_lblIVA.gridy = 1;
 		panel.add(lblIVA, gbc_lblIVA);
 		
-		JLabel lblValorIVA = new JLabel("$ 0.00");
+		lblValorIVA = new JLabel("$ 0.00");
 		GridBagConstraints gbc_lblValorIVA = new GridBagConstraints();
 		gbc_lblValorIVA.anchor = GridBagConstraints.WEST;
 		gbc_lblValorIVA.insets = new Insets(0, 0, 5, 0);
@@ -106,12 +170,24 @@ public class FacturarElementosGUI extends JFrame{
 		gbc_lblTotal.gridy = 3;
 		panel.add(lblTotal, gbc_lblTotal);
 		
-		JLabel lblValorTotal = new JLabel("$ 0.00");
+		lblValorTotal = new JLabel("$ 0.00");
 		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_lblValorTotal = new GridBagConstraints();
 		gbc_lblValorTotal.anchor = GridBagConstraints.WEST;
 		gbc_lblValorTotal.gridx = 1;
 		gbc_lblValorTotal.gridy = 3;
 		panel.add(lblValorTotal, gbc_lblValorTotal);
+
+		JButton btnGuardarFactura = new JButton("Guardar");
+		btnGuardarFactura.setBackground(new Color(0,128,0));
+		btnGuardarFactura.setForeground(Color.WHITE);
+		btnGuardarFactura.setBounds(575,300,100,25);
+		getContentPane().add(btnGuardarFactura);
+		btnGuardarFactura.addActionListener(e -> {
+			controller.guardarFactura();
+
+
+		});
+
 	}
 }

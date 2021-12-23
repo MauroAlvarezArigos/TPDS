@@ -1,14 +1,16 @@
 package DTO;
 
+import java.time.LocalDate;
+
 public class PasajeroBusquedaDTO {
 
     //Pasajero
-        //todo: Agregar ID Pasajero
         private int dbid;
         private String nombre;
         private String apellido;
         private String ndoc;
         private String tipodoc;
+        private LocalDate fechaNacimiento;
 
     public int getDbid() {
         return dbid;
@@ -39,5 +41,11 @@ public class PasajeroBusquedaDTO {
     }
     public void setTipodoc(String tipodoc) {
         this.tipodoc = tipodoc;
+    }
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
     }
 }

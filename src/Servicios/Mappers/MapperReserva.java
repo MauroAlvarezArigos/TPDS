@@ -4,6 +4,7 @@ import DTO.PeriodoEstadoHabitacionDTO;
 import Dominio.Reserva;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class MapperReserva {
@@ -21,9 +22,14 @@ public class MapperReserva {
     public List<PeriodoEstadoHabitacionDTO> listToDTO(List<Reserva> LReservas){
         List<PeriodoEstadoHabitacionDTO> LDTO = new ArrayList<>();
 
-        for(Reserva r : LReservas){
-            LDTO.add(this.toDTO(r));
+        if(LReservas == null || LReservas.isEmpty()){
+            List<PeriodoEstadoHabitacionDTO> L = new ArrayList<>();
+            return L;
+        }else {
+            for (Reserva r : LReservas) {
+                LDTO.add(this.toDTO(r));
+            }
+            return LDTO;
         }
-        return LDTO;
     }
 }

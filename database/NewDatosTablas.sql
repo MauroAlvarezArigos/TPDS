@@ -11,10 +11,14 @@ id8 int;
 id9 int;
 id10 int;
 id11 int;
+<<<<<<< HEAD
 id12 int;
 id13 int;
 id14 int;
 id15 int;
+=======
+idOcup1 int;
+>>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 
 begin
 --Datos Pos Iva
@@ -207,7 +211,10 @@ insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) v
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '7992139873', 'facebook@riotgames.com', '20496392159', 'Blvd Galvez', '3432', 2, 7)returning idpersona into id14;
 insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '4963179873', 'twitter@riotgames.com', null, 'San Martin', '1369', 3, 4)returning idpersona into id15;
 
+insert into persona ( telefono, email, cuit, calle, altura, posIVA, localidad) values ( '6435325467', 'aertgfdryte@hgf.com', '24575464774', '1st Street', '5431', 3, 8)returning idpersona into id11;
+
 --Datos Pasajero
+<<<<<<< HEAD
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Kandace', 'Maffioletti', '14567782', 'Pasaporte', 'Administrative Officer', '03/11/1949', 60);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id2, 'Ginni', 'Breach', '40613405', 'LE', 'Marketing Manager', '08/02/2000', 60);
 insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id3, 'Rab', 'Debill', '40744247', 'DNI', 'Senior Quality Engineer', '05/04/2000', 63);
@@ -233,6 +240,56 @@ insert into persona_juridica (idpersona, domiciliofiscal, razonsocial) values (i
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021/09/11', '2021/09/20');
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (2, 1, 1, 'Franny', 'Gumme', '9093832379', '2021/09/21', '2021/09/30');
 insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (3, 1, 1, 'Richy', 'Wieprecht', '3533356477', '2021/09/01', '2021/09/10');
+=======
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id1, 'Bondy', 'Rylatt', '3808721502', 'LC', 'Office Assistant IV', '2000-09-11', 1);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id2, 'Luce', 'Theml', '9936502027', 'LE', 'Chief Design Engineer', '2000-02-13', 1);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id3, 'Ricki', 'Lapworth', '7519091015', 'Otro', 'Food Chemist', '2000-06-21', 4);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id4, 'Franny', 'Gumme', '9093832379', 'LC', 'Junior Executive', '2000-08-10', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id5, 'Renell', 'St. Quentin', '6694351917', 'DNI', 'Nuclear Power Engineer', '2010-01-19', 7);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id6, 'Colene', 'Rogan', '3828106110', 'Otro', 'Assistant Professor', '2009-02-14', 7);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id7, 'Richy', 'Wieprecht', '3533356477', 'LE', 'Geological Engineer', '2002-06-25', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id8, 'Ewan', 'Latek', '0084924403', 'LC', 'Office Assistant I', '2000-04-03', 5);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id9, 'Shandee', 'Record', '3017832678', 'DNI', 'Biostatistician III', '2000-02-23', 8);
+insert into pasajero (idpersona, nombre, apellido, Ndoc, TipoDoc, Ocupacion, FechaNac, nacionalidad) values (id10, 'Artus', 'Munn', '2688732048', 'DNI', 'Clinical Specialist', '1999-09-20', 7);
+
+--Datos TipoHabitacion
+insert into tipohabitacion (id, tipo, costo) values (1, 'Individual Estandar', 99.99);
+insert into tipohabitacion (id, tipo, costo) values (2, 'Doble Estandar', 199.99);
+insert into tipohabitacion (id, tipo, costo) values (3, 'Doble Superior', 299.99);
+insert into tipohabitacion (id, tipo, costo) values (4, 'Superior Family Plan', 399.99);
+insert into tipohabitacion (id, tipo, costo) values (5, 'Suite Doble', 999.99);
+
+--Datos Habitacion
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 1, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 1, 2, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 1, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 4, 1, 3, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 5, 1, 4, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 6, 1, 5, 2, 0);
+
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 1, 2, 1, 1, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 2, 2, 2, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 3, 2, 1, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 4, 2, 3, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 5, 2, 4, 2, 0);
+insert into habitacion (numero, piso, tipo, capacidad, descuento) values ( 6, 2, 5, 2, 0);
+
+--Datos Seccion_Consumo
+insert into seccion_consumo (id_categoria, tipo) values (1, 'Lavado y Planchado');
+insert into seccion_consumo (id_categoria, tipo) values (2, 'Sauna');
+insert into seccion_consumo (id_categoria, tipo) values (3, 'Bar');
+
+--Datos Reserva
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (1, 1, 1, 'Bondy', 'Rylatt', '3808721502', '2021-09-11', '2021-09-20');
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (2, 1, 1, 'Franny', 'Gumme', '9093832379', '2021-09-21', '2021-09-30');
+insert into reserva (id_reserva, numero, piso, nombre, apellido, telefono, fechadesde, fechahasta) values (3, 1, 1, 'Richy', 'Wieprecht', '3533356477', '2021-09-01', '2021-09-10');
+
+--Datos Ocupacion
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id1, '2021-09-21', '2021-09-30');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id2, '2021-09-01', '2021-09-12');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-09-13', '2021-09-15');
+insert into ocupacion ( numero, piso, responsable, checkin, checkout) values ( 1, 2, id3, '2021-12-13', '2021-12-30') returning id_ocupacion into idOcup1;
+>>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 
 --Datos Fuera De Servicio
 insert into fueradeservicio (id_fueradeservicio, numero, piso, desde, hasta) values (1, 2, 1,'2021/09/11', '2021/09/25');
@@ -308,5 +365,71 @@ insert into detalleunidades (id_unidades, id_detalle, id_item) values (079, 7778
 insert into detalleunidades (id_unidades, id_detalle, id_item) values (089, 888999, 0899);
 insert into detalleunidades (id_unidades, id_detalle, id_item) values (099, 9991010, 0999);
 insert into detalleunidades (id_unidades, id_detalle, id_item) values (0119, 10101111, 01099);
+
+--Datos Item Consumo
+insert into item_consumo(id_item, id_categoria, nombre, costo) values(1,1,'planchado pantalon',100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (2,1,'lavado camisa', 150);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (3,1,'lavado remera', 100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (4,1,'planchado camisa', 150);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (5,1,'lavado ropa interior', 100);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (6,2,'masaje',1500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (7,2,'sauna finlandes',1000);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (8,2,'manicuria',900);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (9,2,'fangoterapia',2500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (10,2,'reflexologia',2500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (11,3,'gaseosa',250);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (12,3,'cerveza nacional',350);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (13,3,'cerveza importada',500);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (14,3,'paquete pringles',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (15,3,'paquete oreo',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (16,3,'paquete mani',300);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (17,3,'botella espumante chandon',900);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (18,3,'botella espumante navarro correa',1000);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (19,3,'agua mineral sin gas',250);
+insert into item_consumo(id_item, id_categoria, nombre, costo) values (20,3,'agua mineral con gas',250);
+
+--Datos Tipo de Tarjeta de Credito
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (1, 'visa');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (2, 'master card');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (3, 'amex');
+insert into tipocredito (id_tipo_credito, tipo_credito)  values (4, 'tarjeta naranja');
+
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (5, 'maestro');
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (6, 'visa debito');
+insert into tipodebito (id_tipo_debito, tipo_debito)  values (7, 'cabal debito');
+
+--Datos Tipo de Cheque
+insert into tipocheque (id_tipo_cheque, tipo_cheque) values (1,'cheque no a la orden');
+insert into tipocheque (id_tipo_cheque, tipo_cheque) values (2, 'cheque posdatado');
+
+--Datos Tipo de Factura
+insert into tipodefactura (id_tipo_factura, tipo) values (1, 'A');
+insert into tipodefactura (id_tipo_factura, tipo) values (2, 'B');
+
+--Datos Tipo de Moneda
+insert into tipomoneda (id_moneda, moneda, simbolo) values (1, 'peso argentino', '$');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (2, 'dolar','u$s');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (3, 'euro', '€');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (4, 'peso uruguayo', '$U');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (5, 'yen', '¥');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (6, 'franco suizo', 'CFH');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (7, 'real', 'R$');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (8, 'peso chileno', '$CLP');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (9, 'guaranì', '₲');
+insert into tipomoneda (id_moneda, moneda, simbolo) values (10, 'sol peruano', 'S/');
+
+--Datos Consumo
+insert into consumos_ocupacion (id_ocupacion, id_consumo) values (idOcup1,1);
+
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 2);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (1, 1, 1);
+
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 4);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (2, 1, 2);
+
+insert into unidades ( fecha_consumo, unidades) values ('2021-12-12', 1);
+insert into consumo_unidades (id_unidades, id_consumo, id_item) values (3, 1, 11);
+
+insert into personajuridica (idpersona, razonsocial, domiciliofiscal) VALUES (id11, 'Tesla S.A.', '1st Street, 5431');
 
 end$$;

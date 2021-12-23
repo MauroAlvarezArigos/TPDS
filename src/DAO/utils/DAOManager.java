@@ -18,6 +18,15 @@ public class DAOManager {
     private UbicacionDAOSQL ubicacionDAO = null;
     private HabitacionDAOSQL habitacionDAO = null;
     private PersonaJuridicaDAOSQL personaJuridicaDAO = null;
+<<<<<<< HEAD
+=======
+    private OcupacionDAOSQL ocupacionDAO = null;
+    private ConsumoDAOSQL consumoDAO = null;
+    private ReservaDAOSQL reservaDAO = null;
+    private FueraDeServicioDAOSQL fueraDeServicioDAO = null;
+    private FacturaDAOSQL facturaDAO = null;
+    private ItemDAOSQL itemDAO = null;
+>>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 
     public DAOManager(){
         this.wrapper = new ConnectionWrapper();
@@ -74,6 +83,7 @@ public class DAOManager {
         return habitacionDAO;
     }
 
+<<<<<<< HEAD
 	public PersonaJuridicaDAO getPersonaJuridicaDAO() {
 		if(this.personaJuridicaDAO == null) {
 			this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
@@ -81,4 +91,54 @@ public class DAOManager {
 		return personaJuridicaDAO;
 	}
 
+=======
+    public PersonaJuridicaDAOSQL getPersonaJuridicaDAO() {
+        if (this.personaJuridicaDAO == null) {
+            this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(wrapper.getConnection());
+        }
+        return personaJuridicaDAO;
+    }
+
+    public OcupacionDAOSQL getOcupacionDAO() {
+        if (this.ocupacionDAO == null) {
+            this.ocupacionDAO = new OcupacionDAOSQL(wrapper.getConnection());
+        }
+        return ocupacionDAO;
+    }
+
+    public ConsumoDAOSQL getConsumoDAO() {
+        if (this.consumoDAO == null) {
+            this.consumoDAO = new ConsumoDAOSQL(wrapper.getConnection());
+        }
+        return consumoDAO;
+    }
+
+    public ReservaDAOSQL getReservaDAO() {
+        if (this.reservaDAO == null) {
+            this.reservaDAO = new ReservaDAOSQL(wrapper.getConnection());
+        }
+        return reservaDAO;
+    }
+
+    public FueraDeServicioDAOSQL getFueraDeServicioDAO() {
+        if (this.fueraDeServicioDAO == null) {
+            this.fueraDeServicioDAO = new FueraDeServicioDAOSQL(wrapper.getConnection());
+        }
+        return fueraDeServicioDAO;
+    }
+
+    public FacturaDAOSQL getFacturaDAO() {
+        if (this.facturaDAO == null) {
+            this.facturaDAO = new FacturaDAOSQL(wrapper.getConnection());
+        }
+        return facturaDAO;
+    }
+
+    public ItemDAOSQL getItemDAO() {
+        if (this.itemDAO == null) {
+            this.itemDAO = new ItemDAOSQL(wrapper.getConnection());
+        }
+        return itemDAO;
+    }
+>>>>>>> d1d1b9edd8ebb29cdf56269cd6aad38f9b3aaf61
 }

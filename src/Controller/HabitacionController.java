@@ -29,6 +29,19 @@ public class HabitacionController {
 	private Color Ocupado = new Color(203, 76, 76);
 	private Color FueraDeServicio = new Color(64, 131, 231);
 
+	public Color getDisponible() {
+		return Disponible;
+	}
+	public Color getReservado() {
+		return Reservado;
+	}
+	public Color getOcupado() {
+		return Ocupado;
+	}
+	public Color getFueraDeServicio() {
+		return FueraDeServicio;
+	}
+
 	List<HabitacionDTO> LHab = new ArrayList<>();
 	
 	
@@ -66,7 +79,7 @@ public class HabitacionController {
 
 				this.getHabDA(converter.convertCalendarToLocalDate(dateDesde) ,
 						converter.convertCalendarToLocalDate(dateHasta));
-				EstadoGUI = new EstadoHabitacionesGUI(desde, hasta, LHab, this);
+				EstadoGUI = new EstadoHabitacionesGUI(desde, hasta, LHab,this.getAllTiposHabDisponibles(LHab) ,this);
 				EstadoGUI.setVisible(true);
 			}
 	        else {
@@ -98,9 +111,10 @@ public class HabitacionController {
 		}
 	}
 
-	public void getHabDA(LocalDate Desde, LocalDate Hasta){
+	public List<HabitacionDTO> getHabDA(LocalDate Desde, LocalDate Hasta){
 
 		LHab = habServicio.getHabDA(Desde, Hasta, 1, 2);
+		return LHab;
 	}
 
 	public java.sql.Date convertJavaDateToSqlDate(java.util.Date date) {
@@ -175,7 +189,7 @@ public class HabitacionController {
 		return LTipos;
 	}
 
-	public Color GetColor(String Value){
+	public Color getColor(String Value){
 
 		switch (Value) {
 			case "Ocupado":
@@ -188,4 +202,57 @@ public class HabitacionController {
 				return Disponible;
 		}
 	}
+
+	public List<List<LocalDate>> getSelections(List<JTable> LTables){
+		List<List<LocalDate>> MatrixDate = new ArrayList<>();
+		List<HabitacionDTO> HabList = new ArrayList<>();
+
+		for(JTable table : LTables){
+			int columns = table.getColumnCount();
+			int rows = table.getRowCount();
+			for(int c = 1; c < columns; c++){
+				String Num_Hab = table.getColumnName(c);
+				List<LocalDate> DateList = new ArrayList<>();
+				for(int x = 0; x < rows; x++){
+					if(table.getModel().getValueAt(x,c) instanceof Boolean){
+						if((Boolean) table.getModel().getValueAt(x,c) ){
+							DateList.add(converter.convertStrtoLocalDate(table.getModel().getValueAt(x,0).toString()));
+						} }	}
+
+				HabList.add(this.getHabitacionDTO(Num_Hab));
+				MatrixDate.add(DateList);
+			}
+		}
+		return MatrixDate;
+	}
+
+	public List<HabitacionDTO> getSelectedHab(List<JTable> LTables){
+		List<List<LocalDate>> MatrixDate = new ArrayList<>();
+		List<HabitacionDTO> HabList = new ArrayList<>();
+
+		for(JTable table : LTables){
+			int columns = table.getColumnCount();
+			int rows = table.getRowCount();
+			for(int c = 1; c < columns; c++){
+				String Num_Hab = table.getColumnName(c);
+
+				HabList.add(this.getHabitacionDTO(Num_Hab));
+			}
+		}
+		return HabList;
+	}
+
+	private HabitacionDTO getHabitacionDTO(String str){
+		HabitacionDTO returnvalue = null;
+		for(HabitacionDTO Hab : LHab){
+			if(Hab.getNumero().equals(str)){
+				returnvalue = Hab;
+			}
+		}
+		return returnvalue;
+	}
+	/*
+	public List<JTable> getLTable(){
+
+	}*/
 }

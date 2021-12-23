@@ -1,9 +1,11 @@
 package GUI;
 
+import java.awt.Font;
 
 import javax.swing.*;
 
 import Controller.OcuparController;
+import Controller.PasajeroController;
 import DTO.PasajeroBusquedaDTO;
 import Exceptions.NoConcordanciaException;
 
@@ -13,6 +15,12 @@ import java.awt.Dimension;
 import java.util.List;
 
 import javax.swing.border.TitledBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
+
+import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 public class OcuparHabAsigPasajeroGUI extends JFrame{
@@ -22,66 +30,34 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 	private JTextField tbxApellido;
 	private JTextField tbxNombre;
 	private JTextField tbxNDoc;
+	private JButton btnSiguiente;
+	private ActionListener SiguienteAction;
+
+	private DefaultTableModel model;
+
+
+	public JButton getBtnSiguiente() {
+		return btnSiguiente;
+	}
+	public ActionListener getSiguienteAction() {
+		return SiguienteAction;
+	}
+	public void setSiguienteAction(ActionListener siguienteAction) {
+		SiguienteAction = siguienteAction;
+	}
+
+	public OcuparHabAsigPasajeroGUI(OcuparController unController) {
+
 	
-	public OcuparHabAsigPasajeroGUI() {
-	
-		this.controller = new OcuparController(this);
+		this.controller = unController;
+		controller.setBuscarOcuparGUI(this);
+
 		this.controller.cargarTDNI();
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
 		this.setSize(500,300);		
 		
 		pantallaDatos();
-	}
-	
-	public JPanel armarTabla(List<PasajeroBusquedaDTO> lista) {
-		JPanel tablaGUI = new JPanel();
-		tablaGUI.setLayout(new BorderLayout());
-		int tam = lista.size();
-		
-		Object[][] data = new Object[tam][5];
-		Object[] columnNames = {" ", "Apellido", "Nombre", "Tipo Documento", "Numero Documento"};
-		
-		System.out.println("Pre for");
-		for(int i=0; i<lista.size(); ++i) {
-			data[i][0] = false;
-			data[i][1] = lista.get(i).getApellido();
-			data[i][2] = lista.get(i).getNombre();
-			data[i][3] = lista.get(i).getTipodoc();
-			data[i][4] = lista.get(i).getNdoc();
-		}
-		
-		JTable tabla = new JTable(data, columnNames) {
-	         @Override
-	         public Class getColumnClass(int column) {
-	                switch (column) {
-	                    case 0:
-	                        return Boolean.class;
-	                    default:
-	                        return String.class;
-	                }
-	         }
-	         
-	         @Override
-	         public boolean isCellEditable(int row, int column) {
-	             return column == 0 ? true : false;
-	         }
-	    };
-	    tabla.getColumnModel().getColumn(0).setPreferredWidth(5);
-	    tabla.setPreferredScrollableViewportSize(new Dimension(400, 200));
-		JScrollPane sp = new JScrollPane(tabla);
-		tablaGUI.add(sp, BorderLayout.CENTER);
-		
-		JPanel boton = new JPanel();
-		JButton btnAceptar = new JButton("Aceptar");
-		btnAceptar.setBounds(306, 323, 156, 25);
-		btnAceptar.setForeground(new Color(255, 255, 255));
-		btnAceptar.setBackground(new Color(0, 128, 0));
-		boton.add(btnAceptar, BorderLayout.SOUTH);
-		tablaGUI.add(boton, BorderLayout.SOUTH);
-		
-		
-		return tablaGUI;
 	}
 	
 	public void pantallaDatos() {
@@ -131,25 +107,22 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 		btnCancelar.setBackground(Color.RED);
 		btnCancelar.setForeground(Color.WHITE);
 		
-		JButton btnAceptar = new JButton("Siguiente");
-		btnAceptar.setBounds(345, 200, 100, 25);
-		getContentPane().add(btnAceptar);
-		btnAceptar.setBackground(new Color(0, 128, 0));
-		btnAceptar.setForeground(Color.WHITE);
+		btnSiguiente = new JButton("Siguiente");
+		btnSiguiente.setBounds(345, 200, 100, 25);
+		getContentPane().add(btnSiguiente);
+		btnSiguiente.setBackground(new Color(0, 128, 0));
+		btnSiguiente.setForeground(Color.WHITE);
 
 		//Actions
-		btnAceptar.addActionListener(e -> {
-			try {
-				controller.buscarPasajero();
-			} catch (NoConcordanciaException e1) {
-				e1.printStackTrace();
-				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");
-			} catch (Exception e1) {
-				System.out.println("Es en el try de gestion pasajero");
-				e1.printStackTrace();
-				
+
+		SiguienteAction = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
 			}
-		});
+		};
+
+		btnSiguiente.addActionListener(SiguienteAction);
 
 		btnCancelar.addActionListener(e -> dispose());
 	}

@@ -1,8 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="TPDS:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/GUI/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/FacturarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/OcuparController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OcuparController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/FacturaDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/FacturaDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DAO/PersonaJuridicaDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PersonaJuridicaDAOSQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DTO/ResponsableDePagoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/ResponsableDePagoDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/OcuparHabitacionGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/OcuparHabitacionGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperConsumo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperConsumo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFactura.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Servicios/PersonaJuridicaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PersonaJuridicaServicio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +43,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -57,9 +84,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/postgresql-42.2.23.jar" />
-    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.general" />
   </component>
   <component name="RunManager">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -104,7 +132,63 @@
       <option name="project" value="LOCAL" />
       <updated>1638642292489</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Arreglos generales para DarAlta">
+      <created>1639950200512</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1639950200512</updated>
+    </task>
+    <task id="LOCAL-00004" summary="subiendo cambios de la semana">
+      <created>1639950278768</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1639950278768</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Avances en items de consumo">
+      <created>1640010492846</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1640010492846</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI">
+      <created>1640026951420</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1640026951420</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Separado DAOHabitacion en OcupacionDAO, FueraDeServicioDAO, y ReservaDAO">
+      <created>1640031931516</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1640031931516</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Arreglando bugs en facturar">
+      <created>1640033752555</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1640033752555</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Insert Factura">
+      <created>1640092427847</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1640092427847</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Primer intento de recuperar los items ya facturados">
+      <created>1640129675465</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1640129675465</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -121,7 +205,21 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Arreglos generales para DarAlta" />
-    <option name="LAST_COMMIT_MESSAGE" value="Arreglos generales para DarAlta" />
+    <MESSAGE value="subiendo cambios de la semana" />
+    <MESSAGE value="Avances en items de consumo" />
+    <MESSAGE value="Avances en pantalla de FacturarElementosGUI, arreglado BUG de la pantalla FacturarGUI" />
+    <MESSAGE value="Separado DAOHabitacion en OcupacionDAO, FueraDeServicioDAO, y ReservaDAO" />
+    <MESSAGE value="Arreglando bugs en facturar" />
+    <MESSAGE value="Insert Factura" />
+    <MESSAGE value="Primer intento de recuperar los items ya facturados" />
+    <option name="LAST_COMMIT_MESSAGE" value="Primer intento de recuperar los items ya facturados" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.postgresql.jdbc.PgResultSet" memberName="rows" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TPDS$App.ic" NAME="App Coverage Results" MODIFIED="1639075671642" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">

@@ -630,6 +630,20 @@ public class AltaPasajeroGUI extends JFrame{
 
 		cbxLocalidad.setBounds(81, 106, 130, 24);
 		cbxLocalidad.setEnabled(false);
+		ActionListener cbxLocalidadActionListener = new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (cbxLocalidad.getSelectedItem() != null && cbxLocalidad.getSelectedItem().toString() != "") {
+						cbxLocalidad.getSelectedItem();
+						tbxCodPostal.setText(controller.getCodigoPostal());
+						tbxCodPostal.setEnabled(false);
+				}else{
+					tbxCodPostal.setEnabled(true);
+						tbxCodPostal.setText("");
+				}
+			}
+		};
+		cbxLocalidad.addActionListener(cbxLocalidadActionListener);
 		direccion.add(cbxLocalidad);
 		
 		lblLocalidad = new JLabel("Localidad");
