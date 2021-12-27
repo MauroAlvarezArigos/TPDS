@@ -1,5 +1,6 @@
 package Controller;
 
+import java.time.Period;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -123,30 +124,33 @@ public class OcuparController {
 				}else if(c == 0 || checkIn == null) {
 					checkIn = ArrayDates.get(x).get(c);
 					checkOut = ArrayDates.get(x).get(c);
-				}else if(ArrayDates.get(x).get(c).compareTo(checkOut) == 1){
-					checkOut = ArrayDates.get(x).get(c);
-					if(c == sizeDates-1){
-						OcupacionDTO ocupacionDTO2 = new OcupacionDTO();
-						ocupacionDTO2.setHabitacion(LHab.get(x));
-						ocupacionDTO2.setCheckIn(checkIn);
-						ocupacionDTO2.setCheckOut(checkOut);
-						LOcupacion.add(ocupacionDTO2);
-					}
 				}else {
-					checkOut = ArrayDates.get(x).get(c-1);
-					OcupacionDTO ocupacionDTO = new OcupacionDTO();
-					ocupacionDTO.setHabitacion(LHab.get(x));
-					ocupacionDTO.setCheckIn(checkIn);
-					ocupacionDTO.setCheckOut(checkOut);
-					LOcupacion.add(ocupacionDTO);
-					checkIn = ArrayDates.get(x).get(c);
-					checkOut = ArrayDates.get(x).get(c);
-					if(c == sizeDates-1){
-						OcupacionDTO ocupacionDTO2 = new OcupacionDTO();
-						ocupacionDTO2.setHabitacion(LHab.get(x));
-						ocupacionDTO2.setCheckIn(checkIn);
-						ocupacionDTO2.setCheckOut(checkOut);
-						LOcupacion.add(ocupacionDTO2);
+					Period period = Period.between(checkOut, ArrayDates.get(x).get(c));
+					if (period.getDays() == 1) {
+						checkOut = ArrayDates.get(x).get(c);
+						if (c == sizeDates - 1) {
+							OcupacionDTO ocupacionDTO2 = new OcupacionDTO();
+							ocupacionDTO2.setHabitacion(LHab.get(x));
+							ocupacionDTO2.setCheckIn(checkIn);
+							ocupacionDTO2.setCheckOut(checkOut);
+							LOcupacion.add(ocupacionDTO2);
+						}
+					} else {
+						checkOut = ArrayDates.get(x).get(c - 1);
+						OcupacionDTO ocupacionDTO = new OcupacionDTO();
+						ocupacionDTO.setHabitacion(LHab.get(x));
+						ocupacionDTO.setCheckIn(checkIn);
+						ocupacionDTO.setCheckOut(checkOut);
+						LOcupacion.add(ocupacionDTO);
+						checkIn = ArrayDates.get(x).get(c);
+						checkOut = ArrayDates.get(x).get(c);
+						if (c == sizeDates - 1) {
+							OcupacionDTO ocupacionDTO2 = new OcupacionDTO();
+							ocupacionDTO2.setHabitacion(LHab.get(x));
+							ocupacionDTO2.setCheckIn(checkIn);
+							ocupacionDTO2.setCheckOut(checkOut);
+							LOcupacion.add(ocupacionDTO2);
+						}
 					}
 				}
 			}

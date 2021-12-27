@@ -1,6 +1,7 @@
 package Servicios.Mappers;
 
 import DAO.IDTypeDAO;
+import DAO.IDTypeDAOSQL;
 import DAO.utils.DAOManager;
 import DTO.IDTypeDTO;
 import Dominio.IDType;

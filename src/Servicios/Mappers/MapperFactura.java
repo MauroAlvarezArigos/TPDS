@@ -37,6 +37,7 @@ public class MapperFactura {
         dominio.setMontoTotal(dto.getMontoTotal());
         dominio.setNotaDeCredito(null);
         dominio.setTipo(facturaDAO.getTipoFactura(dto.getTipo()));
+        //corregir doble periodo estadia
         dominio.setEstadia(new PeriodoEstadia(
                 dto.getEstadia().getFechaInicio(),
                 dto.getEstadia().getFechaFinal(),

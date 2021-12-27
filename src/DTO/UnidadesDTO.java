@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 public class UnidadesDTO {
     private int id_item;
+    private int id_unidades;
     private String nombre;
     private double costoUnitario;
     private String seccionConsumo;

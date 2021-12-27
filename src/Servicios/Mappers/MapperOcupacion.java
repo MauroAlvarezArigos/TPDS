@@ -1,14 +1,13 @@
 package Servicios.Mappers;
 
-import DTO.PeriodoEstadoHabitacionDTO;
-import Dominio.Ocupacion;
 import DAO.HabitacionDAOSQL;
 import DAO.PasajeroDAOSQL;
 import DAO.utils.DAOManager;
-
+import DTO.HabitacionDTO;
 import DTO.OcupacionDTO;
 import DTO.PasajeroBusquedaDTO;
-
+import DTO.PeriodoEstadoHabitacionDTO;
+import Dominio.Ocupacion;
 import Dominio.Pasajero;
 
 import java.util.ArrayList;

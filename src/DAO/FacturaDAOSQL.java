@@ -12,12 +12,14 @@ public class FacturaDAOSQL implements FacturaDAO{
     private Connection conn;
     private Converter converter = new Converter();
     private PasajeroDAOSQL pasajeroDAO;
+    private PersonaJuridicaDAOSQL personaJuridicaDAO;
 
     //---
     //Constructor
     public FacturaDAOSQL(Connection unConn){
         this.conn = unConn;
         this.pasajeroDAO = new PasajeroDAOSQL(unConn);
+        this.personaJuridicaDAO = new PersonaJuridicaDAOSQL(unConn);
     }
 
     //Query Sentences
@@ -338,7 +340,14 @@ public class FacturaDAOSQL implements FacturaDAO{
                 if(rs.getObject("idpersona") == null){
                     responsable.setPersona_asociada(null);
                 }else{
-                    responsable.setPersona_asociada(pasajeroDAO.getPasajeroDbid(rs.getInt("idpersona")));
+                    Pasajero p = pasajeroDAO.getPasajeroDbid(rs.getInt("idpersona"));
+                    if(p.getIdpersona() != 0){
+                        responsable.setPersona_asociada(p);
+                    }else{
+                        PersonaJuridica pj = personaJuridicaDAO.getPersonaJuridicaID(rs.getInt("idpersona"));
+                        responsable.setPersona_asociada(pj);
+                    }
+
                 }
             }
 

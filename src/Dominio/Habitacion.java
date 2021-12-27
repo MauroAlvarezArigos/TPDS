@@ -4,7 +4,6 @@ import java.util.List;
 
 public class Habitacion {
     private int capacidad;
-    //private int estado;
     private int numero;
     private int piso;
     private int descuento;

@@ -1,7 +1,9 @@
 package Servicios.Mappers;
 
 import DTO.LocalidadDTO;
+import DTO.ProvDTO;
 import Dominio.Localidad;
+import Dominio.Provincia;
 
 public class MapperLocalidad {
     public LocalidadDTO toDTO(Localidad unLocalidad){
