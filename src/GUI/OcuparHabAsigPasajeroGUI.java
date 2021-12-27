@@ -22,6 +22,8 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 	private JTextField tbxNDoc;
 	private JButton btnSiguiente;
 	private ActionListener SiguienteAction;
+	private String habitacion;
+	private String responsable;
 
 	@SuppressWarnings("unused")
 	private DefaultTableModel model;
@@ -37,26 +39,35 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 		SiguienteAction = siguienteAction;
 	}
 
-	public OcuparHabAsigPasajeroGUI(OcuparController unController) {
+	public OcuparHabAsigPasajeroGUI(OcuparController unController, String NHab, boolean responsable) {
 
 	
 		this.controller = unController;
 		controller.setBuscarOcuparGUI(this);
-
+		this.habitacion = NHab;
 		this.controller.cargarTDNI();
 		getContentPane().setLayout(null);
 		this.setLocationRelativeTo(null);
-		this.setSize(500,300);		
+		this.setSize(500,300);
+		if(responsable){
+			this.responsable = "responsable";
+		}else{
+			this.responsable = "ocupante";
+		}
 		
 		pantallaDatos();
 	}
 	
 	public void pantallaDatos() {
 		JPanel panelDatos = new JPanel();
-		panelDatos.setBorder(new TitledBorder(null, "Datos del Pasajero", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelDatos.setBorder(new TitledBorder(null, "Datos del "+this.responsable, TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelDatos.setBounds(42, 29, 402, 160);
 		getContentPane().add(panelDatos);
 		panelDatos.setLayout(null);
+
+		JLabel lblNroHab = new JLabel("Numero de Habitacion: "+habitacion);
+		lblNroHab.setBounds(38, 20, 200, 15);
+		panelDatos.add(lblNroHab);
 		
 		JLabel lblApellido = new JLabel("Apellido");
 		lblApellido.setBounds(38, 39, 50, 15);

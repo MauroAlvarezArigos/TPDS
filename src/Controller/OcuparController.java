@@ -1,5 +1,6 @@
 package Controller;
 
+import java.awt.*;
 import java.time.Period;
 import java.util.List;
 
@@ -213,7 +214,7 @@ public class OcuparController {
 
 
 	public void asignarResponsableAcompanante(){
-		BuscarOcuparGUI = new OcuparHabAsigPasajeroGUI(this);
+		BuscarOcuparGUI = new OcuparHabAsigPasajeroGUI(this,LOcupacion.get(OcupacionCounter-1).getHabitacion().getNumero() ,true);
 		BuscarOcuparGUI.setVisible(true);
 		BuscarOcuparGUI.getBtnSiguiente().addActionListener(e -> {
 			try {
@@ -241,15 +242,30 @@ public class OcuparController {
 	}
 
 	public void AsignarAcompanantes() throws NoConcordanciaException {
-		BuscarOcuparGUI = new OcuparHabAsigPasajeroGUI(this);
+		BuscarOcuparGUI = new OcuparHabAsigPasajeroGUI(this,LOcupacion.get(OcupacionCounter-1).getHabitacion().getNumero() ,false);
 		BuscarOcuparGUI.setVisible(true);
 		BuscarOcuparGUI.getBtnSiguiente().removeActionListener(BuscarOcuparGUI.getBtnSiguiente().getActionListeners()[0]);
 		BuscarOcuparGUI.getBtnSiguiente().addActionListener(e -> {
 			try {
 				this.buscarPasajero(1);
 				BuscarOcuparGUI.setVisible(false);
+				JButton btnOtro = new JButton("Asignar otro");
+				btnOtro.setBounds(100, 200, 90, 25);
+				TablaGUI.getBoton().add(btnOtro);
+				btnOtro.setBackground(Color.GREEN);
+				btnOtro.setForeground(Color.WHITE);
+				btnOtro.addActionListener(e1 -> {
+					setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
+					TablaGUI.setVisible(false);
+					TablaGUI.dispose();
+					try{
+						this.AsignarAcompanantes();
+					}catch (NoConcordanciaException x){
+
+					}
+
+				});
 				TablaGUI.getBtnAceptar().addActionListener(e2 -> {
-					System.out.println("Acteptar ActionListener");
 					setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
 					TablaGUI.setVisible(false);
 					TablaGUI.dispose();

@@ -7,24 +7,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_12_2021_17_11__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_5_12_2021_17_11__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/GUI/App.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/GUI/App.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/NewDatosTablas.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/NewDatosTablas.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/FacturarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/FacturarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/module-info.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/OcuparController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OcuparController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/FacturaDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/FacturaDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DAO/PersonaJuridicaDAOSQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DAO/PersonaJuridicaDAOSQL.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/LocalidadDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/ResponsableDePagoDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/ResponsableDePagoDTO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Dominio/PersonaJuridica.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GUI/OcuparHabitacionGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/OcuparHabitacionGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperConsumo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperConsumo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFactura.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperFactura.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperLocalidad.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/Mappers/MapperOcupacion.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/OcupacionServicio.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Servicios/PersonaJuridicaServicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Servicios/PersonaJuridicaServicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/OcuparHabAsigPasajeroGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/OcuparHabAsigPasajeroGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +72,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/lib/postgresql-42.2.23.jar" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -215,6 +204,20 @@
     <option name="LAST_COMMIT_MESSAGE" value="Primer intento de recuperar los items ya facturados" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controller/OcuparController.java</url>
+          <line>183</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controller/OcuparController.java</url>
+          <line>185</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.postgresql.jdbc.PgResultSet" memberName="rows" />

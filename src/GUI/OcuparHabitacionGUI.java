@@ -130,7 +130,8 @@ public class OcuparHabitacionGUI extends JFrame{
 		JLabel lblCantHab = new JLabel("Cantidad de Habitaciones");
 		lblCantHab.setBounds(204, 80, 176, 13);
 		panel.add(lblCantHab);
-		
+		lblCantHab.setVisible(false);
+
 		//SPINNERS
 		chbxIndEstandar = new JCheckBox("Individual Estandar");
 		chbxIndEstandar.setBounds(31, 100, 146, 25);
@@ -141,6 +142,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		indEstandar.setModel(new SpinnerNumberModel(0, 0, null, 1));
 		indEstandar.setBounds(249, 100, 36, 25);
 		panel.add(indEstandar);
+		indEstandar.setVisible(false);
 		
 		chbxDobEstandar = new JCheckBox("Doble Estandar");
 		chbxDobEstandar.setBounds(31, 130, 146, 25);
@@ -151,6 +153,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobEstandar.setModel(new SpinnerNumberModel(0, 0, null, 1));
 		dobEstandar.setBounds(249, 130, 36, 25);
 		panel.add(dobEstandar);
+		dobEstandar.setVisible(false);
 		
 		chbxDobSuperior = new JCheckBox("Doble Superior");
 		chbxDobSuperior.setBounds(31, 160, 146, 25);
@@ -161,7 +164,8 @@ public class OcuparHabitacionGUI extends JFrame{
 		dobSuperior.setModel(new SpinnerNumberModel(0, 0, null, 1));
 		dobSuperior.setBounds(249, 160, 36, 25);
 		panel.add(dobSuperior);
-		
+		dobSuperior.setVisible(false);
+
 		chbxSupFamily = new JCheckBox("Superior Family Plan");
 		chbxSupFamily.setBounds(31, 190, 146, 25);
 		panel.add(chbxSupFamily);
@@ -171,7 +175,8 @@ public class OcuparHabitacionGUI extends JFrame{
 		supFamily.setModel(new SpinnerNumberModel(0, 0, null, 1));
 		supFamily.setBounds(249, 190, 36, 25);
 		panel.add(supFamily);
-		
+		supFamily.setVisible(false);
+
 		chbxSuiteDoble = new JCheckBox("Suite Doble");
 		chbxSuiteDoble.setBounds(31, 220, 146, 25);
 		panel.add(chbxSuiteDoble);
@@ -181,6 +186,7 @@ public class OcuparHabitacionGUI extends JFrame{
 		suiteDoble.setModel(new SpinnerNumberModel(0, 0, null, 1));
 		suiteDoble.setBounds(249, 220, 36, 25);
 		panel.add(suiteDoble);
+		suiteDoble.setVisible(false);
 		
 		JButton btnAsignarHab = new JButton("Asignar Habitacion");
 		btnAsignarHab.setBounds(306, 323, 156, 21);

@@ -18,7 +18,11 @@ public class TablaPasajerosGUI extends JFrame {
     private JTable tabla;
     private JButton btnAceptar;
     private ActionListener AceptarAction;
+    private JPanel boton;
 
+    public JPanel getBoton() {
+        return boton;
+    }
     public JButton getBtnAceptar() {
         return btnAceptar;
     }
@@ -114,7 +118,7 @@ public class TablaPasajerosGUI extends JFrame {
         JScrollPane sp = new JScrollPane(tabla);
         PanelTablaGUI.add(sp, BorderLayout.CENTER);
 
-        JPanel boton = new JPanel();
+        boton = new JPanel();
         btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(306, 323, 156, 21);
         btnAceptar.setForeground(new Color(255, 255, 255));
