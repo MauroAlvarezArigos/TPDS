@@ -1,6 +1,6 @@
 create table posIVA (
 	ident int,
-	tipo character varying(20),
+	tipo character varying(30),
 	constraint pk_ident primary key (ident)
 );
 
