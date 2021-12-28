@@ -165,18 +165,20 @@ public class FacturaDAOSQL implements FacturaDAO{
         int id_estadia = -1;
         PreparedStatement pstmt = null;
         try {
-            pstmt = conn.prepareStatement(INSERT_ESTADIA);
-            pstmt.setInt(1,ocupacion.getId());
-            pstmt.setDate(2, converter.convertToDateViaSqlDate(estadia.getFechaInicio()));
-            pstmt.setDate(3, converter.convertToDateViaSqlDate(estadia.getFechaFinal()));
-            pstmt.setDouble(4, estadia.getMonto());
-            pstmt.setBoolean(5,estadia.getMediaEstadia());
+            if(estadia != null) {
+                pstmt = conn.prepareStatement(INSERT_ESTADIA);
+                pstmt.setInt(1, ocupacion.getId());
+                pstmt.setDate(2, converter.convertToDateViaSqlDate(estadia.getFechaInicio()));
+                pstmt.setDate(3, converter.convertToDateViaSqlDate(estadia.getFechaFinal()));
+                pstmt.setDouble(4, estadia.getMonto());
+                pstmt.setBoolean(5, estadia.getMediaEstadia());
 
-            pstmt.execute();
-            ResultSet resultSet = pstmt.getResultSet();
+                pstmt.execute();
+                ResultSet resultSet = pstmt.getResultSet();
 
-            if (resultSet.next()) {
-                id_estadia = resultSet.getInt("ID_ESTADIA");
+                if (resultSet.next()) {
+                    id_estadia = resultSet.getInt("ID_ESTADIA");
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -237,7 +239,11 @@ public class FacturaDAOSQL implements FacturaDAO{
 
         try {
             pstmt = conn.prepareStatement(INSERT_FACTURA);
-            pstmt.setInt(1,id_estadia);
+            if(id_estadia == -1) {
+                pstmt.setNull(1, Types.NULL);
+            }else{
+                pstmt.setInt(1, id_estadia);
+            }
             pstmt.setInt(2,id_detalle);
             pstmt.setInt(3,id_responsable);
             pstmt.setInt(4,factura.getTipo().getId_tipo());

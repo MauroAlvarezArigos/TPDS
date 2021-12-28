@@ -19,6 +19,7 @@ public class MapperFactura {
     MapperResponsable mapperResponsable;
     MapperPasajeroBusqueda mapperPasajeroBusqueda;
     MapperPersonaJuridica mapperPersonaJuridica;
+    MapperEstadia mapperEstadia;
 
     public Factura toDomain(FacturaDTO dto){
         daoManager = new DAOManager();
@@ -27,6 +28,7 @@ public class MapperFactura {
         mapperDetalle = new MapperDetalle();
         mapperPasajeroBusqueda = new MapperPasajeroBusqueda();
         mapperPersonaJuridica = new MapperPersonaJuridica();
+        mapperEstadia = new MapperEstadia();
 
         daoManager.begin();
 
@@ -38,11 +40,7 @@ public class MapperFactura {
         dominio.setNotaDeCredito(null);
         dominio.setTipo(facturaDAO.getTipoFactura(dto.getTipo()));
         //corregir doble periodo estadia
-        dominio.setEstadia(new PeriodoEstadia(
-                dto.getEstadia().getFechaInicio(),
-                dto.getEstadia().getFechaFinal(),
-                dto.getEstadia().getMonto(),
-                dto.getEstadia().getMediaEstadia()));
+        dominio.setEstadia(mapperEstadia.toDomain(dto.getEstadia()));
         dominio.setPago(null);
         dominio.setDetalle(mapperDetalle.toDomain(dto.getDetalle()));
 

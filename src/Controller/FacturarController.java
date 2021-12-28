@@ -373,6 +373,7 @@ public class FacturarController {
 			facturaDTO.setId_ocupacion(ocupacionDTO.getId());
 
 			FacturaServicio facturaServicio = new FacturaServicio();
+			facturaDTO.getId_factura();
 			facturaServicio.guardarFactura(facturaDTO);
 			facturaGUI.mostrarError("Exito", "La factura ha sido cargada al sistema");
 			facturaGUI.dispose();
@@ -396,21 +397,23 @@ public class FacturarController {
 	}
 
 	public PeriodoEstadiaDTO generarEstadia(){
-		PeriodoEstadiaDTO estadiaDTO = new PeriodoEstadiaDTO();
-		if(horaSalida.isAfter(LocalTime.of(11,0))){
-			if(horaSalida.isAfter(LocalTime.of(18,0))){
+		PeriodoEstadiaDTO estadiaDTO = null;
+		if(facturarElementosGUI.getCbxEstadia().isSelected()) {
+			estadiaDTO = new PeriodoEstadiaDTO();
+			if (horaSalida.isAfter(LocalTime.of(11, 0))) {
+				if (horaSalida.isAfter(LocalTime.of(18, 0))) {
+					estadiaDTO.setMediaEstadia(false);
+					//todo OcuparHabitacion y facturar
+				} else {
+					estadiaDTO.setMediaEstadia(true);
+				}
+			} else {
 				estadiaDTO.setMediaEstadia(false);
-				//todo OcuparHabitacion y facturar
-			}else{
-				estadiaDTO.setMediaEstadia(true);
 			}
-		}else{
-				estadiaDTO.setMediaEstadia(false);
+			estadiaDTO.setFechaInicio(ocupacionDTO.getCheckIn());
+			estadiaDTO.setFechaFinal(ocupacionDTO.getCheckOut());
+			estadiaDTO.setMonto(getValorEstadia(ocupacionDTO));
 		}
-		estadiaDTO.setFechaInicio(ocupacionDTO.getCheckIn());
-		estadiaDTO.setFechaFinal(ocupacionDTO.getCheckOut());
-		estadiaDTO.setMonto(getValorEstadia(ocupacionDTO));
-
 		return estadiaDTO;
 	}
 
