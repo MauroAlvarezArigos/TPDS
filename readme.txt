@@ -9,7 +9,7 @@ todo controlar capacidad de habitacion
 -x- sacar cantidad de habitaciones de ocupar habitacion -x-
 -x- validar si una habitacion esta reservada (mensaje de advertencia al ocupar) -x- (a medias)
 -x- arreglar sobreposicion de ocupaciones -x-
-todo calcular iva si es responsable de pago
+-x- todo calcular iva si es responsable de pago -x-
 -x- arreglar doble facturacion de periodo estadia -x-
 -x- facturar arreglar lista de items pendientes -x-
 todo pasar cosas fuera del controller y a la capa de servicios
