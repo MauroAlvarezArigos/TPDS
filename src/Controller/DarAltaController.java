@@ -14,6 +14,9 @@ import Servicios.UbicacionServicio;
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 public class DarAltaController {
 
@@ -121,6 +124,7 @@ public class DarAltaController {
         if(bool){
             try {
                 revisarDocExistente(AltaPsjeroGUI.getTbxNroDocStr(),AltaPsjeroGUI.getSelectedCbxTipoDNI());
+                validarEmail(AltaPsjeroGUI.getTbxEmailStr());
                 success = true;
             }catch (DuplicateDocNumberException e){
                 informarDocExistenteGUI();
@@ -200,6 +204,19 @@ public class DarAltaController {
         pasajeroServicio.revisarDocExistente(NDoc, TipoDoc);
     }
 
+    public void validarEmail(String Email) {
+        String emailRegex = "^[[A-Z][a-z][0-9]_.-]+@[[A-Z][a-z][0-9]]+(.[[A-Z][a-z][0-9]]+)+$";
+        Pattern emailPat  = Pattern.compile(emailRegex);
+
+        Matcher mat = emailPat.matcher(Email);
+        if(mat.matches()) {
+            System.out.println("Cuit valido");
+        }
+        else {
+            System.out.println("Cuit invalido");
+        }
+    }
+
     public void informarDocExistenteGUI(){
           if(AltaPsjeroGUI.optionMessageGUI(
                   "Numero de Documento Existente",
@@ -257,7 +274,6 @@ public class DarAltaController {
             AltaPsjeroGUI = new AltaPasajeroGUI();
         }
     }
-
 
     public void mensajeAceptarCancelarGUI(){
         if(AltaPsjeroGUI.optionMessageGUI(
