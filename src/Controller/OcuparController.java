@@ -8,6 +8,7 @@ import javax.swing.JComboBox;
 
 import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
+import Exceptions.CapacidadExcedidaException;
 import Exceptions.NoConcordanciaException;
 import GUI.OcuparHabAsigPasajeroGUI;
 import Servicios.IDTypeServicio;
@@ -15,6 +16,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javax.swing.*;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 
 import DTO.*;
 import GUI.OcuparHabitacionGUI;
@@ -165,7 +168,7 @@ public class OcuparController {
 		LOcupacion.get(OcupacionCounter-1).setResponsable(pBusqueda);
 		//}
 	}
-	public void setAcompanantes(List<PasajeroBusquedaDTO> LpBusqueda){
+	public void setAcompanantes(List<PasajeroBusquedaDTO> LpBusqueda) throws CapacidadExcedidaException{
 		//for(OcupacionDTO o : LOcupacion){
 			//System.out.println("Acompanantes");
 		List<PasajeroBusquedaDTO> Locupantes = LOcupacion.get(OcupacionCounter-1).getListaOcupantes();
@@ -181,11 +184,18 @@ public class OcuparController {
 					Locupantes.add(p);
 				}
 			}
-			LOcupacion.get(OcupacionCounter-1).setListaOcupantes(Locupantes);
+		if(Locupantes.size() < LOcupacion.get(OcupacionCounter-1).getHabitacion().getCapacidad()) {
+			LOcupacion.get(OcupacionCounter - 1).setListaOcupantes(Locupantes);
 		}else{
-			LOcupacion.get(OcupacionCounter-1).setListaOcupantes(LpBusqueda);
+			throw new CapacidadExcedidaException();
 		}
-
+		}else{
+			if(LpBusqueda.size() < LOcupacion.get(OcupacionCounter-1).getHabitacion().getCapacidad()) {
+				LOcupacion.get(OcupacionCounter - 1).setListaOcupantes(LpBusqueda);
+			}else{
+				throw new CapacidadExcedidaException();
+			}
+		}
 		//}
 	}
 
@@ -229,10 +239,24 @@ public class OcuparController {
 
 	public void AsignarResponsable() throws NoConcordanciaException{
 		this.buscarPasajero(0);
+		TablaGUI.getBtnAceptar().setEnabled(false);
+		TablaGUI.getTabla().getModel().addTableModelListener(new TableModelListener() {
+			@Override
+			public void tableChanged(TableModelEvent e) {
+				TablaGUI.getBtnAceptar().setEnabled(true);
+			}
+		});
 		TablaGUI.getBtnAceptar().addActionListener(e -> {
 			setResponsable(getPasajerosSeleccionados(TablaGUI.getTabla()).get(0));
 			try {
-				AsignarAcompanantes();
+				if(LOcupacion.get(OcupacionCounter-1).getHabitacion().getCapacidad() == 1){
+					OcupacionCounter = OcupacionCounter - 1;
+					if(OcupacionCounter >= 0){
+						asignarResponsableAcompanantesporOcupacion();
+					}
+				}else {
+					AsignarAcompanantes();
+				}
 			}catch (NoConcordanciaException e1){
 				BuscarOcuparGUI.mostrarError("Error de Busqueda", "No existen pasasjeros que cumplan con los requisitos de busqueda");
 			}
@@ -241,7 +265,7 @@ public class OcuparController {
 
 	}
 
-	public void AsignarAcompanantes() throws NoConcordanciaException {
+	public void AsignarAcompanantes() throws NoConcordanciaException{
 		BuscarOcuparGUI = new OcuparHabAsigPasajeroGUI(this,LOcupacion.get(OcupacionCounter-1).getHabitacion().getNumero() ,false);
 		BuscarOcuparGUI.setVisible(true);
 		BuscarOcuparGUI.getBtnSiguiente().removeActionListener(BuscarOcuparGUI.getBtnSiguiente().getActionListeners()[0]);
@@ -255,7 +279,19 @@ public class OcuparController {
 				btnOtro.setBackground(Color.GREEN);
 				btnOtro.setForeground(Color.WHITE);
 				btnOtro.addActionListener(e1 -> {
-					setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
+					try {
+						setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
+					} catch (CapacidadExcedidaException ex) {
+						BuscarOcuparGUI.mostrarError("Capacidad excedida", "La capacidad de la habitacion ha sido excedida");
+						try {
+							AsignarAcompanantes();
+						} catch (NoConcordanciaException exc) {
+							exc.printStackTrace();
+						}
+						TablaGUI.setVisible(false);
+						TablaGUI.dispose();
+						ex.printStackTrace();
+					}
 					TablaGUI.setVisible(false);
 					TablaGUI.dispose();
 					try{
@@ -266,13 +302,25 @@ public class OcuparController {
 
 				});
 				TablaGUI.getBtnAceptar().addActionListener(e2 -> {
-					setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
-					TablaGUI.setVisible(false);
-					TablaGUI.dispose();
-					BuscarOcuparGUI.dispose();
-					OcupacionCounter = OcupacionCounter - 1;
-					if(OcupacionCounter >= 0){
-						asignarResponsableAcompanantesporOcupacion();
+					try {
+						setAcompanantes(getPasajerosSeleccionados(TablaGUI.getTabla()));
+						TablaGUI.setVisible(false);
+						TablaGUI.dispose();
+						BuscarOcuparGUI.dispose();
+						OcupacionCounter = OcupacionCounter - 1;
+						if(OcupacionCounter >= 0){
+							asignarResponsableAcompanantesporOcupacion();
+						}
+					} catch (CapacidadExcedidaException ex) {
+						BuscarOcuparGUI.mostrarError("Capacidad excedida", "La capacidad de la habitacion ha sido excedida");
+						ex.printStackTrace();
+						try {
+							AsignarAcompanantes();
+						} catch (NoConcordanciaException exc) {
+							exc.printStackTrace();
+						}
+						TablaGUI.setVisible(false);
+						TablaGUI.dispose();
 					}
 					});
 			}catch(NoConcordanciaException e1){
@@ -283,6 +331,11 @@ public class OcuparController {
 	}
 
 	private void GuardarOcupacion(){
+		for(OcupacionDTO o : LOcupacion){
+			if(o.getListaOcupantes() == null){
+				o.setListaOcupantes(new ArrayList<>());
+			}
+		}
 		ocupacionServicio.guardarOcupacion(LOcupacion);
 	}
 

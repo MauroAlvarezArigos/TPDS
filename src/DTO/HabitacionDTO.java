@@ -75,4 +75,5 @@ public class HabitacionDTO {
     public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
+
 }
