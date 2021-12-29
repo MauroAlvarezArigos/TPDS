@@ -10,6 +10,7 @@ import DTO.IDTypeDTO;
 import DTO.PasajeroBusquedaDTO;
 import Exceptions.CapacidadExcedidaException;
 import Exceptions.NoConcordanciaException;
+import GUI.OcupacionSolicitadaGUI;
 import GUI.OcuparHabAsigPasajeroGUI;
 import Servicios.IDTypeServicio;
 import java.time.LocalDate;
@@ -38,6 +39,7 @@ public class OcuparController {
 	private TablaPasajerosGUI TablaGUI;
 	private OcupacionServicio ocupacionServicio;
 	private int OcupacionCounter;
+	private OcupacionSolicitadaGUI ocupacionSolicitadaGUI;
 
 	//Getters and Setters
 
@@ -207,7 +209,38 @@ public class OcuparController {
 		if(OcupacionCounter > 0){
 			asignarResponsableAcompanante();
 		}else{
+			ocupacionSolicitadaGUI = new OcupacionSolicitadaGUI(this);
+
+			for(OcupacionDTO o : LOcupacion){
+				List<String> LOcupantes = new ArrayList<>();
+				if(o.getListaOcupantes() == null){
+					LOcupantes.add("");
+				}else{
+				for (PasajeroBusquedaDTO p : o.getListaOcupantes()){
+					LOcupantes.add(p.getApellido()+", "+p.getNombre());
+				}}
+				ocupacionSolicitadaGUI.addPanelOcupacion(o.getHabitacion().getNumero(), o.getHabitacion().getTipo(), ""+o.getCheckIn(), ""+o.getCheckOut(),
+						o.getResponsable().getApellido()+", "+o.getResponsable().getNombre(), LOcupantes);
+			}
+
+			ocupacionSolicitadaGUI.setVisible(true);
+
 			GuardarOcupacion();
+
+		}
+	}
+
+	public void opcionFinal(){
+		if(BuscarOcuparGUI.optionMessageGUI("Opciones", "Elija alguna de las siguientes opciones", new Object[]{"Cargar otra habitacion", "Salir"})
+				!= 1){
+			OcuparHabitacionGUI ocuparHabitacion = new OcuparHabitacionGUI();
+			ocuparHabitacion.setLocationRelativeTo(null);
+			ocuparHabitacion.setVisible(true);
+			ocupacionSolicitadaGUI.dispose();
+		}else{
+			ocupacionSolicitadaGUI.dispose();
+			BuscarOcuparGUI.dispose();
+			TablaGUI.dispose();
 		}
 	}
 

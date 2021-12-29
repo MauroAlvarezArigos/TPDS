@@ -136,6 +136,16 @@ public class OcuparHabAsigPasajeroGUI extends JFrame{
 			    JOptionPane.ERROR_MESSAGE);
 	}
 
+	public int optionMessageGUI(String titulo, String detalle, Object[] options){
+		JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+		return JOptionPane.showOptionDialog(padre,
+				detalle,titulo,JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,     //do not use a custom Icon
+				options,  //the titles of buttons
+				options[0]);
+	}
+
 	//Getters and Setters
 	public JTextField getTbxNombre() {return tbxNombre;}
 	public void setTbxNombre(JTextField tbxNombre) {this.tbxNombre = tbxNombre;}
