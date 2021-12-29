@@ -240,6 +240,11 @@ public class OcuparController {
 	public void AsignarResponsable() throws NoConcordanciaException{
 		this.buscarPasajero(0);
 		TablaGUI.getBtnAceptar().setEnabled(false);
+		TablaGUI.getBtnVolver().addActionListener(e -> {
+			asignarResponsableAcompanante();
+			TablaGUI.setVisible(false);
+			TablaGUI.dispose();
+		});
 		TablaGUI.getTabla().getModel().addTableModelListener(new TableModelListener() {
 			@Override
 			public void tableChanged(TableModelEvent e) {
@@ -247,20 +252,31 @@ public class OcuparController {
 			}
 		});
 		TablaGUI.getBtnAceptar().addActionListener(e -> {
-			setResponsable(getPasajerosSeleccionados(TablaGUI.getTabla()).get(0));
+			LocalDate fechaNacimiento = getPasajerosSeleccionados(TablaGUI.getTabla()).get(0).getFechaNacimiento();
+			Period edad = Period.between(fechaNacimiento, LocalDate.now());
+			if (edad.getYears() < 18) {
+				BuscarOcuparGUI.mostrarError("Error", "El responable seleccionado no es mayor de edad, por favor seleccione a una persona mayor a " +
+						"18 años como responsable");
+					TablaGUI.setVisible(false);
+					TablaGUI.dispose();
+					asignarResponsableAcompanante();
+			} else {
+				setResponsable(getPasajerosSeleccionados(TablaGUI.getTabla()).get(0));
 			try {
-				if(LOcupacion.get(OcupacionCounter-1).getHabitacion().getCapacidad() == 1){
+				if (LOcupacion.get(OcupacionCounter - 1).getHabitacion().getCapacidad() == 1) {
 					OcupacionCounter = OcupacionCounter - 1;
-					if(OcupacionCounter >= 0){
+					if (OcupacionCounter >= 0) {
 						asignarResponsableAcompanantesporOcupacion();
 					}
-				}else {
+				} else {
 					AsignarAcompanantes();
 				}
-			}catch (NoConcordanciaException e1){
+			} catch (NoConcordanciaException e1) {
 				BuscarOcuparGUI.mostrarError("Error de Busqueda", "No existen pasasjeros que cumplan con los requisitos de busqueda");
 			}
 			TablaGUI.dispose();
+
+		}
 		});
 
 	}
@@ -275,6 +291,15 @@ public class OcuparController {
 				BuscarOcuparGUI.setVisible(false);
 				JButton btnOtro = new JButton("Asignar otro");
 				btnOtro.setBounds(100, 200, 90, 25);
+				TablaGUI.getBtnVolver().addActionListener(e4 -> {
+					try {
+						AsignarAcompanantes();
+					} catch (NoConcordanciaException ex) {
+						ex.printStackTrace();
+					}
+					TablaGUI.setVisible(false);
+					TablaGUI.dispose();
+				});
 				TablaGUI.getBoton().add(btnOtro);
 				btnOtro.setBackground(Color.GREEN);
 				btnOtro.setForeground(Color.WHITE);

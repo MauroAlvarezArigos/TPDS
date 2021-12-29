@@ -9,7 +9,7 @@
     <list default="true" id="e2f7915e-23fe-472b-943f-5009ad5c025b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/OcuparController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/OcuparController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/DTO/HabitacionDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GUI/TablaPasajerosGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

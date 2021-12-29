@@ -19,6 +19,7 @@ public class TablaPasajerosGUI extends JFrame {
     private JButton btnAceptar;
     private ActionListener AceptarAction;
     private JPanel boton;
+    private JButton btnVolver;
 
     public JPanel getBoton() {
         return boton;
@@ -34,6 +35,9 @@ public class TablaPasajerosGUI extends JFrame {
     }
     public void setAceptarAction(ActionListener aceptarAction) {
         AceptarAction = aceptarAction;
+    }
+    public JButton getBtnVolver() {
+        return btnVolver;
     }
 
     public TablaPasajerosGUI(OcuparController unController, List<PasajeroBusquedaDTO> lista, int flag) {
@@ -119,12 +123,21 @@ public class TablaPasajerosGUI extends JFrame {
         PanelTablaGUI.add(sp, BorderLayout.CENTER);
 
         boton = new JPanel();
+
+        btnVolver = new JButton("Volver");
+        btnVolver.setBounds(306, 323, 156, 21);
+        btnVolver.setForeground(new Color(255, 255, 255));
+        btnVolver.setBackground(new Color(205, 50, 50));
+        boton.add(btnVolver, BorderLayout.SOUTH);
+
         btnAceptar = new JButton("Aceptar");
         btnAceptar.setBounds(306, 323, 156, 21);
         btnAceptar.setForeground(new Color(255, 255, 255));
         btnAceptar.setBackground(new Color(50, 205, 50));
         boton.add(btnAceptar, BorderLayout.SOUTH);
         PanelTablaGUI.add(boton, BorderLayout.SOUTH);
+
+
 
     }
 }
