@@ -29,8 +29,9 @@ public class FacturaDAOSQL implements FacturaDAO{
                     " WHERE (tipo = ?)";
     private static final String INSERT_FACTURA =
             "\n" +
-                    " INSERT INTO FACTURA (ID_ESTADIA, ID_DETALLE, ID_RESPONSABLE, ID_TIPO_FACTURA, ID_NOTA_DE_CREDITO, ID_PAGO, FECHA, MONTOTOTAL, ID_OCUPACION)" +
-                    " VALUES (?, ?, ?, ?, NULL, NULL, ?, ?, ?) RETURNING ID_FACTURA";
+                    " INSERT INTO FACTURA (ID_ESTADIA, ID_DETALLE, ID_RESPONSABLE, ID_TIPO_FACTURA, ID_NOTA_DE_CREDITO, ID_PAGO, FECHA, MONTOTOTAL, MONTOIVA" +
+                    ", ID_OCUPACION)" +
+                    " VALUES (?, ?, ?, ?, NULL, NULL, ?, ?, ?, ?) RETURNING ID_FACTURA";
     private static final String INSERT_ESTADIA =
             "\n" +
                     " INSERT INTO PERIODOESTADIA ( ID_OCUPACION, FECHADESDE, FECHAHASTA, MONTO, MEDIA_ESTADIA)" +
@@ -249,7 +250,8 @@ public class FacturaDAOSQL implements FacturaDAO{
             pstmt.setInt(4,factura.getTipo().getId_tipo());
             pstmt.setDate(5, converter.convertToDateViaSqlDate(factura.getFecha()));
             pstmt.setDouble(6, factura.getMontoTotal());
-            pstmt.setInt(7, factura.getOcupacion().getId());
+            pstmt.setDouble(7,factura.getMontoIVA());
+            pstmt.setInt(8, factura.getOcupacion().getId());
             pstmt.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -276,6 +278,7 @@ public class FacturaDAOSQL implements FacturaDAO{
                 f.setId_factura(rs.getInt("ID_FACTURA"));
                 f.setFecha(converter.convertToLocalDateViaInstant(rs.getDate("FECHA")));
                 f.setMontoTotal(rs.getDouble("MONTOTOTAL"));
+                f.setMontoIVA(rs.getDouble("MONTOIVA"));
                 f.setResponsable(this.getResponsable(rs.getInt("ID_RESPONSABLE")));
                 f.setNotaDeCredito(this.getNotaDeCredito(rs.getInt("ID_NOTA_DE_CREDITO")));
                 f.setEstadia(this.getEstadia(rs.getInt("ID_ESTADIA")));

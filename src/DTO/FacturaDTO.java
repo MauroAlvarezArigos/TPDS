@@ -7,6 +7,7 @@ public class FacturaDTO {
     private int id_factura;
     private LocalDate fecha;
     private double montoTotal;
+    private double montoIVA;
     private Object responsable;
     private String tipo;
     private boolean pago;
@@ -51,7 +52,6 @@ public class FacturaDTO {
     public void setPago(boolean pago) {
         this.pago = pago;
     }
-
     public DetalleFacturaDTO getDetalle() {
         return detalle;
     }
@@ -75,5 +75,11 @@ public class FacturaDTO {
     }
     public void setId_ocupacion(int id_ocupacion) {
         this.id_ocupacion = id_ocupacion;
+    }
+    public double getMontoIVA() {
+        return montoIVA;
+    }
+    public void setMontoIVA(double montoIVA) {
+        this.montoIVA = montoIVA;
     }
 }

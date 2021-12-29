@@ -7,6 +7,7 @@ public class Factura {
     private Ocupacion ocupacion;
     private LocalDate fecha;
     private double montoTotal;
+    private double montoIVA;
     private ResponsableDePago responsable;
     private TipoDeFactura tipo;
     private Pago pago;
@@ -73,5 +74,11 @@ public class Factura {
     }
     public void setOcupacion(Ocupacion ocupacion) {
         this.ocupacion = ocupacion;
+    }
+    public double getMontoIVA() {
+        return montoIVA;
+    }
+    public void setMontoIVA(double montoIVA) {
+        this.montoIVA = montoIVA;
     }
 }

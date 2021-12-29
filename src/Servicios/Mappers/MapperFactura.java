@@ -37,6 +37,7 @@ public class MapperFactura {
         dominio.setOcupacion(ocupacionDAO.getOcupacion(dto.getId_ocupacion()));
         dominio.setFecha(dto.getFecha());
         dominio.setMontoTotal(dto.getMontoTotal());
+        dominio.setMontoIVA(dto.getMontoIVA());
         dominio.setNotaDeCredito(null);
         dominio.setTipo(facturaDAO.getTipoFactura(dto.getTipo()));
         //corregir doble periodo estadia
@@ -76,6 +77,7 @@ public class MapperFactura {
         FacturaDTO dto = new FacturaDTO();
         dto.setId_ocupacion(dominio.getOcupacion().getId());
         dto.setMontoTotal(dominio.getMontoTotal());
+        dto.setMontoIVA(dominio.getMontoIVA());
 
         if(dominio.getPago() != null){
             dto.setPago(true);

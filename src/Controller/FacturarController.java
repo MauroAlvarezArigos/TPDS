@@ -294,7 +294,7 @@ public class FacturarController {
 
 	private double calcularIVA(double subtotal){
 		double iva = 0.0;
-		if(TipoFactura == 'B'){iva = Math.round(  valorIVA*subtotal * 100) / 100.0;}
+		iva = Math.round(  valorIVA*subtotal * 100) / 100.0;
 		return iva;
 	}
 
@@ -363,7 +363,8 @@ public class FacturarController {
 		}else{
 			FacturaDTO facturaDTO = new FacturaDTO();
 			facturaDTO.setFecha(LocalDate.now());
-			facturaDTO.setMontoTotal(total);
+			facturaDTO.setMontoTotal(subtotal);
+			facturaDTO.setMontoIVA(iva);
 			facturaDTO.setNotaDeCredito(false);
 			facturaDTO.setTipo(new String(""+TipoFactura));
 			facturaDTO.setPago(false);
