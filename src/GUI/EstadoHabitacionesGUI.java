@@ -148,11 +148,13 @@ public class EstadoHabitacionesGUI extends JFrame {
 				}
 			});
 
+			final boolean[] ignore = {false};
+
 			table.getModel().addTableModelListener(new TableModelListener(){
 				@Override
 				public void tableChanged(TableModelEvent e) {
 					if((EstadoArray.get(e.getColumn()-1).get(e.getFirstRow())) == "Reservado" &&
-							(Boolean) (table.getValueAt(e.getFirstRow(), e.getColumn()))) {
+							(Boolean) (table.getValueAt(e.getFirstRow(), e.getColumn())) && !ignore[0]) {
 						//-----
 						LocalDate date = converter.convertStrtoLocalDate((String)table.getValueAt(e.getFirstRow(),0));
 						HabitacionDTO hab = null;
@@ -171,8 +173,19 @@ public class EstadoHabitacionesGUI extends JFrame {
 						if(op == 1){
 							table.setValueAt(false,e.getFirstRow(), e.getColumn());
 						}else{
-
+							ignore[0] = true;
+							int size = table.getRowCount();
+							for(int c = 0; c < size ; c++){
+								LocalDate currentDate = converter.convertStrtoLocalDate((String) table.getValueAt(c,0));
+								if((currentDate.compareTo(reserva.getFechaDesde()) > 0 &&
+								currentDate.compareTo(reserva.getFechaHasta()) < 0) ||
+								currentDate.compareTo(reserva.getFechaHasta()) == 0){
+									table.setValueAt(true, c, e.getColumn());
+								}
+							}
+							ignore[0] = false;
 						}
+
 						System.out.println("Error Reservado");
 					}
 				}
