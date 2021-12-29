@@ -15,6 +15,7 @@ import javax.swing.*;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
+import modelosTabla.JTextFieldLimit;
 import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
@@ -430,6 +431,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblNacionalidad);
 		
 		tbxApellido = new JTextField();
+		tbxApellido.setDocument(new JTextFieldLimit(30));
 		tbxApellido.setBounds(102, 30, 140, 20);
 		datosPersonales.add(tbxApellido);
 		tbxApellido.setColumns(10);
@@ -455,6 +457,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		tbxNombre = new JTextField();
 		tbxNombre.setColumns(10);
+		tbxNombre.setDocument(new JTextFieldLimit(30));
 		tbxNombre.setBounds(348, 30, 122, 20);
 		datosPersonales.add(tbxNombre);
 		
@@ -497,6 +500,7 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.add(lblAsteriscoDNI);
 		
 		tbxNroDoc = new JTextField();
+		tbxNroDoc.setDocument(new JTextFieldLimit(15));
 		tbxNroDoc.setBounds(83, 59, 86, 20);
 		panelDocimento.add(tbxNroDoc);
 		tbxNroDoc.setColumns(10);
@@ -512,6 +516,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		tbxEmail = new JTextField();
 		tbxEmail.setBounds(62, 155, 180, 20);
+		tbxEmail.setDocument(new JTextFieldLimit(70));
 		datosPersonales.add(tbxEmail);
 		tbxEmail.setColumns(10);
 		
@@ -525,6 +530,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblAsteriscoT);
 		
 		tbxTelefono = new JTextField();
+		tbxTelefono.setDocument(new JTextFieldLimit(15));
 		tbxTelefono.setBounds(92, 196, 150, 20);
 		datosPersonales.add(tbxTelefono);
 		tbxTelefono.setColumns(10);
@@ -539,6 +545,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblAsteriscoO);
 		
 		tbxOcupacion = new JTextField();
+		tbxOcupacion.setDocument(new JTextFieldLimit(25));
 		tbxOcupacion.setBounds(348, 196, 122, 20);
 		datosPersonales.add(tbxOcupacion);
 		tbxOcupacion.setColumns(10);
@@ -548,6 +555,7 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(lblCuit);
 		
 		tbxCuit = new JTextField();
+		tbxCuit.setDocument(new JTextFieldLimit(50));
 		tbxCuit.setBounds(92, 246, 150, 20);
 		datosPersonales.add(tbxCuit);
 		tbxCuit.setColumns(10);
@@ -638,7 +646,7 @@ public class AltaPasajeroGUI extends JFrame{
 						tbxCodPostal.setText(controller.getCodigoPostal());
 						tbxCodPostal.setEnabled(false);
 				}else{
-					tbxCodPostal.setEnabled(true);
+					tbxCodPostal.setEnabled(false);
 						tbxCodPostal.setText("");
 				}
 			}
@@ -658,6 +666,7 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.add(lblAsterisco_localidad);
 		
 		tbxCalle = new JTextField();
+		tbxCalle.setDocument(new JTextFieldLimit(20));
 		tbxCalle.setBounds(81, 141, 130, 20);
 		direccion.add(tbxCalle);
 		tbxCalle.setColumns(10);
@@ -685,6 +694,8 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.add(lblAsterisco1);
 		
 		tbxCodPostal = new JTextField();
+		tbxCodPostal.setEnabled(false);
+		tbxCodPostal.setDocument(new JTextFieldLimit(20));
 		tbxCodPostal.setBounds(303, 108, 87, 20);
 		direccion.add(tbxCodPostal);
 		tbxCodPostal.setColumns(10);
@@ -701,6 +712,7 @@ public class AltaPasajeroGUI extends JFrame{
 		direccion.add(lblAsterisco2);
 		
 		tbxDireccionNro = new JTextField();
+		tbxDireccionNro.setDocument(new JTextFieldLimit(20));
 		tbxDireccionNro.setBounds(304, 141, 86, 20);
 		direccion.add(tbxDireccionNro);
 		tbxDireccionNro.setColumns(10);
@@ -746,6 +758,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		tbxDpto = new JTextField();
 		tbxDpto.setEnabled(false);
+		tbxDpto.setDocument(new JTextFieldLimit(20));
 		tbxDpto.setBounds(221, 208, 46, 20);
 		direccion.add(tbxDpto);
 		tbxDpto.setColumns(10);
@@ -758,6 +771,7 @@ public class AltaPasajeroGUI extends JFrame{
 		
 		tbxPiso = new JTextField();
 		tbxPiso.setEnabled(false);
+		tbxPiso.setDocument(new JTextFieldLimit(20));
 		tbxPiso.setBounds(221, 234, 46, 20);
 		direccion.add(tbxPiso);
 		tbxPiso.setColumns(10);

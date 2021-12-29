@@ -5,6 +5,7 @@ import java.awt.Font;
 import javax.swing.*;
 import Controller.PasajeroController;
 import Exceptions.NoConcordanciaException;
+import modelosTabla.JTextFieldLimit;
 
 import java.awt.Color;
 
@@ -34,6 +35,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(lblApellido);
 		
 		tbxApellido = new JTextField();
+		tbxApellido.setDocument(new JTextFieldLimit(30));
 		tbxApellido.setBounds(145, 61, 270, 20);
 		panelDatos.add(tbxApellido);
 		
@@ -42,6 +44,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(lblNombre);
 				
 		tbxNombre = new JTextField();
+		tbxNombre.setDocument(new JTextFieldLimit(30));
 		tbxNombre.setBounds(145, 89, 270, 20);
 		panelDatos.add(tbxNombre);
 		
@@ -57,6 +60,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(lblNumero);
 		
 		tbxNDoc = new JTextField();
+		tbxNDoc.setDocument(new JTextFieldLimit(15));
 		tbxNDoc.setBounds(330, 117, 85, 20);
 		panelDatos.add(tbxNDoc);
 		tbxNDoc.setColumns(10);
