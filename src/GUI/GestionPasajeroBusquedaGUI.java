@@ -60,10 +60,10 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 		scrollPane.setBounds(10, 62, 666, 163);
 		getContentPane().add(scrollPane);
 		
-		JLabel warning = new JLabel("No hay concidencias en la busqueda");
+		JLabel warning = new JLabel();
 		warning.setForeground(Color.RED);
 		warning.setVisible(false);
-		warning.setBounds(265, 33, 218, 19);
+		warning.setBounds(265, 33, 411, 19);
 		getContentPane().add(warning);
 	
 		JButton cancelar = new JButton("Cancelar");
@@ -100,15 +100,18 @@ public class GestionPasajeroBusquedaGUI extends JFrame implements ActionListener
 						newLista.add(lista.get(i));
 				}
 			}
-			if(newLista.size() == 0) {
+			if(resultSearch.length()>50) {
 				warning.setVisible(true);
+				warning.setText("La busqueda debe ser menor a 50 caracteres");
+			} else if(newLista.size() == 0) {
+				warning.setVisible(true);
+				warning.setText("No hay concidencias en la busqueda");
 			}else {
 				warning.setVisible(false);
 				setJPanelPasajero(newLista);
 				if(newLista.size() > 5) {
 					scrollPane.add(resultados);
 				}
-				
 			}
 		update();
 

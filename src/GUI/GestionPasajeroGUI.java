@@ -21,7 +21,7 @@ public class GestionPasajeroGUI extends JFrame{
 	
 		this.controller = new PasajeroController(this);
 		this.controller.cargarTDNI();
-		this.setLayout(null);
+		getContentPane().setLayout(null);
 		this.setSize(500,300);		
 		
 		JPanel panelDatos = new JPanel();
@@ -30,7 +30,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.setLayout(null);
 		
 		JLabel lblApellido = new JLabel("Apellido:");
-		lblApellido.setBounds(88, 64, 50, 15);
+		lblApellido.setBounds(68, 64, 70, 15);
 		panelDatos.add(lblApellido);
 		
 		tbxApellido = new JTextField();
@@ -38,7 +38,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(tbxApellido);
 		
 		JLabel lblNombre = new JLabel("Nombre:");
-		lblNombre.setBounds(88, 91, 50, 15);
+		lblNombre.setBounds(68, 91, 70, 15);
 		panelDatos.add(lblNombre);
 				
 		tbxNombre = new JTextField();
@@ -46,7 +46,7 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(tbxNombre);
 		
 		JLabel lblDocumentoTipo = new JLabel("Documento Tipo:");
-		lblDocumentoTipo.setBounds(88, 120, 100, 15);
+		lblDocumentoTipo.setBounds(68, 120, 100, 15);
 		panelDatos.add(lblDocumentoTipo);
 		
 		cbxTipoDNI.setBounds(190, 115, 87, 25);
@@ -61,19 +61,24 @@ public class GestionPasajeroGUI extends JFrame{
 		panelDatos.add(tbxNDoc);
 		tbxNDoc.setColumns(10);
 		
-		
 		//Buttons
 		JButton Cancelar = new JButton("Cancelar");
-		Cancelar.setBounds(210,150,100,25);
+		Cancelar.setBounds(256,195,100,25);
 		Cancelar.setBackground(Color.RED);
 		Cancelar.setForeground(Color.WHITE);
 		panelDatos.add(Cancelar);
 		
 		JButton next = new JButton("Siguiente");
-		next.setBounds(315,150,100,25);
+		next.setBounds(366,195,100,25);
 		next.setBackground(new Color(0, 128, 0));
 		next.setForeground(Color.WHITE);
 		panelDatos.add(next);
+		
+		JLabel informeDeErrores = new JLabel();
+		informeDeErrores.setForeground(Color.RED);
+		informeDeErrores.setVisible(false);
+		informeDeErrores.setBounds(88, 172, 378, 13);
+		panelDatos.add(informeDeErrores);
 		
 		JLabel lblGestionar = new JLabel("Gestionar Pasajero");
 		lblGestionar.setBounds(0, 0, 496, 27);
@@ -87,7 +92,21 @@ public class GestionPasajeroGUI extends JFrame{
 		
 		next.addActionListener(e -> {
 			try {
-				controller.buscarPasajero();
+				if((tbxApellido.getText()).length()>30) {
+					informeDeErrores.setVisible(true);
+					tbxApellido.setBorder(BorderFactory.createLineBorder(Color.red));
+					informeDeErrores.setText("El apellido debe contener menos de 30 caracteres");
+				}else if((tbxNombre.getText()).length()>30) {
+					informeDeErrores.setVisible(true);
+					tbxNombre.setBorder(BorderFactory.createLineBorder(Color.red));
+					informeDeErrores.setText("El nombre debe contener menos de 30 caracteres");
+				}else if((tbxNDoc.getText()).length()>30) {
+					informeDeErrores.setVisible(true);
+					tbxNDoc.setBorder(BorderFactory.createLineBorder(Color.red));
+					informeDeErrores.setText("El documento debe contener menos de 10 caracteres");
+				} else {
+					controller.buscarPasajero();
+				}
 			} catch (NoConcordanciaException e1) {
 				e1.printStackTrace();
 				mostrarError("No Concordancia", "No existe ninguna concordancia segun los criterios de busqueda");

@@ -1,18 +1,18 @@
 create table posIVA (
 	ident int,
-	tipo character varying(50),
+	tipo character varying(30),
 	constraint pk_ident primary key (ident)
 );
 
 create table pais(
-	nombre character varying(50),
+	nombre character varying(30),
 	codigoPais int,
-	nacionalidad character varying(50),
+	nacionalidad character varying(30),
 	constraint pk_codigoPais primary key (codigoPais)
 );
 
 create table provincia(
-	nombre character varying(50),
+	nombre character varying(30),
 	codigoProvincia int,
 	pais int,
 	constraint pk_codigoProv primary key (codigoProvincia),
@@ -20,7 +20,7 @@ create table provincia(
 );
 
 create table localidad(
-	nombre character varying(50),
+	nombre character varying(30),
 	codPostal character varying(10),
 	codigoLocalidad int,
 	prov int,
@@ -30,10 +30,10 @@ create table localidad(
 
 create table persona(
 	idPersona int GENERATED ALWAYS AS IDENTITY NOT NULL PRIMARY KEY,
-	telefono character varying(25),
-	email character varying(50),
+	telefono character varying(15),
+	email character varying(70),
 	CUIT character varying(50) NOT NULL,
-	calle character varying(25),
+	calle character varying(40),
 	altura character varying(20),
 	PosIVA int,
 	Localidad int,
@@ -48,11 +48,11 @@ create table IDType(
 
 create table pasajero(
     idPersona int,
-	nombre character varying(50),
-	apellido character varying(50),
-	Ndoc character varying(25),
+	nombre character varying(30),
+	apellido character varying(30),
+	Ndoc character varying(10),
 	TipoDoc character varying(10),
-	Ocupacion character varying(50),
+	Ocupacion character varying(25),
 	FechaNac date,
 	Nacionalidad int,
 	constraint fk_idpersona foreign key (idPersona) REFERENCES persona (idPersona),
@@ -75,7 +75,7 @@ create table responsabledepago(
     CUITDNI character varying(50),
     NumDireccion character varying(50),
     calle character varying(50),
-    telefono character varying(50),
+    telefono character varying(15),
     constraint fk_idpersona foreign key (idPersona) REFERENCES persona (idPersona)
 );
 
@@ -205,8 +205,8 @@ create table reserva (
     numero int,
     piso int,
     nombre character varying(50),
-    apellido character varying(50),
-    telefono character varying(50),
+    apellido character varying(30),
+    telefono character varying(15),
     fechadesde date,
     fechahasta date,
     constraint pk_id_reserva primary key (id_reserva),
@@ -258,7 +258,7 @@ create table tarjeta (
     numero character varying (25),
     vencimiento Date,
     nombre character varying (50),
-    dni character varying (25),
+    dni character varying (8),
     constraint fk_pago foreign key (id_pago) REFERENCES pago (id_pago)
 );
 
