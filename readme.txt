@@ -12,4 +12,4 @@ todo validar fecha de nacimiento (que sea una fecha posible para una persona viv
 -x- calcular iva si es responsable de pago -x-
 -x- arreglar doble facturacion de periodo estadia -x-
 -x- facturar arreglar lista de items pendientes -x-
-todo validar que el responsable sea mayor de edad
+-x- validar que el responsable sea mayor de edad -x-
