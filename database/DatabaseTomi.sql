@@ -190,6 +190,7 @@ create table factura(
     id_pago int,
     fecha Date,
     MontoTotal double precision,
+    MontoIVA double precision,
     constraint fk_estadia foreign key (id_estadia) REFERENCES periodoestadia (id_estadia),
     constraint fk_ocupacion foreign key (id_ocupacion) REFERENCES ocupacion (id_ocupacion),
     constraint fk_detalle foreign key (id_detalle) REFERENCES detallefactura (id_detalle),
