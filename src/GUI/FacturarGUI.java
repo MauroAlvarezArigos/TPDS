@@ -38,6 +38,7 @@ public class FacturarGUI extends JFrame {
 	private DefaultTableModel model;
 	private JPanel panelOcupanteHabitacion;
 	private JScrollPane scrollPane;
+	private JButton btnFacturar;
 	
 	private FacturarController controller;
 
@@ -87,6 +88,8 @@ public class FacturarGUI extends JFrame {
 		btnCancelar.addActionListener(e -> dispose());
 		
 		btnBuscar.addActionListener(e -> {
+			btnFacturar.setEnabled(true);
+			cbxFacturaTercero.setEnabled(true);
 			try {
 				controller.checkOut();
 			} catch (CampoFaltanteException e1) {
@@ -115,6 +118,7 @@ public class FacturarGUI extends JFrame {
 		panelFacturaTercero.add(tbxCuit);
 		
 		cbxFacturaTercero = new JCheckBox("Facturar a tercero");
+		cbxFacturaTercero.setEnabled(false);
 		cbxFacturaTercero.setBounds(50, 48, 145, 21);
 		cbxFacturaTercero.addActionListener(e->{
 			if(cbxFacturaTercero.isSelected()) {
@@ -203,8 +207,9 @@ public class FacturarGUI extends JFrame {
 		scrollPane.setVisible(true);
 		panelOcupanteHabitacion.add(scrollPane);
 		
-		JButton btnFacturar = new JButton("Facturar");
+		btnFacturar = new JButton("Facturar");
 		btnFacturar.setForeground(Color.WHITE);
+		btnFacturar.setEnabled(false);
 		btnFacturar.setBackground(new Color(0, 128, 0));
 		btnFacturar.setBounds(580, 256, 96, 20);
 		getContentPane().add(btnFacturar);
