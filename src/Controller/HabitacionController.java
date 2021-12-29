@@ -12,11 +12,13 @@ import javax.swing.JTable;
 
 import DTO.HabitacionDTO;
 import DTO.PeriodoEstadoHabitacionDTO;
+import DTO.ReservaDTO;
 import Exceptions.DesdeMayorException;
 import Exceptions.FechaIncorrectaException;
 import GUI.EstadoHabitacionesGUI;
 import GUI.MostrarEstadoHabitacionGUI;
 import Servicios.HabitacionServicio;
+import Servicios.ReservaServicio;
 import utils.Converter;
 
 
@@ -24,6 +26,7 @@ public class HabitacionController {
 	private HabitacionServicio habServicio;
 	private MostrarEstadoHabitacionGUI MostarEstadoGUI;
 	private EstadoHabitacionesGUI EstadoGUI;
+	private ReservaServicio reservaServicio;
 	private Converter converter = new Converter();
 
 	private Color Disponible = new Color(118, 203, 78);
@@ -50,6 +53,8 @@ public class HabitacionController {
 	public HabitacionController(MostrarEstadoHabitacionGUI mostrarEstado) {
 		this.MostarEstadoGUI = mostrarEstado;
 		this.habServicio = new HabitacionServicio();
+		this.reservaServicio = new ReservaServicio();
+
 	}
 	
 	public void mostrarEstado() throws DesdeMayorException, FechaIncorrectaException, ParseException{
@@ -261,4 +266,9 @@ public class HabitacionController {
 	public List<JTable> getLTable(){
 
 	}*/
+
+	public ReservaDTO getReservaenFecha(int numero, int piso, LocalDate date){
+		return reservaServicio.buscarReservaFecha(numero,piso,date);
+	}
+
 }

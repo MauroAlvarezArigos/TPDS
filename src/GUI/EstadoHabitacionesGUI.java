@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,9 +11,12 @@ import javax.swing.*;
 
 import Controller.HabitacionController;
 import DTO.HabitacionDTO;
+import DTO.ReservaDTO;
 import utils.Converter;
 
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
@@ -144,6 +148,36 @@ public class EstadoHabitacionesGUI extends JFrame {
 				}
 			});
 
+			table.getModel().addTableModelListener(new TableModelListener(){
+				@Override
+				public void tableChanged(TableModelEvent e) {
+					if((EstadoArray.get(e.getColumn()-1).get(e.getFirstRow())) == "Reservado" &&
+							(Boolean) (table.getValueAt(e.getFirstRow(), e.getColumn()))) {
+						//-----
+						LocalDate date = converter.convertStrtoLocalDate((String)table.getValueAt(e.getFirstRow(),0));
+						HabitacionDTO hab = null;
+						for(HabitacionDTO h : Lhab){
+							if(h.getNumero() == table.getColumnName(e.getColumn())){
+								hab = h;
+								break;
+							}
+						}
+						ReservaDTO reserva = controller.getReservaenFecha(hab.getN_hab(),hab.getPiso() ,date);
+						//-----
+						int op = optionMessageGUI("Advertencia", "La habitacion ya se encuentra reservada por" +
+								" "+reserva.getApellido()+", "+reserva.getNombre() +" ," + "entre los dias "+reserva.getFechaDesde() +
+								" y "+reserva.getFechaHasta()+" ,"+
+								"desea ocupar esta habitacion igualmente", new Object[]{"SI", "NO"});
+						if(op == 1){
+							table.setValueAt(false,e.getFirstRow(), e.getColumn());
+						}else{
+
+						}
+						System.out.println("Error Reservado");
+					}
+				}
+			});
+
 			//.......End
 
 			//Setear tama�os y apariencia de cada columna
@@ -267,6 +301,16 @@ public class EstadoHabitacionesGUI extends JFrame {
 		list.add(date2);
 		
 		return list;
+	}
+
+	public int optionMessageGUI(String titulo, String detalle, Object[] options){
+		JFrame padre = (JFrame) SwingUtilities.getWindowAncestor(this);
+		return JOptionPane.showOptionDialog(padre,
+				detalle,titulo,JOptionPane.YES_NO_OPTION,
+				JOptionPane.QUESTION_MESSAGE,
+				null,     //do not use a custom Icon
+				options,  //the titles of buttons
+				options[0]);
 	}
 
 }

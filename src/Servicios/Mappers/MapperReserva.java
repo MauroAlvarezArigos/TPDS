@@ -33,4 +33,14 @@ public class MapperReserva {
             return LDTO;
         }
     }
+
+    public ReservaDTO toComplexDTO(Reserva unReserva){
+        ReservaDTO dto = new ReservaDTO();
+        dto.setFechaDesde(unReserva.getFechaDesde());
+        dto.setFechaHasta(unReserva.getFechaHasta());
+        dto.setApellido(unReserva.getApellido());
+        dto.setNombre(unReserva.getNombre());
+
+        return dto;
+    }
 }
