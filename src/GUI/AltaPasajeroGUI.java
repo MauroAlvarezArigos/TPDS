@@ -6,6 +6,8 @@ import modelosTabla.DateLabelFormatter;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -501,6 +503,16 @@ public class AltaPasajeroGUI extends JFrame{
 		panelDocimento.add(tbxNroDoc);
 		tbxNroDoc.setColumns(10);
 		
+		tbxNroDoc.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if(!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
+		
 		JLabel lblAsteriscoDoc = new JLabel("(*)");
 		lblAsteriscoDoc.setBounds(80, 0, 15, 14);
 		panelDocimento.add(lblAsteriscoDoc);
@@ -529,6 +541,16 @@ public class AltaPasajeroGUI extends JFrame{
 		datosPersonales.add(tbxTelefono);
 		tbxTelefono.setColumns(10);
 		
+		tbxTelefono.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if(!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
+		
 		lblOcupacion = new JLabel("Ocupacion");
 		lblOcupacion.setBounds(260, 198, 78, 14);
 		datosPersonales.add(lblOcupacion);
@@ -551,6 +573,15 @@ public class AltaPasajeroGUI extends JFrame{
 		tbxCuit.setBounds(92, 246, 150, 20);
 		datosPersonales.add(tbxCuit);
 		tbxCuit.setColumns(10);
+		tbxCuit.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if(!((c >= '0') && (c <= '9') || c =='-' || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		
 		lblTIVA = new JLabel("Tipo IVA");
 		lblTIVA.setBounds(261, 248, 46, 14);
@@ -704,6 +735,15 @@ public class AltaPasajeroGUI extends JFrame{
 		tbxDireccionNro.setBounds(304, 141, 86, 20);
 		direccion.add(tbxDireccionNro);
 		tbxDireccionNro.setColumns(10);
+		tbxDireccionNro.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if(!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		
 		checkDpto = new JCheckBox("Vive en departamento");
 		checkDpto.setBounds(127, 181, 153, 23);
@@ -761,6 +801,15 @@ public class AltaPasajeroGUI extends JFrame{
 		tbxPiso.setBounds(221, 234, 46, 20);
 		direccion.add(tbxPiso);
 		tbxPiso.setColumns(10);
+		tbxPiso.addKeyListener(new KeyAdapter() {
+			public void keyTyped(KeyEvent e){
+				char c = e.getKeyChar();
+				if(!((c >= '0') && (c <= '9') || (c == KeyEvent.VK_BACK_SPACE) || (c == KeyEvent.VK_DELETE))) {
+					getToolkit().beep();
+					e.consume();
+				}
+			}
+		});
 		
 		return direccion;
 	}

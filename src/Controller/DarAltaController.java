@@ -4,7 +4,10 @@
 package Controller;
 
 import DTO.*;
+import Exceptions.CUITInvalidoException;
 import Exceptions.DuplicateDocNumberException;
+import Exceptions.EmailInvalidoException;
+import Exceptions.FechaIncorrectaException;
 import GUI.AltaPasajeroGUI;
 import Servicios.IDTypeServicio;
 import Servicios.IVAServicio;
@@ -13,6 +16,7 @@ import Servicios.UbicacionServicio;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -123,18 +127,59 @@ public class DarAltaController {
         boolean success = false;
         if(bool){
             try {
+            	revisarLongitudes();
                 revisarDocExistente(AltaPsjeroGUI.getTbxNroDocStr(),AltaPsjeroGUI.getSelectedCbxTipoDNI());
                 validarEmail(AltaPsjeroGUI.getTbxEmailStr());
+                validarCUIT(AltaPsjeroGUI.getTbxCuitStr());
+                verificarFechaNacimiento(AltaPsjeroGUI.getDatePanelFechNac());
                 success = true;
             }catch (DuplicateDocNumberException e){
                 informarDocExistenteGUI();
-            }
+            }catch (EmailInvalidoException e) {
+            	informarInvalidoGUI("El Email ingresado es invalido por favor reingrese","Email Invalido");
+            } catch (CUITInvalidoException e) {
+            	informarInvalidoGUI("El CUIT ingresado es invalido por favor reingrese", "CUIT invalido");
+            } catch (FechaIncorrectaException e) {
+            	informarInvalidoGUI("La fecha ingresada es invalida por favor reingrese", "Fecha de Nacimiento invalida");
+			}
             if (success){
                 cargarPasajeroGUI();
             }
         }
     }
-
+    public void verificarFechaNacimiento(LocalDate date) throws FechaIncorrectaException{
+    	if(date.isAfter(LocalDate.now())) {
+    		//FechaInvalida
+    		throw new FechaIncorrectaException();		
+    	}
+    }
+    
+    public void revisarLongitudes() {
+    	if(AltaPsjeroGUI.getTbxApellidoStr().length() > 30) {
+    		informarCampoInvalidoGUI("Apellido(s)", "30");
+    	}else if(AltaPsjeroGUI.getTbxNombreStr().length() > 30) {
+    		informarCampoInvalidoGUI("Nombre(s)", "30");		
+    	}else if(AltaPsjeroGUI.getTbxTelefonoStr().length() > 15) {
+    		informarCampoInvalidoGUI("Telefono", "15");		
+    	}else if(AltaPsjeroGUI.getTbxEmailStr().length() > 70) {
+    		informarCampoInvalidoGUI("Email", "70");	
+    	}else if(AltaPsjeroGUI.getTbxNroDocStr().length() > 10) {
+    		informarCampoInvalidoGUI("Numero (DNI)", "10");
+    	}else if(AltaPsjeroGUI.getTbxOcupacionStr().length() > 25) {
+    		informarCampoInvalidoGUI("Ocupacion", "25");
+    	}else if(AltaPsjeroGUI.getTbxCuitStr().length() > 13) {
+    		informarCampoInvalidoGUI("CUIT", "13");
+    	}else if(AltaPsjeroGUI.getTbxCalleStr().length() > 40){
+    		informarCampoInvalidoGUI("Calle", "40");
+    	}else if(AltaPsjeroGUI.getTbxDireccionNroStr().length() > 4){
+    		informarCampoInvalidoGUI("Numero (Direccion)", "4");
+    	}else if(AltaPsjeroGUI.getTbxDptoStr().length() > 100){
+    		informarCampoInvalidoGUI("Departamento", "100");
+    	}else if(AltaPsjeroGUI.getTbxPisoStr().length() > 4){
+    		informarCampoInvalidoGUI("Piso", "4");
+    	}	
+    }
+    
     public void cargarIVA(){
         JComboBox<String> cargaIva = AltaPsjeroGUI.getCbxIVA();
         cargaIva.removeAllItems();
@@ -194,7 +239,7 @@ public class DarAltaController {
         List<String> ListNacionalidades = ubicacionServicio.getAllNacionalidad();
         JComboBox<String> nac = AltaPsjeroGUI.getCbxNacionalidad();
 
-       nac.addItem("");
+        nac.addItem("");
         for (String Nacionalidad : ListNacionalidades) {
             nac.addItem(Nacionalidad);
         }
@@ -204,19 +249,42 @@ public class DarAltaController {
         pasajeroServicio.revisarDocExistente(NDoc, TipoDoc);
     }
 
-    public void validarEmail(String Email) {
+    public void validarEmail(String Email) throws EmailInvalidoException{
         String emailRegex = "^[[A-Z][a-z][0-9]_.-]+@[[A-Z][a-z][0-9]]+(.[[A-Z][a-z][0-9]]+)+$";
         Pattern emailPat  = Pattern.compile(emailRegex);
 
         Matcher mat = emailPat.matcher(Email);
-        if(mat.matches()) {
-            System.out.println("Cuit valido");
-        }
-        else {
-            System.out.println("Cuit invalido");
+        if(!mat.matches()) {
+            System.out.println("Email invalido");
+        	throw new EmailInvalidoException();
         }
     }
+    
+    public void validarCUIT(String cuit) throws CUITInvalidoException{
+    	String cuitRegex = "[0-9][0-9]-[0-9]{8}-[0-9]";
+        Pattern cuitPat  = Pattern.compile(cuitRegex);
 
+        Matcher mat = cuitPat.matcher(cuit);
+        if(!mat.matches()) {
+            System.out.println("Email invalido");
+        	throw new CUITInvalidoException();
+        }
+    }
+    
+    public void informarCampoInvalidoGUI(String campo, String tam){
+    	JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this.AltaPsjeroGUI);
+		JOptionPane.showMessageDialog(padre,
+				"El campo "+ campo +" supera los "+tam+" caracteres, por favor reingrese","Campo Invalido",
+				JOptionPane.ERROR_MESSAGE);
+    }
+    
+    public void informarInvalidoGUI(String mensaje, String titulo){
+    	JFrame padre= (JFrame) SwingUtilities.getWindowAncestor(this.AltaPsjeroGUI);
+		JOptionPane.showMessageDialog(padre,
+				mensaje,titulo,
+				JOptionPane.ERROR_MESSAGE);
+    }
+    
     public void informarDocExistenteGUI(){
           if(AltaPsjeroGUI.optionMessageGUI(
                   "Numero de Documento Existente",
