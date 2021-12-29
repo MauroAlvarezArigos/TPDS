@@ -39,7 +39,7 @@ public class EstadoHabitacionesGUI extends JFrame {
 
 		controller = uncontroller;
 
-		this.setBounds(100, 100, 676, 600);
+		this.setBounds(100, 100, 676, 650);
 		
 		JPanel contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -206,8 +206,14 @@ public class EstadoHabitacionesGUI extends JFrame {
 
 
 			JScrollPane scrollPane = new JScrollPane(table);
+			scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
+
+			table.setFillsViewportHeight(true);
+			table.setPreferredScrollableViewportSize(new Dimension(500,450));
+			table.setPreferredSize(new Dimension(500,600));
 
 			JPanel indEstandar = new JPanel();
+			indEstandar.setBounds(100, 100, 676, 650);
 			indEstandar.add(scrollPane);
 			tabbedPane.addTab(tipo, indEstandar);
 
@@ -305,13 +311,14 @@ public class EstadoHabitacionesGUI extends JFrame {
     	list.add(date1);
 		Date date = new Date(desde.getTime() + (1000 * 60 * 60 * 24));
 		
-		while(hasta.getTime() > date.getTime()) {
+		while(hasta.getTime() >= date.getTime()) {
 			String dateS = format1.format(date); 
 			list.add(dateS);
 			Date sig = new Date(date.getTime() + (1000 * 60 * 60 * 24));
 			date = sig;
 		}
-		list.add(date2);
+		/*if(date.compareTo(date2) != 0)
+		list.add(date2);*/
 		
 		return list;
 	}

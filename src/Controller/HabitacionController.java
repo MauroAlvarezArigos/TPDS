@@ -79,7 +79,7 @@ public class HabitacionController {
 						 , MostarEstadoGUI.getHasta().getModel().getDay());
 			java.util.Date hasta = dateHasta.getTime();
         	
-			if(desde.getTime() < hasta.getTime()) {
+			if(desde.getTime() <= hasta.getTime()) {
 	        	SimpleDateFormat format1 = new SimpleDateFormat("dd/MM/yyyy");
 	        	@SuppressWarnings("unused")
 				String date1 = format1.format(desde); 
