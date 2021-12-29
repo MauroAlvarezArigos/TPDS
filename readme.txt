@@ -7,7 +7,7 @@ todo validar cuit si es de tipo resp inscripto
 todo validar fecha de nacimiento (que sea una fecha posible para una persona viva)
 todo controlar capacidad de habitacion
 -x- sacar cantidad de habitaciones de ocupar habitacion -x-
-todo validar si una habitacion esta reservada (mensaje de advertencia al ocupar)
+-x- validar si una habitacion esta reservada (mensaje de advertencia al ocupar) -x- (a medias)
 -x- arreglar sobreposicion de ocupaciones -x-
 todo calcular iva si es responsable de pago
 -x- arreglar doble facturacion de periodo estadia -x-
